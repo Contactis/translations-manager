@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('translations-generator:server');
+var debug = require('debug')('translations-manager:server');
 var http = require('http');
 
 /**
