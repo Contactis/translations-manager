@@ -1,22 +1,22 @@
 {
-  "name": "translations-generator",
+  "name": "translations-manager",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
-  "description": "Universal translation generator",
+  "description": "Universal translation manager",
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:egel/translations-generator.git"
+    "url": "git@bitbucket.org:egel/translations-manager.git"
   },
   "keywords": [
     "translations",
     "i18n",
     "universal",
     "translator",
-    "generator"
+    "manager"
   ],
   "author": "Maciej Sypień",
   "license": "MIT",
