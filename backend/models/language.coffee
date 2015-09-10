@@ -7,9 +7,10 @@ module.exports = (sequelize, DataTypes) ->
     },
     {
       timestamps: false
-    }, classMethods:
-    associate: (models) ->
+    }
+    ,classMethods:
+      associate: (models) ->
 # associations can be defined here
-      return
+        return
   )
   Language
