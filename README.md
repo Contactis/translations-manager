@@ -26,7 +26,7 @@ Project is build entirely on javascript and node.js platform. Therefor [npm](htt
 ```
 git clone git@bitbucket.org:egel/translations-generator.git
 cd translations-generator
-sudo npm install && sudo npm install -g gulp bower sequelize-cli
+sudo npm install && sudo npm install -g gulp bower sequelize-cli nodemon
 cd frontend && bower install
 ```
 
