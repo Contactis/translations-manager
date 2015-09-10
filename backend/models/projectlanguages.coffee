@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = (sequelize, DataTypes) ->
   ProjectLanguages = sequelize.define('ProjectLanguages', {
     project_id: DataTypes.INTEGER

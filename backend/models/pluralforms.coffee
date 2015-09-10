@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = (sequelize, DataTypes) ->
   PluralForms = sequelize.define('PluralForms', {
     name: DataTypes.STRING

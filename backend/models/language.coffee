@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = (sequelize, DataTypes) ->
   Language = sequelize.define('Language', {
       name_native: DataTypes.STRING

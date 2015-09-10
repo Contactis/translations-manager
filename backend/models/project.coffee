@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = (sequelize, DataTypes) ->
   Project = sequelize.define('Project', {
     name: DataTypes.STRING

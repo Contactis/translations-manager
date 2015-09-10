@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = (sequelize, DataTypes) ->
   Translation = sequelize.define('Translation', {
     translation: DataTypes.STRING
