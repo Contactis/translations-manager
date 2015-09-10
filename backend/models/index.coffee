@@ -1,5 +1,4 @@
-`var sequelize`
-'use strict'
+sequelize = null
 fs = require('fs')
 path = require('path')
 Sequelize = require('sequelize')

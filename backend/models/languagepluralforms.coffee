@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = (sequelize, DataTypes) ->
   LanguagePluralForms = sequelize.define('LanguagePluralForms', {
     language_id: DataTypes.INTEGER
