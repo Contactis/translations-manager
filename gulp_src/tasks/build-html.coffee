@@ -9,9 +9,9 @@ htmlmini  = require 'gulp-minify-html'
 gulp.task 'build-html', ->
 
   appSrc = gulp.src [
-    config.buildDir + '/app/**/*.js'
-    config.buildDir + '/common/**/*.js'
-    config.buildDir + '/sass/' + config.build.project_theme_name + '/edisonda/js/**/*.js'
+    config.buildDir + 'frontend/app/**/*.js'
+    config.buildDir + 'frontend/common/**/*.js'
+    config.buildDir + 'frontend/assets/sass/' + config.build.project_theme_name + '/js/**/*.js'
     config.buildDir + '/' + config.build.tpl_name
   ],
     read: false

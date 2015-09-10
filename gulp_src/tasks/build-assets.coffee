@@ -13,15 +13,15 @@ gulp.task 'copy-assets', ->
   .pipe(gulp.dest(config.buildDir + '/assets'))
 
 gulp.task 'copy-fonts', ->
-  gulp.src('src/sass/' + config.build.project_theme_name + '/edisonda/css/fonts/**')
+  gulp.src('frontend/sass/' + config.build.project_theme_name + '/css/fonts/**')
   .pipe(gulp.dest(config.buildDir + '/assets/fonts'))
 
 gulp.task 'copy-files', ->
-  gulp.src('src/sass/' + config.build.project_theme_name + '/edisonda/files/**')
+  gulp.src('frontend/sass/' + config.build.project_theme_name + '/files/**')
   .pipe(gulp.dest(config.buildDir + '/assets/files/'))
 
 gulp.task 'copy-images', ->
-  gulp.src('src/sass/' + config.build.project_theme_name + '/edisonda/img/**')
+  gulp.src('src/sass/' + config.build.project_theme_name + '/img/**')
   .pipe(gulp.dest(config.buildDir + '/assets/img/'))
 
 gulp.task 'vendor-js', ->
@@ -30,9 +30,8 @@ gulp.task 'vendor-js', ->
 
 gulp.task 'build-assets', [
   'copy-assets'
-  'copy-angular-i18'
   'copy-fonts'
-  'copy-edisonda-files'
-  'copy-edisonda-images'
+  'copy-files'
+  'copy-images'
   'vendor-js'
 ]

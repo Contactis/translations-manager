@@ -7,6 +7,7 @@ os   = require 'os'
 # Require files with individual build tasks
 require './tasks/about'
 require './tasks/build'
+require './tasks/build-html'
 require './tasks/build-assets'
 require './tasks/build-coffee'
 require './tasks/build-jade'
@@ -18,5 +19,6 @@ require './tasks/watchers'
 osRelease = os.release()
 if osRelease.indexOf('boot2docker') >= 0
   config.arguments.b2d = true
+
 
 gulp.task 'default', ['describe-myself']
