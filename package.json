@@ -62,6 +62,8 @@
     "sequelize-cli": "^1.9.1",
     "serve-favicon": "~2.3.0",
     "stream-series": "^0.1.1",
-    "yargs": "^3.24.0"
+    "yargs": "^3.24.0",
+    "mysql": "^2.9.0",
+    "sqlite3": "^3.1.0"
   }
 }
