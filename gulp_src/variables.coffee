@@ -1,7 +1,7 @@
 # ## This file provides us with variables interface
 # ## which can be included in every file in need. DRY!
 
-buildConfig = require '../build.config'
+buildConfig = require '../frontend/build.config.coffee'
 pkg         = require '../package.json'
 argv        = require('yargs').argv
 
