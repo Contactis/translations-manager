@@ -11,7 +11,6 @@ gulp.task 'build-html', ->
   appSrc = gulp.src [
     config.buildDir + 'frontend/app/**/*.js'
     config.buildDir + 'frontend/common/**/*.js'
-    config.buildDir + 'frontend/assets/sass/' + config.build.project_theme_name + '/js/**/*.js'
     config.buildDir + '/' + config.build.tpl_name
   ],
     read: false
@@ -24,7 +23,7 @@ gulp.task 'build-html', ->
   styles = gulp.src config.buildDir + '/assets/*.css',
     read: false
 
-  gulp.src 'src/index.html'
+  gulp.src 'frontend/index.html'
   .pipe inject(series(vendorSrc, gitCommit, appSrc, styles),
     ignorePath: config.buildDir)
   .pipe gulp.dest config.buildDir
@@ -39,7 +38,7 @@ gulp.task 'build-html-prod', ->
     read: false
 
 
-  gulp.src 'src/index.html'
+  gulp.src 'frontend/index.html'
   .pipe inject(appSrc,
     ignorePath: config.buildDir)
   .pipe htmlmini

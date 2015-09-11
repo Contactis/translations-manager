@@ -11,7 +11,6 @@ jsFiles = config.build.vendor_files.js
 appFiles = [
   config.prod.buildAnnotated + '/app/**/*.js'
   config.prod.buildAnnotated + '/common/**/*.js'
-  config.prod.buildAnnotated + '/sass/' + config.build.project_theme_name + '/edisonda/js/**/*.js'
   config.prod.buildAnnotated + '/' + config.build.tpl_name
 ]
 

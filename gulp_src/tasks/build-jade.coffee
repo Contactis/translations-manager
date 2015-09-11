@@ -21,7 +21,7 @@ jadeCore = ->
   gulp.src([
     config.build.app_files.jade_app_tpl
     config.build.app_files.jade_common_tpl
-    '!src/**/*.partial.jade'
+    '!frontend/**/*.partial.jade'
   ])
   .pipe(gulpif((!config.arguments.production && config.arguments.jadeCache), cache('jade-templates')))
   .pipe(jade({
