@@ -33,12 +33,27 @@ module.exports =
 #    recommended that you use wildcards.
 
   vendor_files:
-    js: 'frontend/vendor/jquery/dist/jquery.js'
+    js: [
+      # independent libraries
+      'vendor/lodash/dist/lodash.js'
+      # Angular lib should be the last of independent list!
+      'vendor/angular/angular.js'
+
+      # Libraries depends on independent libraries
+      'vendor/angular-animate/angular-animate.js'
+      'vendor/angular-aria/angular-aria.min.js'
+      'vendor/angular-lodash/angular-lodash.js'
+      'vendor/angular-material.js'
+      'vendor/angular-translate/angular-translate.js'
+      'vendor/angular-ui-router/release/angular-ui-router.js'
+      'vendor/restangular/src/restangular.js'
+
+
+      ]
+
+    css: [ 'vendor/angular-material/angular-material.css' ]
+
     assets: ''
-
-
-    css: [ 'frontend/vendor/fullcalendar/dist/fullcalendar.css' ]
-
 
 #    This is a collection of file patterns that refer to our app code (the
 #    stuff in `src/`). These file paths are used in the configuration of
