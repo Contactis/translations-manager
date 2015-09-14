@@ -6,9 +6,9 @@ module.exports =
         autoIncrement: true
         primaryKey: true
         type: Sequelize.INTEGER
-      key_index: type: Sequelize.STRING
-      is_plural: type: Sequelize.BOOLEAN
-      project_id: type: Sequelize.INTEGER
-      group_id: type: Sequelize.INTEGER
+      keyIndex: type: Sequelize.STRING
+      isPlural: type: Sequelize.BOOLEAN
+      projectId: type: Sequelize.INTEGER
+      groupId: type: Sequelize.INTEGER
 down: (queryInterface, Sequelize) ->
     queryInterface.dropTable 'TranslationKeys'

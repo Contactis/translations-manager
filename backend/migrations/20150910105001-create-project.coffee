@@ -8,7 +8,7 @@ module.exports =
         type: Sequelize.INTEGER
       name: type: Sequelize.STRING
       description: type: Sequelize.STRING
-      default_language: type: Sequelize.INTEGER
+      defaultLanguage: type: Sequelize.INTEGER
       createdAt:
         allowNull: false
         type: Sequelize.DATE

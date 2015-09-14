@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) ->
   ProjectLanguages = sequelize.define('ProjectLanguages', {
-    project_id: DataTypes.INTEGER
-    language_id: DataTypes.INTEGER
+    projectId: DataTypes.INTEGER
+    languageId: DataTypes.INTEGER
   },
   {
     timestamps:   false

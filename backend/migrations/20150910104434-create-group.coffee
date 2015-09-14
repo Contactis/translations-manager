@@ -6,7 +6,7 @@ module.exports =
         autoIncrement: true
         primaryKey: true
         type: Sequelize.INTEGER
-      parent_id: type: Sequelize.INTEGER
+      parentId: type: Sequelize.INTEGER
       name: type: Sequelize.STRING
       namespace: type: Sequelize.STRING
   down: (queryInterface, Sequelize) ->

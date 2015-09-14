@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) ->
   Group = sequelize.define('Group', {
-    parent_id: DataTypes.INTEGER
+    parentId: DataTypes.INTEGER
     name: DataTypes.STRING
     namespace: DataTypes.STRING
   },
