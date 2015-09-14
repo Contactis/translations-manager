@@ -5,22 +5,15 @@ module.exports =
   backendDir:   'backend'
   frontendDir:  'frontend'
 
+#    Global filenames for html templates
 
+  tpl_name:       'templates-module.js'
+  tpl_module:     'templates-module'
 
   gulp_build_dir: 'gulp-build'
 
-
-
-
-
-
-
   #  Global filenames for html templates
-  project_theme_name: 'theme_beta'
-
-
-
-
+  project_theme_name: 'theme_material'
 
 #    This is the same as `app_files`, except it contains patterns that
 #    reference vendor code (`vendor/`) that we need to place into the build
@@ -40,13 +33,17 @@ module.exports =
 #    recommended that you use wildcards.
 
   vendor_files:
-    js: 'vendor/jquery/dist/jquery.js'
+    js: 'frontend/vendor/jquery/dist/jquery.js'
     assets: ''
+
+
+    css: [ 'frontend/vendor/fullcalendar/dist/fullcalendar.css' ]
 
 
 #    This is a collection of file patterns that refer to our app code (the
 #    stuff in `src/`). These file paths are used in the configuration of
-#    build tasks. `js` is all project JavaScript, less tests. `common_tpl` contains
+#    build tasks. `js` is all project JavaScript, less tests. `common_tpl`
+#    contains
 #    our reusable components' (`src/common`) template HTML files, while
 #    `app_tpl` contains the same, but for our app's code. `html` is just our
 #    main HTML file, `less` is our main style-sheet, and `unit` contains our
@@ -55,23 +52,42 @@ module.exports =
 
 
   app_files:
-    js: [ 'src/**/*.js', '!src/**/*.spec.js', '!src/assets/**/*.js', '!src/sass/**/*.js' ]
+    js: [ 'src/**/*.js',
+          '!src/**/*.spec.js',
+          '!src/assets/**/*.js',
+          '!src/sass/**/*.js' ]
     jsunit: [ 'src/**/*.spec.js' ]
 
     #coffee: [ 'src/**/*.coffee', '!src/**/*.spec.coffee' ],
-    coffee:       [ 'src/**/*.coffee', '!src/**/*.spec.coffee' ]
-    coffeeunit:   [ 'src/**/*.spec.coffee' ]
-    all_coffee:   'src/**/*.coffee'
+    coffee:       [ 'frontend/**/*.coffee', '!frontend/**/*.spec.coffee' ]
+    coffeeunit:   [ 'frontend/**/*.spec.coffee' ]
+    all_coffee:   'frontend/**/*.coffee'
     gulp_files:   'gulp/**/*.coffee'
 
     git_commit:   'src/assets/gitcommit.js'
 
-    jade_app_tpl: 'src/app/**/*.jade'
-    jade_common_tpl: 'src/common/**/*.jade'
-    jade_all_templates: 'src/**/*.jade'
+    jade_app_tpl: 'frontend/app/**/*.jade'
+    jade_common_tpl: 'frontend/common/**/*.jade'
+    jade_all_templates: 'frontend/**/*.jade'
 
     assets:   [ 'frontend/assets/**']
-    html:     [ 'src/index.html' ]
+    html:     [ 'frontend/index.html' ]
     less:     [ 'src/less/main.less' ]
-    sass:     [ 'src/sass/main.sass', 'src/app/**/*.sass', 'src/common/**/*.sass' ]
+    sass:     [ 'frontend/sass/main.sass',
+                'frontend/app/**/*.sass',
+                'frontend/common/**/*.sass' ]
     sass_all: ['src/sass/**/*.sass', 'src/sass/**/*.scss']
+
+
+
+#    This is a collection of files used during testing only.
+
+  test_files:
+    js:
+      'vendor/angular-mocks/angular-mocks.js'
+
+
+
+
+
+

@@ -21,7 +21,7 @@ gulp.task 'copy-files', ->
   .pipe(gulp.dest(config.buildDir + '/assets/files/'))
 
 gulp.task 'copy-images', ->
-  gulp.src('src/sass/' + config.build.project_theme_name + '/img/**')
+  gulp.src('frontend/sass/' + config.build.project_theme_name + '/img/**')
   .pipe(gulp.dest(config.buildDir + '/assets/img/'))
 
 gulp.task 'vendor-js', ->

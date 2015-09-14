@@ -10,8 +10,7 @@ gulpif  = require 'gulp-if'
 
 gulp.task 'build-styles', ->
   gulp.src([
-    'src/sass/theme_beta/main.sass'
-    'src/sass/theme_beta/edisonda/css/style.sass'
+    'frontend/sass/theme_beta/main.sass'
   ])
   .pipe(sass({
       indentedSyntax: true

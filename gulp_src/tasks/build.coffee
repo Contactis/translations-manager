@@ -9,19 +9,13 @@ chalk       = require 'chalk'
 
 buildArgs =
   stage1: ['clean-all']
-  stage2: ['coffee', 'git-commit', 'compile-jade', 'build-styles', 'build-assets']
+  stage2: ['coffee', 'compile-jade', 'build-styles', 'build-assets']
   stage3: ['build-html']
 
 
 gulp.task 'build', (done) ->
 
   buildStart = Date.now()
-
-  if config.arguments.tests
-    buildArgs.stage3.push 'run-tests'
-
-  if config.arguments.docs
-    buildArgs.stage2.push 'build-docs'
 
   runSequence buildArgs.stage1, buildArgs.stage2, buildArgs.stage3, ->
     diff = String((Date.now() - buildStart) / 1000)
