@@ -10,5 +10,5 @@ module.exports =
       is_plural: type: Sequelize.BOOLEAN
       project_id: type: Sequelize.INTEGER
       group_id: type: Sequelize.INTEGER
-  down: (queryInterface, Sequelize) ->
+down: (queryInterface, Sequelize) ->
     queryInterface.dropTable 'TranslationKeys'
