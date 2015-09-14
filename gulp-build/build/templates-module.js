@@ -1,0 +1,1 @@
+angular.module("templates-module", []).run(["$templateCache", function($templateCache) {$templateCache.put("templates/template.tpl.html","");}]);

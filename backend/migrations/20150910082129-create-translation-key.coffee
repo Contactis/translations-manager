@@ -8,5 +8,7 @@ module.exports =
         type: Sequelize.INTEGER
       key_index: type: Sequelize.STRING
       is_plural: type: Sequelize.BOOLEAN
-  down: (queryInterface, Sequelize) ->
+      project_id: type: Sequelize.INTEGER
+      group_id: type: Sequelize.INTEGER
+down: (queryInterface, Sequelize) ->
     queryInterface.dropTable 'TranslationKeys'

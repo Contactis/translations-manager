@@ -52,33 +52,22 @@ module.exports =
 
 
   app_files:
-    js: [ 'src/**/*.js',
-          '!src/**/*.spec.js',
-          '!src/assets/**/*.js',
-          '!src/sass/**/*.js' ]
-    jsunit: [ 'src/**/*.spec.js' ]
 
     #coffee: [ 'src/**/*.coffee', '!src/**/*.spec.coffee' ],
     coffee:       [ 'frontend/**/*.coffee', '!frontend/**/*.spec.coffee' ]
-    coffeeunit:   [ 'frontend/**/*.spec.coffee' ]
-    all_coffee:   'frontend/**/*.coffee'
-    gulp_files:   'gulp/**/*.coffee'
 
-    git_commit:   'src/assets/gitcommit.js'
+    all_coffee:         'frontend/**/*.coffee'
+    gulp_files:         'gulp/**/*.coffee'
+    git_commit:         'src/assets/gitcommit.js'
 
-    jade_app_tpl: 'frontend/app/**/*.jade'
-    jade_common_tpl: 'frontend/common/**/*.jade'
+    jade_app_tpl:       'frontend/app/**/*.jade'
+    jade_common_tpl:    'frontend/common/**/*.jade'
     jade_all_templates: 'frontend/**/*.jade'
 
     assets:   [ 'frontend/assets/**']
     html:     [ 'frontend/index.html' ]
-    less:     [ 'src/less/main.less' ]
-    sass:     [ 'frontend/sass/main.sass',
-                'frontend/app/**/*.sass',
-                'frontend/common/**/*.sass' ]
-    sass_all: ['src/sass/**/*.sass', 'src/sass/**/*.scss']
-
-
+    less:     [ 'frontend/less/main.less' ]
+    sass:     [ 'frontend/sass/main.sass']
 
 #    This is a collection of files used during testing only.
 

@@ -1,0 +1,10 @@
+{
+  "verbose": true,
+  "ignore": ["*.test.js"],
+  "execMap": {
+    "rb":   "ruby",
+    "pde":  "processing --sketch={{pwd}} --run",
+    "js":   "node backend/app.js"
+  },
+  "ext": "js coffee"
+}
