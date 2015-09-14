@@ -1,4 +1,4 @@
-# Translation Manager
+# Translation Manager [![Built with Gulp][build-with-gulp-png]][gulpjs-page]
 > by iTelo
 
 Project had been created for iTelo's project [Profitelo](http:///profitelo.pl)
@@ -35,11 +35,13 @@ sudo npm install && sudo npm install -g gulp bower sequelize-cli nodemon
 cd frontend && bower install
 ```
 
+
 ## Development
 All official things that is combined with development process like: app
 structure, frontend and backend side and other elaboration stuff are gathered in
 part called [**development**][wiki-development] into our Wiki pages. To see more
 visit our [wiki pages][wiki].
+
 
 ## Licence
 ```
@@ -64,6 +66,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
 
- [node.js]: https://nodejs.org
- [wiki]: https://bitbucket.org/egel/translations-manager/wiki/browse/
- [wiki-development]: https://bitbucket.org/egel/translations-manager/wiki/browse/
+[node.js]: https://nodejs.org
+[wiki]: https://bitbucket.org/egel/translations-manager/wiki/browse/
+[wiki-development]: https://bitbucket.org/egel/translations-manager/wiki/browse/
+[gulpjs-page]: https://www.gulpjs.com
+[build-with-gulp-png]: https://raw.githubusercontent.com/gulpjs/gulp/e2dd2b6c66409f59082c24585c6989244793d132/built-with-gulp.png
