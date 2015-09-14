@@ -55,12 +55,15 @@
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.3.4",
+    "mysql": "^2.9.0",
     "passport": "^0.3.0",
     "passport-http-bearer": "^1.0.1",
     "run-sequence": "^1.1.2",
     "sequelize": "^3.7.1",
     "sequelize-cli": "^1.9.1",
+    "sequelize-fixtures": "^0.4.7",
     "serve-favicon": "~2.3.0",
+    "sqlite3": "^3.1.0",
     "stream-series": "^0.1.1",
     "yargs": "^3.24.0"
   }

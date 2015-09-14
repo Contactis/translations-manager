@@ -1,15 +1,14 @@
 module.exports =
   up: (queryInterface, Sequelize) ->
-    queryInterface.createTable 'Users',
+    queryInterface.createTable 'Projects',
       id:
         allowNull: false
         autoIncrement: true
         primaryKey: true
         type: Sequelize.INTEGER
-      first_name: type: Sequelize.STRING
-      last_name: type: Sequelize.STRING
-      password: type: Sequelize.STRING
-      token: type: Sequelize.STRING
+      name: type: Sequelize.STRING
+      description: type: Sequelize.STRING
+      default_language: type: Sequelize.INTEGER
       createdAt:
         allowNull: false
         type: Sequelize.DATE
@@ -17,4 +16,4 @@ module.exports =
         allowNull: false
         type: Sequelize.DATE
   down: (queryInterface, Sequelize) ->
-    queryInterface.dropTable 'Users'
+    queryInterface.dropTable 'Projects'

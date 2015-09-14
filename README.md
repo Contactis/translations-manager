@@ -31,7 +31,7 @@ machine, and these programs are:
 ```
 git clone git@bitbucket.org:egel/translations-generator.git
 cd translations-generator
-sudo npm install && sudo npm install -g gulp bower sequelize-cli
+sudo npm install && sudo npm install -g gulp bower sequelize-cli nodemon
 cd frontend && bower install
 ```
 
