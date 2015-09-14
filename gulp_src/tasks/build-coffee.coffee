@@ -29,40 +29,5 @@ gulp.task 'coffee',  ->
   .pipe(annotate())
   .pipe(gulp.dest(config.buildDir))
 
-# ## Production build tasks
-
-# ### TEMP DIR
-gulp.task 'coffee-prod-build', ->
-  gulp.src(config.build.app_files.all_coffee)
-  .pipe(coffeeLint())
-  .pipe(coffeeLint.reporter())
-  .pipe(coffeeLint.reporter('fail'))
-  .pipe(remove({developmentOnly: true}))
-  .pipe(coffee({bare: true}))
-  .pipe(stripDebug())
-  .pipe(gulp.dest(config.prod.plain))
-
-gulp.task 'coffee-prod-annotate', ['coffee-prod-build'], ->
-  gulp.src(config.prod.jsNotAnnotated)
-  .pipe(annotate())
-  .pipe(gulp.dest(config.prod.jsAnnotated))
-
-
-# ### MID DIR
-gulp.task 'coffee-prod-mid-build', ->
-  gulp.src(config.build.app_files.coffee)
-  .pipe(coffeeLint())
-  .pipe(coffeeLint.reporter())
-  .pipe(coffeeLint.reporter('fail'))
-  .pipe(remove({production: true, developmentOnly: true}))
-  .pipe(coffee({bare: true}))
-  .pipe(stripDebug())
-  .pipe(gulp.dest(config.prod.build))
-
-
-gulp.task 'coffee-prod-mid-build-annotate', ['coffee-prod-mid-build'], ->
-  gulp.src(config.prod.buildNotAnnotated)
-  .pipe(annotate())
-  .pipe(gulp.dest(config.prod.buildAnnotated))
 
 
