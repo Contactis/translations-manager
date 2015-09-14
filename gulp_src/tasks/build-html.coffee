@@ -28,19 +28,3 @@ gulp.task 'build-html', ->
     ignorePath: config.buildDir)
   .pipe gulp.dest config.buildDir
 
-
-gulp.task 'build-html-prod', ->
-
-  appSrc = gulp.src [
-      config.buildDir + '/*.js'
-      config.buildDir + '/*.css'
-    ],
-    read: false
-
-
-  gulp.src 'frontend/index.html'
-  .pipe inject(appSrc,
-    ignorePath: config.buildDir)
-  .pipe htmlmini
-          conditionals: true
-  .pipe gulp.dest config.buildDir

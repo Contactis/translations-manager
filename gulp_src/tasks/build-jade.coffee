@@ -43,20 +43,6 @@ gulp.task 'compile-jade', ->
     console.warn = consoleWarn
     config.arguments.jadeCache = true
 
-gulp.task 'compile-jade-prod-tmp', ->
-  jadeCore()
-  .pipe(gulp.dest(config.prod.jsAnnotated))
-  .pipe cback ->
-    console.warn = consoleWarn
-    config.arguments.jadeCache = true
-
-gulp.task 'compile-jade-prod-mid', ->
-  jadeCore()
-  .pipe(uglify())
-  .pipe(gulp.dest(config.prod.buildAnnotated))
-  .pipe cback ->
-    console.warn = consoleWarn
-    config.arguments.jadeCache = true
 
 
 

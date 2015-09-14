@@ -23,13 +23,6 @@ gulp.task 'watchers', ->
     source: config.build.app_files.coffee
     tasks:  ['coffee']
 
-  if config.arguments.tests
-    coffeeWatchArgs.tasks.push 'run-tests-watch'
-    coffeeWatchArgs.source = config.build.app_files.all_coffee
-
-  if config.arguments.docs
-    coffeeWatchArgs.tasks.push 'run-docs'
-
   coffeeWatcher = gulp.watch coffeeWatchArgs.source, watchersConfig, ->
     runSequence coffeeWatchArgs.tasks
 

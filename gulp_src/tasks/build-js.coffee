@@ -19,7 +19,7 @@ jsFiles = jsFiles.concat appFiles
 gulp.task 'build-js', ->
   gulp.src jsFiles
   .pipe(concat(config.pkg.name + '-' + config.pkg.version + '.js'))
-  .pipe(gulpif(config.arguments.uglify, uglify()))
   .pipe(gulp.dest(config.buildDir))
+
 
 
