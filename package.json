@@ -55,6 +55,7 @@
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.3.4",
+    "js2coffee": "^2.1.0",
     "mysql": "^2.9.0",
     "passport": "^0.3.0",
     "passport-http-bearer": "^1.0.1",
