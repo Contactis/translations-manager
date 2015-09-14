@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": null,
+    "username": "root",
     "password": null,
-    "database": null,
-    "host": "db.sqlite",
+    "database": "database_development",
+    "host": "sqlite.sqlite",
     "dialect": "sqlite"
   }
 }
