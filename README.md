@@ -29,8 +29,8 @@ machine, and these programs are:
 
 ### Setup
 ```
-git clone git@bitbucket.org:egel/translations-generator.git
-cd translations-generator
+git clone git@bitbucket.org:egel/translations-manager.git
+cd translations-manager
 sudo npm install && sudo npm install -g gulp bower sequelize-cli nodemon
 cd frontend && bower install
 ```
