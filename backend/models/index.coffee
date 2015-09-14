@@ -1,5 +1,4 @@
-`var sequelize`
-'use strict'
+sequelize = null
 fs = require('fs')
 path = require('path')
 Sequelize = require('sequelize')
@@ -14,7 +13,7 @@ else
 fs.readdirSync(__dirname).filter((file) ->
   file.indexOf('.') != 0 and file != basename
 ).forEach (file) ->
-  if file.slice(-3) != '.js'
+  if file.slice(-7) != '.coffee'
     return
   model = sequelize['import'](path.join(__dirname, file))
   db[model.name] = model

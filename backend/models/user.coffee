@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = (sequelize, DataTypes) ->
   User = sequelize.define('User', {
     first_name: DataTypes.STRING
