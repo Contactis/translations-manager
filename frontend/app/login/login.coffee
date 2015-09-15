@@ -4,11 +4,13 @@ angular.module('translation.login', [
 
 .config ($stateProvider) ->
 
-  $stateProvider.state 'login',
+  $stateProvider.state 'app.login',
     url:            '/login'
-    controller:     'loginController'
+    controller:     'LoginController'
     templateUrl:    'login/login.tpl.html'
-    parent:         'app'
 
-.controller 'loginController', ($scope) ->
+.controller 'LoginController', ($scope) ->
+  console.log 'LoginController'
+  return
+
 
