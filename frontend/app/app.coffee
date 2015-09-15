@@ -8,15 +8,14 @@ translationApp = angular.module('translation-manager', [
   'translation.login'
 ])
 
-.config ($stateProvider) ->
-
-  $stateProvider
-  .state 'app',
-    url: ''
-    abstract: true
-    controller:   'AppController'
-    templateUrl:  'templates/app.tpl.html'
+#.config ($stateProvider) ->
+#
+#  $stateProvider
+#  .state 'app',
+#    url: '/'
+#    controller:   'AppController'
+#    templateUrl:  'templates/app.tpl.html'
 # App Controller
 # -------------
 .controller 'AppController', ($scope) ->
-  console.log 'jestem'
+

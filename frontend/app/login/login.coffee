@@ -11,3 +11,4 @@ angular.module('translation.login', [
     parent:         'app'
 
 .controller 'loginController', ($scope) ->
+
