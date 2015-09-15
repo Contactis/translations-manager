@@ -1,7 +1,8 @@
 module.exports = (sequelize, DataTypes) ->
-  TranslationStatus = sequelize.define('TranslationStatus', {
-    name: DataTypes.STRING
-    description: DataTypes.STRING
+  Groups = sequelize.define('Groups', {
+    parentId:     DataTypes.INTEGER
+    name:         DataTypes.STRING
+    namespace:    DataTypes.STRING
   },
   {
     timestamps:   false
@@ -9,4 +10,5 @@ module.exports = (sequelize, DataTypes) ->
     # associations can be defined here
     return
   )
-  TranslationStatus
+
+  return Groups
