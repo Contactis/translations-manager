@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) ->
   ProjectUsers = sequelize.define('ProjectUsers', {
-    project_id: DataTypes.INTEGER
-    user_id: DataTypes.INTEGER
+    projectId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER
   },
   {
     timestamps:   false

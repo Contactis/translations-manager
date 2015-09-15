@@ -6,9 +6,9 @@ module.exports =
         autoIncrement: true
         primaryKey: true
         type: Sequelize.INTEGER
-      name_native: type: Sequelize.STRING
-      name_english: type: Sequelize.STRING
-      code_ietf: type: Sequelize.STRING
+      nameNative: type: Sequelize.STRING
+      nameEnglish: type: Sequelize.STRING
+      codeIetf: type: Sequelize.STRING
       description: type: Sequelize.STRING
   down: (queryInterface, Sequelize) ->
     queryInterface.dropTable 'Languages'

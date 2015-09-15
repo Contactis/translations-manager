@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) ->
-  LanguagePluralForms = sequelize.define('LanguageTranslations', {
-    language_id: DataTypes.INTEGER
-    plural_form: DataTypes.INTEGER
+  LanguageTranslations = sequelize.define('LanguageTranslations', {
+    languageId: DataTypes.INTEGER
+    pluralForm: DataTypes.INTEGER
   },
   {
     timestamps:   false
@@ -10,5 +10,5 @@ module.exports = (sequelize, DataTypes) ->
     return
   )
 
-  LanguagePluralForms.removeAttribute 'id'
-  LanguagePluralForms
+  LanguageTranslations.removeAttribute 'id'
+  LanguageTranslations

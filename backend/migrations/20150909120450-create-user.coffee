@@ -6,8 +6,8 @@ module.exports =
         autoIncrement: true
         primaryKey: true
         type: Sequelize.INTEGER
-      first_name: type: Sequelize.STRING
-      last_name: type: Sequelize.STRING
+      firstName: type: Sequelize.STRING
+      lastName: type: Sequelize.STRING
       password: type: Sequelize.STRING
       token: type: Sequelize.STRING
       createdAt:

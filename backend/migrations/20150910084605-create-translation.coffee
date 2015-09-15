@@ -7,9 +7,9 @@ module.exports =
         primaryKey: true
         type: Sequelize.INTEGER
       translation: type: Sequelize.STRING
-      language_id: type: Sequelize.INTEGER
-      plural_form: type: Sequelize.INTEGER
-      last_modified_by: type: Sequelize.INTEGER
+      languageId: type: Sequelize.INTEGER
+      pluralForm: type: Sequelize.INTEGER
+      lastModifiedBy: type: Sequelize.INTEGER
       status: type: Sequelize.INTEGER
       note: type: Sequelize.TEXT
       createdAt:
