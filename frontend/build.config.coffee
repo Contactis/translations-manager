@@ -35,23 +35,22 @@ module.exports =
   vendor_files:
     js: [
       # independent libraries
-      'vendor/lodash/dist/lodash.js'
+      'frontend/vendor/lodash/dist/lodash.js'
       # Angular lib should be the last of independent list!
-      'vendor/angular/angular.js'
+      'frontend/vendor/angular/angular.js'
 
       # Libraries depends on independent libraries
-      'vendor/angular-animate/angular-animate.js'
-      'vendor/angular-aria/angular-aria.min.js'
-      'vendor/angular-lodash/angular-lodash.js'
-      'vendor/angular-material.js'
-      'vendor/angular-translate/angular-translate.js'
-      'vendor/angular-ui-router/release/angular-ui-router.js'
-      'vendor/restangular/src/restangular.js'
-
+      'frontend/vendor/angular-animate/angular-animate.js'
+      'frontend/vendor/angular-aria/angular-aria.min.js'
+      'frontend/vendor/angular-lodash/angular-lodash.js'
+      'frontend/vendor/angular-material.js'
+      'frontend/vendor/angular-translate/angular-translate.js'
+      'frontend/vendor/angular-ui-router/release/angular-ui-router.js'
+      'frontend/vendor/restangular/src/restangular.js'
 
       ]
 
-    css: [ 'vendor/angular-material/angular-material.css' ]
+    css: [ 'frontend/vendor/angular-material/angular-material.css' ]
 
     assets: ''
 
@@ -68,7 +67,6 @@ module.exports =
 
   app_files:
 
-    #coffee: [ 'src/**/*.coffee', '!src/**/*.spec.coffee' ],
     coffee:       [ 'frontend/**/*.coffee', '!frontend/**/*.spec.coffee' ]
 
     all_coffee:         'frontend/**/*.coffee'
