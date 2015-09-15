@@ -10,7 +10,7 @@ angular.module('translation.login', [
     templateUrl:    'login/login.tpl.html'
 
 .controller 'LoginController', ($scope) ->
-  console.log 'LoginController'
+
   return
 
 

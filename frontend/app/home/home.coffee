@@ -10,7 +10,7 @@ angular.module('translation.home', [
     templateUrl:    'home/home.tpl.html'
 
 .controller 'HomeController', ($scope) ->
-  console.log 'dupa into home'
+
   return
 
 

@@ -35,6 +35,8 @@ translationApp = angular.module('translation', [
   $locationProvider.html5Mode(true)
 
 
+.run ($rootScope) ->
+
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
     return
 

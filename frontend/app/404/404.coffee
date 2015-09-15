@@ -10,7 +10,7 @@ angular.module('translation.404', [
     templateUrl:    '404/404.tpl.html'
 
 .controller 'Page404Controller', ($scope) ->
-  console.log 'win to call 404 page'
+
   return
 
 
