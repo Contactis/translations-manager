@@ -9,9 +9,9 @@ gulpif  = require 'gulp-if'
 jsFiles = config.build.vendor_files.js
 
 appFiles = [
-  config.prod.buildAnnotated + '/app/**/*.js'
-  config.prod.buildAnnotated + '/common/**/*.js'
-  config.prod.buildAnnotated + '/' + config.build.tpl_name
+  config.buildDir + '/app/**/*.js'
+  config.buildDir + '/common/**/*.js'
+  config.buildDir + '/' + config.build.tpl_name
 ]
 
 jsFiles = jsFiles.concat appFiles

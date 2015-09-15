@@ -12,8 +12,6 @@ module.exports =
   pkg:        pkg
   gulpDir:    buildConfig.gulp_build_dir
   buildDir:   'public'
-  prod:
-    buildAnnotated:     buildConfig.gulp_build_dir + '/mid/build'
 
   arguments:
     production: false

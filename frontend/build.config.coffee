@@ -10,7 +10,7 @@ module.exports =
   tpl_name:       'templates-module.js'
   tpl_module:     'templates-module'
 
-  gulp_build_dir: 'gulp-build'
+  gulp_build_dir: 'public'
 
   #  Global filenames for html templates
   project_theme_name: 'theme_material'
