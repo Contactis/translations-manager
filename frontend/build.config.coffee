@@ -67,7 +67,7 @@ module.exports =
 
   app_files:
 
-    coffee:       [ 'frontend/**/*.coffee', '!frontend/**/*.spec.coffee' ]
+    coffee:       [ 'frontend/**/*.coffee', '!frontend/**/*.spec.coffee', '!frontend/build.config.coffee' ]
 
     all_coffee:         'frontend/**/*.coffee'
     gulp_files:         'gulp/**/*.coffee'
