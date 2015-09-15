@@ -19,3 +19,4 @@ translationApp = angular.module('translation-manager', [
 # App Controller
 # -------------
 .controller 'AppController', ($scope) ->
+  console.log 'jestem'

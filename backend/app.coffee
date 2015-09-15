@@ -2,4 +2,4 @@ require './bootstrap/associations'
 require './bootstrap/webServer'
 
 
-require './routes/login'
+require './routes/angular'

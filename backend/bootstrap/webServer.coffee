@@ -3,6 +3,7 @@ GLOBAL.app = express()
 
 chalk = require 'chalk'
 
+app.use express.static 'public'
 
 GLOBAL.server = app.listen 3000, ->
   host = server.address().address
