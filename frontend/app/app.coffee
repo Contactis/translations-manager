@@ -5,6 +5,7 @@ translationApp = angular.module('translation', [
   'restangular'
   'ngAnimate'
   'ngAria'
+  'ngMaterial'
 
   # Including templates
   'templates-module'
@@ -13,6 +14,8 @@ translationApp = angular.module('translation', [
   'translation.404'
   'translation.home'
   'translation.login'
+  'translation.register'
+  'translation.dashboard'
 ])
 
 
@@ -23,7 +26,7 @@ translationApp = angular.module('translation', [
     url:          ''
     abstract:     true
     controller:   'AppController'
-    template:     '<div data-ui-view=""></div>'
+    templateUrl:  'templates/app.tpl.html'
 
   $urlRouterProvider
     .when('', '/')

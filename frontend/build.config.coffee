@@ -43,7 +43,7 @@ module.exports =
       'frontend/vendor/angular-animate/angular-animate.js'
       'frontend/vendor/angular-aria/angular-aria.min.js'
       'frontend/vendor/angular-lodash/angular-lodash.js'
-      'frontend/vendor/angular-material.js'
+      'frontend/vendor/angular-material/angular-material.js'
       'frontend/vendor/angular-translate/angular-translate.js'
       'frontend/vendor/angular-ui-router/release/angular-ui-router.js'
       'frontend/vendor/restangular/src/restangular.js'
