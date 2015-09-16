@@ -1,0 +1,22 @@
+div(layout-align="center center" class="md-whiteframe-z1")
+   br
+   form(name="registerForm")
+      md-content(layout-padding class="autoScroll")
+         md-input-container(class="md-icon-float")
+            label Email
+            md-icon email
+            input(data-ng-model="user.email" type="text")
+         md-input-container(class="md-icon-float")
+            label Password
+            md-icon lock
+            input(data-ng-model="user.password" type="password")
+         md-input-container(class="md-icon-float")
+            label Repeat password
+            md-icon lock
+            input(data-ng-model="user.password" type="password")
+         md-input-container(class="md-icon-float")
+            label Name (visible for other)
+            md-icon person
+            input(data-ng-model="user.password" type="password")
+         md-button
+            span(data-ui-sref='app.register') Register
