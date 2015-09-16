@@ -3,7 +3,9 @@ config      = require '../variables'
 nodemon     = require 'gulp-nodemon'
 gulp        = require 'gulp'
 coffeeLint  = require 'gulp-coffeelint'
-
+shell       = require 'gulp-shell'
+nodeConfig  = require './../../backend/config/config.json'
+runSequence = require 'run-sequence'
 
 gulp.task 'start-backend',  ->
   gulp.src(config.build.backendDir + "/**/*.coffee")
@@ -25,3 +27,14 @@ gulp.task 'nodemon', ->
     ext: "js coffee"
     tasks: ['start-backend']
 
+
+gulp.task 'db:renew', shell.task [
+  "cd backend && rm -f #{nodeConfig['development']['host']} && sequelize db:migrate --coffee"
+]
+
+gulp.task 'db:seed', shell.task [
+  "cd backend && sequelize db:seed --coffee"
+]
+
+gulp.task 'db:restore', ->
+  runSequence 'db:renew', 'db:seed'

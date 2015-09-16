@@ -10,8 +10,5 @@ module.exports =
       pluralForm:
         type:           Sequelize.INTEGER
         allowNull:      false
-        references:
-          model:        "Translations"
-          key:          "pluralForm"
   down: (queryInterface, Sequelize) ->
     queryInterface.dropTable 'LanguagesTranslations'
