@@ -11,3 +11,4 @@ GLOBAL.server = app.listen config.backendPort, ->
 
   console.log "[#{chalk.gray moment().format 'HH:mm:ss'}]
 #{chalk.green '[express] Translation Manager backend is running on port '+ config.backendPort}"
+
