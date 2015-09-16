@@ -4,7 +4,6 @@
     "password":   null,
     "database":   "database_development",
     "host":       "translation_manager_db.sqlite",
-    "dialect":    "sqlite",
-    "backendPort": 3000
+    "dialect":    "sqlite"
   }
 }
