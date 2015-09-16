@@ -4,7 +4,7 @@ nodemon     = require 'gulp-nodemon'
 gulp        = require 'gulp'
 coffeeLint  = require 'gulp-coffeelint'
 shell       = require 'gulp-shell'
-nodeConfig  = require './../../backend/config/config.json'
+nodeConfig  = require './../../backend/config/database.json'
 runSequence = require 'run-sequence'
 
 gulp.task 'start-backend',  ->
@@ -29,11 +29,11 @@ gulp.task 'nodemon', ->
 
 
 gulp.task 'db:renew', shell.task [
-  "cd backend && rm -f #{nodeConfig['development']['host']} && sequelize db:migrate --coffee"
+  "cd backend && rm -f #{nodeConfig['development']['host']} && sequelize db:migrate --coffee --config 'config/database.json' "
 ]
 
 gulp.task 'db:seed', shell.task [
-  "cd backend && sequelize db:seed --coffee"
+  "cd backend && sequelize db:seed --coffee --config 'config/database.json'"
 ]
 
 gulp.task 'db:restore', ->

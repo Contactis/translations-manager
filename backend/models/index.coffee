@@ -5,7 +5,7 @@ path          = require('path')
 
 basename      = path.basename(module.filename)
 env           = process.env.NODE_ENV or 'development'
-config        = require(__dirname + '/../config/config.json')[env]
+config        = require(__dirname + '/../config/database.json')[env]
 db            = {}
 
 if config.use_env_variable

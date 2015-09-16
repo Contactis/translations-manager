@@ -1,5 +1,7 @@
+require('coffee-script').register()
+
 env = process.env.NODE_ENV or 'development'
-GLOBAL.config = require(__dirname + '/config/config.json')[env]
+GLOBAL.config = require(__dirname + '/config/database.json')[env]
 
 
 require './bootstrap/associations'
