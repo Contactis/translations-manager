@@ -12,5 +12,6 @@ module.exports =
         type:           Sequelize.STRING
       namespace:
         type:           Sequelize.STRING
+        allowNull:      false
   down: (queryInterface, Sequelize) ->
     queryInterface.dropTable 'Groups'

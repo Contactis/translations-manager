@@ -35,7 +35,7 @@ gulp.task 'nodemon', ->
 
 gulp.task 'db:renew', shell.task [
   "cd backend &&
-   rm -f backend/#{databaseConfig['development']['host']} &&
+   rm -f #{databaseConfig['development']['host']} &&
    sequelize db:migrate --coffee --config #{_dbConfigFilePath}"
 ]
 

@@ -6,7 +6,7 @@ module.exports =
         primaryKey:     true
         autoIncrement:  true
         allowNull:      false
-      keyIndex:
+      keyString:
         type:           Sequelize.STRING(600)
         allowNull:      false
       isPlural:
