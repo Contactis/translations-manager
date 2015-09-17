@@ -2,13 +2,13 @@ module.exports =
   up: (queryInterface, Sequelize) ->
     queryInterface.createTable 'ProjectsLanguages',
       projectId:
-        type:           Sequelize.INTEGER
+        type:           Sequelize.INTEGER.UNSIGNED
         allowNull:      false
         references:
           model:        "Projects"
           key:          "id"
       languageId:
-        type:           Sequelize.INTEGER
+        type:           Sequelize.INTEGER.UNSIGNED
         allowNull:      false
         references:
           model:        "Languages"

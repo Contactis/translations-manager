@@ -2,7 +2,7 @@ module.exports =
   up: (queryInterface, Sequelize) ->
     queryInterface.createTable 'TranslationsKeys',
       id:
-        type:           Sequelize.INTEGER
+        type:           Sequelize.INTEGER.UNSIGNED
         primaryKey:     true
         autoIncrement:  true
         allowNull:      false
@@ -12,13 +12,13 @@ module.exports =
       isPlural:
         type:           Sequelize.BOOLEAN
       projectId:
-        type:           Sequelize.INTEGER
+        type:           Sequelize.INTEGER.UNSIGNED
         allowNull:      false
         references:
           model:        "Projects"
           key:          "id"
       groupId:
-        type:           Sequelize.INTEGER
+        type:           Sequelize.INTEGER.UNSIGNED
         references:
           model:        "Groups"
           key:          "id"

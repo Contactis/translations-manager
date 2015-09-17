@@ -2,7 +2,7 @@ module.exports =
   up: (queryInterface, Sequelize) ->
     queryInterface.createTable 'TranslationStatuses',
       id:
-        type:           Sequelize.INTEGER
+        type:           Sequelize.INTEGER.UNSIGNED
         autoIncrement:  true
         primaryKey:     true
         allowNull:      false
