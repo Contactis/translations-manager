@@ -1,11 +1,17 @@
+dbConfig    = require(__dirname + '/../config/database.json')
+
 express     = require 'express'
 GLOBAL.app  = express()
+session     = require 'express-session'
 moment      = require 'moment'
 chalk       = require 'chalk'
 bodyParser  = require 'body-parser'
 path        = require 'path'
 epilogue    = require 'epilogue'
 http        = require 'http'
+
+sqlite3     = require('sqlite3').verbose()
+db          = new sqlite3.Database(__dirname + '/../' + dbConfig.development.host)
 
 
 # configure app to use bodyParser()
