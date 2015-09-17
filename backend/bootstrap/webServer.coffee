@@ -3,6 +3,9 @@ GLOBAL.app  = express()
 moment      = require 'moment'
 chalk       = require 'chalk'
 bodyParser  = require 'body-parser'
+path        = require 'path'
+epilogue    = require 'epilogue'
+http        = require 'http'
 
 
 # configure app to use bodyParser()
@@ -11,29 +14,19 @@ app.use bodyParser.urlencoded(extended: true)
 app.use bodyParser.json()
 app.use express.static 'public'
 
+epilogue.initialize
+  app:        app
+  sequelize:  orm.sequelize
 
-# app.get '/api', (req, res) ->
-#   res.send('adfsadfsdf')
-
-# app.get '/api', (request, response) ->
-#   response.json { message: 'Inistalize awesome!' }
-
-
-# ROUTES FOR OUR API
-# =============================================================================
-router = express.Router()
-
-router.get '/', (request, resource) ->
-  resource.json {messages: 'Translation API is running'}
-  return
+require('../bootstrap/endpoints')(epilogue)
 
 
-# REGISTER OUR ROUTES -------------------------------
-# all of our routes will be prefixed with /api
-app.use '/api', router
+app.get '/*', (req, res) ->
+  res.sendFile path.resolve __dirname + '/../../public/index.html'
 
 GLOBAL.server = app.listen config.backendPort, ->
 
   console.log "[#{chalk.gray moment().format 'HH:mm:ss'}]
-#{chalk.green '[express] Translation Manager backend is running at'} #{chalk.blue 'http://' + config.host + ':' + config.backendPort + '/'}"
+#{chalk.green '[express] Translation Manager backend is running at'}
+#{chalk.blue 'http://' + config.host + ':' + config.backendPort + '/'}"
 

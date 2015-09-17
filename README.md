@@ -28,6 +28,16 @@ machine, and these programs are:
 - [node.js][node.js]
 
 ### Setup
+Latest node.js is recommended for development. Simply update using NPM ([how to set up node.js](https://docs.npmjs.com/getting-started/installing-node))
+
+```
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+```
+
+Then clone the repo and install all requirements
+
 ```
 git clone git@bitbucket.org:egel/translations-manager.git
 cd translations-manager

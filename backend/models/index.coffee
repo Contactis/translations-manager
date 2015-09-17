@@ -5,13 +5,16 @@ path          = require('path')
 
 basename      = path.basename(module.filename)
 env           = process.env.NODE_ENV or 'development'
-config        = require(__dirname + '/../config/server.json')[env]
+config        = require(__dirname + '/../config/database.json')[env]
 db            = {}
 
-if config.use_env_variable
-  sequelize = new Sequelize(process.env[config.use_env_variable])
-else
-  sequelize = new Sequelize(config.database, config.username, config.password, config)
+
+databasePath = path.resolve __dirname + '/../' + config.host
+
+config.host = databasePath
+config.storage = databasePath
+
+sequelize = new Sequelize(config.database, config.username, config.password, config)
 
 fs.readdirSync(__dirname).filter((file) ->
   file.indexOf('.') != 0 and file != basename
