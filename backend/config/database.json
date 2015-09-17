@@ -4,6 +4,7 @@
     "password":   null,
     "database":   "database_development",
     "host":       "translation_manager_db.sqlite",
-    "dialect":    "sqlite"
+    "dialect":    "sqlite",
+    "storage":    "translation_manager_db.sqlite"
   }
 }
