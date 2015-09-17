@@ -35,6 +35,9 @@ gulp.task 'watchers', ->
   sassWatcher = gulp.watch config.build.app_files.sass_all, watchersConfig, ->
     runSequence 'build-styles'
 
+  # ## Backend
+  gulp.watch config.build.backendDir + '/**/*.coffee', ['lint-backend']
+
   # ## Additional tasks to run on file change
 
   coffeeWatcher.on 'change', (e) ->

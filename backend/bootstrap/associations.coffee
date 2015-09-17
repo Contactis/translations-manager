@@ -57,3 +57,4 @@ orm.TranslationsKeys.belongsTo(orm.Groups, {
 # LanguagesTranslations
 orm.Languages.belongsToMany(orm.Translations, { through: 'LanguagesTranslations' })
 orm.Translations.belongsToMany(orm.Languages, { through: 'LanguagesTranslations' })
+

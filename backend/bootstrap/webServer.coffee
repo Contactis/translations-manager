@@ -12,6 +12,7 @@ app.use bodyParser.json()
 app.use express.static 'public'
 
 
+
 # app.get '/api', (req, res) ->
 #   res.send('adfsadfsdf')
 
@@ -35,5 +36,6 @@ app.use '/api', router
 GLOBAL.server = app.listen config.backendPort, ->
 
   console.log "[#{chalk.gray moment().format 'HH:mm:ss'}]
-#{chalk.green '[express] Translation Manager backend is running at'} #{chalk.blue 'http://' + config.host + ':' + config.backendPort + '/'}"
+#{chalk.green '[express] Translation Manager backend is running at'}
+#{chalk.blue 'http://' + config.host + ':' + config.backendPort + '/'}"
 

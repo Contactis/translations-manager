@@ -10,13 +10,15 @@ shell           = require 'gulp-shell'
 databaseConfig  = require './../../backend/' + _dbConfigFilePath
 runSequence     = require 'run-sequence'
 
-gulp.task 'start-backend',  ->
+gulp.task 'lint-backend',  ->
   gulp.src(config.build.backendDir + "/**/*.coffee")
   .pipe(coffeeLint())
   .pipe(coffeeLint.reporter())
 
 
 gulp.task 'nodemon', ->
+  runSequence 'lint-backend'
+
   nodemon
     verbose: false
     ignore: [
@@ -28,7 +30,7 @@ gulp.task 'nodemon', ->
     execMap:
       js: "node backend/app.js"
     ext: "js coffee"
-    tasks: ['start-backend']
+
 
 
 gulp.task 'db:renew', shell.task [
