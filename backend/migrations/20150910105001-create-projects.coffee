@@ -2,14 +2,14 @@ module.exports =
   up: (queryInterface, Sequelize) ->
     queryInterface.createTable 'Projects',
       id:
-        type:           Sequelize.INTEGER
+        type:           Sequelize.INTEGER.UNSIGNED
         autoIncrement:  true
         primaryKey:     true
         allowNull:      false
       name:
         type:           Sequelize.STRING
       defaultLanguage:
-        type:           Sequelize.INTEGER
+        type:           Sequelize.INTEGER.UNSIGNED
         allowNull:      false
         references:
           model:        "Languages"

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) ->
   TranslationsKeys = sequelize.define('TranslationsKeys', {
-    keyIndex:     DataTypes.STRING(600)
+    keyString:     DataTypes.STRING(600)
     isPlural:     DataTypes.BOOLEAN
     projectId:    DataTypes.INTEGER
     groupId:      DataTypes.INTEGER

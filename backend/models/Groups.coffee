@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) ->
     parentId:     DataTypes.INTEGER
     name:         DataTypes.STRING
     namespace:    DataTypes.STRING
+    projectId:    DataTypes.INTEGER
   },
   {
     timestamps:   false

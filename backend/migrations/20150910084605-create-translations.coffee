@@ -2,7 +2,7 @@ module.exports =
   up: (queryInterface, Sequelize) ->
     queryInterface.createTable 'Translations',
       id:
-        type:           Sequelize.INTEGER
+        type:           Sequelize.INTEGER.UNSIGNED
         autoIncrement:  true
         primaryKey:     true
         allowNull:      false
@@ -10,7 +10,7 @@ module.exports =
         type:           Sequelize.STRING(600)
         allowNull:      false
       languageId:
-        type:           Sequelize.INTEGER
+        type:           Sequelize.INTEGER.UNSIGNED
         allowNull:      false
         references:
           model:        "Languages"

@@ -17,6 +17,7 @@ app.use express.static 'public'
 epilogue.initialize
   app:        app
   sequelize:  orm.sequelize
+  base:       '/api'
 
 require('../bootstrap/endpoints')(epilogue)
 
