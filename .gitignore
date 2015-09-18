@@ -4,6 +4,7 @@ public
 .idea
 .env
 .DS_Store
+*.log
 
 ###############################
 ## Wiki pages
@@ -15,3 +16,4 @@ wiki/
 # Gulp temporary files
 ########################################
 gulp-build
+

@@ -4,7 +4,6 @@ config = require '../variables'
 # Require all dependencies
 gulp        = require 'gulp'
 runSequence = require 'run-sequence'
-gulp-watch  = require 'gulp-watch'
 chalk       = require 'chalk'
 
 gulp.task 'watchers', ->
@@ -35,6 +34,9 @@ gulp.task 'watchers', ->
   # ## Sass stylesheets
   sassWatcher = gulp.watch config.build.app_files.sass_all, watchersConfig, ->
     runSequence 'build-styles'
+
+  # ## Backend
+  gulp.watch config.build.backendDir + '/**/*.coffee', ['lint-backend']
 
   # ## Additional tasks to run on file change
 
