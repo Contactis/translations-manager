@@ -4,6 +4,7 @@ module.exports = (epilogue) ->
     model: orm.Languages
     endpoints: ['/languages', '/languages/:id']
 
+
   epilogue.resource
     model:  orm.LanguagesTranslations
     endpoints: ['/languages-translations', '/languages-translations/:id']
@@ -23,3 +24,4 @@ module.exports = (epilogue) ->
   epilogue.resource
     model: orm.Projects
     endpoints: ['/projects', '/projects/:id']
+    associations: orm.ProjectsLanguages

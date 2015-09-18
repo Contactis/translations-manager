@@ -26,20 +26,22 @@ orm.Translations.belongsTo(orm.Users, {
 
 # ProjectsUsers
 orm.Users.belongsToMany(orm.Projects, { through: 'ProjectsUsers' })
-orm.Projects.belongsToMany(orm.Users, { through: 'ProjectsUsers' })
+#orm.Projects.belongsToMany(orm.Users, { through: 'ProjectsUsers' })
 
 
 # ProjectsLanguages
 orm.Languages.belongsToMany(orm.Projects, { through: 'ProjectsLanguages' })
-orm.Projects.belongsToMany(orm.Languages, { through: 'ProjectsLanguages' })
+#orm.Projects.belongsToMany(orm.Languages, { through: 'ProjectsLanguages' })
+
+orm.Projects.hasMany(orm.ProjectsLanguages)
 
 
-# Projects
-orm.Projects.belongsTo(orm.Languages, {
-  foreignKey:
-    name:       'defaultLanguage'
-    allowNull:  false
-})
+## Projects
+#orm.Projects.belongsTo(orm.Languages, {
+#  foreignKey:
+#    name:       'defaultLanguage'
+#    allowNull:  false
+#})
 
 
 # TranslationsKeys
