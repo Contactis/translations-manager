@@ -32,7 +32,7 @@ gulp.task 'watchers', ->
 
 
   # ## Sass stylesheets
-  sassWatcher = gulp.watch config.build.app_files.sass_all, watchersConfig, ->
+  sassWatcher = gulp.watch config.build.app_files.sass, watchersConfig, ->
     runSequence 'build-styles'
 
   # ## Backend

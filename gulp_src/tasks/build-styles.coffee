@@ -10,7 +10,7 @@ gulpif  = require 'gulp-if'
 
 gulp.task 'build-styles', ->
   gulp.src([
-    'frontend/sass/theme_beta/main.sass'
+    'frontend/sass/theme_material/main.sass'
   ])
   .pipe(sass({
       indentedSyntax: true

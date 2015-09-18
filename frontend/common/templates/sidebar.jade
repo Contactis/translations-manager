@@ -1,4 +1,24 @@
-span Project name
-md-icon(style="font-size:48px;") keyboard_arrow_down
-p Languages: 8
-p All keys: 1234
+div(class="paddingLeftRight-20")
+    div(flex='5' class="projectTitle" layout="row" layout-align="space-between center")
+        span Project name
+        md-icon(flex='1' class="alignRight") keyboard_arrow_down
+    p(flex='5' class="zeroMargin") Jakub Pęksa
+
+    //TODO switch brs to paddings
+    br
+    div(flex='5')
+        md-icon(class="paddingRight-10") language
+        span(class="alignCenter") Languages: 8
+    div(flex='5')
+        md-icon(class="paddingRight-10") vpn_key
+        span(class="alignCenter") All keys: 1234
+    br
+    hr
+
+    br
+    div(flex='15' layout="row" layout-align="space-between center")
+        span Languages
+        md-icon(flex='1' class="alignRight") search
+
+
+
