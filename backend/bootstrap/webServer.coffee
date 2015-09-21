@@ -11,8 +11,7 @@ epilogue    = require 'epilogue'
 http        = require 'http'
 
 sqlite3     = require('sqlite3').verbose()
-db          = new sqlite3.Database(__dirname + '/../' + dbConfig.development.host)
-
+db          = new sqlite3.Database(dbConfig.development.host)
 
 # configure app to use bodyParser()
 # this will let us get the data from a POST
