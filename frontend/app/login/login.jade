@@ -1,15 +1,16 @@
-div(layout-align="center center" class="md-whiteframe-z1")
-    br
-    form(name="loginForm")
-        md-content(layout-padding class="autoScroll")
-            md-input-container(class="md-icon-float")
-                label Email
-                md-icon email
-                input(data-ng-model="user.email" type="text")
-            md-input-container(class="md-icon-float")
-                label Password
-                md-icon lock
-                input(data-ng-model="user.password" type="password")
-            md-button(type="submit") Login
-            md-button
-                span(data-ui-sref='app.register') Register
+div(flex class="md-padding" layout="row" layout-fill layout-align="center center")
+    div(layout-align="center center" class="md-whiteframe-z1")
+        br
+        form(name="loginForm")
+            md-content(layout-padding class="autoScroll")
+                md-input-container(class="md-icon-float")
+                    label Email
+                    md-icon email
+                    input(data-ng-model="user.email" type="text")
+                md-input-container(class="md-icon-float")
+                    label Password
+                    md-icon lock
+                    input(data-ng-model="user.password" type="password")
+                md-button(type="submit") Login
+                md-button
+                    span(data-ui-sref='app.register') Register

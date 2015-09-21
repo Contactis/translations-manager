@@ -9,7 +9,7 @@ angular.module('translation.dashboard', [
     controller:     'DashboardController'
     templateUrl:    'dashboard/dashboard.tpl.html'
 
-.controller 'Dashboard', ($scope) ->
+.controller 'DashboardController', ($scope) ->
 
   return
 
