@@ -6,7 +6,7 @@ module.exports =
         autoIncrement:  true
         primaryKey:     true
         allowNull:      false
-      translation:
+      translatedPhrase:
         type:           Sequelize.STRING(600)
         allowNull:      false
       languageId:
@@ -17,6 +17,9 @@ module.exports =
           key:          "id"
       pluralForm:
         type:           Sequelize.INTEGER
+      TranslationsKeyId:
+        type:           Sequelize.INTEGER
+        allowNull:      false
       lastModifiedBy:
         type:           Sequelize.INTEGER
         allowNull:      false
