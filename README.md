@@ -28,29 +28,49 @@ machine, and these programs are:
 - [node.js][node.js]
 
 ### Setup
-Latest node.js is recommended for development. Simply update using NPM ([how to set up node.js](https://docs.npmjs.com/getting-started/installing-node))
+Latest node.js is recommended for development (4.0.0 or higher). 
+Simply update using NPM ([how to set up node.js](https://docs.npmjs.com/getting-started/installing-node))
 
-```
+``` 
 sudo npm cache clean -f
 sudo npm install -g n
 sudo n stable
 ```
+
+or using `nvm` (node version manager)
+```
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.26.1/install.sh | bash
+nvm install 4
+nvm use 4
+```
+
 
 Then clone the repo and install all requirements
 
 ```
 git clone git@bitbucket.org:egel/translations-manager.git
 cd translations-manager
-sudo npm install && sudo npm install -g gulp bower sequelize-cli
+sudo npm install -g gulp bower sequelize-cli    # for global install need sudo 
+npm install       # should install without sudo
 cd frontend && bower install
 ```
+
+then run environment
+
+```
+gulp db:restore
+gulp watch
+```
+
+Open browser on: http://127.0.0.1:4000/
+
+Enjoy :)
 
 
 ## Development
 All official things that is combined with development process like: app
-structure, frontend and backend side and other elaboration stuff are gathered in
-part called [**development**][wiki-development] into our Wiki pages. To see more
-visit our [wiki pages][wiki].
+structure, frontend and backend side and other elaboration stuff are gathered in part called [**development**][wiki-development] into our Wiki pages. 
+To see more visit our [wiki pages][wiki].
 
 
 ## Licence
