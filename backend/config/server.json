@@ -1,6 +1,7 @@
 {
   "development": {
     "host":         "127.0.0.1",
-    "backendPort":  3000
+    "backendPort":  3000,
+    "secret":       "ILoveTranslationManager"
   }
 }
