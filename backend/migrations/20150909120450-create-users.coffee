@@ -1,15 +1,21 @@
 module.exports =
   up: (queryInterface, Sequelize) ->
     queryInterface.createTable 'Users',
+      id:
+        type:           Sequelize.INTEGER
+        allowNull:      false
+        primaryKey:     true
       email:
         type:           Sequelize.STRING
         allowNull:      false
-        primaryKey:     true
       firstName:
         type:           Sequelize.STRING
       lastName:
         type:           Sequelize.STRING
       password:
+        type:           Sequelize.STRING
+        allowNull:      false
+      token:
         type:           Sequelize.STRING
       createdAt:
         allowNull:      false
