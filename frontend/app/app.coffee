@@ -14,10 +14,17 @@ translationApp = angular.module('translation', [
   'translation.404'
   'translation.login'
   'translation.dashboard'
+
+
+
+# Including services
+  'userService'
+
+
 ])
 
 
-.config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider) ->
+.config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider, RestangularProvider) ->
 
   $stateProvider
   .state 'app',
@@ -25,11 +32,17 @@ translationApp = angular.module('translation', [
     abstract:     true
     controller:   'AppController'
     templateUrl:  'templates/app.tpl.html'
+    resolve:
+      user: (user) ->
+        return user.getSession()
 
   $urlRouterProvider
     .when('', '/')
     .when('/', '/login')
     .otherwise('/404')
+
+
+  RestangularProvider.setBaseUrl '/api'
 
 
 
@@ -54,5 +67,8 @@ translationApp = angular.module('translation', [
 # App Controller
 # -------------
 .controller 'AppController', ($scope) ->
+
+
+
   return
 

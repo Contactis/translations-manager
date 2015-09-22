@@ -1,5 +1,6 @@
 angular.module('translation.login', [
   'ui.router'
+  'authorisationService'
 ])
 
 .config ($stateProvider) ->
@@ -9,13 +10,29 @@ angular.module('translation.login', [
     controller:     'LoginController'
     templateUrl:    'login/login.tpl.html'
 
-.controller 'LoginController', ($scope) ->
+.controller 'LoginController', ($scope, authorisation) ->
 
 
-  $scope.register = false
+  $scope.user =
+    email: ''
+    password: ''
+    repeatPassword: ''
+    username: ''
+
+
+  $scope.showRegistration = false
 
   $scope.toggleRegister = ->
-    $scope.register = !$scope.register
+    $scope.showRegistration = !$scope.showRegistration
+
+
+
+  $scope.login = ->
+    authorisation.login $scope.user.email, $scope.user.password
+
+
+  $scope.register = ->
+    authorisation.register $scope.user.email, $scope.user.password, $scope.user.repeatPassword, $scope.user.username
 
 
 
