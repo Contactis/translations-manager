@@ -80,7 +80,7 @@ module.exports =
     assets:   [ 'frontend/assets/**']
     html:     [ 'frontend/index.html' ]
     less:     [ 'frontend/less/main.less' ]
-    sass:     [ 'frontend/sass/theme_material/main.sass']
+    sass:     [ 'frontend/sass/theme_material/**/*.sass']
 
 #    This is a collection of files used during testing only.
 

@@ -1,16 +1,25 @@
 div(flex class="md-padding" layout="row" layout-fill layout-align="center center")
-    div(layout-align="center center" class="md-whiteframe-z1")
-        br
-        form(name="loginForm")
-            md-content(layout-padding class="autoScroll")
-                md-input-container(class="md-icon-float")
-                    label Email
-                    md-icon email
-                    input(data-ng-model="user.email" type="text")
-                md-input-container(class="md-icon-float")
-                    label Password
-                    md-icon lock
-                    input(data-ng-model="user.password" type="password")
-                md-button(type="submit") Login
-                md-button
-                    span(data-ui-sref='app.register') Register
+  md-whiteframe-z1(layout-align="center center")
+    form(name="loginForm")
+      md-content(layout-padding class="autoScroll")
+        md-input-container.md-icon-float
+          label Email
+          md-icon email
+          input(data-ng-model="user.email" type="text")
+        md-input-container.md-icon-float
+          label Password
+          md-icon lock
+          input(data-ng-model="user.password" type="password")
+        md-input-container.md-icon-float.register(data-ng-show="register" ng-animate="'animate'")
+          label Repeat password
+          md-icon lock
+          input(data-ng-model="user.password" type="password")
+        md-input-container.md-icon-float.register(data-ng-show="register" ng-animate="'animate'")
+          label Username
+          md-icon person
+          input(data-ng-model="user.password" type="password")
+        md-button.md-raised(data-ng-show="!register" data-ng-click="toggleRegister()") Register
+        md-button.md-raised.md-primary(type="submit" data-ng-show="!register") Login
+        md-button.md-raised(data-ng-show="register" data-ng-click="toggleRegister()") Cancel
+        md-button.md-raised.md-primary(data-ng-show="register") Complete
+

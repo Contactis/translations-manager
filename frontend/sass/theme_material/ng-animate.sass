@@ -1,0 +1,62 @@
+.animate-enter, .animate-leave
+  -webkit-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all
+  -moz-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all
+  -ms-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all
+  -o-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all
+  transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all
+  position: relative
+  display: block
+
+.animate-enter.animate-enter-active
+  opacity: 1
+  top: 0
+  height: 30px
+
+.animate-leave
+  opacity: 1
+  top: 0
+  height: 30px
+  &.animate-leave-active
+    opacity: 0
+    top: -50px
+    height: 0px
+
+.animate-enter
+  opacity: 0
+  top: -50px
+  height: 0px
+
+/* when hiding the picture
+
+.register
+  &.ng-hide-add
+    animation: 0.5s lightSpeedOut ease
+
+/* when showing the picture
+.register
+  &.ng-hide-remove
+    animation: 0.5s lightSpeedIn ease
+
+/* light speed out
+@keyframes lightSpeedOut
+  0%
+    opacity: 1
+    height: 52px
+
+  100%
+    opacity: 0
+    height: 0px
+
+
+/* light speed out
+@keyframes lightSpeedIn
+  0%
+    opacity: 0
+    height: 0px
+
+  100%
+    opacity: 1
+    height: 52px
+
+
+

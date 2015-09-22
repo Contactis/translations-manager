@@ -12,14 +12,12 @@ translationApp = angular.module('translation', [
 
 # Including pages of aplication
   'translation.404'
-  'translation.home'
   'translation.login'
-  'translation.register'
   'translation.dashboard'
 ])
 
 
-.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+.config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider) ->
 
   $stateProvider
   .state 'app',
@@ -30,12 +28,14 @@ translationApp = angular.module('translation', [
 
   $urlRouterProvider
     .when('', '/')
-    .when('/', '/home')
+    .when('/', '/login')
     .otherwise('/404')
 
 
 
   $locationProvider.html5Mode(true)
+
+  #$animateProvider.classNameFilter(/animate/)
 
 
 .run ($rootScope) ->
