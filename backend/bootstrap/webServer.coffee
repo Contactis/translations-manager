@@ -33,10 +33,11 @@ epilogue.initialize
 
 require('../bootstrap/endpoints')(epilogue)
 
+require('../bootstrap/passport')(passport)
+
 # Routes: customs, indexes, ...
 require('../controllers/main')(app, passport)
 
-require('../bootstrap/passport')(passport)
 
 
 # AngularJS

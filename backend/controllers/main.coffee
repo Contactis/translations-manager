@@ -10,16 +10,17 @@ module.exports = (app, passport) ->
   app.get '/api', (request, response) ->
     response.json {message: "Welcome to translation manager API at " + config.host + ':' + config.backendPort + '/api'}
 
+  app.get '/api/ErrorExample', (request, response, next) ->
+    next(new Error 'Random error')
+
   app.get '/api/login', (request, response, next) ->
-    response.json { "username": "John Doe" }
+    response.json {message: "Not implemented yet"}
 
-  app.get '/api/profile',
+  app.get '/api/profile', passport.authenticate('bearer', {session: false}), (request, response) ->
+    response.json {message: "BAM! you are loggend in!"}
 
-  app.post '/api/signin', passport.authenticate('', {
-    successRedirect: '/dashboard'
-    failureRedirect: '/signup',
-
-  })
+  app.post '/api/signin', () ->
+    response.json {message: "Not implemented yet"}
 
 
 isLoggedIn = (request, response, next) ->
