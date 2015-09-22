@@ -19,8 +19,6 @@ module.exports = (sequelize, DataTypes) ->
       allowNull:    false
     firstName:      DataTypes.STRING
     lastName:       DataTypes.STRING
-    token:
-      type:         DataTypes.STRING
   },
   {
     indexes: [
@@ -36,10 +34,11 @@ module.exports = (sequelize, DataTypes) ->
 
     classMethods:
       generateHash: (password) ->
-        return bcrypt.hashSync(password, 10)
+        return bcrypt.hash(password, 10)
 
       validPassword: (password) ->
-        return bcrypt.compareSync(password, this.password)
+        return bcrypt.compare(password, this.password)
+
   })
 
   return Users

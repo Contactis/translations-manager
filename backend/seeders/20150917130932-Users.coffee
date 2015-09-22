@@ -5,10 +5,9 @@ module.exports =
       {
         id:         1
         email:      'admin@admin.com'
-        firstName:  'Super'
+        firstName:  'Sir Super'
         lastName:   'Admin'
-        password:   'asdf'
-        token:      'loveMustangGt500'
+        password:   'admin'
         createdAt:  new Date()
         updatedAt:  new Date()
       }
