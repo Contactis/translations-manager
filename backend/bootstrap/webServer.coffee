@@ -3,7 +3,6 @@ GLOBAL.app    = express()
 port          = process.env.PORT || config.backendPort
 passport      = require 'passport'
 localStrategy = require('passport-local').Strategy
-session       = require 'express-session'
 moment        = require 'moment'
 chalk         = require 'chalk'
 bodyParser    = require 'body-parser'
@@ -20,9 +19,18 @@ app.use bodyParser.json()                       # configure app to use bodyParse
 app.use bodyParser.urlencoded(extended: true)   # this will let us get the data from a POST
 
 app.use express.static 'public'
-app.use session { secret: config.secret }
 app.use passport.initialize()
-app.use passport.session()
+
+# app.all '/*', (request, resource, next) ->
+#   # CORS headers
+#   resource.header("Access-Control-Allow-Origin", "*") # restrict it to the required domain
+#   resource.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+#   # Set custom headers for CORS
+#   resource.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key')
+#   if request.method == 'OPTIONS'
+#     resource.status(200).end()
+#   else
+#     next()
 
 
 # Epilogue setup
