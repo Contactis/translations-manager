@@ -7,11 +7,12 @@ angular.module 'authorisationService', ['restangular']
 
     _deferred = $q.defer()
 
-    Restangular.one('login').post().then (response) ->
-      console.log email, password
+    Restangular.all('login').post(
+      email:          email
+      password:       password
+    ).then (response) ->
 
       _deferred.resolve response
-
 
     return _deferred.promise
 
@@ -21,8 +22,12 @@ angular.module 'authorisationService', ['restangular']
 
     _deferred = $q.defer()
 
-    Restangular.one('register').post().then (response) ->
-      console.log email, password, repeatPassword, username
+    Restangular.all('register').post(
+      email:          email
+      password:       password
+      repeatPassword: repeatPassword
+      username:       username
+    ).then (response) ->
 
       _deferred.resolve response
 
