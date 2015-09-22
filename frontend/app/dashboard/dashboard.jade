@@ -1,5 +1,11 @@
-div(class="projectTitle dashboardMainFrame" layout="row")
-    span(flex="10") Languages
-    md-icon(class="alignLeft" flex="1") keyboard_arrow_down
-    div(offset="39" flex="5") NO
+div.dashboardMainFrame(layout="row")
+    div.projectTitle(flex="40")
+        span Languages
+        md-icon.alignLeft keyboard_arrow_down
+    //TODO --under-- it should be centered
+    div.missingTranslations(flex="1")
+        span Current missing translations: 78
+    div(flex="10")
+
+    //p(flex offset="1") NO
 
