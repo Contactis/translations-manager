@@ -11,6 +11,14 @@ angular.module('translation.login', [
 
 .controller 'LoginController', ($scope) ->
 
+
+  $scope.register = false
+
+  $scope.toggleRegister = ->
+    $scope.register = !$scope.register
+
+
+
   return
 
 
