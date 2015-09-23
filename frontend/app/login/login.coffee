@@ -1,6 +1,7 @@
 angular.module('translation.login', [
   'ui.router'
   'authorisationService'
+  'ngCookies'
 ])
 
 .config ($stateProvider) ->
@@ -10,7 +11,7 @@ angular.module('translation.login', [
     controller:     'LoginController'
     templateUrl:    'login/login.tpl.html'
 
-.controller 'LoginController', ($scope, authorisation) ->
+.controller 'LoginController', ($scope, $cookies, authorisation) ->
 
 
   $scope.user =
@@ -29,6 +30,20 @@ angular.module('translation.login', [
 
   $scope.login = ->
     authorisation.login $scope.user.email, $scope.user.password
+    .then (response) ->
+      token = response.plain()
+
+      if angular.isDefined token.token
+        $cookies.put 'token', token.token
+
+        Restangular.all('profile').get()
+        .then (response) ->
+          console.log response
+
+
+
+    , (error) ->
+      console.log 'error occured', error
 
 
   $scope.register = ->

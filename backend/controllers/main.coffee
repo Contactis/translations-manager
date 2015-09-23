@@ -1,10 +1,5 @@
-jwt = require 'jwt-simple'
-Sequelize = require 'sequelize'
-sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
-  host:     dbConfig.host
-  dialect:  dbConfig.dialect
-  storage:  dbConfig.storage
-})
+jwt     = require 'jwt-simple'
+moment  = require 'moment'
 
 module.exports = (app, passport) ->
 
@@ -36,11 +31,22 @@ module.exports = (app, passport) ->
 
     orm.Users.findOne({where: {email: email, password: password}}).then (user) ->
       if not user
-        done(null, false)
 
-      # user exsist then
-      mu = createNewToken(user.id)
-      console.log "mu>>", mu
+        response.status 401
+        response.json
+          status: 401
+          message: "Invalid credentials"
+
+        return
+
+      else # user exsist then
+
+        response.status 200
+        response.json
+          token: createNewToken(user.id)
+
+        return
+
 
     , (err) ->
       if err
@@ -52,7 +58,17 @@ module.exports = (app, passport) ->
 
 
 createNewToken = (userId) ->
-  return "hahaha" + userId
+
+  token = jwt.encode(userId, Math.random().toString(), 'HS512')
+
+  orm.Sessions.create
+    userId: userId
+    token: token
+    expiryAt: moment().add(7, 'days').format()
+
+
+  return token
+
 
 
 

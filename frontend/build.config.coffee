@@ -41,6 +41,7 @@ module.exports =
 
       # Libraries depends on independent libraries
       'frontend/vendor/angular-animate/angular-animate.js'
+      'frontend/vendor/angular-cookies/angular-cookies.js'
       'frontend/vendor/angular-aria/angular-aria.min.js'
       'frontend/vendor/angular-lodash/angular-lodash.js'
       'frontend/vendor/angular-material/angular-material.js'

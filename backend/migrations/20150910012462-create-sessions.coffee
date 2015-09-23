@@ -13,7 +13,7 @@ module.exports =
           model:        "Users"
           key:          "id"
       token:
-        type:           Sequelize.STRING(10)
+        type:           Sequelize.STRING
       expiryAt:
         type:           Sequelize.DATE
         allowNull:      false

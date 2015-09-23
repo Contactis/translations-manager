@@ -1,4 +1,5 @@
-'use strict'
+moment = require 'moment'
+
 module.exports =
   up: (queryInterface, Sequelize) ->
     queryInterface.bulkInsert 'Users', [
@@ -8,8 +9,8 @@ module.exports =
         firstName:  'Sir Super'
         lastName:   'Admin'
         password:   'admin'
-        createdAt:  new Date()
-        updatedAt:  new Date()
+        createdAt:  moment().format()
+        updatedAt:  moment().format()
       }
       {
         id:         2
@@ -17,8 +18,8 @@ module.exports =
         firstName:  'Sir Super'
         lastName:   'Manager'
         password:   'manager'
-        createdAt:  new Date()
-        updatedAt:  new Date()
+        createdAt:  moment().format()
+        updatedAt:  moment().format()
       }
       {
         id:         3
@@ -26,8 +27,8 @@ module.exports =
         firstName:  'Sir Super'
         lastName:   'Translator'
         password:   'translator'
-        createdAt:  new Date()
-        updatedAt:  new Date()
+        createdAt:  moment().format()
+        updatedAt:  moment().format()
       }
       {
         id:         4
@@ -35,8 +36,8 @@ module.exports =
         firstName:  'Sir Super'
         lastName:   'Programmer'
         password:   'programmer'
-        createdAt:  new Date()
-        updatedAt:  new Date()
+        createdAt:  moment().format()
+        updatedAt:  moment().format()
       }
     ], {}
   down: (queryInterface, Sequelize) ->

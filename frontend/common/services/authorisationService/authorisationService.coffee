@@ -7,12 +7,16 @@ angular.module 'authorisationService', ['restangular']
 
     _deferred = $q.defer()
 
-    Restangular.all('login').post(
+    Restangular.all('login').post
       email:          email
       password:       password
-    ).then (response) ->
+    .then (response) ->
 
       _deferred.resolve response
+
+    , (err) ->
+      _deferred.reject err
+
 
     return _deferred.promise
 

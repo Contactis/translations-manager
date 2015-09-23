@@ -2,7 +2,7 @@ module.exports =
   up: (queryInterface, Sequelize) ->
     queryInterface.createTable 'Users',
       id:
-        type:           Sequelize.INTEGER
+        type:           Sequelize.INTEGER.UNSIGNED
         allowNull:      false
         primaryKey:     true
       email:

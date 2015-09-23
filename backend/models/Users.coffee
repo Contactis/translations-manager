@@ -3,7 +3,7 @@ bcrypt = require 'bcryptjs'
 module.exports = (sequelize, DataTypes) ->
   Users = sequelize.define('Users', {
     id:
-      type:         DataTypes.INTEGER
+      type:         DataTypes.INTEGER.UNSIGNED
       allowNull:    false
       primaryKey:   true
     email:

@@ -13,7 +13,7 @@ epilogue      = require 'epilogue'
 http          = require 'http'
 
 
-app.use morgan('dev')
+#app.use morgan('dev')
 app.use cookieParser()
 app.use bodyParser.json()                       # configure app to use bodyParser()
 app.use bodyParser.urlencoded(extended: true)   # this will let us get the data from a POST
@@ -39,6 +39,8 @@ epilogue.initialize
   sequelize:  orm.sequelize
   base:       '/api'
 
+require('../bootstrap/authorization')()
+
 require('../bootstrap/endpoints')(epilogue)
 
 require('../bootstrap/passport')(passport)
@@ -51,6 +53,8 @@ require('../controllers/main')(app, passport)
 # AngularJS
 app.get '/*', (req, res) ->
   res.sendFile path.resolve __dirname + '/../../public/index.html'
+
+
 
 GLOBAL.server = app.listen port, ->
 

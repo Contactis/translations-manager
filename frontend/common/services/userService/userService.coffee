@@ -1,15 +1,18 @@
-angular.module 'userService', ['restangular']
+angular.module 'userService', [
+  'restangular'
+  'ngCookies'
+]
 
-.service 'user', ($q, Restangular) ->
+.service 'user', ($q, $cookies, $http, Restangular) ->
 
   _deferred = null
 
-  _defaultUserObject =
+  user =
     loggedIn:   false
     username:   'Unknown'
     firstName:  'First name'
     lastName:   'Last name'
-    token:      'LKn9ufbgup93qiglbKJHfds9u03houqdlksf1ughbz'
+    token:      ''
 
 
 
@@ -20,7 +23,23 @@ angular.module 'userService', ['restangular']
 
     _deferred = $q.defer()
 
-    _deferred.resolve _defaultUserObject
+    token = $cookies.get 'token'
+
+
+    if token
+      $http.defaults.headers.common['authorization'] = token
+
+      Restangular.one('profile').get().then (response) ->
+        console.log response
+        user.loggedIn = true
+      , (error) ->
+        console.log error
+
+
+
+
+
+    _deferred.resolve user
 
 
     return _deferred.promise
@@ -28,6 +47,7 @@ angular.module 'userService', ['restangular']
 
   api =
     getSession: getSession
+    user: user
 
 
 
