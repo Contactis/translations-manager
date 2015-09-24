@@ -17,7 +17,12 @@ angular.module('translation.login', [
   $scope.toggleRegister = ->
     $scope.register = !$scope.register
 
-
+  $scope.sizes = [
+    "small (12-inch)"
+    "medium (14-inch)"
+    "large (16-inch)"
+    "insane (42-inch)"
+  ]
 
   return
 

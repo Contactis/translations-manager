@@ -1,11 +1,18 @@
-div.dashboardMainFrame(layout="row")
-    div.projectTitle(flex="40")
-        span Languages
-        md-icon.alignLeft keyboard_arrow_down
-    //TODO --under-- it should be centered
-    div.missingTranslations(flex="1")
-        span Current missing translations: 78
-    div(flex="10")
+div.dashboardMainFrame(layout="row" layout-align="start end")
+  div.projectTitle(flex='40')
+    span Languages
+    md-icon.alignLeft keyboard_arrow_down
+  //TODO --under-- it should be centered
+  div.missingTranslations(flex='20')
+    span Current missing translations: 78
+  div(flex='10')
+    md-input-container.paddingBottom-1
+      md-select(ng-model="filter.translation")
+        md-option(ng-repeat="single in static.translation track by $index" value="{{single}}") {{single}}
+  div(flex='10')
+    md-input-container.paddingBottom-1
+      md-select(ng-model="filter.plural")
+        md-option(ng-repeat="single in static.plurals track by $index" value="{{single}}") {{single}}
 
-    //p(flex offset="1") NO
+
 
