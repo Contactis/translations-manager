@@ -1,18 +1,27 @@
-div.dashboardMainFrame(layout="row" layout-align="start end")
-  div.projectTitle(flex='40')
+div.dashboardMainFrame(layout="row" layout-align="start center")
+  div.projectTitle(flex="40")
     span Languages
     md-icon.alignLeft keyboard_arrow_down
   //TODO --under-- it should be centered
-  div.missingTranslations(flex='20')
+  div.missingTranslations(flex="20")
+    md-icon.redIcon warning
     span Current missing translations: 78
-  div(flex='10')
-    md-input-container.paddingBottom-1
-      md-select(ng-model="filter.translation")
-        md-option(ng-repeat="single in static.translation track by $index" value="{{single}}") {{single}}
-  div(flex='10')
-    md-input-container.paddingBottom-1
-      md-select(ng-model="filter.plural")
-        md-option(ng-repeat="single in static.plurals track by $index" value="{{single}}") {{single}}
+  div(flex offset="10")
+    div.inlineBlock.width50p
+      md-input-container.paddingBottom-1
+        md-select(ng-model="filter.translation")
+          md-option(ng-repeat="single in static.translation track by $index" value="{{single}}") {{single}}
+    div.inlineBlock.width40p
+      md-input-container.paddingBottom-1
+        md-select(ng-model="filter.plural")
+          md-option(ng-repeat="single in static.plurals track by $index" value="{{single}}") {{single}}
 
+  //div(flex)
+  //  md-autocomplete(md-search-text="ctrl.searchText" md-items="item in test"
+  //  md-item-text="item" md-min-length="0" placeholder="search a phrase")
+  //    md-item-template
+  //      span {{item}}
 
+div
+  dtable.mainTable(options="options" rows="data" class="material")
 
