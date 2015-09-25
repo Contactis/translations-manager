@@ -1,5 +1,7 @@
 angular.module('translation.login', [
   'ui.router'
+  'authorisationService'
+  'ngCookies'
 ])
 
 .config ($stateProvider) ->
@@ -9,13 +11,43 @@ angular.module('translation.login', [
     controller:     'LoginController'
     templateUrl:    'login/login.tpl.html'
 
-.controller 'LoginController', ($scope) ->
+.controller 'LoginController', ($scope, $cookies, authorisation) ->
 
 
-  $scope.register = false
+  $scope.user =
+    email: ''
+    password: ''
+    repeatPassword: ''
+    username: ''
+
+
+  $scope.showRegistration = false
 
   $scope.toggleRegister = ->
-    $scope.register = !$scope.register
+    $scope.showRegistration = !$scope.showRegistration
+
+
+
+  $scope.login = ->
+    authorisation.login $scope.user.email, $scope.user.password
+    .then (response) ->
+      token = response.plain()
+
+      if angular.isDefined token.token
+        $cookies.put 'token', token.token
+
+        Restangular.all('profile').get()
+        .then (response) ->
+          console.log response
+
+
+
+    , (error) ->
+      console.log 'error occured', error
+
+
+  $scope.register = ->
+    authorisation.register $scope.user.email, $scope.user.password, $scope.user.repeatPassword, $scope.user.username
 
   $scope.sizes = [
     "small (12-inch)"

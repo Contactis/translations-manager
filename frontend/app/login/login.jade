@@ -5,21 +5,21 @@ div(flex class="md-padding" layout="row" layout-fill layout-align="center center
         md-input-container.md-icon-float
           label Email
           md-icon email
-          input(data-ng-model="user.email" type="text")
+          input(data-ng-model="user.email" name="email" type="text")
         md-input-container.md-icon-float
           label Password
           md-icon lock
-          input(data-ng-model="user.password" type="password")
-        md-input-container.md-icon-float.register(data-ng-show="register" ng-animate="'animate'")
+          input(data-ng-model="user.password" name="password" type="password")
+        md-input-container.md-icon-float.register(data-ng-show="showRegistration" ng-animate="'animate'")
           label Repeat password
           md-icon lock
-          input(data-ng-model="user.password" type="password")
-        md-input-container.md-icon-float.register(data-ng-show="register" ng-animate="'animate'")
+          input(data-ng-model="user.repeatPassword" name="repeatPassword" type="password")
+        md-input-container.md-icon-float.register(data-ng-show="showRegistration" ng-animate="'animate'")
           label Username
           md-icon person
-          input(data-ng-model="user.password" type="password")
-        md-button.md-raised(data-ng-show="!register" data-ng-click="toggleRegister()") Register
-        md-button.md-raised.md-primary(type="submit" data-ng-show="!register") Login
-        md-button.md-raised(data-ng-show="register" data-ng-click="toggleRegister()") Cancel
-        md-button.md-raised.md-primary(data-ng-show="register") Complete
+          input(data-ng-model="user.username" name="username" type="text")
+        md-button.md-raised(data-ng-show="!showRegistration" data-ng-click="toggleRegister()") Register
+        md-button.md-raised.md-primary(data-ng-show="!showRegistration" data-ng-click="login()" autofocus="") Login
+        md-button.md-raised(data-ng-show="showRegistration" data-ng-click="toggleRegister()") Cancel
+        md-button.md-raised.md-primary(data-ng-show="showRegistration" data-ng-click="register()") Complete
 

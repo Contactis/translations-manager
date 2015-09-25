@@ -1,25 +1,27 @@
 module.exports =
   up: (queryInterface, Sequelize) ->
-    queryInterface.createTable 'Users',
+    queryInterface.createTable 'Sessions',
       id:
         type:           Sequelize.INTEGER.UNSIGNED
-        allowNull:      false
         primaryKey:     true
-      email:
-        type:           Sequelize.STRING
+        autoIncrement:  true
         allowNull:      false
-      firstName:
+      userId:
+        type:           Sequelize.INTEGER.UNSIGNED
+        allowNull:      false
+        references:
+          model:        "Users"
+          key:          "id"
+      token:
         type:           Sequelize.STRING
-      lastName:
-        type:           Sequelize.STRING
-      password:
-        type:           Sequelize.STRING
+      expiryAt:
+        type:           Sequelize.DATE
         allowNull:      false
       createdAt:
-        allowNull:      false
         type:           Sequelize.DATE
+        allowNull:      false
       updatedAt:
-        allowNull:      false
         type:           Sequelize.DATE
+        allowNull:      false
   down: (queryInterface, Sequelize) ->
-    queryInterface.dropTable 'Users'
+    queryInterface.dropTable 'Sessions'
