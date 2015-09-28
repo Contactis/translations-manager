@@ -10,17 +10,17 @@ translationApp = angular.module('translation', [
   # Including templates
   'templates-module'
 
-# Including pages of aplication
+  # Including pages of aplication
   'translation.404'
   'translation.login'
   'translation.dashboard'
+  'translation.add-new-key'
 
-
-
-# Including services
+  # Including services
   'userService'
 
-
+  # Including controllers
+  'translation.controllers.sidenav'
 ])
 
 
@@ -42,13 +42,14 @@ translationApp = angular.module('translation', [
     .otherwise('/404')
 
 
+
   RestangularProvider.setBaseUrl '/api'
-
-
 
   $locationProvider.html5Mode(true)
 
   #$animateProvider.classNameFilter(/animate/)
+
+
 
 
 .run ($rootScope) ->
@@ -67,9 +68,7 @@ translationApp = angular.module('translation', [
 
 # App Controller
 # -------------
-.controller 'AppController', ($scope) ->
-
-
+.controller 'AppController', ($scope, $mdSidenav) ->
 
   return
 

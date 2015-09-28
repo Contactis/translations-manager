@@ -1,8 +1,8 @@
-//only for logged users
-div.sidebarFrame(ng-include="" flex="15" class="sideBar" src="'templates/sidebar.tpl.html'" layout="column")
+div(layout='row', flex='')
+  //- side navigation
+  include sidebar.partial.jade
 
-div(layout="column" flex)
-    div(layout="column" flex data-ui-view='')
-    div(ng-include="" src="'templates/footer.tpl.html'")
-
+  //- Content of page
+  #content(layout='column', flex='')
+    div(data-ui-view='')
 

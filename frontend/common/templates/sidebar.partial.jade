@@ -1,0 +1,24 @@
+div(ng-controller="SidenavController")
+  md-sidenav.md-sidenav-left.md-whiteframe-z1(layout='column' md-component-id='left' md-is-locked-open="$mdMedia('gt-sm')")
+    md-toolbar.md-theme-indigo
+      h1.md-toolbar-tools
+        | Current project
+        span(flex)
+        md-button.md-fab.md-primary.md-mini.md-hue-2(aria-label="Project menu" style="float: right")
+          md-icon(flex) keyboard_arrow_down
+
+    md-subheader.md-no-sticky Pages
+      md-list-item(ng-repeat='page in pages')
+        p {{ page.name }}
+        md-checkbox.md-secondary(ng-model='page.wanted')
+
+    md-divider
+
+    md-subheader.md-no-sticky Clickable Items with Secondary Controls
+    md-list-item(ng-click='navigateTo(setting.extraScreen, $event)', ng-repeat='setting in settings')
+      md-icon(md-svg-icon='{{setting.icon}}')
+      p  {{ setting.name }}
+      md-switch.md-secondary(ng-model='setting.enabled')
+    md-list-item(ng-click="navigateTo('data usage', $event)")
+      md-icon(md-svg-icon='cached')
+      p Data Usage
