@@ -14,6 +14,7 @@ angular.module('translation.controllers.sidenav', [
   $scope.countKeys = 1234
 
   $scope.pages = [
+    { name: "Dashboard", sref: "app.dashboard" }
     { name: "Login", sref: "app.login" }
     { name: "Programmer view", sref: "app.programmer-view" }
     { name: "Manager view", sref: "app.manager-view" }
