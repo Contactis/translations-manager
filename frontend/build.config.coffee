@@ -75,7 +75,11 @@ module.exports =
 
   app_files:
 
-    coffee:       [ 'frontend/**/*.coffee', '!frontend/**/*.spec.coffee', '!frontend/build.config.coffee' ]
+    coffee:   [
+      'frontend/**/*.coffee'
+      '!frontend/**/*.spec.coffee'
+      '!frontend/build.config.coffee'
+    ]
 
     all_coffee:         'frontend/**/*.coffee'
     gulp_files:         'gulp/**/*.coffee'
@@ -87,8 +91,7 @@ module.exports =
 
     assets:   [ 'frontend/assets/**']
     html:     [ 'frontend/index.html' ]
-    less:     [ 'frontend/less/main.less' ]
-    sass:     [ 'frontend/sass/theme_material/**/*.sass']
+
 
 #    This is a collection of files used during testing only.
 
