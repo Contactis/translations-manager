@@ -1,7 +1,7 @@
 module.exports = ->
 
-  app.all '/*', (req, res, next) ->
-    console.log req.headers['authorization']
+  app.all '/api/*', (req, res, next) ->
+    console.log 'auth token', req.headers['authorization']
     req.token = req.headers['authorization']
     next()
 

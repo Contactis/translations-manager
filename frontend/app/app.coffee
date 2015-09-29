@@ -67,7 +67,17 @@ translationApp = angular.module('translation', [
 
 # App Controller
 # -------------
-.controller 'AppController', ($scope) ->
+.controller 'AppController', ($scope, $rootScope, $cookies, $state) ->
+
+
+  $rootScope.logout = ->
+
+    $cookies.remove 'token'
+    $state.go 'app.login'
+
+
+
+
 
 
 

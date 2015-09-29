@@ -2,16 +2,22 @@ angular.module('translation.login', [
   'ui.router'
   'authorisationService'
   'ngCookies'
+  'restangular'
+  'userPermissionsSettings'
 ])
 
-.config ($stateProvider) ->
+.config ($stateProvider, userPermissionsSettingsProvider) ->
+
+  access = userPermissionsSettingsProvider.userRoles
 
   $stateProvider.state 'app.login',
     url:            '/login'
     controller:     'LoginController'
     templateUrl:    'login/login.tpl.html'
+    data:
+      access:       access.anon
 
-.controller 'LoginController', ($scope, $cookies, authorisation) ->
+.controller 'LoginController', ($scope, $cookies, $state, authorisation, Restangular) ->
 
 
   $scope.user =
@@ -36,8 +42,9 @@ angular.module('translation.login', [
       if angular.isDefined token.token
         $cookies.put 'token', token.token
 
-        Restangular.all('profile').get()
+        Restangular.one('profile').get()
         .then (response) ->
+          $state.go 'app.dashboard'
           console.log response
 
 

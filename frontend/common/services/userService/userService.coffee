@@ -1,9 +1,10 @@
 angular.module 'userService', [
   'restangular'
   'ngCookies'
+  'ui.router'
 ]
 
-.service 'user', ($q, $cookies, $http, Restangular) ->
+.service 'user', ($q, $cookies, $http, $state, Restangular) ->
 
   _deferred = null
 
@@ -32,6 +33,7 @@ angular.module 'userService', [
       Restangular.one('profile').get().then (response) ->
         console.log response
         user.loggedIn = true
+        $state.go 'app.dashboard'
       , (error) ->
         console.log error
 

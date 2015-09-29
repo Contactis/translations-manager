@@ -47,6 +47,7 @@ require('../bootstrap/passport')(passport)
 
 # Routes: customs, indexes, ...
 require('../controllers/main')(app, passport)
+require('../controllers/registration')()
 
 
 
