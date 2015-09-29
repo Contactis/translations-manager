@@ -30,9 +30,8 @@ div(ng-controller="SidenavController")
 
     md-subheader Pages
     md-list
-      md-list-item(ng-repeat="page in pages" )
-        md-button(ng-click="goTo(page.sref)" ng-class="{active: $state.includes('login')}")
-          p {{page.name}}
+      md-list-item(ng-repeat="page in pages" ng-click="goTo(page.sref)" ng-class="{active: $state.includes('login')}")
+        span {{page.name}}
       //- md-list-item(ng-repeat='page in pages')
       //-   p {{ page.name }}
       //-   md-checkbox.md-secondary(ng-model='page.wanted')
