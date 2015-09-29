@@ -1,6 +1,8 @@
 //only for logged users
-div(ng-include="" flex="15" style="background-color: gray;" src="'templates/sidebar.tpl.html'" layout="column")
+div.sidebarFrame(ng-include="" flex="15" class="sideBar" src="'templates/sidebar.tpl.html'" layout="column")
 
 div(layout="column" flex)
     div(layout="column" flex data-ui-view='')
     div(ng-include="" src="'templates/footer.tpl.html'")
+
+

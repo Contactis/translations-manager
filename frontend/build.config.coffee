@@ -48,13 +48,17 @@ module.exports =
       'frontend/vendor/angular-translate/angular-translate.js'
       'frontend/vendor/angular-ui-router/release/angular-ui-router.js'
       'frontend/vendor/restangular/src/restangular.js'
+      'frontend/vendor/angular-data-table/release/dataTable.helpers.min.js'
 
       'frontend/vendors_offline/common.js'
       'frontend/vendors_offline/permissionConfig.js'
-
       ]
 
-    css: [ 'frontend/vendor/angular-material/angular-material.css' ]
+    css: [
+      'frontend/vendor/angular-material/angular-material.css'
+      'frontend/vendor/angular-data-table/release/dataTable.css'
+      'frontend/vendor/angular-data-table/release/material.css'
+    ]
 
     assets: ''
 

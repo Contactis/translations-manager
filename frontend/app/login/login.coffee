@@ -56,7 +56,12 @@ angular.module('translation.login', [
   $scope.register = ->
     authorisation.register $scope.user.email, $scope.user.password, $scope.user.repeatPassword, $scope.user.username
 
-
+  $scope.sizes = [
+    "small (12-inch)"
+    "medium (14-inch)"
+    "large (16-inch)"
+    "insane (42-inch)"
+  ]
 
   return
 
