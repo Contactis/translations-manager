@@ -1,16 +1,41 @@
 div(ng-controller="SidenavController")
-  md-sidenav.md-sidenav-left.md-whiteframe-z1(layout='column' md-component-id='left' md-is-locked-open="$mdMedia('gt-sm')")
-    md-toolbar.md-theme-indigo
+  md-sidenav.site-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left' md-is-locked-open="$mdMedia('gt-sm')")
+    md-toolbar.md-theme-indigo.md-whiteframe-z1
       h1.md-toolbar-tools
         | Current project
         span(flex)
-        md-button.md-fab.md-primary.md-mini.md-hue-2(aria-label="Project menu" style="float: right")
-          md-icon(flex) keyboard_arrow_down
+        //- md-button.md-fab.md-primary.md-mini.md-hue-2(aria-label="Project menu" style="float: right")
+        //-   md-tooltip
+        //-     | Project options
+        //-   md-icon(flex) keyboard_arrow_down
+        md-menu(md-offset='0 -5')
+          md-button.md-icon-button(aria-label='Open project menu', ng-click='$mdOpenMenu()')
+            md-tooltip
+              | Project options
+            md-icon(md-menu-origin='' flex) keyboard_arrow_down
+          md-menu-content(width='4')
+            md-menu-item(ng-repeat='item in [1, 2, 3]')
+              md-button(ng-click='ctrl.announceClick($index)')
+                span(md-menu-align-target='') Option
+                |  {{item}}
+    md-subheader.md-no-sticky
+      md-icon(flex) language
+      | Languages: {{ countLanguages }}
 
-    md-subheader.md-no-sticky Pages
-      md-list-item(ng-repeat='page in pages')
-        p {{ page.name }}
-        md-checkbox.md-secondary(ng-model='page.wanted')
+    md-subheader.md-no-sticky
+      md-icon.s48(flex) vpn_key
+      | All keys: {{ countKeys }}
+
+    md-divider
+
+    md-subheader Pages
+    md-list
+      md-list-item(ng-repeat="page in pages" )
+        md-button(ng-click="goTo(page.sref)" ng-class="{active: $state.includes('login')}")
+          p {{page.name}}
+      //- md-list-item(ng-repeat='page in pages')
+      //-   p {{ page.name }}
+      //-   md-checkbox.md-secondary(ng-model='page.wanted')
 
     md-divider
 
@@ -20,5 +45,6 @@ div(ng-controller="SidenavController")
       p  {{ setting.name }}
       md-switch.md-secondary(ng-model='setting.enabled')
     md-list-item(ng-click="navigateTo('data usage', $event)")
-      md-icon(md-svg-icon='cached')
       p Data Usage
+
+
