@@ -19,12 +19,12 @@ div(ng-controller="SidenavController")
                 span(md-menu-align-target='') Option
                 |  {{item}}
     md-subheader.md-no-sticky
-      md-icon(flex) language
-      | Languages: {{ countLanguages }}
+      i.material-icons.md-18.md-dark.md-inactive language
+      span  Languages: {{ countLanguages }}
 
     md-subheader.md-no-sticky
-      md-icon.s48(flex) vpn_key
-      | All keys: {{ countKeys }}
+      i.material-icons.md-18.md-dark.md-inactive vpn_key
+      span  All keys: {{ countKeys }}
 
     md-divider
 

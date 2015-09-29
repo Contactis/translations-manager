@@ -1,0 +1,29 @@
+/**
+ * Setup helper class for better material icons management
+ */
+
+$class-slug: md !default
+$class-slug-size-list: 18 24 36 48
+
+// If more class needed, just unlock the awesome ;)
+// @for $i from 1 through 200
+//   .material-icons.#{$class-slug}-#{$i}
+//     font-size: $i + px
+
+@each $class-slug-size in $class-slug-size-list
+  $i: index($class-slug-size-list, $class-slug-size)
+  .#{$class-slug}-#{$class-slug-size}
+    font-size: $class-slug-size + px
+
+
+// Rules for using icons as black on a light background.
+.material-icons.#{$class-slug}-dark
+  color: rgba(0, 0, 0, 0.54)
+.material-icons.#{$class-slug}-dark.#{$class-slug}-inactive
+  color: rgba(0, 0, 0, 0.26)
+
+// Rules for using icons as white on a dark background.
+.material-icons.#{$class-slug}-light
+  color: rgba(255, 255, 255, 1)
+.material-icons.#{$class-slug}-light.#{$class-slug}-inactive
+  color: rgba(255, 255, 255, 0.3)
