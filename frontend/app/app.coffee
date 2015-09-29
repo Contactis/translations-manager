@@ -14,6 +14,7 @@ translationApp = angular.module('translation', [
   'translation.404'
   'translation.login'
   'translation.dashboard'
+  'translation.manager-view'
   'translation.programmer-view'
 
   # Including services
