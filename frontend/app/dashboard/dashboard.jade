@@ -1,5 +1,38 @@
-md-toolbar(layout='row')
-  .md-toolbar-tools
-    md-button.md-icon-button(ng-click="toogleSidenav('left')", hide-gt-sm='')
-      md-icon(flex) menu
-    h1 Dashboard
+.primary-containter
+  md-toolbar(layout='row')
+    .md-toolbar-tools
+      md-button.md-icon-button(ng-click="toogleSidenav('left')", hide-gt-sm='')
+        md-icon(flex) menu
+      h1 Dashboard
+
+      span(flex)
+
+      form
+        md-input-container
+          label Search a phrase
+          input(type='text' ng-model='project.rate')
+
+      md-button.md-icon-button(ng-click="toogleSidenav('left')")
+        md-icon(flex) more_vert
+
+  md-grid-list(md-cols-sm='1', md-cols-md='2', md-cols-gt-md='4', md-row-height-gt-md='1:1', md-row-height='2:2', md-gutter='12px', md-gutter-gt-sm='8px')
+    md-grid-tile.gray(md-rowspan='2', md-colspan='2', md-colspan-sm='1')
+      p Future content
+      md-grid-tile-footer
+        h3 #1: (3r x 2c)
+    md-grid-tile.green
+      md-grid-tile-footer
+        h3 #2: (1r x 1c)
+    md-grid-tile.yellow
+      md-grid-tile-footer
+        h3 #3: (1r x 1c)
+    md-grid-tile.blue(md-rowspan='2')
+      md-grid-tile-footer
+        h3 #4: (2r x 1c)
+    md-grid-tile.red(md-rowspan='2', md-colspan='2', md-colspan-sm='1')
+      md-grid-tile-footer
+        h3 #5: (2r x 2c)
+    md-grid-tile.green(md-rowspan='2')
+      md-grid-tile-footer
+        h3 #6: (2r x 1c)
+
