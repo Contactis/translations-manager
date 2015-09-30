@@ -1,0 +1,63 @@
+div#sidenav.md-whiteframe-z2(ng-controller="SidenavController")
+  md-sidenav.md-primary.site-sidenav.md-sidenav-left.md-closed.md-locked-open(layout="column" md-component-id='left' md-is-locked-open="$mdMedia('gt-sm')")
+    md-toolbar(layout="column")
+      header.md-toolbar-tools.fill-height
+        img(width=40 src="https://material.angularjs.org/0.11.0/img/icons/angular-logo.svg")
+        | Project name
+        span(flex)
+        md-menu(md-offset='0 -5')
+          md-button.md-icon-button(aria-label='Open project menu', ng-click='$mdOpenMenu()')
+            md-tooltip
+              | Project options
+            md-icon(md-menu-origin='' flex) keyboard_arrow_down
+          md-menu-content(width='4')
+            md-menu-item
+              md-subheader User
+            md-menu-item
+              md-divider
+            md-menu-item
+              md-button(ng-click='logout()')
+                span(md-menu-align-target='') Logout
+
+      header.md-indent(flex)
+        span.md-body-2 {{ userdata.fullname }}
+        br
+        span.md-caption
+          span {{userdata.email}}
+          span(flex)
+          md-button.md-icon-button()
+            md-tooltip
+              | User options
+            md-icon(md-menu-origin='' flex) keyboard_arrow_down
+
+    md-content(flex layout="column")
+      p
+        i.material-icons.md-18.md-dark.md-inactive language
+        span  Languages: {{ countLanguages }}
+
+      p
+        i.material-icons.md-18.md-dark.md-inactive vpn_key
+        span  All keys: {{ countKeys }}
+
+      md-divider
+
+      md-subheader Pages
+      md-list
+        md-list-item(ng-repeat="page in pages" ng-click="goTo(page.sref)" ng-class="{active: $state.includes('login')}")
+          span {{page.name}}
+        //- md-list-item(ng-repeat='page in pages')
+        //-   p {{ page.name }}
+        //-   md-checkbox.md-secondary(ng-model='page.wanted')
+
+      md-divider
+
+      md-subheader.md-no-sticky Clickable Items with Secondary Controls
+      md-list-item(ng-click='navigateTo(setting.extraScreen, $event)', ng-repeat='setting in settings')
+        md-icon(md-svg-icon='{{setting.icon}}')
+        p  {{ setting.name }}
+        md-switch.md-secondary(ng-model='setting.enabled')
+      md-list-item(ng-click="navigateTo('data usage', $event)")
+        p Data Usage
+
+
+

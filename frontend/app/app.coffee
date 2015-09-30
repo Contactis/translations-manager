@@ -26,7 +26,8 @@ translationApp = angular.module('translation', [
 ])
 
 
-.config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider, RestangularProvider) ->
+.config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider, RestangularProvider,
+$mdThemingProvider) ->
 
   $stateProvider
   .state 'app',
@@ -51,7 +52,9 @@ translationApp = angular.module('translation', [
 
   #$animateProvider.classNameFilter(/animate/)
 
-
+  $mdThemingProvider.theme('default')
+    .primaryPalette('blue-grey')
+    .accentPalette('pink')
 
 
 .run ($rootScope, authorisation, user) ->
@@ -82,10 +85,6 @@ translationApp = angular.module('translation', [
 # App Controller
 # -------------
 .controller 'AppController', ($scope, $rootScope, $state, $cookies, $mdSidenav) ->
-
-  $rootScope.logout = ->
-    $cookies.remove 'token'
-    $state.go 'app.login'
 
   return
 
