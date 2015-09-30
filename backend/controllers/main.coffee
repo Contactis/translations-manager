@@ -69,8 +69,8 @@ module.exports = (app, passport) ->
       if err
         done(err)
 
-  app.get '/api/profile', passport.authenticate('bearer', {session: false}), (request, response) ->
-    response.json {message: "BAM! you are loggend in!"}
+#  app.get '/api/profile', passport.authenticate('bearer', {session: false}), (request, response) ->
+#    response.json {message: "BAM! you are loggend in!"}
 
 
 

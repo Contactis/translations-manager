@@ -1,8 +1,7 @@
 div(ng-controller="SidenavController")
   md-sidenav.site-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left' md-is-locked-open="$mdMedia('gt-sm')")
     md-toolbar.md-theme-indigo.md-whiteframe-z1
-      h1.md-toolbar-tools
-        | Current project
+      h1.md-toolbar-tools {{ currentProject.name }}
         span(flex)
         //- md-button.md-fab.md-primary.md-mini.md-hue-2(aria-label="Project menu" style="float: right")
         //-   md-tooltip
@@ -32,6 +31,8 @@ div(ng-controller="SidenavController")
     md-list
       md-list-item(ng-repeat="page in pages" ng-click="goTo(page.sref)" ng-class="{active: $state.includes('login')}")
         span {{page.name}}
+      md-list-item(ng-click="$root.logout()")
+        span Logout
       //- md-list-item(ng-repeat='page in pages')
       //-   p {{ page.name }}
       //-   md-checkbox.md-secondary(ng-model='page.wanted')

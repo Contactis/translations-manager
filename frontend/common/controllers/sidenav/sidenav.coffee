@@ -3,15 +3,22 @@ angular.module('translation.controllers.sidenav', [
   'ngAnimate'
   'ngAria'
   'ngMaterial'
+  'projectsService'
 ])
 
-.controller 'SidenavController', ($scope, $state, $mdSidenav, $mdUtil) ->
+.controller 'SidenavController', ($scope, $state, $mdSidenav, $mdUtil, projects) ->
 
   $scope.goTo = (uiview) ->
     $state.go(uiview)
 
   $scope.countLanguages = 8
   $scope.countKeys = 1234
+
+  $scope.currentProject = {}
+
+  projects.updated.then null, null, (project) ->
+    $scope.currentProject = project
+
 
   $scope.pages = [
     { name: "Dashboard", sref: "app.dashboard" }

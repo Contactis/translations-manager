@@ -17,7 +17,7 @@ angular.module('translation.login', [
     data:
       access:       access.anon
 
-.controller 'LoginController', ($scope, $cookies, $state, authorisation, Restangular) ->
+.controller 'LoginController', ($scope, $cookies, $state, $http, authorisation, Restangular) ->
 
 
   $scope.user =
@@ -39,15 +39,16 @@ angular.module('translation.login', [
     .then (response) ->
       token = response.plain()
 
+
+
       if angular.isDefined token.token
         $cookies.put 'token', token.token
+        $http.defaults.headers.common['authorization'] = token.token
 
         Restangular.one('profile').get()
         .then (response) ->
           $state.go 'app.dashboard'
           console.log response
-
-
 
     , (error) ->
       console.log 'error occured', error

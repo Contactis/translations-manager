@@ -30,19 +30,12 @@ angular.module 'userService', [
     if token
       $http.defaults.headers.common['authorization'] = token
 
-      Restangular.one('profile').get().then (response) ->
-        console.log response
-        user.loggedIn = true
-        $state.go 'app.dashboard'
-      , (error) ->
-        console.log error
-
-
-
-
-
-    _deferred.resolve user
-
+    Restangular.one('profile').get().then (response) ->
+      user = response.plain()
+      user.loggedIn = true
+      _deferred.resolve user
+    , (error) ->
+      _deferred.resolve error
 
     return _deferred.promise
 
