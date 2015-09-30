@@ -8,10 +8,9 @@
 
       span(flex)
 
-      form
-        md-input-container
-          label Search a phrase
-          input(type='text' ng-model='project.rate')
+      md-input-container.padding-bottom-0(md-no-float)
+        md-icon.md-24 search
+        input(ng-model='project.rate' type="text" placeholder="Search a phrase")
 
       md-button.md-icon-button(ng-click="toogleSidenav('left')")
         md-icon(flex) more_vert
