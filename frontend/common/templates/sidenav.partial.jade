@@ -1,9 +1,9 @@
 div#sidenav.md-whiteframe-z2(ng-controller="SidenavController")
-  md-sidenav.md-primary.site-sidenav.md-sidenav-left.md-closed.md-locked-open(layout="column" md-component-id='left' md-is-locked-open="$mdMedia('gt-sm')")
+  md-sidenav.md-primary.site-sidenav.md-sidenav-left(layout="column" md-component-id='left' md-is-locked-open="$mdMedia('gt-sm')")
     md-toolbar(layout="column")
       header.md-toolbar-tools.fill-height
         img(width=40 src="https://material.angularjs.org/0.11.0/img/icons/angular-logo.svg")
-        | Project name
+        a(href="" ng-click="goTo('app.dashboard')") {{ currentProject.name }}
         span(flex)
         md-menu(md-offset='0 -5')
           md-button.md-icon-button(aria-label='Open project menu', ng-click='$mdOpenMenu()')
@@ -12,32 +12,36 @@ div#sidenav.md-whiteframe-z2(ng-controller="SidenavController")
             md-icon(md-menu-origin='' flex) keyboard_arrow_down
           md-menu-content(width='4')
             md-menu-item
-              md-subheader User
-            md-menu-item
-              md-divider
-            md-menu-item
-              md-button(ng-click='logout()')
-                span(md-menu-align-target='') Logout
+              md-button(ng-click='change()')
+                i.material-icons(flex)
+                span(md-menu-align-target='') Change project
 
-      header.md-indent(flex)
+      header.margin-left-20.margin-bottom-5(flex)
         span.md-body-2 {{ userdata.fullname }}
         br
         span.md-caption
-          span {{userdata.email}}
+          span {{ userdata.email }}
           span(flex)
-          md-button.md-icon-button()
-            md-tooltip
-              | User options
-            md-icon(md-menu-origin='' flex) keyboard_arrow_down
+
+          md-menu(md-offset='0 -5')
+            md-button.md-icon-button(aria-label='Open user menu', ng-click='$mdOpenMenu()')
+              md-tooltip
+                | Project options
+              md-icon(md-menu-origin='' flex) keyboard_arrow_down
+            md-menu-content(width='4')
+              md-menu-item
+                md-button(ng-click='logout()')
+                  i.material-icons.md-24(flex) exit_to_app
+                  span(md-menu-align-target='') Logout user
 
     md-content(flex layout="column")
-      p
+      p.margin-left-20
         i.material-icons.md-18.md-dark.md-inactive language
-        span  Languages: {{ countLanguages }}
+        span.md-body-1  Languages: {{ countLanguages }}
 
-      p
+      p.margin-left-20
         i.material-icons.md-18.md-dark.md-inactive vpn_key
-        span  All keys: {{ countKeys }}
+        span.md-body-1  All keys: {{ countKeys }}
 
       md-divider
 

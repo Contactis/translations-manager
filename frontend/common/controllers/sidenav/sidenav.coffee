@@ -9,7 +9,7 @@ angular.module('translation.controllers.sidenav', [
 
 
 .controller 'SidenavController', ($scope, $rootScope, $state, $cookies,
-$mdSidenav, $mdUtil) ->
+$mdSidenav, $mdUtil, projects) ->
 
 
   $scope.goTo = (uiview) ->
@@ -18,6 +18,10 @@ $mdSidenav, $mdUtil) ->
   $scope.countLanguages = 8
   $scope.countKeys = 1234
 
+  $scope.userdata =
+    fullname:   "John Doe"
+    email:      "johndoe@example.com"
+
   $scope.currentProject = {}
 
   projects.updated.then null, null, (project) ->
@@ -25,7 +29,6 @@ $mdSidenav, $mdUtil) ->
 
 
   $scope.pages = [
-    { name: "Dashboard", sref: "app.dashboard" }
     { name: "Login", sref: "app.login" }
     { name: "Programmer view", sref: "app.programmer-view" }
     { name: "Manager view", sref: "app.manager-view" }
@@ -36,6 +39,9 @@ $mdSidenav, $mdUtil) ->
   $rootScope.logout = () ->
     $cookies.remove 'token'
     $state.go 'app.login'
+
+  $rootScope.changeProject = () ->
+    console.log "change project"
 
 
 
