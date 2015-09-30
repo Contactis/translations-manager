@@ -19,6 +19,7 @@ translationApp = angular.module('translation', [
 
   # Including services
   'userService'
+  'authorisationService'
 
   # Including controllers
   'translation.controllers.sidenav'
@@ -53,9 +54,20 @@ translationApp = angular.module('translation', [
 
 
 
-.run ($rootScope) ->
+.run ($rootScope, authorisation, user) ->
+
+
+  _firstEnter = {}
+
+  user.getSession().then () ->
+    authorisation.accessCheck(_firstEnter.event, _firstEnter.toState)
 
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
+    if _.isEmpty _firstEnter
+      _firstEnter.event = event
+      _firstEnter.toState = toState
+    else
+      authorisation.accessCheck(event, toState)
     return
 
   $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->

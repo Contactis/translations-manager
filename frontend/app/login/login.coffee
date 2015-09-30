@@ -15,7 +15,7 @@ angular.module('translation.login', [
     controller:     'LoginController'
     templateUrl:    'login/login.tpl.html'
     data:
-      access:       access.anon
+      access:       access.public
 
 .controller 'LoginController', ($scope, $cookies, $state, $http, authorisation, Restangular) ->
 

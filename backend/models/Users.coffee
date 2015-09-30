@@ -1,4 +1,5 @@
 bcrypt = require 'bcryptjs'
+authorisation = require '../services/authorisationService'
 
 module.exports = (sequelize, DataTypes) ->
   Users = sequelize.define('Users', {
@@ -19,6 +20,7 @@ module.exports = (sequelize, DataTypes) ->
       allowNull:    false
     firstName:      DataTypes.STRING
     lastName:       DataTypes.STRING
+    role:           DataTypes.STRING
   },
   {
     indexes: [
@@ -31,6 +33,9 @@ module.exports = (sequelize, DataTypes) ->
     getterMethods:
       fullName: ->
         return this.firstName + ' ' + this.lastName
+
+      role: ->
+        return authorisation.userRoles[this.dataValues.role]
 
     classMethods:
       generateHash: (password) ->
