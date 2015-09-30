@@ -2,9 +2,14 @@ angular.module 'userService', [
   'restangular'
   'ngCookies'
   'ui.router'
+  'userPermissionsSettings'
 ]
 
-.service 'user', ($q, $cookies, $http, $state, Restangular) ->
+.service 'user', ($q, $cookies, $http, $state, Restangular, userPermissionsSettings) ->
+
+  accessLevels  = userPermissionsSettings.accessLevels
+  userRoles     = userPermissionsSettings.userRoles
+
 
   _deferred = null
 
@@ -14,6 +19,7 @@ angular.module 'userService', [
     firstName:  'First name'
     lastName:   'Last name'
     token:      ''
+    role:       userRoles.public
 
 
 
@@ -43,6 +49,9 @@ angular.module 'userService', [
   api =
     getSession: getSession
     user: user
+
+    getData:  (key) ->
+      return user[key]
 
 
 

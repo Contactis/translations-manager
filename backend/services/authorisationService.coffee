@@ -1,3 +1,5 @@
+config = require '../../common/permissionsConfig'
+
 
 ###
     Method to build a distinct bit mask for each role
@@ -48,7 +50,9 @@ buildAccessLevels = (accessLevelDeclarations, userRoles) ->
       accessLevels[level] = bitMask: resultBitMask
   return accessLevels
 
+userRoles     = buildRoles config.roles
+accessLevels  = buildAccessLevels config.accessLevels, userRoles
 
 module.exports =
-  userRoles: buildRoles(config.roles)
-  accessLevels: buildAccessLevels(config.accessLevels, exports.userRoles)
+  userRoles:    userRoles
+  accessLevels: accessLevels
