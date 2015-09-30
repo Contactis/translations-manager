@@ -1,9 +1,10 @@
 .primary-containter
-  md-toolbar(layout='row')
+  md-toolbar.md-accent.md-whiteframe-glow-z1(layout='row')
     .md-toolbar-tools
       md-button.md-icon-button(ng-click="toogleSidenav('left')", hide-gt-sm='')
         md-icon(flex) menu
-      h1 Dashboard
+
+      h1.md-toolbar-item Dashboard
 
       span(flex)
 
@@ -14,6 +15,8 @@
 
       md-button.md-icon-button(ng-click="toogleSidenav('left')")
         md-icon(flex) more_vert
+
+  div(layout="row" layout-margin)
 
   md-grid-list(md-cols-sm='1', md-cols-md='2', md-cols-gt-md='4', md-row-height-gt-md='1:1', md-row-height='2:2', md-gutter='12px', md-gutter-gt-sm='8px')
     md-grid-tile.gray(md-rowspan='2', md-colspan='2', md-colspan-sm='1')

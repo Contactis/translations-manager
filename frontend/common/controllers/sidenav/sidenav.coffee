@@ -1,11 +1,13 @@
 angular.module('translation.controllers.sidenav', [
   'ui.router'
   'ngAnimate'
+  'ngCookies'
   'ngAria'
   'ngMaterial'
 ])
 
-.controller 'SidenavController', ($scope, $state, $mdSidenav, $mdUtil) ->
+.controller 'SidenavController', ($scope, $rootScope, $state, $cookies,
+$mdSidenav, $mdUtil) ->
 
   $scope.goTo = (uiview) ->
     $state.go(uiview)
@@ -21,6 +23,10 @@ angular.module('translation.controllers.sidenav', [
     { name: "Translator view", sref: "app.translator-view" }
     { name: "Admin view", sref: "app.admin-view" }
   ]
+
+  $rootScope.logout = () ->
+    $cookies.remove 'token'
+    $state.go 'app.login'
 
 
 
