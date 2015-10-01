@@ -12,7 +12,8 @@ angular.module('translation.manager-view', [
     url:            '/manager-view'
     controller:     'ManagerViewController'
     templateUrl:    'manager-view/manager-view.tpl.html'
-
+    data:
+      access: access.user
 
 .controller 'ManagerViewController', ($scope) ->
   $scope.filter = {}
