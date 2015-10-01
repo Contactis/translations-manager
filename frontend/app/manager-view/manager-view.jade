@@ -36,22 +36,7 @@
 
       md-button.md-icon-button(ng-click="toogleSidenav('left')")
         md-icon(flex) more_vert
-  //md-grid-list(md-cols-sm='1', md-cols-md='2', md-cols-gt-md='4', md-row-height-gt-md='1:1', md-row-height='2:2', md-gutter='12px', md-gutter-gt-sm='8px')
-  //  md-grid-tile.gray(md-rowspan='1', md-colspan='1', md-colspan-sm='1')
-  //    p search bar
-  //    md-grid-tile-footer
-  //      h3 #1: (1r x 1c)
 
   div
     dtable.translationTables(options="options" rows="data" class="material")
 
-
-//div
-//  div.inlineBlock.width50p
-//    md-input-container.paddingBottom-1
-//      md-select(ng-model="filter.translation")
-//        md-option(ng-repeat="single in static.translation track by $index" value="{{single}}") {{single}}
-//  div.inlineBlock.width40p
-//    md-input-container.paddingBottom-1
-//      md-select(ng-model="filter.plural")
-//        md-option(ng-repeat="single in static.plurals track by $index" value="{{single}}") {{single}}
