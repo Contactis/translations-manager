@@ -19,7 +19,7 @@ translationApp = angular.module('translation', [
 
   # Including services
   'userService'
-  'authorisationService'
+  'authorizationService'
 
   # Including controllers
   'translation.controllers.sidenav'
@@ -57,13 +57,13 @@ $mdThemingProvider) ->
     .accentPalette('pink')
 
 
-.run ($rootScope, authorisation, user) ->
+.run ($rootScope, authorization, user) ->
 
 
   _firstEnter = {}
 
   user.getSession().then () ->
-    authorisation.accessCheck(_firstEnter.event, _firstEnter.toState)
+    authorization.accessCheck(_firstEnter.event, _firstEnter.toState)
 
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
 
@@ -71,7 +71,7 @@ $mdThemingProvider) ->
       _firstEnter.event = event
       _firstEnter.toState = toState
     else
-      authorisation.accessCheck(event, toState)
+      authorization.accessCheck(event, toState)
     return
 
   $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->

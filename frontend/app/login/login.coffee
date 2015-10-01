@@ -1,6 +1,6 @@
 angular.module('translation.login', [
   'ui.router'
-  'authorisationService'
+  'authorizationService'
   'ngCookies'
   'restangular'
   'userPermissionsSettings'
@@ -17,7 +17,7 @@ angular.module('translation.login', [
     data:
       access:       access.anon
 
-.controller 'LoginController', ($scope, $cookies, $state, $http, authorisation, Restangular) ->
+.controller 'LoginController', ($scope, $cookies, $state, $http, authorization, Restangular) ->
 
 
   $scope.user =
@@ -35,7 +35,7 @@ angular.module('translation.login', [
 
 
   $scope.login = ->
-    authorisation.login $scope.user.email, $scope.user.password
+    authorization.login $scope.user.email, $scope.user.password
     .then (response) ->
       token = response.plain()
 
@@ -55,7 +55,7 @@ angular.module('translation.login', [
 
 
   $scope.register = ->
-    authorisation.register $scope.user.email, $scope.user.password, $scope.user.repeatPassword, $scope.user.username
+    authorization.register $scope.user.email, $scope.user.password, $scope.user.repeatPassword, $scope.user.username
 
   $scope.sizes = [
     "small (12-inch)"

@@ -1,10 +1,11 @@
-angular.module 'authorisationService', [
+angular.module 'authorizationService', [
   'restangular'
   'ui.router'
   'userService'
+  'ngMaterial'
 ]
 
-.service 'authorisation', ($q, $state, Restangular, user) ->
+.service 'authorization', ($q, $state, $mdToast, Restangular, user) ->
 
 
 
@@ -63,19 +64,25 @@ angular.module 'authorisationService', [
 # Missing state
       if angular.isDefined(event)
 
-#      GlobalNotificationsService.add
-#        msg:"ACCESS_UNDEFINED_FOR_THIS_STATE"
-#        type:"warning"
-
+        $mdToast.show(
+          $mdToast.simple()
+          .content('Access undefined for this state')
+          .position('bottom right')
+          .hideDelay(3000)
+        )
         _kickUnauthorised _queue, event
     else
       if api.authorizePageAccess(toState.data.access)
         _queue.resolve()
       else
 
-#        GlobalNotificationsService.add
-#          msg:    "SEEMS_LIKE_YOU_TRIED_ACCESSING_A_ROUTE_YOU_DONT_HAVE_ACCESS_TO"
-#          type:   "error"
+        $mdToast.show(
+          $mdToast.simple()
+          .content('Seems like you don\'t have permissions to access that page.')
+          .position('bottom right')
+          .hideDelay(3000)
+        )
+
         _kickUnauthorised _queue, event
 
 
