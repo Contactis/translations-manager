@@ -12,7 +12,6 @@ angular.module('translation.controllers.sidenav', [
 .controller 'SidenavController', ($scope, $rootScope, $state, $cookies,
 $mdSidenav, $mdUtil, projects, user) ->
 
-
   $scope.goTo = (uiview) ->
     $state.go(uiview)
 
@@ -20,8 +19,8 @@ $mdSidenav, $mdUtil, projects, user) ->
   $scope.countKeys = 1234
 
   $scope.userdata =
-    fullname:   "John Doe"
-    email:      "johndoe@example.com"
+    fullname: 24324
+    email: 2345235
 
   $scope.currentProject = {}
 
@@ -37,8 +36,16 @@ $mdSidenav, $mdUtil, projects, user) ->
     { name: "Admin view", sref: "app.admin-view" }
   ]
 
-
   $rootScope.logout = user.logout
+
+  $scope.groups = [
+    { name: "All", isActive: true }
+    { name: "dashboard", isActive: false }
+    { name: "media.side.awesome", isActive: true }
+    { name: "title.pages", isActive: false }
+  ]
+
+
 
   $rootScope.changeProject = () ->
     console.log "change project"

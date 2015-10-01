@@ -19,8 +19,10 @@ gulp.task 'coffee',  ->
   gulp.src(config.build.app_files.coffee)
   .pipe(plumber( (error) ->
       GLOBAL.coffeeOK = false
-      if !config.arguments.production
+      if config.arguments.production
         throw new Error error.message
+      else
+        console.log error.message
     ))
   .pipe(cache('coffeeBuild'))
   .pipe(coffeeLint())
