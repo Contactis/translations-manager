@@ -5,11 +5,12 @@ angular.module('translation.controllers.sidenav', [
   'ngAria'
   'ngMaterial'
   'projectsService'
+  'userService'
 ])
 
 
 .controller 'SidenavController', ($scope, $rootScope, $state, $cookies,
-$mdSidenav, $mdUtil, projects) ->
+$mdSidenav, $mdUtil, projects, user) ->
 
 
   $scope.goTo = (uiview) ->
@@ -36,9 +37,8 @@ $mdSidenav, $mdUtil, projects) ->
     { name: "Admin view", sref: "app.admin-view" }
   ]
 
-  $rootScope.logout = () ->
-    $cookies.remove 'token'
-    $state.go 'app.login'
+
+  $rootScope.logout = user.logout
 
   $rootScope.changeProject = () ->
     console.log "change project"

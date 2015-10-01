@@ -66,6 +66,7 @@ $mdThemingProvider) ->
     authorisation.accessCheck(_firstEnter.event, _firstEnter.toState)
 
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
+
     if _.isEmpty _firstEnter
       _firstEnter.event = event
       _firstEnter.toState = toState

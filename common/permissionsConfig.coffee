@@ -9,6 +9,7 @@ module.exports =
     'admin'
   ]
   accessLevels:
+    'public':           '*'
     'anon':             [ 'public' ]
     'programmer':       [ 'programmer' ]
     'user': [
