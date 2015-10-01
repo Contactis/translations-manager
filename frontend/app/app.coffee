@@ -54,7 +54,9 @@ $mdThemingProvider) ->
 
   $mdThemingProvider.theme('default')
     .primaryPalette('blue-grey')
-    .accentPalette('pink')
+    .accentPalette('blue')
+    .warnPalette('red')
+    # .backgroundPalette('gray')
 
 
 .run ($rootScope, authorization, user) ->

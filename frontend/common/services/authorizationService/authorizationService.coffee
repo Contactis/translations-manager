@@ -5,9 +5,8 @@ angular.module 'authorizationService', [
   'ngMaterial'
 ]
 
+
 .service 'authorization', ($q, $state, $mdToast, Restangular, user) ->
-
-
 
   login = (email, password) ->
 

@@ -4,6 +4,7 @@ angular.module('translation.manager-view', [
   'data-table'
 ])
 
+
 .config ($stateProvider, userPermissionsSettingsProvider) ->
 
   access = userPermissionsSettingsProvider.accessLevels
@@ -14,6 +15,7 @@ angular.module('translation.manager-view', [
     templateUrl:    'manager-view/manager-view.tpl.html'
     data:
       access: access.user
+
 
 .controller 'ManagerViewController', ($scope) ->
   $scope.filter = {}
