@@ -1,13 +1,15 @@
-angular.module('userService', [
+angular.module('translation.services.user', [
   'restangular'
   'ngCookies'
   'ui.router'
-  'userPermissionsSettings'
+  'translation.providers.userPermissionsSettings'
 ])
-.service 'user', ($q, $cookies, $http, $state, Restangular, userPermissionsSettings) ->
 
-  accessLevels  = userPermissionsSettings.accessLevels
-  userRoles     = userPermissionsSettings.userRoles
+
+.service 'UserService', ($q, $cookies, $http, $state, Restangular, UserPermissionsSettings) ->
+
+  accessLevels  = UserPermissionsSettings.accessLevels
+  userRoles     = UserPermissionsSettings.userRoles
 
 
   _deferred = null

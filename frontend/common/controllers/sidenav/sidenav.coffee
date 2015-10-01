@@ -4,13 +4,13 @@ angular.module('translation.controllers.sidenav', [
   'ngCookies'
   'ngAria'
   'ngMaterial'
-  'projectsService'
-  'userService'
+  'translation.services.projects'
+  'translation.services.user'
 ])
 
 
 .controller 'SidenavController', ($scope, $rootScope, $state, $cookies,
-$mdSidenav, $mdUtil, projects, user) ->
+$mdSidenav, $mdUtil, ProjectsService, user) ->
 
   $scope.goTo = (uiview) ->
     $state.go(uiview)
@@ -24,7 +24,7 @@ $mdSidenav, $mdUtil, projects, user) ->
 
   $scope.currentProject = {}
 
-  projects.updated.then null, null, (project) ->
+  ProjectsService.updated.then null, null, (project) ->
     $scope.currentProject = project
 
 

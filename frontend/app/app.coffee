@@ -10,16 +10,19 @@ translationApp = angular.module('translation', [
   # Including templates
   'templates-module'
 
+  # Including directives
+  'translation.directives.accessLevel'
+
   # Including pages of aplication
-  'translation.404'
-  'translation.login'
-  'translation.dashboard'
-  'translation.manager-view'
-  'translation.programmer-view'
+  'translation.pages.404'
+  'translation.pages.login'
+  'translation.pages.dashboard'
+  'translation.pages.manager-view'
+  'translation.pages.programmer-view'
 
   # Including services
-  'userService'
-  'authorizationService'
+  'translation.services.user'
+  'translation.services.authorization'
 
   # Including controllers
   'translation.controllers.sidenav'
@@ -59,13 +62,13 @@ $mdThemingProvider) ->
     # .backgroundPalette('gray')
 
 
-.run ($rootScope, authorization, user) ->
+.run ($rootScope, UserService, AuthorizationService) ->
 
 
   _firstEnter = {}
 
-  user.getSession().then () ->
-    authorization.accessCheck(_firstEnter.event, _firstEnter.toState)
+  UserService.getSession().then () ->
+    AuthorizationService.accessCheck(_firstEnter.event, _firstEnter.toState)
 
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
 
@@ -73,7 +76,7 @@ $mdThemingProvider) ->
       _firstEnter.event = event
       _firstEnter.toState = toState
     else
-      authorization.accessCheck(event, toState)
+      AuthorizationService.accessCheck(event, toState)
     return
 
   $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
