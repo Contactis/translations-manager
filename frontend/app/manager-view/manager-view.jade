@@ -28,11 +28,11 @@
       span(flex)
       div.inlineBlock
           md-input-container.padding-bottom-0
-            md-select(ng-model="filter.translation")
+            md-select(ng-model="filter.translation" aria-label="translations")
               md-option(ng-repeat="single in static.translation track by $index" value="{{single}}") {{single}}
       div.inlineBlock
           md-input-container.padding-bottom-0
-            md-select(ng-model="filter.plural")
+            md-select(ng-model="filter.plural" aria-label="plural forms")
               md-option(ng-repeat="single in static.plurals track by $index" value="{{single}}") {{single}}
 
 
