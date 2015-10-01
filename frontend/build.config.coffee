@@ -79,6 +79,8 @@ module.exports =
       'frontend/**/*.coffee'
       '!frontend/**/*.spec.coffee'
       '!frontend/build.config.coffee'
+      '!frontend/vendor/**/*.coffee'
+      '!frontend/vendors_offline/**/*.coffee'
     ]
 
     all_coffee:         'frontend/**/*.coffee'
