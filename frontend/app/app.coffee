@@ -39,8 +39,8 @@ $mdThemingProvider) ->
     controller:   'AppController'
     templateUrl:  'templates/app.tpl.html'
     resolve:
-      user: (user) ->
-        return user.getSession()
+      user: (UserService) ->
+        return UserService.getSession()
 
   $urlRouterProvider
     .when('', '/')

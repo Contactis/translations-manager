@@ -10,7 +10,7 @@ angular.module('translation.controllers.sidenav', [
 
 
 .controller 'SidenavController', ($scope, $rootScope, $state, $cookies,
-$mdSidenav, $mdUtil, ProjectsService, user) ->
+$mdSidenav, $mdUtil, ProjectsService, UserService) ->
 
   $scope.goTo = (uiview) ->
     $state.go(uiview)
@@ -36,7 +36,7 @@ $mdSidenav, $mdUtil, ProjectsService, user) ->
     { name: "Admin view", sref: "app.admin-view" }
   ]
 
-  $rootScope.logout = user.logout
+  $rootScope.logout = UserService.logout
 
   $scope.groups = [
     { name: "All", isActive: true }
