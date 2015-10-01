@@ -5,8 +5,7 @@ angular.module 'authorizationService', [
   'ngMaterial'
 ]
 
-
-.service 'authorization', ($q, $state, $mdToast, Restangular, user) ->
+.service 'authorization', ($q, $state, $mdToast, Restangular, userService) ->
 
   login = (email, password) ->
 
@@ -47,7 +46,7 @@ angular.module 'authorizationService', [
 
   _kickUnauthorised = (queue, event) ->
     event.preventDefault()
-    if user.getData('loggedIn')
+    if userService.getData('loggedIn')
       $state.go 'app.dashboard'
     else
       $state.go 'app.login'
@@ -94,7 +93,7 @@ angular.module 'authorizationService', [
 
     authorizePageAccess: (accessLevel, role) ->
       if typeof role is 'undefined'
-        role = user.getData('role')
+        role = userService.getData('role')
       result = accessLevel.bitMask & role.bitMask
       return result
 
