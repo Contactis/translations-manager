@@ -2,6 +2,21 @@
 
 // Sidenav
 
+html
+  height: 100%
+
+body
+  min-height:     100%        // At least fill all <html>
+  display:        flex        // Magic begins
+  flex-direction: column      // Column layout
+
+#content
+  min-height:     100%        // At least fill all <html>
+  display:        flex        // Magic begins
+  flex-direction: column      // Column layout
+  flex-grow: 1
+
+
 #sidenav
   position: static
 

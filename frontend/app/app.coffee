@@ -35,6 +35,7 @@ $mdThemingProvider) ->
   $stateProvider
   .state 'app',
     url:          ''
+    replace:      true
     abstract:     true
     controller:   'AppController'
     templateUrl:  'templates/app.tpl.html'

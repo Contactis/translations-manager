@@ -1,8 +1,7 @@
-div(layout='row', flex='')
+div(layout='row' flex)
   //- side navigation
   include sidenav.partial.jade
 
   //- Content of page
-  #content(layout='column', flex='')
-    div(data-ui-view='')
+  #content(data-ui-view='')
 
