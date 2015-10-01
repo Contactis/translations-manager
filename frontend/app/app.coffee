@@ -19,13 +19,15 @@ translationApp = angular.module('translation', [
 
   # Including services
   'userService'
+  'authorisationService'
 
   # Including controllers
   'translation.controllers.sidenav'
 ])
 
 
-.config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider, RestangularProvider) ->
+.config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider, RestangularProvider,
+$mdThemingProvider) ->
 
   $stateProvider
   .state 'app',
@@ -50,12 +52,25 @@ translationApp = angular.module('translation', [
 
   #$animateProvider.classNameFilter(/animate/)
 
+  $mdThemingProvider.theme('default')
+    .primaryPalette('blue-grey')
+    .accentPalette('pink')
 
 
+.run ($rootScope, authorisation, user) ->
 
-.run ($rootScope) ->
+
+  _firstEnter = {}
+
+  user.getSession().then () ->
+    authorisation.accessCheck(_firstEnter.event, _firstEnter.toState)
 
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
+    if _.isEmpty _firstEnter
+      _firstEnter.event = event
+      _firstEnter.toState = toState
+    else
+      authorisation.accessCheck(event, toState)
     return
 
   $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
@@ -70,10 +85,6 @@ translationApp = angular.module('translation', [
 # App Controller
 # -------------
 .controller 'AppController', ($scope, $rootScope, $state, $cookies, $mdSidenav) ->
-
-  $rootScope.logout = ->
-    $cookies.remove 'token'
-    $state.go 'app.login'
 
   return
 

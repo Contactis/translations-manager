@@ -5,6 +5,7 @@
     "database":   "database_development",
     "host":       "translation_manager_db.sqlite",
     "dialect":    "sqlite",
-    "storage":    "translation_manager_db.sqlite"
+    "storage":    "translation_manager_db.sqlite",
+    "logging":    false
   }
 }

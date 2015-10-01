@@ -3,8 +3,6 @@ angular.module 'userPermissionsSettings', []
 .provider 'userPermissionsSettings', () ->
 
 
-  config = common
-
   ###
       Method to build a distinct bit mask for each role
       It starts off with "1" and shifts the bit to the left for each element in the
@@ -55,10 +53,18 @@ angular.module 'userPermissionsSettings', []
     return accessLevels
 
 
+  userRoles =     buildRoles common.permissionConfig.roles
+  accessLevels =  buildAccessLevels common.permissionConfig.accessLevels, userRoles
+
+
   api =
     $get: ->
-    userRoles: buildRoles config.permissionConfig.roles
-    accessLevels: buildAccessLevels config.permissionConfig.accessLevels, buildRoles config.permissionConfig.roles
+      return {
+      userRoles: userRoles
+      accessLevels: accessLevels
+      }
+    userRoles: userRoles
+    accessLevels: accessLevels
 
   return api
 

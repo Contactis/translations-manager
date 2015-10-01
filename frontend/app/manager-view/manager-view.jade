@@ -21,11 +21,11 @@
 
       div
         div.inlineBlock.width50p
-          md-input-container.paddingBottom-1
+          md-input-container.padding-bottom-0
             md-select(ng-model="filter.translation")
               md-option(ng-repeat="single in static.translation track by $index" value="{{single}}") {{single}}
         div.inlineBlock.width40p
-          md-input-container.paddingBottom-1
+          md-input-container.padding-bottom-0
             md-select(ng-model="filter.plural")
               md-option(ng-repeat="single in static.plurals track by $index" value="{{single}}") {{single}}
       span(flex)
@@ -43,7 +43,7 @@
   //      h3 #1: (1r x 1c)
 
   div
-    dtable.mainTable(options="options" rows="data" class="material")
+    dtable.translationTables(options="options" rows="data" class="material")
 
 
 //div

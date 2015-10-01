@@ -2,9 +2,14 @@ angular.module 'userService', [
   'restangular'
   'ngCookies'
   'ui.router'
+  'userPermissionsSettings'
 ]
 
-.service 'user', ($q, $cookies, $http, $state, Restangular) ->
+.service 'user', ($q, $cookies, $http, $state, Restangular, userPermissionsSettings) ->
+
+  accessLevels  = userPermissionsSettings.accessLevels
+  userRoles     = userPermissionsSettings.userRoles
+
 
   _deferred = null
 
@@ -14,6 +19,7 @@ angular.module 'userService', [
     firstName:  'First name'
     lastName:   'Last name'
     token:      ''
+    role:       userRoles.public
 
 
 
@@ -30,19 +36,12 @@ angular.module 'userService', [
     if token
       $http.defaults.headers.common['authorization'] = token
 
-      Restangular.one('profile').get().then (response) ->
-        console.log response
-        user.loggedIn = true
-        $state.go 'app.dashboard'
-      , (error) ->
-        console.log error
-
-
-
-
-
-    _deferred.resolve user
-
+    Restangular.one('profile').get().then (response) ->
+      user = response.plain()
+      user.loggedIn = true
+      _deferred.resolve user
+    , (error) ->
+      _deferred.resolve error
 
     return _deferred.promise
 
@@ -50,6 +49,9 @@ angular.module 'userService', [
   api =
     getSession: getSession
     user: user
+
+    getData:  (key) ->
+      return user[key]
 
 
 

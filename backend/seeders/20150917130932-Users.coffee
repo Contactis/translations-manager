@@ -9,6 +9,7 @@ module.exports =
         firstName:  'Sir Super'
         lastName:   'Admin'
         password:   'admin'
+        role:       'admin'
         createdAt:  moment().format()
         updatedAt:  moment().format()
       }
@@ -18,6 +19,7 @@ module.exports =
         firstName:  'Sir Super'
         lastName:   'Manager'
         password:   'manager'
+        role:       'user'
         createdAt:  moment().format()
         updatedAt:  moment().format()
       }
@@ -27,6 +29,7 @@ module.exports =
         firstName:  'Sir Super'
         lastName:   'Translator'
         password:   'translator'
+        role:       'user'
         createdAt:  moment().format()
         updatedAt:  moment().format()
       }
@@ -36,6 +39,7 @@ module.exports =
         firstName:  'Sir Super'
         lastName:   'Programmer'
         password:   'programmer'
+        role:       'user'
         createdAt:  moment().format()
         updatedAt:  moment().format()
       }
