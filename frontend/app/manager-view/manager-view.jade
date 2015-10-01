@@ -2,7 +2,7 @@
   md-toolbar(layout='row')
     .md-toolbar-tools
 
-      h1.md-toolbar-tools(flex="40")
+      h1.md-toolbar-tools(flex='40')
         | Language
         md-menu(md-offset='0 -5' flex="1")
           md-button.md-icon-button(aria-label='Open project menu', ng-click='$mdOpenMenu()')
@@ -15,20 +15,9 @@
                 span(md-menu-align-target='') Language
                 |  {{item}}
 
-      div.missingTranslations(flex="25")
-          md-icon.redIcon warning
-          span Current missing translations: 78
-
-      div
-        div.inlineBlock.width50p
-          md-input-container.padding-bottom-0
-            md-select(ng-model="filter.translation")
-              md-option(ng-repeat="single in static.translation track by $index" value="{{single}}") {{single}}
-        div.inlineBlock.width40p
-          md-input-container.padding-bottom-0
-            md-select(ng-model="filter.plural")
-              md-option(ng-repeat="single in static.plurals track by $index" value="{{single}}") {{single}}
-      span(flex)
+      //div.missingTranslations
+      //    md-icon.redIcon warning
+      //    span Current missing translations: 78
       form
         md-input-container
           label Search a phrase
@@ -36,6 +25,17 @@
 
       md-button.md-icon-button(ng-click="toogleSidenav('left')")
         md-icon(flex) more_vert
+      span(flex)
+      div.inlineBlock
+          md-input-container.padding-bottom-0
+            md-select(ng-model="filter.translation")
+              md-option(ng-repeat="single in static.translation track by $index" value="{{single}}") {{single}}
+      div.inlineBlock
+          md-input-container.padding-bottom-0
+            md-select(ng-model="filter.plural")
+              md-option(ng-repeat="single in static.plurals track by $index" value="{{single}}") {{single}}
+
+
 
   div
     dtable.translationTables(options="options" rows="data" class="material")
