@@ -1,27 +1,57 @@
-div.dashboardMainFrame(layout="row" layout-align="start center")
-  div.projectTitle(flex="40")
-    span Languages
-    md-icon.alignLeft keyboard_arrow_down
-  //TODO --under-- it should be centered
-  div.missingTranslations(flex="20")
-    md-icon.redIcon warning
-    span Current missing translations: 78
-  div(flex offset="10")
-    div.inlineBlock.width50p
-      md-input-container.paddingBottom-1
-        md-select(ng-model="filter.translation")
-          md-option(ng-repeat="single in static.translation track by $index" value="{{single}}") {{single}}
-    div.inlineBlock.width40p
-      md-input-container.paddingBottom-1
-        md-select(ng-model="filter.plural")
-          md-option(ng-repeat="single in static.plurals track by $index" value="{{single}}") {{single}}
+.primary-containter
+  md-toolbar(layout='row')
+    .md-toolbar-tools
 
-  //div(flex)
-  //  md-autocomplete(md-search-text="ctrl.searchText" md-items="item in test"
-  //  md-item-text="item" md-min-length="0" placeholder="search a phrase")
-  //    md-item-template
-  //      span {{item}}
+      h1.md-toolbar-tools(flex="40")
+        | Language
+        md-menu(md-offset='0 -5' flex="1")
+          md-button.md-icon-button(aria-label='Open project menu', ng-click='$mdOpenMenu()')
+            md-tooltip
+              | Choose language
+            md-icon(md-menu-origin='' flex) keyboard_arrow_down
+          md-menu-content(width='4')
+            md-menu-item(ng-repeat='item in [1, 2, 3]')
+              md-button(ng-click='ctrl.announceClick($index)')
+                span(md-menu-align-target='') Language
+                |  {{item}}
 
-div
-  dtable.mainTable(options="options" rows="data" class="material")
+      div.missingTranslations(flex="25")
+          md-icon.redIcon warning
+          span Current missing translations: 78
 
+      div
+        div.inlineBlock.width50p
+          md-input-container.paddingBottom-1
+            md-select(ng-model="filter.translation")
+              md-option(ng-repeat="single in static.translation track by $index" value="{{single}}") {{single}}
+        div.inlineBlock.width40p
+          md-input-container.paddingBottom-1
+            md-select(ng-model="filter.plural")
+              md-option(ng-repeat="single in static.plurals track by $index" value="{{single}}") {{single}}
+      span(flex)
+      form
+        md-input-container
+          label Search a phrase
+          input(type='text' ng-model='project.rate')
+
+      md-button.md-icon-button(ng-click="toogleSidenav('left')")
+        md-icon(flex) more_vert
+  //md-grid-list(md-cols-sm='1', md-cols-md='2', md-cols-gt-md='4', md-row-height-gt-md='1:1', md-row-height='2:2', md-gutter='12px', md-gutter-gt-sm='8px')
+  //  md-grid-tile.gray(md-rowspan='1', md-colspan='1', md-colspan-sm='1')
+  //    p search bar
+  //    md-grid-tile-footer
+  //      h3 #1: (1r x 1c)
+
+  div
+    dtable.mainTable(options="options" rows="data" class="material")
+
+
+//div
+//  div.inlineBlock.width50p
+//    md-input-container.paddingBottom-1
+//      md-select(ng-model="filter.translation")
+//        md-option(ng-repeat="single in static.translation track by $index" value="{{single}}") {{single}}
+//  div.inlineBlock.width40p
+//    md-input-container.paddingBottom-1
+//      md-select(ng-model="filter.plural")
+//        md-option(ng-repeat="single in static.plurals track by $index" value="{{single}}") {{single}}
