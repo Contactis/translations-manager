@@ -1,10 +1,9 @@
-angular.module 'userService', [
+angular.module('userService', [
   'restangular'
   'ngCookies'
   'ui.router'
   'userPermissionsSettings'
-]
-
+])
 .service 'user', ($q, $cookies, $http, $state, Restangular, userPermissionsSettings) ->
 
   accessLevels  = userPermissionsSettings.accessLevels
@@ -13,13 +12,16 @@ angular.module 'userService', [
 
   _deferred = null
 
-  user =
+  defaultUserObject =
     loggedIn:   false
     username:   'Unknown'
     firstName:  'First name'
     lastName:   'Last name'
     token:      ''
     role:       userRoles.public
+
+
+  user = angular.copy defaultUserObject
 
 
 
@@ -46,12 +48,21 @@ angular.module 'userService', [
     return _deferred.promise
 
 
+
   api =
     getSession: getSession
     user: user
 
-    getData:  (key) ->
+    getData: (key) ->
       return user[key]
+
+    logout: () ->
+      console.log 'logout'
+      $cookies.remove 'token'
+      user = angular.copy defaultUserObject
+      delete $http.defaults.headers.common['authorization']
+
+      $state.go 'app.login'
 
 
 

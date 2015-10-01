@@ -8,14 +8,14 @@ angular.module('translation.login', [
 
 .config ($stateProvider, userPermissionsSettingsProvider) ->
 
-  access = userPermissionsSettingsProvider.userRoles
+  access = userPermissionsSettingsProvider.accessLevels
 
   $stateProvider.state 'app.login',
     url:            '/login'
     controller:     'LoginController'
     templateUrl:    'login/login.tpl.html'
     data:
-      access:       access.public
+      access:       access.anon
 
 .controller 'LoginController', ($scope, $cookies, $state, $http, authorisation, Restangular) ->
 
