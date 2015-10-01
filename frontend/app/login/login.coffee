@@ -36,9 +36,7 @@ angular.module('translation.pages.login', [
 
   $scope.login = ->
     AuthorizationService.login $scope.user.email, $scope.user.password
-    .then (response) ->
-      token = response.plain()
-
+    .then (token) ->
       if angular.isDefined token.token
         $cookies.put 'token', token.token
         $http.defaults.headers.common['authorization'] = token.token

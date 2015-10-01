@@ -16,8 +16,8 @@ angular.module('translation.pages.dashboard', [
     data:
       access: access.user
     resolve:
-      ProjectsStateResolver: (projects) ->
-        return projects.get(1)
+      ProjectsStateResolver: (ProjectsService) ->
+        return ProjectsService.get(1)
 
 
 .controller 'DashboardController', ($scope, ProjectsStateResolver) ->
