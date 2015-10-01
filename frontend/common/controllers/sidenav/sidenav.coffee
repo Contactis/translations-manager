@@ -4,17 +4,14 @@ angular.module('translation.controllers.sidenav', [
   'ngCookies'
   'ngAria'
   'ngMaterial'
-  'projectsService'
-  'userService'
+  'translation.services.projects'
+  'translation.services.user'
 ])
 
 
 .controller 'SidenavController', ($scope, $rootScope, $state, $cookies,
-$mdSidenav, $mdUtil, projects, userService) ->
-
-
-
-  $scope.user = userService.user()
+$mdSidenav, $mdUtil, ProjectsService, UserService) ->
+  $scope.user = UserService.user()
 
   $scope.goTo = (uiview) ->
     $state.go(uiview)
@@ -24,10 +21,10 @@ $mdSidenav, $mdUtil, projects, userService) ->
 
   $scope.currentProject = {}
 
-  projects.updated.then null, null, (project) ->
+  ProjectsService.updated.then null, null, (project) ->
     $scope.currentProject = project
 
-  userService.updated.then null, null, (user) ->
+  UserService.updated.then null, null, (user) ->
     $scope.user = user
 
 
@@ -39,7 +36,7 @@ $mdSidenav, $mdUtil, projects, userService) ->
     { name: "Admin view", sref: "app.admin-view" }
   ]
 
-  $rootScope.logout = userService.logout
+  $rootScope.logout = UserService.logout
 
   $scope.groups = [
     { name: "All", isActive: true }

@@ -1,15 +1,15 @@
-angular.module('translation.login', [
+angular.module('translation.pages.login', [
   'ui.router'
-  'authorizationService'
   'ngCookies'
   'restangular'
-  'userPermissionsSettings'
-  'userService'
+  'translation.services.user'
+  'translation.services.authorization'
+  'translation.providers.userPermissionsSettings'
 ])
 
-.config ($stateProvider, userPermissionsSettingsProvider) ->
+.config ($stateProvider, UserPermissionsSettingsProvider) ->
 
-  access = userPermissionsSettingsProvider.accessLevels
+  access = UserPermissionsSettingsProvider.accessLevels
 
   $stateProvider.state 'app.login',
     url:            '/login'
@@ -18,8 +18,8 @@ angular.module('translation.login', [
     data:
       access:       access.anon
 
-.controller 'LoginController', ($scope, $cookies, $state, $http, authorization, Restangular, userService) ->
 
+.controller 'LoginController', ($scope, $cookies, $state, $http, Restangular, AuthorizationService, UserService) ->
 
   $scope.user =
     email: ''
@@ -34,10 +34,10 @@ angular.module('translation.login', [
     $scope.showRegistration = !$scope.showRegistration
 
 
-
   $scope.login = ->
-    authorization.login $scope.user.email, $scope.user.password
-    .then (token) ->
+    AuthorizationService.login $scope.user.email, $scope.user.password
+    .then (response) ->
+      token = response.plain()
 
       if angular.isDefined token.token
         $cookies.put 'token', token.token
@@ -47,7 +47,7 @@ angular.module('translation.login', [
         .then (response) ->
           response = response.plain()
           response['loggedIn'] = true
-          userService.sync response
+          UserService.sync response
           $state.go 'app.dashboard'
 
     , (error) ->
@@ -55,7 +55,8 @@ angular.module('translation.login', [
 
 
   $scope.register = ->
-    authorization.register $scope.user.email, $scope.user.password, $scope.user.repeatPassword, $scope.user.username
+    AuthorizationService.register($scope.user.email, $scope.user.password, $scope.user.repeatPassword,
+    $scope.user.username)
 
   $scope.sizes = [
     "small (12-inch)"

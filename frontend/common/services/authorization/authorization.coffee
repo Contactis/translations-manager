@@ -1,11 +1,11 @@
-angular.module 'authorizationService', [
+angular.module 'translation.services.authorization', [
   'restangular'
   'ui.router'
-  'userService'
   'ngMaterial'
+  'translation.services.user'
 ]
 
-.service 'authorization', ($q, $state, $mdToast, Restangular, userService) ->
+.service 'AuthorizationService', ($q, $state, $mdToast, Restangular, UserService) ->
 
   login = (email, password) ->
 
@@ -46,16 +46,15 @@ angular.module 'authorizationService', [
 
   _kickUnauthorised = (queue, event) ->
     event.preventDefault()
-    if userService.getData('loggedIn')
+    if UserService.getData('loggedIn')
       $state.go 'app.dashboard'
     else
       $state.go 'app.login'
 
     queue.resolve()
 
+
   _pageAccessCheck = (event, toState) ->
-
-
     _queue = $q.defer()
 
     if angular.isUndefined(toState) or !('data' of toState) or !('access' of toState.data)
@@ -83,8 +82,8 @@ angular.module 'authorizationService', [
 
         _kickUnauthorised _queue, event
 
-
     return _queue.promise
+
 
   api =
     login:        login
@@ -93,9 +92,8 @@ angular.module 'authorizationService', [
 
     authorizePageAccess: (accessLevel, role) ->
       if typeof role is 'undefined'
-        role = userService.getData('role')
+        role = UserService.getData('role')
       result = accessLevel.bitMask & role.bitMask
       return result
-
 
   return api

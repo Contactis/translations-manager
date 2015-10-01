@@ -1,7 +1,8 @@
-angular.module 'projectsService', [
+angular.module 'translation.services.projects', [
   'restangular'
 ]
-.service 'projects', ($q, $timeout, Restangular) ->
+
+.service 'ProjectsService', ($q, $timeout, Restangular) ->
 
   _notify = $q.defer()
   _projectQueue = null

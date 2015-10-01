@@ -1,13 +1,13 @@
-angular.module('translation.manager-view', [
+angular.module('translation.pages.manager-view', [
   'ui.router'
-  'userPermissionsSettings'
   'data-table'
+  'translation.providers.userPermissionsSettings'
 ])
 
 
-.config ($stateProvider, userPermissionsSettingsProvider) ->
+.config ($stateProvider, UserPermissionsSettingsProvider) ->
 
-  access = userPermissionsSettingsProvider.accessLevels
+  access = UserPermissionsSettingsProvider.accessLevels
 
   $stateProvider.state 'app.manager-view',
     url:            '/manager-view'

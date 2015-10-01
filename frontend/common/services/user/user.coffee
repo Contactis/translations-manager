@@ -1,13 +1,15 @@
-angular.module('userService', [
+angular.module('translation.services.user', [
   'restangular'
   'ngCookies'
   'ui.router'
-  'userPermissionsSettings'
+  'translation.providers.userPermissionsSettings'
 ])
-.service 'userService', ($q, $cookies, $http, $timeout, $state, Restangular, userPermissionsSettings) ->
 
-  accessLevels  = userPermissionsSettings.accessLevels
-  userRoles     = userPermissionsSettings.userRoles
+
+.service 'UserService', ($q, $cookies, $http, $timeout, $state, Restangular, UserPermissionsSettings) ->
+
+  accessLevels  = UserPermissionsSettings.accessLevels
+  userRoles     = UserPermissionsSettings.userRoles
 
   _notify = $q.defer()
 
