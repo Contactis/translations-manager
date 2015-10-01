@@ -4,7 +4,7 @@ angular.module('userService', [
   'ui.router'
   'userPermissionsSettings'
 ])
-.service 'user', ($q, $cookies, $http, $state, Restangular, userPermissionsSettings) ->
+.service 'userService', ($q, $cookies, $http, $state, Restangular, userPermissionsSettings) ->
 
   accessLevels  = userPermissionsSettings.accessLevels
   userRoles     = userPermissionsSettings.userRoles
@@ -13,10 +13,15 @@ angular.module('userService', [
   _deferred = null
 
   defaultUserObject =
+    id:         ''
+    createdAt:  ''
+    updatedAt:  ''
+    email:      ''
     loggedIn:   false
-    username:   'Unknown'
-    firstName:  'First name'
-    lastName:   'Last name'
+    username:   ''
+    firstName:  ''
+    lastName:   ''
+    fullName:   ''
     token:      ''
     role:       userRoles.public
 
@@ -63,6 +68,12 @@ angular.module('userService', [
       delete $http.defaults.headers.common['authorization']
 
       $state.go 'app.login'
+
+    sync: (newUserObject) ->
+      angular.forEach defaultUserObject, (val, key) ->
+        user[key] = newUserObject[key]
+
+      return user
 
 
 

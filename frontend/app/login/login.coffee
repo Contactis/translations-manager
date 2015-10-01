@@ -4,6 +4,7 @@ angular.module('translation.login', [
   'ngCookies'
   'restangular'
   'userPermissionsSettings'
+  'userService'
 ])
 
 .config ($stateProvider, userPermissionsSettingsProvider) ->
@@ -17,7 +18,7 @@ angular.module('translation.login', [
     data:
       access:       access.anon
 
-.controller 'LoginController', ($scope, $cookies, $state, $http, authorization, Restangular) ->
+.controller 'LoginController', ($scope, $cookies, $state, $http, authorization, Restangular, userService) ->
 
 
   $scope.user =
@@ -36,10 +37,7 @@ angular.module('translation.login', [
 
   $scope.login = ->
     authorization.login $scope.user.email, $scope.user.password
-    .then (response) ->
-      token = response.plain()
-
-
+    .then (token) ->
 
       if angular.isDefined token.token
         $cookies.put 'token', token.token
@@ -47,8 +45,10 @@ angular.module('translation.login', [
 
         Restangular.one('profile').get()
         .then (response) ->
+          response = response.plain()
+          response['loggedIn'] = true
+          userService.sync response
           $state.go 'app.dashboard'
-          console.log response
 
     , (error) ->
       console.log 'error occured', error

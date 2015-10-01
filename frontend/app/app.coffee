@@ -36,8 +36,8 @@ $mdThemingProvider) ->
     controller:   'AppController'
     templateUrl:  'templates/app.tpl.html'
     resolve:
-      user: (user) ->
-        return user.getSession()
+      user: (userService) ->
+        return userService.getSession()
 
   $urlRouterProvider
     .when('', '/')
@@ -57,12 +57,12 @@ $mdThemingProvider) ->
     .accentPalette('pink')
 
 
-.run ($rootScope, authorization, user) ->
+.run ($rootScope, authorization, userService) ->
 
 
   _firstEnter = {}
 
-  user.getSession().then () ->
+  userService.getSession().then () ->
     authorization.accessCheck(_firstEnter.event, _firstEnter.toState)
 
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
