@@ -12,24 +12,27 @@ angular.module('translation.controllers.sidenav', [
 .controller 'SidenavController', ($scope, $rootScope, $state, $cookies,
 $mdSidenav, $mdUtil, projects, userService) ->
 
+
+
+  $scope.user = userService.user()
+
   $scope.goTo = (uiview) ->
     $state.go(uiview)
 
   $scope.countLanguages = 8
   $scope.countKeys = 1234
 
-  $scope.userdata =
-    fullname: 24324
-    email: 2345235
-
   $scope.currentProject = {}
 
   projects.updated.then null, null, (project) ->
     $scope.currentProject = project
 
+  userService.updated.then null, null, (user) ->
+    $scope.user = user
+
+
 
   $scope.pages = [
-    { name: "Login", sref: "app.login" }
     { name: "Programmer view", sref: "app.programmer-view" }
     { name: "Manager view", sref: "app.manager-view" }
     { name: "Translator view", sref: "app.translator-view" }
