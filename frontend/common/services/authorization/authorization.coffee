@@ -1,12 +1,11 @@
-angular.module 'authorisationService', [
+angular.module 'translation.services.authorization', [
   'restangular'
   'ui.router'
-  'userService'
+  'ngMaterial'
+  'translation.services.user'
 ]
 
-.service 'authorisation', ($q, $state, Restangular, user) ->
-
-
+.service 'AuthorizationService', ($q, $state, $mdToast, Restangular, UserService) ->
 
   login = (email, password) ->
 
@@ -47,39 +46,44 @@ angular.module 'authorisationService', [
 
   _kickUnauthorised = (queue, event) ->
     event.preventDefault()
-    if user.getData('loggedIn')
+    if UserService.getData('loggedIn')
       $state.go 'app.dashboard'
     else
       $state.go 'app.login'
 
     queue.resolve()
 
+
   _pageAccessCheck = (event, toState) ->
-
-
     _queue = $q.defer()
 
     if angular.isUndefined(toState) or !('data' of toState) or !('access' of toState.data)
 # Missing state
       if angular.isDefined(event)
 
-#      GlobalNotificationsService.add
-#        msg:"ACCESS_UNDEFINED_FOR_THIS_STATE"
-#        type:"warning"
-
+        $mdToast.show(
+          $mdToast.simple()
+          .content('Access undefined for this state')
+          .position('bottom right')
+          .hideDelay(3000)
+        )
         _kickUnauthorised _queue, event
     else
       if api.authorizePageAccess(toState.data.access)
         _queue.resolve()
       else
 
-#        GlobalNotificationsService.add
-#          msg:    "SEEMS_LIKE_YOU_TRIED_ACCESSING_A_ROUTE_YOU_DONT_HAVE_ACCESS_TO"
-#          type:   "error"
+        $mdToast.show(
+          $mdToast.simple()
+          .content('Seems like you don\'t have permissions to access that page.')
+          .position('bottom right')
+          .hideDelay(3000)
+        )
+
         _kickUnauthorised _queue, event
 
-
     return _queue.promise
+
 
   api =
     login:        login
@@ -88,9 +92,8 @@ angular.module 'authorisationService', [
 
     authorizePageAccess: (accessLevel, role) ->
       if typeof role is 'undefined'
-        role = user.getData('role')
+        role = UserService.getData('role')
       result = accessLevel.bitMask & role.bitMask
       return result
-
 
   return api

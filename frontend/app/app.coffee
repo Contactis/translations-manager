@@ -10,16 +10,19 @@ translationApp = angular.module('translation', [
   # Including templates
   'templates-module'
 
-  # Including pages of application
-  'translation.404'
-  'translation.login'
-  'translation.dashboard'
-  'translation.manager-view'
-  'translation.programmer-view'
+  # Including directives
+  'translation.directives.accessLevel'
+
+  # Including pages of aplication
+  'translation.pages.404'
+  'translation.pages.login'
+  'translation.pages.dashboard'
+  'translation.pages.manager-view'
+  'translation.pages.programmer-view'
 
   # Including services
-  'userService'
-  'authorisationService'
+  'translation.services.user'
+  'translation.services.authorization'
 
   # Including controllers
   'translation.controllers.sidenav'
@@ -35,12 +38,13 @@ $mdThemingProvider) ->
   $stateProvider
   .state 'app',
     url:          ''
+    replace:      true
     abstract:     true
     controller:   'AppController'
     templateUrl:  'templates/app.tpl.html'
     resolve:
-      user: (user) ->
-        return user.getSession()
+      user: (UserService) ->
+        return UserService.getSession()
 
   $urlRouterProvider
     .when('', '/')
@@ -57,16 +61,19 @@ $mdThemingProvider) ->
 
   $mdThemingProvider.theme('default')
     .primaryPalette('blue-grey')
-    .accentPalette('pink')
+    .accentPalette('blue')
+    .warnPalette('red')
+    # .backgroundPalette('gray')
 
 
-.run ($rootScope, authorisation, user) ->
+.run ($rootScope, UserService, AuthorizationService) ->
 
 
   _firstEnter = {}
 
-  user.getSession().then () ->
-    authorisation.accessCheck(_firstEnter.event, _firstEnter.toState)
+  UserService.getSession().then () ->
+    AuthorizationService.accessCheck(_firstEnter.event, _firstEnter.toState)
+
 
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
 
@@ -74,7 +81,7 @@ $mdThemingProvider) ->
       _firstEnter.event = event
       _firstEnter.toState = toState
     else
-      authorisation.accessCheck(event, toState)
+      AuthorizationService.accessCheck(event, toState)
     return
 
   $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->

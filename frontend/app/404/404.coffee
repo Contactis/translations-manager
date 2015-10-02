@@ -1,11 +1,11 @@
-angular.module('translation.404', [
+angular.module('translation.pages.404', [
   'ui.router'
-  'userPermissionsSettings'
+  'translation.providers.userPermissionsSettings'
 ])
 
-.config ($stateProvider, userPermissionsSettingsProvider) ->
+.config ($stateProvider, UserPermissionsSettingsProvider) ->
 
-  access = userPermissionsSettingsProvider.accessLevels
+  access = UserPermissionsSettingsProvider.accessLevels
 
   $stateProvider.state '404',
     url:            '/404'

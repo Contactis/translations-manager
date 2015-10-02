@@ -1,22 +1,30 @@
-angular.module('userService', [
+angular.module('translation.services.user', [
   'restangular'
   'ngCookies'
   'ui.router'
-  'userPermissionsSettings'
+  'translation.providers.userPermissionsSettings'
 ])
-.service 'user', ($q, $cookies, $http, $state, Restangular, userPermissionsSettings) ->
 
-  accessLevels  = userPermissionsSettings.accessLevels
-  userRoles     = userPermissionsSettings.userRoles
 
+.service 'UserService', ($q, $cookies, $http, $timeout, $state, Restangular, UserPermissionsSettings) ->
+
+  accessLevels  = UserPermissionsSettings.accessLevels
+  userRoles     = UserPermissionsSettings.userRoles
+
+  _notify = $q.defer()
 
   _deferred = null
 
   defaultUserObject =
+    id:         ''
+    createdAt:  ''
+    updatedAt:  ''
+    email:      ''
     loggedIn:   false
-    username:   'Unknown'
-    firstName:  'First name'
-    lastName:   'Last name'
+    username:   ''
+    firstName:  ''
+    lastName:   ''
+    fullName:   ''
     token:      ''
     role:       userRoles.public
 
@@ -42,6 +50,10 @@ angular.module('userService', [
       user = response.plain()
       user.loggedIn = true
       _deferred.resolve user
+
+      $timeout ->
+        _notify.notify user
+
     , (error) ->
       _deferred.resolve error
 
@@ -51,7 +63,9 @@ angular.module('userService', [
 
   api =
     getSession: getSession
-    user: user
+    user: ->
+      return angular.copy user
+    updated:  _notify.promise
 
     getData: (key) ->
       return user[key]
@@ -60,9 +74,22 @@ angular.module('userService', [
       console.log 'logout'
       $cookies.remove 'token'
       user = angular.copy defaultUserObject
+
+      $timeout ->
+        _notify.notify user
+
       delete $http.defaults.headers.common['authorization']
 
       $state.go 'app.login'
+
+    sync: (newUserObject) ->
+      angular.forEach defaultUserObject, (val, key) ->
+        user[key] = newUserObject[key]
+
+      $timeout ->
+        _notify.notify user
+
+      return user
 
 
 

@@ -1,4 +1,4 @@
-angular.module('translation.programmer-view', [
+angular.module('translation.pages.programmer-view', [
   'ui.router'
   'ngCookies'
   'ngMaterial'

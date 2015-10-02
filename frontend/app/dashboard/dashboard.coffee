@@ -1,13 +1,13 @@
-angular.module('translation.dashboard', [
+angular.module('translation.pages.dashboard', [
   'ui.router'
-  'userPermissionsSettings'
   'data-table'
-  'projectsService'
+  'translation.services.projects'
+  'translation.providers.userPermissionsSettings'
 ])
 
-.config ($stateProvider, userPermissionsSettingsProvider) ->
+.config ($stateProvider, UserPermissionsSettingsProvider) ->
 
-  access = userPermissionsSettingsProvider.accessLevels
+  access = UserPermissionsSettingsProvider.accessLevels
 
   $stateProvider.state 'app.dashboard',
     url:            '/dashboard'
@@ -16,13 +16,13 @@ angular.module('translation.dashboard', [
     data:
       access: access.user
     resolve:
-      project: (projects) ->
-        return projects.get(1)
+      ProjectsStateResolver: (ProjectsService) ->
+        return ProjectsService.get(1)
 
 
-.controller 'DashboardController', ($scope, project) ->
+.controller 'DashboardController', ($scope, ProjectsStateResolver) ->
 
-  $scope.project = project
+  $scope.project = ProjectsStateResolver
 
   $scope.filter = {}
   $scope.static = {}

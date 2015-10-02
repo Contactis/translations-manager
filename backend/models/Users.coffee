@@ -37,6 +37,9 @@ module.exports = (sequelize, DataTypes) ->
       role: ->
         return authorisation.userRoles[this.dataValues.role]
 
+      password: ->
+        return ''
+
     classMethods:
       generateHash: (password) ->
         return bcrypt.hash(password, 10)

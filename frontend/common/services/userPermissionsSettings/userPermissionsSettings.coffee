@@ -1,7 +1,6 @@
-angular.module 'userPermissionsSettings', []
+angular.module('translation.providers.userPermissionsSettings', [])
 
-.provider 'userPermissionsSettings', () ->
-
+.provider 'UserPermissionsSettings', () ->
 
   ###
       Method to build a distinct bit mask for each role

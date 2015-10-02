@@ -1,4 +1,4 @@
-div#sidenav.md-whiteframe-z2(ng-controller="SidenavController")
+div#sidenav.md-whiteframe-z2(ng-controller="SidenavController" ng-show="user.loggedIn")
   md-sidenav.md-primary.site-sidenav.md-sidenav-left(layout="column" md-component-id='left' md-is-locked-open="$mdMedia('gt-sm')")
     md-toolbar.md-primary.md-hue-2(layout="column")
       header.md-toolbar-tools.fill-height
@@ -17,10 +17,10 @@ div#sidenav.md-whiteframe-z2(ng-controller="SidenavController")
                 span(md-menu-align-target='') Change project
 
       header.margin-left-20.margin-bottom-5(flex)
-        span.md-body-2 {{ userdata.fullname }}
+        span.md-body-2 {{ user.fullName }}
         br
         span.md-caption
-          span {{ userdata.email }}
+          span {{ user.email }}
           span(flex)
 
           md-menu(md-offset='0 -5')
