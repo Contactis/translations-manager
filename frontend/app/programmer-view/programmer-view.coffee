@@ -2,17 +2,24 @@ angular.module('translation.programmer-view', [
   'ui.router'
   'ngCookies'
   'ngMaterial'
+  'userPermissionsSettings'
+  'data-table'
 ])
 
-.config ($stateProvider) ->
+.config ($stateProvider, userPermissionsSettingsProvider) ->
+
+  access = userPermissionsSettingsProvider.accessLevels
 
   $stateProvider.state 'app.programmer-view',
     url:            '/programmer-view'
     controller:     'ProgrammerViewController'
     templateUrl:    'programmer-view/programmer-view.tpl.html'
+    data:
+      access: access.user
 
 .controller 'ProgrammerViewController', ($scope, $log, $cookies, $mdSidenav, $mdUtil) ->
-  console.log "ProgrammerViewController !!!"
+
+  $scope.filter = {}
 
   # buildToggler = (navID) ->
   #   debounceFn = $mdUtil.debounce( () ->

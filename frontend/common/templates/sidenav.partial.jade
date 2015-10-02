@@ -1,6 +1,6 @@
 div#sidenav.md-whiteframe-z2(ng-controller="SidenavController")
   md-sidenav.md-primary.site-sidenav.md-sidenav-left(layout="column" md-component-id='left' md-is-locked-open="$mdMedia('gt-sm')")
-    md-toolbar(layout="column")
+    md-toolbar.md-primary.md-hue-2(layout="column")
       header.md-toolbar-tools.fill-height
         img(width=40 src="https://material.angularjs.org/0.11.0/img/icons/angular-logo.svg")
         a(href="" ng-click="goTo('app.dashboard')") {{ currentProject.name }}

@@ -27,16 +27,10 @@
         md-icon(flex) more_vert
       span(flex)
       div.width40p
-          md-input-container.padding-bottom-0
-            md-select(ng-model="filter.translation")
-              md-option(ng-repeat="single in static.translation track by $index" value="{{single}}") {{single}}
+        md-input-container.padding-bottom-0
+          md-select(ng-model="filter.translation")
+            md-option(ng-repeat="single in static.translation track by $index" value="{{single}}") {{single}}
       div.width40p
-          md-input-container.padding-bottom-0
-            md-select(ng-model="filter.plural")
-              md-option(ng-repeat="single in static.plurals track by $index" value="{{single}}") {{single}}
-
-
-
-  div
-    dtable.translationTables(options="options" rows="data" class="material")
-
+        md-input-container.padding-bottom-0
+          md-select(ng-model="filter.plural")
+            md-option(ng-repeat="single in static.plurals track by $index" value="{{single}}") {{single}}

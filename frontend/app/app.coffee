@@ -10,7 +10,7 @@ translationApp = angular.module('translation', [
   # Including templates
   'templates-module'
 
-  # Including pages of aplication
+  # Including pages of application
   'translation.404'
   'translation.login'
   'translation.dashboard'
@@ -23,6 +23,9 @@ translationApp = angular.module('translation', [
 
   # Including controllers
   'translation.controllers.sidenav'
+
+  # Including directives
+  'translator.directive.trTopBar'
 ])
 
 
