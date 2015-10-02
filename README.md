@@ -31,7 +31,7 @@ machine, and these programs are:
 Latest node.js is recommended for development (4.0.0 or higher). 
 Simply update using NPM ([how to set up node.js](https://docs.npmjs.com/getting-started/installing-node))
 
-``` 
+```
 sudo npm cache clean -f
 sudo npm install -g n
 sudo n stable
@@ -48,10 +48,11 @@ nvm use 4
 Then clone the repo and install all requirements
 
 ```
+sudo apt-get install build-essential
 git clone git@bitbucket.org:egel/translations-manager.git
 cd translations-manager
 sudo npm install -g gulp bower sequelize-cli    # for global install need sudo 
-npm install       # should install without sudo
+npm install     # should install without sudo
 cd frontend && bower install
 ```
 
