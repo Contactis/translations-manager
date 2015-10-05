@@ -2,10 +2,11 @@ angular.module 'translation.services.authorization', [
   'restangular'
   'ui.router'
   'ngMaterial'
+  'ngCookies'
   'translation.services.user'
 ]
 
-.service 'AuthorizationService', ($q, $state, $mdToast, Restangular, UserService) ->
+.service 'AuthorizationService', ($q, $state, $mdToast, $cookies, $http, Restangular, UserService) ->
 
   login = (email, password) ->
 
@@ -16,31 +17,76 @@ angular.module 'translation.services.authorization', [
       password:       password
     .then (response) ->
 
-      _deferred.resolve response
+      if angular.isDefined response.token
+        UserService.loadDashboard response.token
+
+
+
+      else
+        $mdToast.show(
+          $mdToast.simple()
+          .content('Login unsuccessful. Try again.')
+          .position('bottom right')
+          .hideDelay(3000)
+        )
+
 
     , (err) ->
       _deferred.reject err
 
+      $mdToast.show(
+        $mdToast.simple()
+        .content('Login unsuccessful. Try again.')
+        .position('bottom right')
+        .hideDelay(3000)
+      )
 
     return _deferred.promise
 
 
 
-  register = (email, password, repeatPassword, username) ->
+  register = (attributes) ->
 
     _deferred = $q.defer()
 
     Restangular.all('register').post(
-      email:          email
-      password:       password
-      repeatPassword: repeatPassword
-      username:       username
+      email:      attributes.email
+      password:   attributes.password
+      firstName:  attributes.firstName
+      lastName:   attributes.lastName
     ).then (response) ->
 
       _deferred.resolve response
 
+    , (error) ->
+      _deferred.reject error
+
+      $mdToast.show(
+        $mdToast.simple()
+        .content('Registration unsuccessful. Try again with different email.')
+        .position('bottom right')
+        .hideDelay(3000)
+      )
+
 
     return _deferred.promise
+
+  logout = () ->
+    $cookies.remove 'token'
+    UserService.resetUser()
+
+    delete $http.defaults.headers.common['authorization']
+
+
+    $mdToast.show(
+      $mdToast.simple()
+      .content('You had been logged out.')
+      .position('bottom right')
+      .hideDelay(3000)
+    )
+
+
+    $state.go 'app.login'
 
 
 
@@ -87,6 +133,7 @@ angular.module 'translation.services.authorization', [
 
   api =
     login:        login
+    logout:       logout
     register:     register
     accessCheck:  _pageAccessCheck
 

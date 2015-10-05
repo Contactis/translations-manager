@@ -1,12 +1,13 @@
 angular.module('translation.services.user', [
   'restangular'
   'ngCookies'
+  'ngMaterial'
   'ui.router'
   'translation.providers.userPermissionsSettings'
 ])
 
 
-.service 'UserService', ($q, $cookies, $http, $timeout, $state, Restangular, UserPermissionsSettings) ->
+.service 'UserService', ($q, $cookies, $http, $timeout, $state, $mdToast, Restangular, UserPermissionsSettings) ->
 
   accessLevels  = UserPermissionsSettings.accessLevels
   userRoles     = UserPermissionsSettings.userRoles
@@ -59,37 +60,59 @@ angular.module('translation.services.user', [
 
     return _deferred.promise
 
+  syncUserObject = (newUserObject) ->
+    angular.forEach defaultUserObject, (val, key) ->
+      user[key] = newUserObject[key]
+
+    $timeout ->
+      _notify.notify user
+
+    return user
+
+
+  loadDashboard = (token) ->
+
+    $cookies.put 'token', token
+    $http.defaults.headers.common['authorization'] = token
+
+    Restangular.one('profile').get()
+    .then (response) ->
+      response = response.plain()
+      response['loggedIn'] = true
+      syncUserObject response
+
+      $mdToast.show(
+        $mdToast.simple()
+        .content("Welcome #{response.fullName}!")
+        .position('bottom right')
+        .hideDelay(3000)
+      )
+
+
+      $state.go 'app.dashboard'
 
 
   api =
-    getSession: getSession
-    user: ->
-      return angular.copy user
-    updated:  _notify.promise
+    getSession:     getSession
+    sync:           syncUserObject
+    loadDashboard:  loadDashboard
+    updated:        _notify.promise
 
-    getData: (key) ->
-      return user[key]
-
-    logout: () ->
-      console.log 'logout'
-      $cookies.remove 'token'
+    resetUser: ->
       user = angular.copy defaultUserObject
 
       $timeout ->
         _notify.notify user
 
-      delete $http.defaults.headers.common['authorization']
+    user: ->
+      return angular.copy user
 
-      $state.go 'app.login'
+    defaultUserObject: ->
+      return angular.copy defaultUserObject
 
-    sync: (newUserObject) ->
-      angular.forEach defaultUserObject, (val, key) ->
-        user[key] = newUserObject[key]
+    getData: (key) ->
+      return user[key]
 
-      $timeout ->
-        _notify.notify user
-
-      return user
 
 
 
