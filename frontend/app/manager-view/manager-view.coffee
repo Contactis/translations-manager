@@ -19,26 +19,12 @@ angular.module('translation.pages.manager-view', [
 
 .controller 'ManagerViewController', ($scope) ->
   $scope.filter = {}
-  $scope.static = {}
   $scope.languageList = ['pl','en','de']
 
-  $scope.static.translation = [
-    "All translations"
-    "Missing translations"
-    "Without missing translations"
-  ]
-
-  $scope.static.plurals = [
-    "None"
-    "Only plurals"
-    "Not plurals"
-  ]
   $scope.test = [
     'no elo'
     'lalala'
   ]
-  $scope.filter.translation = $scope.static.translation[0]
-  $scope.filter.plural = $scope.static.plurals[0]
 
   $scope.options = {
     rowHeight: 50,

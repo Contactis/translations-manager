@@ -1,7 +1,8 @@
 angular.module('translator.directive.trTopBar', [
+  'translation.services.filtersState'
 ])
 
-.directive 'trTopBar', () ->
+.directive 'trTopBar', (filtersStateService) ->
   return {
   restrict: 'E'
   replace: true
@@ -9,29 +10,14 @@ angular.module('translator.directive.trTopBar', [
   scope:
     mainSetting: '&'
     translationFilter: '='
-    filter: '='
+    filter: '=filter'
 
   link: (scope, element, attrs) ->
 
-    scope.static = {}
-    scope.static.translation = [
-      "All translations"
-      "Missing translations"
-      "Without missing translations"
-    ]
+    scope.static = filtersStateService.topBarDefaultFilters
 
-    scope.static.plurals = [
-      "None"
-      "Only plurals"
-      "Not plurals"
-    ]
-
-    filter.translation = scope.static.translation[0]
-    filter.plural = scope.static.plurals[0]
-
-
-
-
+    scope.filter.translation = scope.static.translation[0]
+    scope.filter.plural = scope.static.plurals[0]
 
   }
 
