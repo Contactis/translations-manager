@@ -23,9 +23,13 @@ translationApp = angular.module('translation', [
   # Including services
   'translation.services.user'
   'translation.services.authorization'
+  'translation.services.filtersState'
 
   # Including controllers
   'translation.controllers.sidenav'
+
+  # Including directives
+  'translator.directive.trTopBar'
 ])
 
 
