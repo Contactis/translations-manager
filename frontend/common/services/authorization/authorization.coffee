@@ -18,11 +18,12 @@ angular.module 'translation.services.authorization', [
     .then (response) ->
 
       if angular.isDefined response.token
+        _deferred.resolve response
         UserService.loadDashboard response.token
 
-
-
       else
+        _deferred.reject 'no token'
+
         $mdToast.show(
           $mdToast.simple()
           .content('Login unsuccessful. Try again.')
@@ -30,9 +31,9 @@ angular.module 'translation.services.authorization', [
           .hideDelay(3000)
         )
 
+    , (error) ->
 
-    , (err) ->
-      _deferred.reject err
+      _deferred.reject error
 
       $mdToast.show(
         $mdToast.simple()
@@ -44,39 +45,21 @@ angular.module 'translation.services.authorization', [
     return _deferred.promise
 
 
-
   register = (attributes) ->
 
-    _deferred = $q.defer()
-
-    Restangular.all('register').post(
+    return Restangular.all('register').post(
       email:      attributes.email
       password:   attributes.password
       firstName:  attributes.firstName
       lastName:   attributes.lastName
-    ).then (response) ->
+    )
 
-      _deferred.resolve response
+  logout = ->
 
-    , (error) ->
-      _deferred.reject error
-
-      $mdToast.show(
-        $mdToast.simple()
-        .content('Registration unsuccessful. Try again with different email.')
-        .position('bottom right')
-        .hideDelay(3000)
-      )
-
-
-    return _deferred.promise
-
-  logout = () ->
     $cookies.remove 'token'
     UserService.resetUser()
-
     delete $http.defaults.headers.common['authorization']
-
+    $state.go 'app.login'
 
     $mdToast.show(
       $mdToast.simple()
@@ -84,9 +67,6 @@ angular.module 'translation.services.authorization', [
       .position('bottom right')
       .hideDelay(3000)
     )
-
-
-    $state.go 'app.login'
 
 
 

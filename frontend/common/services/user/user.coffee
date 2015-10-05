@@ -88,7 +88,6 @@ angular.module('translation.services.user', [
         .hideDelay(3000)
       )
 
-
       $state.go 'app.dashboard'
 
 
@@ -103,6 +102,8 @@ angular.module('translation.services.user', [
 
       $timeout ->
         _notify.notify user
+
+      return
 
     user: ->
       return angular.copy user

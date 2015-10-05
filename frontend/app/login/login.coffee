@@ -45,7 +45,7 @@ angular.module('translation.pages.login', [
     if $scope.user.password != $scope.user.repeatPassword
       $mdToast.show(
         $mdToast.simple()
-        .content('Passwords don\'tt match. Try again')
+        .content('Passwords don\'t match. Try again')
         .position('bottom right')
         .hideDelay(3000)
       )
@@ -59,6 +59,13 @@ angular.module('translation.pages.login', [
 
         if angular.isDefined response.token
           UserService.loadDashboard response.token
+      , ->
+        $mdToast.show(
+          $mdToast.simple()
+          .content('Registration unsuccessful. Try again with different email.')
+          .position('bottom right')
+          .hideDelay(3000)
+        )
 
   $scope.sizes = [
     "small (12-inch)"
