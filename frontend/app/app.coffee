@@ -60,11 +60,22 @@ $mdThemingProvider) ->
 
   #$animateProvider.classNameFilter(/animate/)
 
-  $mdThemingProvider.theme('default')
+  ###
+  The is some issue with defining backgroud color
+  "Uncaught TypeError: Cannot read property '600' of undefined"
+  More info: https://github.com/angular/material/issues/2752
+  ###
+  $mdThemingProvider
+    .theme('default')
     .primaryPalette('blue-grey')
     .accentPalette('blue')
     .warnPalette('red')
-    # .backgroundPalette('gray')
+    # .backgroundPalette('gray',
+    #   'default': 'A200',
+    #   'hue-1': '300',
+    #   'hue-2': '600',
+    #   'hue-3': '900'
+    # )
 
 
 .run ($rootScope, UserService, AuthorizationService) ->
