@@ -74,25 +74,25 @@ angular.module('translation.pages.programmer-view', [
   #mocked data
   $scope.data = [
     {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
-      wuwu: "Strona główna"}
+    wuwu: "Strona główna"}
     {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
-      wuwu: "Logowanie"}
+    wuwu: "Logowanie"}
     {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
-      wuwu: "Strona główna"}
+    wuwu: "Strona główna"}
     {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
-      wuwu: "Logowanie"}
+    wuwu: "Logowanie"}
     {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
-      wuwu: "Strona główna"}
+    wuwu: "Strona główna"}
     {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
-      wuwu: "Logowanie"}
+    wuwu: "Logowanie"}
     {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
-      wuwu: "Strona główna"}
+    wuwu: "Strona główna"}
     {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
-      wuwu: "Logowanie"}
+    wuwu: "Logowanie"}
     {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
-      wuwu: "Strona główna"}
+    wuwu: "Strona główna"}
     {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
-      wuwu: "Logowanie"}
+    wuwu: "Logowanie"}
   ]
   return
 
