@@ -1,5 +1,6 @@
-config = require '../../common/permissionsConfig'
-
+config  = require '../../common/permissionsConfig'
+jwt     = require 'jwt-simple'
+moment  = require 'moment'
 
 ###
     Method to build a distinct bit mask for each role
@@ -53,6 +54,21 @@ buildAccessLevels = (accessLevelDeclarations, userRoles) ->
 userRoles     = buildRoles config.roles
 accessLevels  = buildAccessLevels config.accessLevels, userRoles
 
+createNewToken = (userId) ->
+
+  token = jwt.encode(userId, Math.random().toString(), 'HS512')
+
+  orm.Sessions.create
+    userId: userId
+    token: token
+    expiryAt: moment().add(7, 'days').format()
+
+
+  return token
+
+
+
 module.exports =
-  userRoles:    userRoles
-  accessLevels: accessLevels
+  userRoles:      userRoles
+  accessLevels:   accessLevels
+  createNewToken: createNewToken

@@ -5,22 +5,23 @@ module.exports = (sequelize, DataTypes) ->
   Users = sequelize.define('Users', {
     id:
       type:         DataTypes.INTEGER.UNSIGNED
-      allowNull:    false
-      primaryKey:   true
+      allowNull:      false
+      primaryKey:     true
+      autoIncrement:  true
     email:
       type:         DataTypes.STRING
       validate:
-        isEmail: true
-        notNull: true
+        isEmail:    true
       allowNull:    false
     password:
       type:         DataTypes.STRING
-      validate:
-        notNull: true
       allowNull:    false
     firstName:      DataTypes.STRING
     lastName:       DataTypes.STRING
-    role:           DataTypes.STRING
+    role:
+      type:         DataTypes.STRING
+      defaultValue: 'user'
+      allowNull:    false
   },
   {
     indexes: [
@@ -37,15 +38,17 @@ module.exports = (sequelize, DataTypes) ->
       role: ->
         return authorisation.userRoles[this.dataValues.role]
 
-      password: ->
-        return ''
+    setterMethods:
+      password: (password) ->
+        this.setDataValue 'password', bcrypt.hashSync(password, bcrypt.genSaltSync(10))
 
     classMethods:
       generateHash: (password) ->
         return bcrypt.hash(password, 10)
 
+    instanceMethods:
       validPassword: (password) ->
-        return bcrypt.compare(password, this.password)
+        return bcrypt.compareSync(password, this.password)
 
   })
 

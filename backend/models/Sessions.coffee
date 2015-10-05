@@ -1,8 +1,9 @@
 module.exports = (sequelize, DataTypes) ->
   Sessions = sequelize.define('Sessions', {
     id:
-      type:         DataTypes.INTEGER.UNSIGNED
-      primaryKey:   true
+      type:           DataTypes.INTEGER.UNSIGNED
+      primaryKey:     true
+      autoIncrement:  true
     userId:         DataTypes.INTEGER
     token:          DataTypes.STRING
     expiryAt:       DataTypes.DATE
