@@ -17,7 +17,7 @@ gulp.task 'lint-backend',  ->
 
 
 gulp.task 'nodemon', ->
-  runSequence 'lint-backend'
+  #runSequence 'lint-backend'
 
   nodemon
     verbose: false
@@ -28,21 +28,7 @@ gulp.task 'nodemon', ->
       "gulp_src/*"
     ]
     execMap:
-      js: "node backend/app.js"
-    ext: "js coffee"
+      js: "node ."
+    ext: "js coffee json"
 
 
-
-gulp.task 'db:renew', shell.task [
-  "cd backend &&
-   rm -f #{databaseConfig['development']['host']} &&
-   sequelize db:migrate --coffee --config #{_dbConfigFilePath}"
-]
-
-gulp.task 'db:seed', shell.task [
-  "cd backend &&
-   sequelize db:seed --coffee --config #{_dbConfigFilePath}"
-]
-
-gulp.task 'db:restore', ->
-  runSequence 'db:renew', 'db:seed'
