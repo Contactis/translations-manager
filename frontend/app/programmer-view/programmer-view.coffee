@@ -17,7 +17,8 @@ angular.module('translation.pages.programmer-view', [
     data:
       access: access.user
 
-.controller 'ProgrammerViewController', ($scope, $log, $cookies, $mdSidenav, $mdUtil) ->
+.controller 'ProgrammerViewController', ($scope, $log, $cookies, $mdSidenav, $mdUtil, $mdDialog) ->
+
 
   $scope.filter = {}
 
@@ -55,45 +56,51 @@ angular.module('translation.pages.programmer-view', [
 
     columnMode: 'force',
     columns: [{
-      name: "Groups",
-      prop: "name",
+      name: "Key",
+      prop: "key",
+    }, {
+      name: "Basic translations:",
+      prop: "translation"
     }, {
       name: "Context description",
-      prop: "gender"
-    }, {
-      name: "Default translation - English(en-GB)",
-      prop: "company",
-    }, {
-      name: "English (en-US)"
-      prop: "something"
-    }, {
-      name: "Polski (pl-PL)"
-      prop: "wuwu"
+      prop: "description",
     }]
   }
   #mocked data
   $scope.data = [
-    {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
-    wuwu: "Strona główna"}
-    {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
-    wuwu: "Logowanie"}
-    {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
-    wuwu: "Strona główna"}
-    {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
-    wuwu: "Logowanie"}
-    {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
-    wuwu: "Strona główna"}
-    {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
-    wuwu: "Logowanie"}
-    {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
-    wuwu: "Strona główna"}
-    {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
-    wuwu: "Logowanie"}
-    {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
-    wuwu: "Strona główna"}
-    {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
-    wuwu: "Logowanie"}
+    {key: "dashboard.page_title.home", translation: "Home", description: "Name should be short and essential"},
+    {key: "dashboard.page_title.login", translation: "Login", description: "Name should be short and essential"}
   ]
+
+
+
+
+  $scope.showAdvanced = (ev) ->
+    $mdDialog.show
+      controller: DialogController
+      templateUrl: "templates/dialog/translation.tpl.html"
+      parent: angular.element(document.body)
+      targetEvent: ev
+      clickOutsideToClose: true
+
+  DialogController = ($scope, $mdDialog) ->
+    $scope.currentKey = {}
+    $scope.currentKey.isPlural = true
+    $scope.closeDialog = () ->
+      $mdDialog.hide()
+
+    $scope.saveKey = () ->
+      console.log 'saving key!'
+
+    $scope.languagePlurals = [
+      { plural: "One"}
+      { plural: "Other"}
+
+    ]
+
+  DialogController.$inject = ["$scope", "$mdDialog"]
+
+
   return
 
 

@@ -28,9 +28,9 @@
       span(flex)
       div.width40p
         md-input-container.padding-bottom-0
-          md-select(ng-model="filter.translation")
+          md-select(ng-model="filter.translation" aria-label='default')
             md-option(ng-repeat="single in static.translation track by $index" value="{{single}}") {{single}}
       div.width40p
         md-input-container.padding-bottom-0
-          md-select(ng-model="filter.plural")
+          md-select(ng-model="filter.plural" aria-label='default')
             md-option(ng-repeat="single in static.plurals track by $index" value="{{single}}") {{single}}
