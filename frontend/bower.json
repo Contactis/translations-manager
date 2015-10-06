@@ -10,15 +10,18 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "1.4.5",
-    "angular-animate": "~1.4.5",
+    "angular-animate": "~1.4.6",
     "angular-cookies": "~1.4.6",
     "angular-data-table": "~0.3.18",
     "angular-lodash": "~0.1.2",
     "angular-material": "~0.11.0",
-    "angular-translate": "~2.7.2",
+    "angular-translate": "~2.8.1",
     "angular-ui-router": "~0.2.15",
-    "restangular": "~1.5.1"
+    "restangular": "~1.5.1",
+    "angular-dynamic-locale": "~0.1.27",
+    "angular-i18n": "~1.4.7",
+    "angular-translate-interpolation-messageformat": "~2.8.1",
+    "messageformat": "~0.1.8"
   },
   "resolutions": {
     "angular": "1.4.6"

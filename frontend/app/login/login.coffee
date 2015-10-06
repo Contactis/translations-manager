@@ -1,5 +1,6 @@
 angular.module('translation.pages.login', [
   'ui.router'
+  'pascalprecht.translate'
   'ngCookies'
   'restangular'
   'ngMaterial'
