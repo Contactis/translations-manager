@@ -6,6 +6,7 @@ translationApp = angular.module('translation', [
   'ngAnimate'
   'ngAria'
   'ngMaterial'
+  'ngMessages'
 
   # Including templates
   'templates-module'
