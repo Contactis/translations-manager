@@ -4,6 +4,7 @@ angular.module('translation.pages.programmer-view', [
   'ngMaterial'
   'translation.providers.userPermissionsSettings'
   'data-table'
+  'ngMessages'
 ])
 
 .config ($stateProvider, UserPermissionsSettingsProvider) ->
@@ -93,9 +94,8 @@ angular.module('translation.pages.programmer-view', [
       console.log 'saving key!'
 
     $scope.languagePlurals = [
-      { plural: "One"}
-      { plural: "Other"}
-
+      { plural: "One",   example: ": 1"}
+      { plural: "Other", example: ": 0, 2-999, 12..."}
     ]
 
   DialogController.$inject = ["$scope", "$mdDialog"]
