@@ -1,10 +1,13 @@
-tr-top-bar(filter='filter')
+tr-top-bar(filters='filters' context-menu="contextMenu")
 
-div
-  dtable.translationTables(options="options" rows="data" class="material")
+//- pre
+//-   | filters: {{ filters | json }}
+//-   | contextMenu: {{ contextMenu | json }}
 
-span(flex)
-div.margin-30(layout='row')
+div(flex layout="column" layout-fill)
+  dtable.translationTables(options="options" rows="tableData" class="material" selected="selected" on-row-click="onRowClick(row)" on-select="onSelect(rows)")
+
+div(layout='row')
   span(flex)
-  md-button.md-fab.md-primary(ng-click="showAdvanced($event)" )
+  md-button.md-fab.md-primary.md-fab-bottom-right(aria-label="Profile" ng-click="showAdvanced($event)" )
     md-icon.material-icons add

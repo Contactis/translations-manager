@@ -2,10 +2,11 @@ angular.module 'translation.services.authorization', [
   'restangular'
   'ui.router'
   'ngMaterial'
+  'ngCookies'
   'translation.services.user'
 ]
 
-.service 'AuthorizationService', ($q, $state, $mdToast, Restangular, UserService) ->
+.service 'AuthorizationService', ($q, $state, $mdToast, $cookies, $http, Restangular, UserService) ->
 
   login = (email, password) ->
 
@@ -16,31 +17,56 @@ angular.module 'translation.services.authorization', [
       password:       password
     .then (response) ->
 
-      _deferred.resolve response
+      if angular.isDefined response.token
+        _deferred.resolve response
+        UserService.loadDashboard response.token
 
-    , (err) ->
-      _deferred.reject err
+      else
+        _deferred.reject 'no token'
 
+        $mdToast.show(
+          $mdToast.simple()
+          .content('Login unsuccessful. Try again.')
+          .position('bottom right')
+          .hideDelay(3000)
+        )
+
+    , (error) ->
+
+      _deferred.reject error
+
+      $mdToast.show(
+        $mdToast.simple()
+        .content('Login unsuccessful. Try again.')
+        .position('bottom right')
+        .hideDelay(3000)
+      )
 
     return _deferred.promise
 
 
+  register = (attributes) ->
 
-  register = (email, password, repeatPassword, username) ->
+    return Restangular.all('register').post(
+      email:      attributes.email
+      password:   attributes.password
+      firstName:  attributes.firstName
+      lastName:   attributes.lastName
+    )
 
-    _deferred = $q.defer()
+  logout = ->
 
-    Restangular.all('register').post(
-      email:          email
-      password:       password
-      repeatPassword: repeatPassword
-      username:       username
-    ).then (response) ->
+    $cookies.remove 'token'
+    UserService.resetUser()
+    delete $http.defaults.headers.common['authorization']
+    $state.go 'app.login'
 
-      _deferred.resolve response
-
-
-    return _deferred.promise
+    $mdToast.show(
+      $mdToast.simple()
+      .content('You had been logged out.')
+      .position('bottom right')
+      .hideDelay(3000)
+    )
 
 
 
@@ -87,6 +113,7 @@ angular.module 'translation.services.authorization', [
 
   api =
     login:        login
+    logout:       logout
     register:     register
     accessCheck:  _pageAccessCheck
 

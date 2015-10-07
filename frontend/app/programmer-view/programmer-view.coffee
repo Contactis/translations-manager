@@ -2,9 +2,10 @@ angular.module('translation.pages.programmer-view', [
   'ui.router'
   'ngCookies'
   'ngMaterial'
-  'translation.providers.userPermissionsSettings'
   'data-table'
   'ngMessages'
+  'restangular'
+  'translation.providers.userPermissionsSettings'
 ])
 
 .config ($stateProvider, UserPermissionsSettingsProvider) ->
@@ -16,26 +17,38 @@ angular.module('translation.pages.programmer-view', [
     controller:     'ProgrammerViewController'
     templateUrl:    'programmer-view/programmer-view.tpl.html'
     data:
-      access: access.user
+      access:       access.user
 
-.controller 'ProgrammerViewController', ($scope, $log, $cookies, $mdSidenav, $mdUtil, $mdDialog) ->
+.controller 'ProgrammerViewController', ($scope, $log, $cookies, $timeout, $mdSidenav,
+$mdUtil, Restangular, $mdDialog) ->
+
+  $scope.filters     = {}
+  $scope.contextMenu = {}
+  $scope.tableData  = []
+
+  $timeout () ->
+    $scope.contextMenu.name   = "Programmer"
+    $scope.contextMenu.links  = [
+      {
+        name: "Export selected to..."
+        method: "exportSelectedTo()"
+      }
+    ]
+    return
 
 
-  $scope.filter = {}
+  Restangular.one('translations-keys').getList().then (success)->
+    $scope.tableData = success.plain()
+    console.log success
+  , (error) ->
+    console.log "Problem with loading translation keys"
 
-  # buildToggler = (navID) ->
-  #   debounceFn = $mdUtil.debounce( () ->
-  #     $mdSidenav(navID)
-  #       .toggle()
-  #       .then () ->
-  #         $log.debug("toggle " + navID + " is done")
+  # @private
+  _exportSelectedTo = () ->
+    console.log "exportSelectedTo fired"
 
-  #   , 200)
-  #   return debounceFn
 
-  # $scope.toogleLeft = () ->
-  #   $mdSidenav()
-
+  # @public
   $scope.toogleSidenav = (componentId) ->
     $mdSidenav(componentId)
       .toggle()
@@ -49,29 +62,37 @@ angular.module('translation.pages.programmer-view', [
       $log.debug("close LEFT is done")
 
 
-  $scope.options = {
-    rowHeight: 50,
-    footerHeight: false,
-    headerHeight: 40,
-    scrollbarV: false,
-
-    columnMode: 'force',
-    columns: [{
-      name: "Key",
-      prop: "key",
-    }, {
-      name: "Basic translations:",
-      prop: "translation"
-    }, {
-      name: "Context description",
-      prop: "description",
-    }]
-  }
-  #mocked data
-  $scope.data = [
-    {key: "dashboard.page_title.home", translation: "Home", description: "Name should be short and essential"},
-    {key: "dashboard.page_title.login", translation: "Login", description: "Name should be short and essential"}
-  ]
+  $scope.options =
+    rowHeight:          50
+    headerHeight:       40
+    footerHeight:       false
+    scrollbarV:         true
+    checkboxSelection:  true
+    selectable:         true
+    multiSelect:        true
+    emptyMessage:       'Nothing to show...',
+    columnMode:         'force'
+    columns: [
+# {
+#   name: "Database ID"
+#   prop: "id"
+#   width: 10
+# }
+      {
+        name: "Index key name"
+        prop: "keyString"
+        isCheckboxColumn: true,
+        headerCheckbox: true
+      }
+      {
+        name: "Default translation - English(en-US)"
+        prop: "translation"
+      }
+      {
+        name: "Context description"
+        prop: "gender"
+      }
+    ]
 
 
 
@@ -100,7 +121,4 @@ angular.module('translation.pages.programmer-view', [
     ]
   DialogController.$inject = ["$scope", "$mdDialog"]
 
-
   return
-
-

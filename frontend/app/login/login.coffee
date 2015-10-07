@@ -1,7 +1,9 @@
 angular.module('translation.pages.login', [
   'ui.router'
+  'pascalprecht.translate'
   'ngCookies'
   'restangular'
+  'ngMaterial'
   'translation.services.user'
   'translation.services.authorization'
   'translation.providers.userPermissionsSettings'
@@ -19,13 +21,15 @@ angular.module('translation.pages.login', [
       access:       access.anon
 
 
-.controller 'LoginController', ($scope, $cookies, $state, $http, Restangular, AuthorizationService, UserService) ->
+.controller 'LoginController', ($scope, $state, $http, $mdToast,
+Restangular, AuthorizationService, UserService) ->
 
   $scope.user =
-    email: ''
-    password: ''
+    email:          ''
+    password:       ''
     repeatPassword: ''
-    username: ''
+    firstName:      ''
+    lastName:       ''
 
 
   $scope.showRegistration = false
@@ -35,26 +39,34 @@ angular.module('translation.pages.login', [
 
 
   $scope.login = ->
-    AuthorizationService.login $scope.user.email, $scope.user.password
-    .then (token) ->
-      if angular.isDefined token.token
-        $cookies.put 'token', token.token
-        $http.defaults.headers.common['authorization'] = token.token
-
-        Restangular.one('profile').get()
-        .then (response) ->
-          response = response.plain()
-          response['loggedIn'] = true
-          UserService.sync response
-          $state.go 'app.dashboard'
-
-    , (error) ->
-      console.log 'error occured', error
+    AuthorizationService.login($scope.user.email, $scope.user.password)
 
 
   $scope.register = ->
-    AuthorizationService.register($scope.user.email, $scope.user.password, $scope.user.repeatPassword,
-    $scope.user.username)
+    if $scope.user.password != $scope.user.repeatPassword
+      $mdToast.show(
+        $mdToast.simple()
+        .content('Passwords don\'t match. Try again')
+        .position('bottom right')
+        .hideDelay(3000)
+      )
+    else
+      AuthorizationService.register
+        email:      $scope.user.email
+        password:   $scope.user.password
+        firstName:  $scope.user.firstName
+        lastName:   $scope.user.lastName
+      .then (response) ->
+
+        if angular.isDefined response.token
+          UserService.loadDashboard response.token
+      , ->
+        $mdToast.show(
+          $mdToast.simple()
+          .content('Registration unsuccessful. Try again with different email.')
+          .position('bottom right')
+          .hideDelay(3000)
+        )
 
   $scope.sizes = [
     "small (12-inch)"

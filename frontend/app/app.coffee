@@ -2,6 +2,7 @@ translationApp = angular.module('translation', [
   # Including external libraries
   'ui.router'
   'pascalprecht.translate'
+  'tmh.dynamicLocale'
   'restangular'
   'ngAnimate'
   'ngAria'
@@ -25,6 +26,7 @@ translationApp = angular.module('translation', [
   'translation.services.user'
   'translation.services.authorization'
   'translation.services.filtersState'
+  'translation.services.customTranslationHandler'
 
   # Including controllers
   'translation.controllers.sidenav'
@@ -34,8 +36,8 @@ translationApp = angular.module('translation', [
 ])
 
 
-.config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider, RestangularProvider,
-$mdThemingProvider) ->
+.config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider, $mdThemingProvider,
+$translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
 
   $stateProvider
   .state 'app',
@@ -77,6 +79,28 @@ $mdThemingProvider) ->
     #   'hue-2': '600',
     #   'hue-3': '900'
     # )
+
+  # ### Translations (angular translate)
+  $translateProvider.addInterpolation('$translateMessageFormatInterpolation')
+
+  # Warnings, regarding forgotten IDs in translations
+  $translateProvider.useMissingTranslationHandler('CustomTranslationHandlerService')
+
+  # Set a fallback language in case there find no other
+  $translateProvider.fallbackLanguage('en-us')
+
+  # **Set default language**
+  # This method tries to resolve language by user locale
+  $translateProvider.registerAvailableLanguageKeys([
+    'en-us'
+  ], {
+    'en_US': 'en-us'
+    'en-en': 'en-us'
+    'en':    'en-us'
+  }).determinePreferredLanguage()
+
+  # # configure loading angular locales
+  # tmhDynamicLocaleProvider.localeLocationPattern('assets/angular-i18n/angular-locale_{{locale}}.js')
 
 
 .run ($rootScope, UserService, AuthorizationService) ->

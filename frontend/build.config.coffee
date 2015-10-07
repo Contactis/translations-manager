@@ -45,11 +45,19 @@ module.exports =
       'frontend/vendor/angular-aria/angular-aria.min.js'
       'frontend/vendor/angular-lodash/angular-lodash.js'
       'frontend/vendor/angular-material/angular-material.js'
-      'frontend/vendor/angular-translate/angular-translate.js'
       'frontend/vendor/angular-ui-router/release/angular-ui-router.js'
+      'frontend/vendor/angular-translate/angular-translate.js'
       'frontend/vendor/restangular/src/restangular.js'
       'frontend/vendor/angular-data-table/release/dataTable.helpers.min.js'
       'frontend/vendor/angular-messages/angular-messages.js'
+
+      'frontend/vendor/messageformat/messageformat.js'
+      'frontend/vendor/messageformat/locale/en.js'
+      'frontend/vendor/messageformat/locale/pl.js'
+      'frontend/vendor/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js'
+      'frontend/vendor/angular-dynamic-locale/dist/tmhDynamicLocale.js'
+
+
 
       'frontend/vendors_offline/common.js'
       'frontend/vendors_offline/permissionConfig.js'

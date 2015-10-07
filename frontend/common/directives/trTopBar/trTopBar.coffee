@@ -3,22 +3,26 @@ angular.module('translator.directive.trTopBar', [
 ])
 
 .directive 'trTopBar', (filtersStateService) ->
-  return {
   restrict: 'E'
   replace: true
   templateUrl: 'directives/trTopBar/trTopBar.tpl.html'
   scope:
-    mainSetting: '&'
-    translationFilter: '='
-    filter: '=filter'
+    mainSetting:        '&'
+    translationFilter:  '='
+    contextMenu:        '='
+    filters:            '='
 
   link: (scope, element, attrs) ->
-
     scope.static = filtersStateService.topBarDefaultFilters
 
-    scope.filter.translation = scope.static.translation[0]
-    scope.filter.plural = scope.static.plurals[0]
+    scope.contextMenu.name    = "<menu name not set>"
+    scope.contextMenu.links   = []
 
-  }
+    scope.filters.translation = scope.static.translation[0]
+    scope.filters.plural      = scope.static.plurals[0]
+    scope.filters.inputSearch = ''
 
+    console.log "scope.contextMenu", scope.contextMenu
+    console.log "scope.filters", scope.filters
 
+    return
