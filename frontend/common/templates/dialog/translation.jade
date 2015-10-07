@@ -1,43 +1,45 @@
 md-dialog(flex="50")
-    md-content(layout-padding ng-cloak)
+    md-content(ng-cloak)
       form(name="keyForm")
-        h2 Add new key
-        div(layout layout-sm="column")
-          span.padding-top-5(flex="25") Key index type:
-          md-radio-group(ng-model="currentKey.isPlural")
-            md-radio-button(data-ng-value="false") String
-            md-radio-button(data-ng-value="true") Plural
-        div(layout layout-sm="column")
-          md-input-container(flex)
-            label Namespace
-            input(data-ng-model="currentKey.namespace" required name="namespace")
-            div(data-ng-if="keyForm.namespace.$touched" ng-messages="keyForm.namespace.$error")
-              div(ng-message="required") This is required.
-          md-input-container(flex)
-            label Key Index
-            input(data-ng-model="currentKey.key" name="key" required)
-            div(data-ng-if="keyForm.key.$touched" ng-messages="keyForm.key.$error")
-              div(ng-message="required") This is required.
-        div(layout layout-sm="column")
-          p(flex="25") Preview:
-          p {{ currentKey.namespace + currentKey.key }}
-        md-input-container(data-ng-if="!currentKey.isPlural")
-          label Translation
-          input(data-ng-model="currentKey.translation")
-        div(data-ng-if="currentKey.isPlural" style="background-color: #F7F7F7;")
-          p Plural forms
-          md-input-container(data-ng-repeat="singlePlural in languagePlurals")
-            label {{ singlePlural.plural + singlePlural.example }}
-            input(data-ng-model="singlePlural.key" required name="{{singlePlural.plural}}")
-            div(data-ng-if="keyForm[singlePlural.plural].$touched" data-ng-messages="keyForm[singlePlural.plural].$error")
-              div(ng-message="required") This is required.
-        md-input-container
-          label Context description
-          textarea(maxlength="50" data-ng-model="currentKey.description" columns="1" md-maxlength="50" name="description")
+        md-toolbar
+          h2.padding-left-8 Add new key
+        div(layout-padding)
+          div(layout layout-sm="column")
+            span.padding-top-5(flex="20") Key index type:
+            md-radio-group(ng-model="currentKey.isPlural")
+              md-radio-button(data-ng-value="false") String
+              md-radio-button(data-ng-value="true") Plural
+          div(layout layout-sm="column")
+            md-input-container(flex)
+              label Namespace
+              input(data-ng-model="currentKey.namespace" required name="namespace")
+              div(data-ng-if="keyForm.namespace.$touched" ng-messages="keyForm.namespace.$error")
+                div(ng-message="required") This is required.
+            md-input-container(flex)
+              label Key Index
+              input(data-ng-model="currentKey.key" name="key" required)
+              div(data-ng-if="keyForm.key.$touched" ng-messages="keyForm.key.$error")
+                div(ng-message="required") This is required.
+          div(layout layout-sm="column")
+            p(flex="20") Preview:
+            p {{ currentKey.namespace + currentKey.key }}
+          md-input-container(data-ng-if="!currentKey.isPlural")
+            label Translation
+            input(data-ng-model="currentKey.translation")
+          div(data-ng-if="currentKey.isPlural" style="background-color: #F7F7F7;")
+            p Plural forms
+            md-input-container(data-ng-repeat="singlePlural in languagePlurals")
+              label {{ singlePlural.plural + singlePlural.example }}
+              input(data-ng-model="singlePlural.key" required name="{{singlePlural.plural}}")
+              div(data-ng-if="keyForm[singlePlural.plural].$touched" data-ng-messages="keyForm[singlePlural.plural].$error")
+                div(ng-message="required") This is required.
+          md-input-container
+            label Context description
+            textarea(maxlength="50" data-ng-model="currentKey.description" columns="1" md-maxlength="50" name="description")
 
-        div(layout layout-sm="column")
-          span(flex)
-          md-button(data-ng-click="closeDialog()") Cancel
-          md-button(data-ng-click="saveKey()") Add
+          div(layout layout-sm="column")
+            span(flex)
+            md-button(data-ng-click="closeDialog()") Cancel
+            md-button(data-ng-click="saveKey()") Add
 
 

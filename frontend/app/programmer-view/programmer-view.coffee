@@ -93,11 +93,11 @@ angular.module('translation.pages.programmer-view', [
     $scope.saveKey = () ->
       console.log 'saving key!'
 
+    #mocked
     $scope.languagePlurals = [
       { plural: "One",   example: ": 1"}
       { plural: "Other", example: ": 0, 2-999, 12..."}
     ]
-
   DialogController.$inject = ["$scope", "$mdDialog"]
 
 
