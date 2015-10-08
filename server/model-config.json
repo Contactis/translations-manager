@@ -31,5 +31,41 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "Language": {
+    "dataSource": "sqlite",
+    "public": true
+  },
+  "ProjectGroup": {
+    "dataSource": "sqlite",
+    "public": true
+  },
+  "LanguageGroup": {
+    "dataSource": "sqlite",
+    "public": true
+  },
+  "Project": {
+    "dataSource": "sqlite",
+    "public": true
+  },
+  "ProjectLanguage": {
+    "dataSource": "sqlite",
+    "public": true
+  },
+  "ProjectUser": {
+    "dataSource": "sqlite",
+    "public": true
+  },
+  "Translation": {
+    "dataSource": "sqlite",
+    "public": true
+  },
+  "TranslationKey": {
+    "dataSource": "sqlite",
+    "public": true
+  },
+  "TranslationStatus": {
+    "dataSource": "sqlite",
+    "public": true
   }
 }

@@ -1,0 +1,29 @@
+{
+  "name": "Language",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "nameNative": {
+      "type": "string",
+      "required": true
+    },
+    "nameEnglish": {
+      "type": "string",
+      "required": true
+    },
+    "ietfCode": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

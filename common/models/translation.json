@@ -1,0 +1,40 @@
+{
+  "name": "Translation",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "translatedPhrase": {
+      "type": "string",
+      "required": true
+    },
+    "pluralForm": {
+      "type": "number"
+    },
+    "description": {
+      "type": "string"
+    },
+    "translationsKeyId": {
+      "type": "number",
+      "required": true
+    },
+    "languageId": {
+      "type": "number",
+      "required": true
+    },
+    "status": {
+      "type": "number",
+      "required": true
+    },
+    "lastModifiedBy": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

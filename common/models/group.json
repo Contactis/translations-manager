@@ -1,0 +1,29 @@
+{
+  "name": "ProjectGroup",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "parentId": {
+      "type": "number"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "namespace": {
+      "type": "string",
+      "required": true
+    },
+    "projectId": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

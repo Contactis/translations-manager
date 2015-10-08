@@ -2,5 +2,11 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "sqlite": {
+    "name": "sqlite",
+    "connector": "loopback-connector-sqlite",
+    "file_name": "./translation_manager_db.sqlite",
+    "debug": false
   }
 }
