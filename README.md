@@ -74,10 +74,6 @@ structure, frontend and backend side and other elaboration stuff are gathered in
 part called [**development**][wiki-development] into our Wiki pages.  To see
 more visit our [wiki pages][wiki].
 
-### Git
-When commiting to GIT use [FRONT] or [BACK] prefixes for all commits to
-distinguish between two environments.
-
 
 ## Licence
 ```
