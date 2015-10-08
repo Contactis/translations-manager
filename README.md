@@ -1,12 +1,10 @@
 # Translation Manager [![Built with Gulp][build-with-gulp-png]][gulpjs-page]
 > by iTelo
 
-Project had been created for iTelo's project [Profitelo](http:///profitelo.pl)
-
-Main goal of this product is to provide all neccessary features to store,
+Main goal of this project is to provide all neccessary features to store,
 maintain, manage and deploy translations for your projects. It should help you
-and your teams (dev, translators, PR and management) to cooperate with tons of
-translations.
+and your teams (developers, translators, PR and management) to cooperate with
+each other and tons of translations.
 
 
 ## Table of contents
@@ -28,7 +26,8 @@ machine, and these programs are:
 - [node.js][node.js]
 
 ### Setup
-Latest node.js is recommended for development (4.0.0 or higher). 
+> Latest node.js is recommended for development (4.0.0 or higher).
+
 Simply update using NPM ([how to set up node.js](https://docs.npmjs.com/getting-started/installing-node))
 
 ```
@@ -37,9 +36,9 @@ sudo npm install -g n
 sudo n stable
 ```
 
-or using `nvm` (node version manager)
+or using [`nvm`][nvm-github] (recommended)
 ```
-wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.26.1/install.sh | bash
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.28.0/install.sh | bash
 nvm install 4
 nvm use 4
 ```
@@ -49,32 +48,35 @@ Then clone the repo and install all requirements
 
 ```
 sudo apt-get install build-essential
+sudo npm install -g gulp bower sequelize-cli  # for global install may need sudo
+
 git clone git@bitbucket.org:egel/translations-manager.git
 cd translations-manager
-sudo npm install -g gulp bower sequelize-cli    # for global install need sudo 
-npm install     # should install without sudo
+npm install   # should install without sudo
 cd frontend && bower install
 ```
 
-then run environment
+then build and run environment
 
 ```
-gulp db:restore
-gulp watch
+gulp db:restore  # build and seed database
+gulp watch       # build and run the project
 ```
 
-Open browser on: http://127.0.0.1:4000/
+Open browser on: http://127.0.0.1:3000/
 
-Enjoy :)
+Enjoy the awesome :)
 
 
 ## Development
 All official things that is combined with development process like: app
-structure, frontend and backend side and other elaboration stuff are gathered in part called [**development**][wiki-development] into our Wiki pages. 
-To see more visit our [wiki pages][wiki].
+structure, frontend and backend side and other elaboration stuff are gathered in
+part called [**development**][wiki-development] into our Wiki pages.  To see
+more visit our [wiki pages][wiki].
 
 ### Git
-When commiting to GIT use [FRONT] or [BACK] prefixes for all commits to distinguish between two environments.  
+When commiting to GIT use [FRONT] or [BACK] prefixes for all commits to
+distinguish between two environments.
 
 
 ## Licence
@@ -99,7 +101,7 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
-
+[nvm-github]: https://github.com/creationix/nvm
 [node.js]: https://nodejs.org
 [wiki]: https://bitbucket.org/egel/translations-manager/wiki/browse/
 [wiki-development]: https://bitbucket.org/egel/translations-manager/wiki/browse/
