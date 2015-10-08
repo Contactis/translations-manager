@@ -36,7 +36,7 @@ sudo npm install -g n
 sudo n stable
 ```
 
-or using [`nvm`][nvm-github] (recommended)
+or using [`nvm`][] (recommended)
 ```
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.28.0/install.sh | bash
 nvm install 4
@@ -103,7 +103,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 [nvm-github]: https://github.com/creationix/nvm
 [node.js]: https://nodejs.org
-[wiki]: https://bitbucket.org/egel/translations-manager/wiki/browse/
-[wiki-development]: https://bitbucket.org/egel/translations-manager/wiki/browse/
+[wiki]: https://github.com/Contactis/translations-manager/wiki
+[wiki-development]: https://github.com/Contactis/translations-manager/wiki/Development
 [gulpjs-page]: https://www.gulpjs.com
 [build-with-gulp-png]: https://raw.githubusercontent.com/gulpjs/gulp/e2dd2b6c66409f59082c24585c6989244793d132/built-with-gulp.png
