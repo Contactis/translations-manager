@@ -14,22 +14,22 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "sqlite"
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "sqlite",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "sqlite",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "sqlite",
     "public": false
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "sqlite",
     "public": false
   },
   "Language": {

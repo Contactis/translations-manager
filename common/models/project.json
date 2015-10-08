@@ -19,7 +19,25 @@
     }
   },
   "validations": [],
-  "relations": {},
-  "acls": [],
+  "relations": {
+    "projectLanguages": {
+      "type": "hasMany",
+      "model": "ProjectLanguage",
+      "foreignKey": ""
+    },
+    "projectGroups": {
+      "type": "hasMany",
+      "model": "ProjectGroup",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": {}
 }
