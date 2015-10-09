@@ -36,7 +36,7 @@ sudo npm install -g n
 sudo n stable
 ```
 
-or using [`nvm`][] (recommended)
+or using [`nvm`][nvm-github] (recommended)
 ```
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.28.0/install.sh | bash
 nvm install 4
