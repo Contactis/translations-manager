@@ -36,7 +36,11 @@ angular.module('translation.services.user', [
     $cookies.put 'account', JSON.stringify credentials
 
   getCredentialsCookie = ->
-    return JSON.parse $cookies.get 'account'
+    _credentials = $cookies.get 'account'
+    if _credentials
+      return JSON.parse _credentials
+    else
+      return false
 
   getSession = ->
 

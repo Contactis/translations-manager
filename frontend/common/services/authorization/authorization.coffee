@@ -12,10 +12,13 @@ angular.module 'translation.services.authorization', [
   login = (email, password) ->
 
     _deferred = $q.defer()
-    Account.login
-      email:          email
-      password:       password
-    .then (response) ->
+
+    _credentials =
+        email:          email
+        password:       password
+
+    Account.login _credentials,
+    (response) ->
 
       _deferred.resolve response
       UserService.loadDashboard response
