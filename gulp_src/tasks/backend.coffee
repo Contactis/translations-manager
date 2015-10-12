@@ -31,4 +31,13 @@ gulp.task 'nodemon', ->
       js: "node ."
     ext: "js coffee json"
 
+gulp.task 'db:renew', shell.task [
+  "rm -f translation_manager_db.sqlite && node ./ --kill --silent"
+]
 
+gulp.task 'db:seed', shell.task [
+  "node ./ --seeds --silent"
+]
+
+gulp.task 'db:restore', ->
+  runSequence 'db:renew', 'db:seed'

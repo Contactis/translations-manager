@@ -32,7 +32,11 @@ angular.module('translation.services.user', [
 
   user = angular.copy defaultUserObject
 
+  setCredentialsCookie = (credentials) ->
+    $cookies.put 'account', JSON.stringify credentials
 
+  getCredentialsCookie = ->
+    return JSON.parse $cookies.get 'account'
 
   getSession = ->
 
@@ -40,6 +44,8 @@ angular.module('translation.services.user', [
       return _deferred.promise
 
     _deferred = $q.defer()
+
+    credentials = getCredentialsCookie()
 
     token = $cookies.get 'token'
 
@@ -70,32 +76,34 @@ angular.module('translation.services.user', [
     return user
 
 
-  loadDashboard = (token) ->
-
-    $cookies.put 'token', token
-    $http.defaults.headers.common['authorization'] = token
-
-    Restangular.one('profile').get()
-    .then (response) ->
-      response = response.plain()
-      response['loggedIn'] = true
-      syncUserObject response
-
-      $mdToast.show(
-        $mdToast.simple()
-        .content("Welcome #{response.fullName}!")
-        .position('bottom right')
-        .hideDelay(3000)
-      )
-
-      $state.go 'app.dashboard'
+  loadDashboard = (account) ->
+    console.log account
+    setCredentialsCookie account
+#    $http.defaults.headers.common['authorization'] = token
+#
+#    Restangular.one('profile').get()
+#    .then (response) ->
+#      response = response.plain()
+#      response['loggedIn'] = true
+#      syncUserObject response
+#
+#      $mdToast.show(
+#        $mdToast.simple()
+#        .content("Welcome #{response.fullName}!")
+#        .position('bottom right')
+#        .hideDelay(3000)
+#      )
+#
+#      $state.go 'app.dashboard'
 
 
   api =
-    getSession:     getSession
-    sync:           syncUserObject
-    loadDashboard:  loadDashboard
-    updated:        _notify.promise
+    getSession:           getSession
+    sync:                 syncUserObject
+    loadDashboard:        loadDashboard
+    updated:              _notify.promise
+    setCredentialsCookie: setCredentialsCookie
+    getCredentialsCookie: getCredentialsCookie
 
     resetUser: ->
       user = angular.copy defaultUserObject

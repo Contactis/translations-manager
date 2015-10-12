@@ -1,7 +1,7 @@
 {
   "name": "ProjectLanguage",
   "base": "PersistedModel",
-  "idInjection": true,
+  "idInjection": false,
   "options": {
     "validateUpsert": true
   },

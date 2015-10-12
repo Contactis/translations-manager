@@ -14,7 +14,7 @@ cback         = require 'gulp-callback'
 consoleWarn = deepcopy console.warn
 
 console.warn = (args) ->
-  console.log args
+
   process.exit()
 
 jadeCore = ->

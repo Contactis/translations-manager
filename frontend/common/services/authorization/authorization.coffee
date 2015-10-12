@@ -1,35 +1,24 @@
 angular.module 'translation.services.authorization', [
-  'restangular'
   'ui.router'
   'ngMaterial'
   'ngCookies'
   'translation.services.user'
+  'lbServices'
 ]
 
-.service 'AuthorizationService', ($q, $state, $mdToast, $cookies, $http, Restangular, UserService) ->
+.service 'AuthorizationService', ($q, $state, $mdToast, $cookies, $http, UserService, Account) ->
+
 
   login = (email, password) ->
 
     _deferred = $q.defer()
-
-    Restangular.all('login').post
+    Account.login
       email:          email
       password:       password
     .then (response) ->
 
-      if angular.isDefined response.token
-        _deferred.resolve response
-        UserService.loadDashboard response.token
-
-      else
-        _deferred.reject 'no token'
-
-        $mdToast.show(
-          $mdToast.simple()
-          .content('Login unsuccessful. Try again.')
-          .position('bottom right')
-          .hideDelay(3000)
-        )
+      _deferred.resolve response
+      UserService.loadDashboard response
 
     , (error) ->
 

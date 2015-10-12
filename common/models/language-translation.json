@@ -1,17 +1,16 @@
 {
-  "name": "ProjectUser",
-  "plural": "projectId",
+  "name": "LanguageTranslation",
   "base": "PersistedModel",
   "idInjection": false,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "projectId": {
+    "languageId": {
       "type": "number",
       "required": true
     },
-    "userId": {
+    "pluralForm": {
       "type": "number",
       "required": true
     }

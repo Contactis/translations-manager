@@ -23,7 +23,8 @@
     "angular-translate-interpolation-messageformat": "~2.8.1",
     "angular-ui-router": "~0.2.15",
     "messageformat": "~0.1.8",
-    "restangular": "~1.5.1"
+    "restangular": "~1.5.1",
+    "angular-resource": "~1.4.7"
   },
   "resolutions": {
     "angular": "1.4.6"
