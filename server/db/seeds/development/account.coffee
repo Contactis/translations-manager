@@ -1,5 +1,7 @@
 moment = require 'moment'
 
+# Info: Account extends User
+
 users = [
   {
     email:        'admin@admin.com'

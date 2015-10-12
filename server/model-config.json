@@ -41,10 +41,6 @@
     "dataSource": "sqlite",
     "public": true
   },
-  "LanguageGroup": {
-    "dataSource": "sqlite",
-    "public": true
-  },
   "Project": {
     "dataSource": "sqlite",
     "public": true
