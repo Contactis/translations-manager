@@ -65,6 +65,7 @@ module.exports =
       ]
 
     css: [
+      'frontend/vendor/bootstrap/dist/css/bootstrap.css'
       'frontend/vendor/angular-material/angular-material.css'
       'frontend/vendor/angular-data-table/release/dataTable.css'
       'frontend/vendor/angular-data-table/release/material.css'
