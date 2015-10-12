@@ -24,7 +24,7 @@
       "type": "number",
       "required": true
     },
-    "status": {
+    "statusId": {
       "type": "number",
       "required": true
     },
