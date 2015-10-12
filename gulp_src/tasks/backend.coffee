@@ -41,6 +41,7 @@ gulp.task 'db:renew', shell.task [
   "rm -f translation_manager_db.sqlite && node ./ --kill --silent"
 ]
 
+
 gulp.task 'db:seed', shell.task [
   "node ./ --seeds --silent"
 ]
