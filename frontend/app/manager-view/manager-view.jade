@@ -1,9 +1,9 @@
-tr-top-bar(filter='filter')
+tr-top-bar(filters='filters' context-menu="contextMenu")
 
 table.table.table-striped(st-table="rowCollection")
   thead
   tr
-    th Group
+    th(st-sort="keyString") Group
     th Context description
     th English (en-GB)
     th English (en-US)
@@ -11,5 +11,7 @@ table.table.table-striped(st-table="rowCollection")
   tbody
   tr(data-ng-repeat="singleRow in tableData")
     td {{singleRow.keyString}}
-    td {{singleRow.
-    td {{singleRow.
+    td mocked1
+    td mocked2
+    td mocked3
+    td mocked4
