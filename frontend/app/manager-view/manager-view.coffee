@@ -1,7 +1,9 @@
 angular.module('translation.pages.manager-view', [
   'ui.router'
   'data-table'
+  'smart-table'
   'translation.providers.userPermissionsSettings'
+  'restangular'
 ])
 
 
@@ -17,62 +19,16 @@ angular.module('translation.pages.manager-view', [
       access: access.user
 
 
-.controller 'ManagerViewController', ($scope) ->
+.controller 'ManagerViewController', ($scope, Restangular) ->
   $scope.filter = {}
   $scope.languageList = ['pl','en','de']
 
-  $scope.test = [
-    'no elo'
-    'lalala'
-  ]
+  Restangular.one('translations-keys').getList().then (success)->
+    $scope.tableData = success.plain()
+    console.log success
+  , (error) ->
+    console.log "Problem with loading translation keys"
 
-  $scope.options = {
-    rowHeight: 50,
-    footerHeight: false,
-    headerHeight: 40,
-    scrollbarV: false,
 
-    columnMode: 'force',
-    columns: [{
-      name: "Groups",
-      prop: "name",
-    }, {
-      name: "Context description",
-      prop: "gender"
-    }, {
-      name: "Default translation - English(en-GB)",
-      prop: "company",
-    }, {
-      name: "English (en-US)"
-      prop: "something"
-    }, {
-      name: "Polski (pl-PL)"
-      prop: "wuwu"
-    }]
-  }
-  #mocked data
-  $scope.data = [
-    {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
-    wuwu: "Strona główna"}
-    {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
-    wuwu: "Logowanie"}
-    {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
-    wuwu: "Strona główna"}
-    {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
-    wuwu: "Logowanie"}
-    {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
-    wuwu: "Strona główna"}
-    {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
-    wuwu: "Logowanie"}
-    {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
-    wuwu: "Strona główna"}
-    {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
-    wuwu: "Logowanie"}
-    {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
-    wuwu: "Strona główna"}
-    {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
-    wuwu: "Logowanie"}
-  ]
   return
-
 
