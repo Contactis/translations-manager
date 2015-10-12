@@ -1,5 +1,15 @@
 tr-top-bar(filter='filter')
 
-div
-  dtable.translationTables(options="options" rows="data" class="material")
-
+table.table.table-striped(st-table="rowCollection")
+  thead
+  tr
+    th Group
+    th Context description
+    th English (en-GB)
+    th English (en-US)
+    th Polski (pl-PL)
+  tbody
+  tr(data-ng-repeat="singleRow in tableData")
+    td {{singleRow.keyString}}
+    td {{singleRow.
+    td {{singleRow.
