@@ -23,6 +23,7 @@ angular.module('translation.pages.manager-view', [
   $scope.filters = {}
   $scope.languageList = ['pl','en','de']
   $scope.contextMenu = {}
+  $scope.tableData = []
 
 
   $timeout () ->
@@ -34,14 +35,12 @@ angular.module('translation.pages.manager-view', [
       }
     ]
     return
-
+#  $scope.tableData = {"id":1,"keyString":"LOGIN","isPlural":false,"projectId":1,"groupId":3,"Translations":[]}
   Restangular.one('translations-keys').getList().then (success)->
     $scope.tableData = success.plain()
-    console.log success
-    console.log success[0].keyString
+    $scope.displayedCollection = [].concat($scope.tableData)
   , (error) ->
     console.log "Problem with loading translation keys"
-
 
   return
 

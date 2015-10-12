@@ -1,17 +1,17 @@
 tr-top-bar(filters='filters' context-menu="contextMenu")
 
-table.table.table-striped(st-table="rowCollection")
+table.table.table-striped(st-safe-src="tableData" st-table="displayedCollection")
   thead
-  tr
-    th(st-sort="keyString") Group
-    th Context description
-    th English (en-GB)
-    th English (en-US)
-    th Polski (pl-PL)
+    tr
+      th(st-sort="keyString") Group
+      th Context description
+      th English (en-GB)
+      th English (en-US)
+      th Polski (pl-PL)
   tbody
-  tr(data-ng-repeat="singleRow in tableData")
-    td {{singleRow.keyString}}
-    td mocked1
-    td mocked2
-    td mocked3
-    td mocked4
+    tr(data-ng-repeat="singleRow in displayedCollection")
+      td {{singleRow.keyString}}
+      td mock1
+      td mock2
+      td mock3
+      td mock4
