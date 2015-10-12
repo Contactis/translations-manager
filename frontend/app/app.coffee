@@ -8,6 +8,7 @@ translationApp = angular.module('translation', [
   'ngAria'
   'ngMaterial'
   'ngMessages'
+  'smart-table'
 
   # Including templates
   'templates-module'
