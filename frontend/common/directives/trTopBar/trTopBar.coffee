@@ -8,7 +8,7 @@ angular.module('translator.directive.trTopBar', [
   templateUrl: 'directives/trTopBar/trTopBar.tpl.html'
   scope:
     mainSetting:        '&'
-    translationFilter:  '='
+    query:              '='
     contextMenu:        '='
     filters:            '='
 

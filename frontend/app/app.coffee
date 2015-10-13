@@ -15,6 +15,7 @@ translationApp = angular.module('translation', [
 
   # Including directives
   'translation.directives.accessLevel'
+  'translation.directive.searchWatchModel'
 
   # Including pages of aplication
   'translation.pages.404'
