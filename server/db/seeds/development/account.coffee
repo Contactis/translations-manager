@@ -2,7 +2,7 @@ moment = require 'moment'
 
 # Info: Account extends User
 
-users = [
+accounts = [
   {
     email:        'admin@admin.com'
     firstName:    'Sir Super'
@@ -37,5 +37,22 @@ users = [
   }
 ]
 
-users.forEach (value, i) ->
+accounts.forEach (value, i) ->
   Account.seed value
+
+#
+#Account.create users, (err, users) ->
+#
+#
+#  Role.create
+#    name: 'admin'
+#  , (err, role) ->
+#
+#      role.principals.create
+#        principalType: RoleMapping.USER
+#        principalId: users[0].id
+#      , (err, pr) ->
+#        console.log pr
+#
+#        process.exit()
+
