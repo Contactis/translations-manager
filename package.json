@@ -39,7 +39,6 @@
     "cookie-parser": "^1.4.0",
     "debug": "~2.2.0",
     "deepcopy": "^0.5.0",
-    "epilogue": "Martodox/epilogue",
     "express": "~4.13.1",
     "gulp": "^3.9.0",
     "gulp-add-src": "^0.2.0",
