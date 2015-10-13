@@ -7,11 +7,12 @@ angular.module('translation.controllers.sidenav', [
   'translation.services.projects'
   'translation.services.account'
   'translation.services.authorization'
+  'translation.services.filtersState'
   'lbServices'
 ])
 
 
-.controller 'SidenavController', ($scope, $rootScope, $state, $cookies, Account,
+.controller 'SidenavController', ($scope, $rootScope, $state, $cookies, Account, filtersStateService,
 $mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService) ->
 
   $scope.user = AccountService.account()
