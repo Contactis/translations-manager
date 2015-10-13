@@ -23,6 +23,11 @@ UserPermissionsSettings, Account) ->
 
   _account = angular.copy _defaultAccountObject
 
+  _decodeAccountResource = (accountResource) ->
+    accountResource = accountResource.toJSON()
+    accountResource.role = JSON.parse accountResource.role
+    return accountResource
+
   _accountUpdated = ->
     $timeout ->
       _notify.notify _account
@@ -35,7 +40,7 @@ UserPermissionsSettings, Account) ->
     _deferred = $q.defer()
 
     Account.getCurrent (response) ->
-      _account = response.toJSON()
+      _account = _decodeAccountResource response
 
       _deferred.resolve true
       _accountUpdated()
@@ -69,6 +74,8 @@ UserPermissionsSettings, Account) ->
     setAccount: (newAccount) ->
       _account = angular.copy newAccount
       _accountUpdated()
+
+
 
 
 
