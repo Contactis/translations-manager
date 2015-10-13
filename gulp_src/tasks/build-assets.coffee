@@ -1,10 +1,12 @@
 # require build config
 config = require '../variables'
 
-gulp    = require 'gulp'
-copy    = require 'gulp-copy'
-gulpif  = require 'gulp-if'
-file    = require 'gulp-file'
+gulp      = require 'gulp'
+copy      = require 'gulp-copy'
+gulpif    = require 'gulp-if'
+file      = require 'gulp-file'
+loopback  = require 'gulp-loopback-sdk-angular'
+rename    = require 'gulp-rename'
 
 
 #load common modules
@@ -12,6 +14,12 @@ permissionsConfig = require '../../common/permissionsConfig'
 
 assets = config.build.app_files.assets
 assets = assets.concat config.build.vendor_files.assets
+
+gulp.task 'loopback-models', ->
+  gulp.src('./server/server.js')
+  .pipe(loopback())
+  .pipe(rename('loopbackModelsService.js'))
+  .pipe(gulp.dest('./public/common/services/loopbackModels'))
 
 gulp.task 'copy-assets', ->
   gulp.src(assets)

@@ -1,0 +1,22 @@
+{
+  "name": "ProjectLanguage",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "projectId": {
+      "type": "number",
+      "required": true
+    },
+    "languageId": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

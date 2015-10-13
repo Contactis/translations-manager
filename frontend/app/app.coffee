@@ -25,7 +25,7 @@ translationApp = angular.module('translation', [
   'translation.pages.programmer-view'
 
   # Including services
-  'translation.services.user'
+  'translation.services.account'
   'translation.services.authorization'
   'translation.services.filtersState'
   'translation.services.customTranslationHandler'
@@ -49,10 +49,11 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
     controller:   'AppController'
     templateUrl:  'templates/app.tpl.html'
     resolve:
-      user: (UserService) ->
-        return UserService.getSession()
+      account: (AccountService) ->
+        return AccountService.loadSession()
       getGroups: (filtersStateService) ->
         return filtersStateService.refreshGroups()
+
 
   $urlRouterProvider
     .when('', '/')
@@ -63,7 +64,7 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
 
   RestangularProvider.setBaseUrl '/api'
 
-  $locationProvider.html5Mode(true)
+  #$locationProvider.html5Mode(true)
 
   #$animateProvider.classNameFilter(/animate/)
 
@@ -107,26 +108,25 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
   # tmhDynamicLocaleProvider.localeLocationPattern('assets/angular-i18n/angular-locale_{{locale}}.js')
 
 
-.run ($rootScope, UserService, AuthorizationService) ->
+.run ($rootScope, AccountService, AuthorizationService) ->
 
 
-  _firstEnter = {}
-
-  UserService.getSession().then () ->
-    AuthorizationService.accessCheck(_firstEnter.event, _firstEnter.toState)
-
+  _firstEnter = true
 
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
 
-    if _.isEmpty _firstEnter
-      _firstEnter.event = event
-      _firstEnter.toState = toState
+    if _firstEnter
+      _firstEnter = false
+
+      AccountService.loadSession().then ->
+        AuthorizationService.accessCheck event, toState
     else
-      AuthorizationService.accessCheck(event, toState)
+      AuthorizationService.accessCheck event, toState
+
     return
 
   $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
-    console.log error
+    console.log '$stateChangeError', error
     return
 
   $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->

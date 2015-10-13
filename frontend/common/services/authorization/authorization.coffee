@@ -1,46 +1,32 @@
 angular.module 'translation.services.authorization', [
-  'restangular'
   'ui.router'
   'ngMaterial'
   'ngCookies'
-  'translation.services.user'
+  'translation.services.account'
+  'lbServices'
 ]
 
-.service 'AuthorizationService', ($q, $state, $mdToast, $cookies, $http, Restangular, UserService) ->
+.service 'AuthorizationService', ($q, $state, $mdToast, $timeout, AccountService, Account) ->
 
-  login = (email, password) ->
+  login = (rememberMe, email, password) ->
 
     _deferred = $q.defer()
 
-    Restangular.all('login').post
-      email:          email
-      password:       password
-    .then (response) ->
+    _credentials =
+        email:          email
+        password:       password
 
-      if angular.isDefined response.token
-        _deferred.resolve response
-        UserService.loadDashboard response.token
+    Account.login {rememberMe: rememberMe},  _credentials,
+    (response) ->
 
-      else
-        _deferred.reject 'no token'
-
-        $mdToast.show(
-          $mdToast.simple()
-          .content('Login unsuccessful. Try again.')
-          .position('bottom right')
-          .hideDelay(3000)
-        )
+      response = response.toJSON()
+      AccountService.setAccount(response.user)
+      _deferred.resolve response.user
 
     , (error) ->
 
       _deferred.reject error
 
-      $mdToast.show(
-        $mdToast.simple()
-        .content('Login unsuccessful. Try again.')
-        .position('bottom right')
-        .hideDelay(3000)
-      )
 
     return _deferred.promise
 
@@ -54,38 +40,41 @@ angular.module 'translation.services.authorization', [
       lastName:   attributes.lastName
     )
 
-  logout = ->
-
-    $cookies.remove 'token'
-    UserService.resetUser()
-    delete $http.defaults.headers.common['authorization']
-    $state.go 'app.login'
-
-    $mdToast.show(
-      $mdToast.simple()
-      .content('You had been logged out.')
-      .position('bottom right')
-      .hideDelay(3000)
-    )
-
-
-
   _kickUnauthorised = (queue, event) ->
+
     event.preventDefault()
-    if UserService.getData('loggedIn')
+
+    if Account.isAuthenticated()
       $state.go 'app.dashboard'
     else
       $state.go 'app.login'
 
     queue.resolve()
 
+  api =
+    login:        login
 
-  _pageAccessCheck = (event, toState) ->
-    _queue = $q.defer()
+    register:     register
 
-    if angular.isUndefined(toState) or !('data' of toState) or !('access' of toState.data)
-# Missing state
-      if angular.isDefined(event)
+    logout:       ->
+
+      Account.logout().$promise.then ->
+        AccountService.resetAccount()
+
+        $state.go 'app.login'
+
+      $mdToast.show(
+        $mdToast.simple()
+        .content('You had been logged out.')
+        .position('bottom right')
+        .hideDelay(3000)
+      )
+
+    accessCheck:  (event, toState) ->
+
+      _accessDeffered = $q.defer()
+
+      if angular.isUndefined(toState) or !('data' of toState) or !('access' of toState.data)
 
         $mdToast.show(
           $mdToast.simple()
@@ -93,33 +82,26 @@ angular.module 'translation.services.authorization', [
           .position('bottom right')
           .hideDelay(3000)
         )
-        _kickUnauthorised _queue, event
-    else
-      if api.authorizePageAccess(toState.data.access)
-        _queue.resolve()
+        _kickUnauthorised _accessDeffered, event
       else
+        if api.authorizePageAccess(toState.data.access)
+          _accessDeffered.resolve()
+        else
 
-        $mdToast.show(
-          $mdToast.simple()
-          .content('Seems like you don\'t have permissions to access that page.')
-          .position('bottom right')
-          .hideDelay(3000)
-        )
+          $mdToast.show(
+            $mdToast.simple()
+            .content('Seems like you don\'t have permissions to access that page.')
+            .position('bottom right')
+            .hideDelay(3000)
+          )
 
-        _kickUnauthorised _queue, event
+          _kickUnauthorised _accessDeffered, event
 
-    return _queue.promise
-
-
-  api =
-    login:        login
-    logout:       logout
-    register:     register
-    accessCheck:  _pageAccessCheck
+      return _accessDeffered.promise
 
     authorizePageAccess: (accessLevel, role) ->
       if typeof role is 'undefined'
-        role = UserService.getData('role')
+        role = AccountService.getData('role')
       result = accessLevel.bitMask & role.bitMask
       return result
 

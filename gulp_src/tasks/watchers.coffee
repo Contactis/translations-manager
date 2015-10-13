@@ -8,31 +8,22 @@ chalk       = require 'chalk'
 
 gulp.task 'watchers', ->
 
-  # ## Set up basic watch groups and run group specific tasks only to save time in development mode
-  # ## interval and pool mode must be set in order for boot2docker (OSX) to work
-
-  if config.arguments.b2d
-    watchersConfig = {interval: 1000, mode: 'poll'}
-    console.log chalk.white.bgBlue '[GULP] Watchers in '+ chalk.white.bold.bgBlue 'boot2docker ' + chalk.white.bgBlue 'mode'
-  else
-    watchersConfig = {}
-
   # ### Coffee Script
   coffeeWatchArgs =
     source: config.build.app_files.coffee
     tasks:  ['coffee']
 
-  coffeeWatcher = gulp.watch coffeeWatchArgs.source, watchersConfig, ->
+  coffeeWatcher = gulp.watch coffeeWatchArgs.source, ->
     runSequence coffeeWatchArgs.tasks
 
 
   # ### Jade templates
-  jadeWatcher = gulp.watch config.build.app_files.jade_all_templates, watchersConfig, ->
+  jadeWatcher = gulp.watch config.build.app_files.jade_all_templates, ->
     runSequence 'compile-jade'
 
 
   # ## Sass stylesheets
-  sassWatcher = gulp.watch 'frontend/sass/' + config.build.project_theme_name + '/**/*.sass', watchersConfig, ->
+  sassWatcher = gulp.watch 'frontend/sass/' + config.build.project_theme_name + '/**/*.sass', ->
     runSequence 'build-styles'
 
   # ## Backend

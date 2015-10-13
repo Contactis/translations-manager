@@ -32,4 +32,7 @@ md-content#login-page(flex layout="column" layout-align="center center")
             md-button.md-raised.md-accent(flex data-ng-show="!showRegistration" data-ng-click="login()" tabindex=5) Login
             md-button.md-raised.md-warn(flex data-ng-show="showRegistration" data-ng-click="toggleRegister()" tabindex=8) Cancel
             md-button.md-raised.md-accent(flex data-ng-show="showRegistration" data-ng-click="register()" tabindex=7 ) Complete
+          md-input-container.md-icon-float.margin-bottom-neg-25.margin-top-rm
+            md-checkbox(ng-model="rememberMe" aria-label="Checkbox 1") Remember me
+
 

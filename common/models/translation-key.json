@@ -1,0 +1,36 @@
+{
+  "name": "TranslationKey",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "keyString": {
+      "type": "string",
+      "required": true
+    },
+    "isPlural": {
+      "type": "boolean",
+      "required": true
+    },
+    "projectId": {
+      "type": "number",
+      "required": true
+    },
+    "groupId": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "translations": {
+      "type": "hasMany",
+      "model": "Translation",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

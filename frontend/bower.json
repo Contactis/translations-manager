@@ -25,7 +25,8 @@
     "angular-ui-router": "~0.2.15",
     "bootstrap": "~3.3.5",
     "messageformat": "~0.1.8",
-    "restangular": "~1.5.1"
+    "restangular": "~1.5.1",
+    "angular-resource": "~1.4.7"
   },
   "resolutions": {
     "angular": "1.4.6"

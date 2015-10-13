@@ -5,14 +5,19 @@ angular.module('translation.controllers.sidenav', [
   'ngAria'
   'ngMaterial'
   'translation.services.projects'
-  'translation.services.user'
+  'translation.services.account'
   'translation.services.authorization'
+  'translation.services.filtersState'
+  'lbServices'
 ])
 
 
-.controller 'SidenavController', ($scope, $rootScope, $state, $cookies, Restangular,
-$mdSidenav, $mdUtil, ProjectsService, UserService, AuthorizationService, filtersStateService) ->
-  $scope.user = UserService.user()
+.controller 'SidenavController', ($scope, $rootScope, $state, $cookies, Account, filtersStateService,
+$mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService) ->
+
+  $scope.user = AccountService.account()
+  $scope.user.loggedIn = Account.isAuthenticated()
+
 
   $scope.goTo = (uiview) ->
     $state.go(uiview)
@@ -25,8 +30,9 @@ $mdSidenav, $mdUtil, ProjectsService, UserService, AuthorizationService, filters
   ProjectsService.updated.then null, null, (project) ->
     $scope.currentProject = project
 
-  UserService.updated.then null, null, (user) ->
+  AccountService.updated.then null, null, (user) ->
     $scope.user = user
+    $scope.user.loggedIn = Account.isAuthenticated()
 
 
 

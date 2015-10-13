@@ -1,0 +1,22 @@
+{
+  "name": "LanguageTranslation",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "languageId": {
+      "type": "number",
+      "required": true
+    },
+    "pluralForm": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

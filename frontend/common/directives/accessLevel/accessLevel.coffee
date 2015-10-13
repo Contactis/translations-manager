@@ -1,16 +1,16 @@
 angular.module('translation.directives.accessLevel', [
-  'translation.services.user'
+  'translation.services.account'
   'translation.providers.userPermissionsSettings'
 ])
 
-.directive 'trAccessLevel', (AuthorizationService, UserService) ->
+.directive 'trAccessLevel', (AuthorizationService, AccountService) ->
   restrict: 'A'
   link: ($scope, element, attrs) ->
     prevDisp      = element.css('display')
     userRole      = null
     accessLevel   = null
 
-    $scope.user = UserService.getAllData()
+    $scope.user = AccountService.getAllData()
     $scope.$watch 'user', (user) ->
       if user.role
         userRole = user.role

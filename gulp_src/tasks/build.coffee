@@ -9,7 +9,7 @@ chalk       = require 'chalk'
 
 buildArgs =
   stage1: ['clean-all']
-  stage2: ['coffee', 'compile-jade', 'build-styles', 'build-assets']
+  stage2: ['coffee', 'loopback-models' ,'compile-jade', 'build-styles', 'build-assets']
   stage3: ['build-html', 'nodemon']
 
 

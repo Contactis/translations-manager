@@ -9,6 +9,7 @@ coffeeLint      = require 'gulp-coffeelint'
 shell           = require 'gulp-shell'
 databaseConfig  = require './../../backend/' + _dbConfigFilePath
 runSequence     = require 'run-sequence'
+argv            = require('yargs').argv
 
 gulp.task 'lint-backend',  ->
   gulp.src(config.build.backendDir + "/**/*.coffee")
@@ -17,7 +18,12 @@ gulp.task 'lint-backend',  ->
 
 
 gulp.task 'nodemon', ->
-  runSequence 'lint-backend'
+
+  _jsExec = 'node .'
+
+  if (typeof argv.aclDebug is not "undefined") or (argv.aclDebug is true)
+    _jsExec = 'DEBUG=loopback:security:* slc run'
+
 
   nodemon
     verbose: false
@@ -28,20 +34,16 @@ gulp.task 'nodemon', ->
       "gulp_src/*"
     ]
     execMap:
-      js: "node backend/app.js"
-    ext: "js coffee"
-
-
+      js: _jsExec
+    ext: "js coffee json"
 
 gulp.task 'db:renew', shell.task [
-  "cd backend &&
-   rm -f #{databaseConfig['development']['host']} &&
-   sequelize db:migrate --coffee --config #{_dbConfigFilePath}"
+  "rm -f translation_manager_db.sqlite && node ./ --kill --silent"
 ]
 
+
 gulp.task 'db:seed', shell.task [
-  "cd backend &&
-   sequelize db:seed --coffee --config #{_dbConfigFilePath}"
+  "node ./ --seeds --silent"
 ]
 
 gulp.task 'db:restore', ->
