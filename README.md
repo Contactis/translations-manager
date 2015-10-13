@@ -1,4 +1,4 @@
-# Translation Manager [![Built with Gulp][build-with-gulp-png]][gulpjs-page]
+# Translation Manager [![Built with Gulp][build-with-gulp-png]][gulpjs-page] [![Stories in Ready](https://badge.waffle.io/Contactis/translations-manager.png?label=ready&title=Ready)](http://waffle.io/Contactis/translations-manager)
 > by iTelo
 
 Main goal of this project is to provide all neccessary features to store,
