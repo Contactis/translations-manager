@@ -15,13 +15,12 @@ UserPermissionsSettings, Account) ->
   userRoles     = UserPermissionsSettings.userRoles
 
   _notify = $q.defer()
-
   _deferred = null
-
   _defaultAccountObject =
     role:       userRoles.public
 
-  _account = angular.copy _defaultAccountObject
+  _account = ->
+    return angular.copy _defaultAccountObject
 
   _decodeAccountResource = (accountResource) ->
     accountResource = accountResource.toJSON()
@@ -31,39 +30,31 @@ UserPermissionsSettings, Account) ->
   _accountUpdated = ->
     $timeout ->
       _notify.notify _account
+    return
 
-  loadSession = ->
-
+  _loadSession = ->
     if _deferred
       return _deferred.promise
-
     _deferred = $q.defer()
 
     Account.getCurrent (response) ->
       _account = _decodeAccountResource response
-
       _deferred.resolve true
       _accountUpdated()
-
     , (error) ->
       _deferred.resolve false
-
-
     return _deferred.promise
 
+
   api =
-    loadSession:           loadSession
+    loadSession:          _loadSession
     updated:              _notify.promise
-
-    resetAccount: ->
+    resetAccount:         ->
       _account = angular.copy _defaultAccountObject
-
       _accountUpdated()
-
       return
 
-    account: ->
-      return angular.copy _account
+    account:              _account
 
     defaultAccountObject: ->
       return angular.copy _defaultAccountObject
@@ -74,10 +65,5 @@ UserPermissionsSettings, Account) ->
     setAccount: (newAccount) ->
       _account = angular.copy newAccount
       _accountUpdated()
-
-
-
-
-
 
   return api
