@@ -8,7 +8,6 @@ angular.module('translation.directive.searchWatchModel', [
     searchWatchModel:'='
 
   link: (scope, element, attrs, ctrl) ->
-    console.log "WOOGOHO IT'S WORKING"
     scope.$watch 'searchWatchModel',(val) ->
       ctrl.search(val)
     return
