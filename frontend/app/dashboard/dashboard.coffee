@@ -15,14 +15,9 @@ angular.module('translation.pages.dashboard', [
     templateUrl:    'dashboard/dashboard.tpl.html'
     data:
       access: access.user
-    resolve:
-      ProjectsStateResolver: (ProjectsService) ->
-        return ProjectsService.get(1)
 
 
-.controller 'DashboardController', ($scope, ProjectsStateResolver) ->
-
-  $scope.project = ProjectsStateResolver
+.controller 'DashboardController', ($scope) ->
 
   $scope.filter = {}
   $scope.static = {}

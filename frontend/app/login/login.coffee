@@ -4,7 +4,7 @@ angular.module('translation.pages.login', [
   'ngCookies'
   'restangular'
   'ngMaterial'
-  'translation.services.user'
+  'translation.services.account'
   'translation.services.authorization'
   'translation.providers.userPermissionsSettings'
 ])
@@ -21,8 +21,9 @@ angular.module('translation.pages.login', [
       access:       access.anon
 
 
-.controller 'LoginController', ($scope, $state, $http, $mdToast,
-Restangular, AuthorizationService, UserService) ->
+.controller 'LoginController', ($scope, $state, $http, $mdToast, Restangular, AuthorizationService, AccountService) ->
+
+  $scope.rememberMe = true
 
   $scope.user =
     email:          ''
@@ -39,7 +40,25 @@ Restangular, AuthorizationService, UserService) ->
 
 
   $scope.login = ->
-    AuthorizationService.login($scope.user.email, $scope.user.password)
+    AuthorizationService.login($scope.rememberMe, $scope.user.email, $scope.user.password).then (account) ->
+
+
+      $state.go 'app.dashboard'
+
+
+      $mdToast.show(
+        $mdToast.simple()
+        .content('Welcome!')
+        .position('bottom right')
+        .hideDelay(3000)
+      )
+    , (error) ->
+      $mdToast.show(
+        $mdToast.simple()
+        .content('Login unsuccessful. Try again.')
+        .position('bottom right')
+        .hideDelay(3000)
+      )
 
 
   $scope.register = ->
@@ -59,7 +78,7 @@ Restangular, AuthorizationService, UserService) ->
       .then (response) ->
 
         if angular.isDefined response.token
-          UserService.loadDashboard response.token
+          AccountService.loadDashboard response.token
       , ->
         $mdToast.show(
           $mdToast.simple()
