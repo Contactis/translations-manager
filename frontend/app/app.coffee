@@ -51,8 +51,8 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
     resolve:
       account: (AccountService) ->
         return AccountService.loadSession()
-      getGroups: (filtersStateService) ->
-        return filtersStateService.refreshGroups()
+      getGroups: (FiltersStateService) ->
+        return FiltersStateService.refreshGroups()
 
 
   $urlRouterProvider
@@ -109,20 +109,15 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
 
 
 .run ($rootScope, AccountService, AuthorizationService) ->
-
-
   _firstEnter = true
 
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
-
     if _firstEnter
       _firstEnter = false
-
       AccountService.loadSession().then ->
         AuthorizationService.accessCheck event, toState
     else
       AuthorizationService.accessCheck event, toState
-
     return
 
   $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->

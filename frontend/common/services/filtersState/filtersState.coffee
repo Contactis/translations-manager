@@ -1,6 +1,6 @@
 angular.module 'translation.services.filtersState', []
 
-.service 'filtersStateService', ($q, $timeout, Restangular) ->
+.service 'FiltersStateService', ($q, $timeout, Restangular) ->
 
   _groups = []
   _topBarDefaultFilters = {}

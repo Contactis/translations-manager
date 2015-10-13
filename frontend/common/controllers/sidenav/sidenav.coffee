@@ -12,7 +12,7 @@ angular.module('translation.controllers.sidenav', [
 ])
 
 
-.controller 'SidenavController', ($scope, $rootScope, $state, $cookies, Account, filtersStateService,
+.controller 'SidenavController', ($scope, $rootScope, $state, $cookies, Account, FiltersStateService,
 $mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService) ->
 
   $scope.user = AccountService.account()
@@ -45,7 +45,7 @@ $mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService) ->
 
   $rootScope.logout = AuthorizationService.logout
 
-  $scope.groups = filtersStateService.getGroups()
+  $scope.groups = FiltersStateService.getGroups()
 
 
 

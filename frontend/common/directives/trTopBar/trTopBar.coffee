@@ -2,7 +2,7 @@ angular.module('translator.directive.trTopBar', [
   'translation.services.filtersState'
 ])
 
-.directive 'trTopBar', (filtersStateService) ->
+.directive 'trTopBar', (FiltersStateService) ->
   restrict: 'E'
   replace: true
   templateUrl: 'directives/trTopBar/trTopBar.tpl.html'
@@ -13,7 +13,7 @@ angular.module('translator.directive.trTopBar', [
     filters:            '='
 
   link: (scope, element, attrs) ->
-    scope.static = filtersStateService.topBarDefaultFilters
+    scope.static = FiltersStateService.topBarDefaultFilters
 
     scope.contextMenu.name    = "<menu name not set>"
     scope.contextMenu.links   = []
