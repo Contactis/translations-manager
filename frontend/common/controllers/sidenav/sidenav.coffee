@@ -10,8 +10,8 @@ angular.module('translation.controllers.sidenav', [
 ])
 
 
-.controller 'SidenavController', ($scope, $rootScope, $state, $cookies,
-$mdSidenav, $mdUtil, ProjectsService, UserService, AuthorizationService) ->
+.controller 'SidenavController', ($scope, $rootScope, $state, $cookies, Restangular,
+$mdSidenav, $mdUtil, ProjectsService, UserService, AuthorizationService, filtersStateService) ->
   $scope.user = UserService.user()
 
   $scope.goTo = (uiview) ->
@@ -39,12 +39,7 @@ $mdSidenav, $mdUtil, ProjectsService, UserService, AuthorizationService) ->
 
   $rootScope.logout = AuthorizationService.logout
 
-  $scope.groups = [
-    { name: "All", isActive: true }
-    { name: "dashboard", isActive: false }
-    { name: "media.side.awesome", isActive: true }
-    { name: "title.pages", isActive: false }
-  ]
+  $scope.groups = filtersStateService.getGroups()
 
 
 

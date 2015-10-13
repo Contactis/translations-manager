@@ -57,7 +57,7 @@ div#sidenav.md-whiteframe-z2(ng-controller="SidenavController" ng-show="user.log
       md-divider
       md-subheader Groups
       md-list-item(ng-repeat="group in groups")
-        p  {{ group.name }}
+        p  {{ group.namespace }}
         md-checkbox.md-secondary(ng-model='group.isActive')
 
       md-divider

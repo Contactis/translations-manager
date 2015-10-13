@@ -51,6 +51,8 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
     resolve:
       user: (UserService) ->
         return UserService.getSession()
+      getGroups: (filtersStateService) ->
+        return filtersStateService.refreshGroups()
 
   $urlRouterProvider
     .when('', '/')
