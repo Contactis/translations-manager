@@ -1,6 +1,6 @@
-tr-top-bar(filters='filters' context-menu="contextMenu")
+tr-top-bar(filters='filters' context-menu="contextMenu" query="query")
 
-table.table.table-striped(st-safe-src="tableData" st-table="displayedCollection")
+table.table.table-striped(search-watch-model="query" st-safe-src="tableData" st-table="displayedCollection")
   thead
     tr
       th(st-sort="keyString") Group
