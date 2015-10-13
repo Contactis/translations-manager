@@ -2,6 +2,7 @@ angular.module 'translation.services.filtersState', []
 
 .service 'filtersStateService', ($q, $timeout, Restangular) ->
 
+  _groups = []
   _topBarDefaultFilters = {}
   _topBarDefaultFilters.translation = [
     {
@@ -35,7 +36,22 @@ angular.module 'translation.services.filtersState', []
     }
   ]
 
+  _refreshGroups = () ->
+    Restangular.one('groups').getList().then (success)->
+      _groups = groupHelper(success.plain())
+    , (error) ->
+      console.log "Problem with loading groups"
+
+#      group model needs additional field (isActive) for application purposes
+  groupHelper = (collection) ->
+    angular.forEach collection, (value, key) ->
+      value.isActive = false
+    return collection
+
 
   api =
-    topBarDefaultFilters : _topBarDefaultFilters
+    topBarDefaultFilters: _topBarDefaultFilters
+    refreshGroups: _refreshGroups
+    getGroups: () ->
+      return angular.copy _groups
   return api

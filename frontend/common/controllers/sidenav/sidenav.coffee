@@ -17,6 +17,7 @@ $mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService) ->
   $scope.user = AccountService.account()
   $scope.user.loggedIn = Account.isAuthenticated()
 
+
   $scope.goTo = (uiview) ->
     $state.go(uiview)
 
@@ -43,12 +44,7 @@ $mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService) ->
 
   $rootScope.logout = AuthorizationService.logout
 
-  $scope.groups = [
-    { name: "All", isActive: true }
-    { name: "dashboard", isActive: false }
-    { name: "media.side.awesome", isActive: true }
-    { name: "title.pages", isActive: false }
-  ]
+  $scope.groups = filtersStateService.getGroups()
 
 
 
