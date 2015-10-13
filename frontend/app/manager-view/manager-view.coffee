@@ -3,6 +3,7 @@ angular.module('translation.pages.manager-view', [
   'data-table'
   'smart-table'
   'translation.providers.userPermissionsSettings'
+  'translation.directive.searchWatchModel'
   'restangular'
 ])
 
@@ -21,6 +22,7 @@ angular.module('translation.pages.manager-view', [
 
 .controller 'ManagerViewController', ($scope, $timeout, Restangular) ->
   $scope.filters = {}
+  $scope.query = ""
   $scope.languageList = ['pl','en','de']
   $scope.contextMenu = {}
   $scope.tableData = []
