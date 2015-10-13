@@ -9,7 +9,7 @@ angular.module('translation.services.account', [
 
 
 .service 'AccountService', ($q, $cookies, $http, $timeout, $state, $mdToast, Restangular,
-  UserPermissionsSettings, Account) ->
+UserPermissionsSettings, Account) ->
 
   accessLevels  = UserPermissionsSettings.accessLevels
   userRoles     = UserPermissionsSettings.userRoles
@@ -23,6 +23,11 @@ angular.module('translation.services.account', [
 
   _account = angular.copy _defaultAccountObject
 
+  _decodeAccountResource = (accountResource) ->
+    accountResource = accountResource.toJSON()
+    accountResource.role = JSON.parse accountResource.role
+    return accountResource
+
   _accountUpdated = ->
     $timeout ->
       _notify.notify _account
@@ -35,7 +40,7 @@ angular.module('translation.services.account', [
     _deferred = $q.defer()
 
     Account.getCurrent (response) ->
-      _account = response.toJSON()
+      _account = _decodeAccountResource response
 
       _deferred.resolve true
       _accountUpdated()
@@ -69,6 +74,8 @@ angular.module('translation.services.account', [
     setAccount: (newAccount) ->
       _account = angular.copy newAccount
       _accountUpdated()
+
+
 
 
 

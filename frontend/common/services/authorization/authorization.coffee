@@ -20,7 +20,9 @@ angular.module 'translation.services.authorization', [
     (response) ->
 
       response = response.toJSON()
-      AccountService.setAccount(response.user)
+      response.user.role = JSON.parse response.user.role
+
+      AccountService.setAccount response.user
       _deferred.resolve response.user
 
     , (error) ->
