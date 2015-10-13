@@ -102,10 +102,11 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
     'en_US': 'en-us'
     'en-en': 'en-us'
     'en':    'en-us'
+    'pl_PL': 'en-us'
   }).determinePreferredLanguage()
 
-  # # configure loading angular locales
-  # tmhDynamicLocaleProvider.localeLocationPattern('assets/angular-i18n/angular-locale_{{locale}}.js')
+  # configure loading angular locales
+  #tmhDynamicLocaleProvider.localeLocationPattern('assets/angular-i18n/angular-locale_{{locale}}.js')
 
 
 .run ($rootScope, AccountService, AuthorizationService) ->
