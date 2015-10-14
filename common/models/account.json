@@ -5,19 +5,75 @@
   "options": {
     "validateUpsert": true
   },
+  "relations": {
+    "RoleMappings": {
+      "model": "RoleMapping",
+      "type": "hasMany",
+      "foreignKey": "principalId"
+    },
+    "Roles": {
+      "model": "Role",
+      "type": "hasMany",
+      "through": "RoleMapping"
+    }  
+  },
+  "display": [
+    "id",
+    "username",
+    "password",
+    "email",
+    "firstName",
+    "lastName",
+    {
+      "property": "roleMapping",
+      "sourceModel": "Account",
+      "sourceKey": "accountId",
+      "label": "Role",
+      "type": "reference",
+      "roles": ["admin"],
+      "options": {
+        "model": "Role",
+        "key": "id",
+        "relationship": "Roles",
+        "searchField": "description",
+        "placeholder": "Select Roles",
+        "multiple": true,
+        "allowInsert": false,
+        "matchTemplate": "{{ $item.description }}",
+        "choiceTemplate": "{{ item.description }}",
+        "junctionMeta": {
+          "principalType": "USER"
+        }
+      }
+    },
+    "created",
+    "lastUpdated"
+  ],
   "properties": {
     "id": {
-      "type": "number"
+      "type": "number",
+      "display": {
+        "label": "ID"
+      }
     },
     "realm": {
       "type": "string"
     },
     "username": {
-      "type": "string"
+      "type": "string",
+      "display": {
+        "label": "Username"
+      }
     },
     "password": {
       "type": "string",
-      "required": true
+      "required": true,
+      "display": {
+        "label": "Password",
+        "type": "password",
+        "pattern": "/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{6,}$/",
+        "description": "Password must contain at least 1 upper case letter, 1 number, and at least 6 characters long."
+      }
     },
     "credentials": {
       "type": "object",
@@ -29,7 +85,10 @@
     },
     "email": {
       "type": "string",
-      "required": true
+      "required": true,
+      "display": {
+        "label": "E-mail"
+      }
     },
     "emailVerified": {
       "type": "boolean"
@@ -41,16 +100,33 @@
       "type": "string"
     },
     "created": {
-      "type": "date"
+      "type": "date",
+      "display": {
+        "label": "Created Date",
+        "readonly": true,
+        "evalDefault": "new Date()" 
+      }
     },
     "lastUpdated": {
-      "type": "date"
+      "type": "date",
+      "display": {
+        "label": "Last Updated",
+        "readonly": true,
+        "evalDefault": "new Date()",
+        "forceDefaultOnSave": true 
+      }
     },
     "firstName": {
-      "type": "string"
+      "type": "string",
+      "display": {
+        "label": "First Name"
+      }
     },
     "lastName": {
-      "type": "string"
+      "type": "string",
+      "display": {
+        "label": "Last Name"
+      }
     },
     "role": {
       "type": "string"
@@ -60,7 +136,6 @@
     }
   },
   "validations": [],
-  "relations": {},
   "acls": [],
   "methods": {}
 }
