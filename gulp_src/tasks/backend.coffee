@@ -48,3 +48,15 @@ gulp.task 'db:seed', shell.task [
 
 gulp.task 'db:restore', ->
   runSequence 'db:renew', 'db:seed'
+
+gulp.task 'app:npm', shell.task [
+  "npm update"
+]
+
+gulp.task 'app:bower', shell.task [
+  "cd frontend && bower update"
+]
+
+gulp.task 'app:restore', ->
+  runSequence 'db:restore', 'app:npm', 'app:bower'
+
