@@ -38,6 +38,7 @@ module.exports =
       'frontend/vendor/lodash/dist/lodash.js'
       # Angular lib should be the last of independent list!
       'frontend/vendor/angular/angular.js'
+      'frontend/vendor/moment/moment.js'
 
       # Libraries depends on independent libraries
       'frontend/vendor/angular-animate/angular-animate.js'
@@ -51,10 +52,10 @@ module.exports =
       'frontend/vendor/restangular/src/restangular.js'
       'frontend/vendor/angular-data-table/release/dataTable.helpers.min.js'
       'frontend/vendor/angular-messages/angular-messages.js'
+      'frontend/vendor/angular-moment/angular-moment.js'
 
       'frontend/vendor/messageformat/messageformat.js'
       'frontend/vendor/messageformat/locale/en.js'
-      'frontend/vendor/messageformat/locale/pl.js'
       'frontend/vendor/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js'
       'frontend/vendor/angular-dynamic-locale/dist/tmhDynamicLocale.js'
       'frontend/vendor/angular-smart-table/dist/smart-table.min.js'
