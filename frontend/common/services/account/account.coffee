@@ -19,8 +19,7 @@ UserPermissionsSettings, Account) ->
   _defaultAccountObject =
     role:       userRoles.public
 
-  _account = ->
-    return angular.copy _defaultAccountObject
+  _account = angular.copy _defaultAccountObject
 
   _decodeAccountResource = (accountResource) ->
     accountResource = accountResource.toJSON()
@@ -54,7 +53,8 @@ UserPermissionsSettings, Account) ->
       _accountUpdated()
       return
 
-    account:              _account
+    account: ->
+      return angular.copy _account
 
     defaultAccountObject: ->
       return angular.copy _defaultAccountObject
