@@ -6,6 +6,43 @@
     "validateUpsert": true
   },
   "properties": {
+    "realm": {
+      "type": "string"
+    },
+    "username": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string",
+      "required": true
+    },
+    "credentials": {
+      "type": "object",
+      "deprecated": true
+    },
+    "challenges": {
+      "type": "object",
+      "deprecated": true
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "emailVerified": {
+      "type": "boolean"
+    },
+    "verificationToken": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date"
+    },
+    "lastUpdated": {
+      "type": "date"
+    },
     "firstName": {
       "type": "string"
     },

@@ -32,6 +32,7 @@
     "slu-seed": "^0.1.5"
   },
   "devDependencies": {
+    "isbx-loopback-cms": "git+https://github.com/ISBX/isbx-loopback-cms.git",
     "bcryptjs": "^2.2.2",
     "body-parser": "^1.13.3",
     "chalk": "^1.1.1",

@@ -27,11 +27,11 @@
   },
   "RoleMapping": {
     "dataSource": "sqlite",
-    "public": false
+    "public": true
   },
   "Role": {
     "dataSource": "sqlite",
-    "public": false
+    "public": true
   },
   "Language": {
     "dataSource": "sqlite",
