@@ -17,13 +17,15 @@ Restangular) ->
   _deferredInterfaceLanguages = undefined
 
 
-  # @method         _unifyIetfCode
+  # @method         _unifyToIetfCode
   # @param          langCode
-  # @description    unify language notation from different browser to "xx-xx",
-  #                 like "en-us"
-  _unifyIetfCode = (langCode) ->
-    _langCode = langCode.replace("_", "-")
-    return _langCode.toLowerCase()
+  # @description    unify languages code notation from different browser to one
+  #                 like "xx-yy" or "xx" (ex: "en-us", "en")
+  # @returns        String
+  _unifyToIetfCode = (inputCode) ->
+    _code = inputCode.replace("_", "-")
+    return _code.toLowerCase()
+
 
   # @method       _getInterfaceLanguages
   # @getter
@@ -47,57 +49,66 @@ Restangular) ->
   # @setter
   # @param        [userInterfaceLanguage]
   # @description  Determinate user startup language
+  # @returns      Promise
   _getStartupLanguage = (userInterfaceLanguage) ->
+    _deferred = $q.defer()
+
     userInterfaceLanguage = \
       if typeof userInterfaceLanguage is 'undefined' or not userInterfaceLanguage
         null
       else userInterfaceLanguage
 
-    userLang = undefined
     switch
+      when userInterfaceLanguage isnt null and not userInterfaceLanguage
+        console.log "userInterfaceLanguage", userInterfaceLanguage
+        _deferred.resolve userInterfaceLanguage
       when angular.isDefined $cookieStore.get 'selectedLanguage'
         console.log "cookie is defined", $cookieStore.get 'selectedLanguage'
-        userLang = $cookieStore.get 'selectedLanguage'
-      when userInterfaceLanguage isnt null
-        console.log "userInterfaceLanguage", userInterfaceLanguage
-        userLang = userInterfaceLanguage
+
+        _deferred.resolve $cookieStore.get 'selectedLanguage'
       else
-        console.log "$translate.use()", _unifyIetfCode($translate.use())
+        console.log "$translate.use()", _unifyToIetfCode($translate.use())
         _getInterfaceLanguages().then (success) ->
+          console.log "success", success
           _interfaceLangs = success
-          if _.findWhere(_interfaceLangs, {ietfCode: _unifyIetfCode($translate.use())}, 'ietfCode')
-            userLang = _unifyIetfCode($translate.use())
+          if _.findWhere(_interfaceLangs, {ietfCode: _unifyToIetfCode($translate.use())}, 'ietfCode')
+            _deferred.resolve _unifyToIetfCode($translate.use())
           else
-            $log.info "Your language `" + $translate.use() + "` was not found so we use default language `en-us`"
-            userLang = 'en-us'
+            _str = "Your language `" + _unifyToIetfCode($translate.use()) + \
+              "` was not found, so used default language `en`, international english."
+            $log.info _str
+            _deferred.resolve 'en' # en = international english, not en-us or others
         , (e) ->
           console.log "error", e
-    return userLang
+          _deferred.reject()
+    return _deferred.promise
+
 
   # @method       _setLanguage
   # @setter
   # @param        langCode
   # @description  Set user language for the website.
-  _setLanguage = (langCode) ->
-    _langCode = _unifyIetfCode(langCode)
-    $cookieStore.put('selectedLanguage', _langCode)
-    moment.locale(_langCode)
-    $http.defaults.headers.common['X-LANG'] = _langCode
+  _setLanguage = (ietfCode) ->
+    console.log "_setLanguage ietfCode", ietfCode
+    _code = _unifyToIetfCode(ietfCode)
+    $cookieStore.put('selectedLanguage', _code)
+    moment.locale(_code)
+    $http.defaults.headers.common['X-LANG'] = _code
     $rootScope.$locale = $locale
-    $translate.use _langCode        # for translations strings
-    tmhDynamicLocale.set _langCode  # set locale for translations
+    $translate.use _code        # for translations strings
+    tmhDynamicLocale.set _code  # set locale for translations
     # TODO Add moment.js locale file
     return
+
 
   # ## Public API
   api =
     # Change string translations and $locale
-    getInterfaceLanguages:  _getInterfaceLanguages
-    setLanguage:            _setLanguage
-    getStartupLanguage:     _getStartupLanguage
     langCode:               () ->
       return _langCode
-
+    getInterfaceLanguages:  _getInterfaceLanguages
+    getStartupLanguage:     _getStartupLanguage
+    setLanguage:            _setLanguage
   return api
 
 

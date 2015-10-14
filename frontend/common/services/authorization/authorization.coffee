@@ -28,9 +28,9 @@ LanguagesService) ->
         response = response.toJSON()
         response.user.role = JSON.parse response.user.role
         AccountService.setAccount response.user
-        userLang = LanguagesService.getStartupLanguage(response.user.interfaceLanguage)
-        LanguagesService.setLanguage(userLang)
-        _deferred.resolve response.user
+        LanguagesService.getStartupLanguage(response.user.interfaceLanguage).then (userLang) ->
+          LanguagesService.setLanguage(userLang)
+          _deferred.resolve response.user
       , (error) ->
         console.log "error", error
         _deferred.reject error

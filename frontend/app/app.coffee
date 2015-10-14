@@ -106,15 +106,16 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
   ], {
     'en_US': 'en-us'
     'en-en': 'en-us'
-    'en':    'en-us'
+    'en':    'en-us' # NOTE: change/remove if international version will be added
   }).determinePreferredLanguage()
 
   $translateProvider.useSanitizeValueStrategy(null)
 
   # configure loading angular locales
-  #tmhDynamicLocaleProvider.localeLocationPattern('assets/angular-i18n/angular-locale_{{locale}}.js')
+  tmhDynamicLocaleProvider.localeLocationPattern('assets/angular-i18n/angular-locale_{{locale}}.js')
 
-
+# Run
+# ---
 .run ($rootScope, AccountService, AuthorizationService) ->
   _firstEnter = true
 
@@ -138,8 +139,20 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
 
 # App Controller
 # -------------
-.controller 'AppController', ($scope, $rootScope, $state, $cookies, $mdSidenav, LanguagesService,
-InterfaceLanguagesResolver) ->
-  LanguagesService.getStartupLanguage()
+.controller 'AppController', ($scope, $rootScope, $state, $cookies, $mdSidenav, LanguagesService, AccountService) ->
+
+  console.log "AccountService.getData('interfaceLanguage')", AccountService.getData('interfaceLanguage')
+
+  LanguagesService.getStartupLanguage().then (langCode) ->
+    LanguagesService.setLanguage(langCode)
+
+  # Watch
+  $scope.$watch () ->
+    return AccountService.getAllData()
+  , (newVal, oldVal) ->
+    # update user interface lang if exsist and has been changed
+    if newVal.interfaceLanguage then LanguagesService.setLanguage(newVal.interfaceLanguage)
+    return
+  , true
   return
 
