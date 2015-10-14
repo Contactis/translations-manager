@@ -1,6 +1,8 @@
-angular.module 'translation.services.filtersState', []
+angular.module('translation.services.filtersState', [
+  'lbServices'
+])
 
-.service 'FiltersStateService', ($q, $timeout, Restangular) ->
+.service 'FiltersStateService', ($q, $timeout, ProjectGroup) ->
 
   _groups = []
   _topBarDefaultFilters = {}
@@ -37,8 +39,8 @@ angular.module 'translation.services.filtersState', []
   ]
 
   _refreshGroups = () ->
-    Restangular.one('groups').getList().then (success)->
-      _groups = groupHelper(success.plain())
+    ProjectGroup.find().$promise.then (success)->
+      _groups = groupHelper(success)
     , (error) ->
       console.log "Problem with loading groups"
 

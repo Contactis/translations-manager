@@ -1,10 +1,10 @@
 angular.module('translation.pages.manager-view', [
   'ui.router'
+  'lbServices'
   'data-table'
   'smart-table'
   'translation.providers.userPermissionsSettings'
   'translation.directive.searchWatchModel'
-  'restangular'
 ])
 
 
@@ -20,7 +20,7 @@ angular.module('translation.pages.manager-view', [
       access: access.user
 
 
-.controller 'ManagerViewController', ($scope, $timeout, Restangular) ->
+.controller 'ManagerViewController', ($scope, $timeout, TranslationKey) ->
   $scope.filters = {}
   $scope.query = ""
   $scope.languageList = ['pl','en','de']
@@ -37,9 +37,9 @@ angular.module('translation.pages.manager-view', [
       }
     ]
     return
-#  $scope.tableData = {"id":1,"keyString":"LOGIN","isPlural":false,"projectId":1,"groupId":3,"Translations":[]}
-  Restangular.one('translations-keys').getList().then (success)->
-    $scope.tableData = success.plain()
+
+  TranslationKey.find().$promise.then (success)->
+    $scope.tableData = success
     $scope.displayedCollection = [].concat($scope.tableData)
   , (error) ->
     console.log "Problem with loading translation keys"

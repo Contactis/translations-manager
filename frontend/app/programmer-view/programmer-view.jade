@@ -1,11 +1,16 @@
-tr-top-bar(filters='filters' context-menu="contextMenu")
+tr-top-bar(filters='filters' context-menu="contextMenu" query="query")
 
-//- pre
-//-   | filters: {{ filters | json }}
-//-   | contextMenu: {{ contextMenu | json }}
-
-div(flex layout="column" layout-fill)
-  dtable.translationTables(options="options" rows="tableData" class="material" selected="selected" on-row-click="onRowClick(row)" on-select="onSelect(rows)")
+table.table.table-striped(search-watch-model="query" st-safe-src="tableData" st-table="displayedCollection")
+  thead
+    tr
+      th(st-sort="keyString") Index key name
+      th Basic translation: English (English)
+      th Context Description
+  tbody
+    tr(data-ng-repeat="singleRow in displayedCollection")
+      td {{singleRow.keyString}}
+      td mock1
+      td mock2
 
 div(layout='row')
   span(flex)
