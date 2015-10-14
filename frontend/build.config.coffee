@@ -58,6 +58,7 @@ module.exports =
 
       'frontend/vendor/messageformat/messageformat.js'
       'frontend/vendor/messageformat/locale/en.js'
+      'frontend/vendor/messageformat/locale/pl.js'
       'frontend/vendor/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js'
       'frontend/vendor/angular-dynamic-locale/dist/tmhDynamicLocale.js'
       'frontend/vendor/angular-smart-table/dist/smart-table.min.js'

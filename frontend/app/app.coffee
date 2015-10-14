@@ -105,6 +105,8 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
     'en_US': 'en-us'
     'en-en': 'en-us'
     'en':    'en-us'
+    'pl':    'en-us'
+    'pl-pl': 'en-us'
   }).determinePreferredLanguage()
 
   # configure loading angular locales
