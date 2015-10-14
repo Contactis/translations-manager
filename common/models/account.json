@@ -15,7 +15,7 @@
       "model": "Role",
       "type": "hasMany",
       "through": "RoleMapping"
-    }  
+    }
   },
   "display": [
     "id",
@@ -71,8 +71,7 @@
       "display": {
         "label": "Password",
         "type": "password",
-        "pattern": "/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{6,}$/",
-        "description": "Password must contain at least 1 upper case letter, 1 number, and at least 6 characters long."
+        "description": "Password should contain at least 1 upper case letter, 1 number, and at least 6 characters long."
       }
     },
     "credentials": {
@@ -104,7 +103,7 @@
       "display": {
         "label": "Created Date",
         "readonly": true,
-        "evalDefault": "new Date()" 
+        "evalDefault": "new Date()"
       }
     },
     "lastUpdated": {
@@ -113,7 +112,7 @@
         "label": "Last Updated",
         "readonly": true,
         "evalDefault": "new Date()",
-        "forceDefaultOnSave": true 
+        "forceDefaultOnSave": true
       }
     },
     "firstName": {
