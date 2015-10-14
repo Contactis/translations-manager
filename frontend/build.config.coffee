@@ -57,13 +57,14 @@ module.exports =
       'frontend/vendor/angular-moment/angular-moment.js'
 
       'frontend/vendor/messageformat/messageformat.js'
-      'frontend/vendor/messageformat/locale/en.js'
+      'frontend/vendor/messageformat/locale/en.js' # need to upload all messageformat for all interface languages
       'frontend/vendor/messageformat/locale/pl.js'
+      'frontend/vendor/messageformat/locale/de.js'
+      'frontend/vendor/messageformat/locale/pt.js'
+      'frontend/vendor/messageformat/locale/nl.js'
       'frontend/vendor/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js'
       'frontend/vendor/angular-dynamic-locale/dist/tmhDynamicLocale.js'
       'frontend/vendor/angular-smart-table/dist/smart-table.min.js'
-
-
 
       'frontend/vendors_offline/common.js'
       'frontend/vendors_offline/permissionConfig.js'

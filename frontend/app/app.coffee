@@ -9,6 +9,7 @@ translationApp = angular.module('translation', [
   'ngMaterial'
   'ngMessages'
   'smart-table'
+  'angular-lodash'
 
   # Including templates
   'templates-module'
@@ -56,7 +57,8 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
         return AccountService.loadSession()
       getGroups: (FiltersStateService) ->
         return FiltersStateService.refreshGroups()
-
+      InterfaceLanguagesResolver: (LanguagesService) ->
+        return LanguagesService.getInterfaceLanguages()
 
   $urlRouterProvider
     .when('', '/')
@@ -105,9 +107,9 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
     'en_US': 'en-us'
     'en-en': 'en-us'
     'en':    'en-us'
-    'pl':    'en-us'
-    'pl-pl': 'en-us'
   }).determinePreferredLanguage()
+
+  $translateProvider.useSanitizeValueStrategy(null)
 
   # configure loading angular locales
   #tmhDynamicLocaleProvider.localeLocationPattern('assets/angular-i18n/angular-locale_{{locale}}.js')
@@ -136,7 +138,8 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
 
 # App Controller
 # -------------
-.controller 'AppController', ($scope, $rootScope, $state, $cookies, $mdSidenav) ->
-
+.controller 'AppController', ($scope, $rootScope, $state, $cookies, $mdSidenav, LanguagesService,
+InterfaceLanguagesResolver) ->
+  LanguagesService.getStartupLanguage()
   return
 

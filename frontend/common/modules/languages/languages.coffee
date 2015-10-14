@@ -5,13 +5,17 @@ angular.module('translation.modules.languages', [
   'tmh.dynamicLocale'
   'ngCookies'
   'angularMoment'
+  'angular-lodash'
 ])
 
 # LanguageService
 # ---------------
-.factory 'LanguagesService', ($http, $rootScope, $translate, $locale, $cookieStore, tmhDynamicLocale) ->
+.factory 'LanguagesService', ($q, $log, $http, $rootScope, $translate, $locale, $cookieStore, tmhDynamicLocale,
+Restangular) ->
 
   _langCode = null
+  _deferredInterfaceLanguages = undefined
+
 
   # @method         _unifyIetfCode
   # @param          langCode
@@ -21,13 +25,34 @@ angular.module('translation.modules.languages', [
     _langCode = langCode.replace("_", "-")
     return _langCode.toLowerCase()
 
+  # @method       _getInterfaceLanguages
+  # @getter
+  # @description  Get all frontend available interface languages from
+  #               the database
+  # @returns      Promise
+  _getInterfaceLanguages = () ->
+    if _deferredInterfaceLanguages
+      return _deferredInterfaceLanguages.promise
+    _deferredInterfaceLanguages = $q.defer()
+
+    Restangular.one('Languages').getList().then (response) ->
+      _deferredInterfaceLanguages.resolve(response.plain())
+    , (error) ->
+      console.log "Languages error: ", error
+      _deferredInterfaceLanguages.reject()
+    return _deferredInterfaceLanguages.promise
+
 
   # @method       _getStartupLanguage
   # @setter
   # @param        [userInterfaceLanguage]
   # @description  Determinate user startup language
   _getStartupLanguage = (userInterfaceLanguage) ->
-    userInterfaceLanguage = if typeof userInterfaceLanguage is 'undefined' then null else userInterfaceLanguage
+    userInterfaceLanguage = \
+      if typeof userInterfaceLanguage is 'undefined' or not userInterfaceLanguage
+        null
+      else userInterfaceLanguage
+
     userLang = undefined
     switch
       when angular.isDefined $cookieStore.get 'selectedLanguage'
@@ -37,8 +62,16 @@ angular.module('translation.modules.languages', [
         console.log "userInterfaceLanguage", userInterfaceLanguage
         userLang = userInterfaceLanguage
       else
-        console.log "$translate.use()", $translate.use()
-        userLang = $translate.use()
+        console.log "$translate.use()", _unifyIetfCode($translate.use())
+        _getInterfaceLanguages().then (success) ->
+          _interfaceLangs = success
+          if _.findWhere(_interfaceLangs, {ietfCode: _unifyIetfCode($translate.use())}, 'ietfCode')
+            userLang = _unifyIetfCode($translate.use())
+          else
+            $log.info "Your language `" + $translate.use() + "` was not found so we use default language `en-us`"
+            userLang = 'en-us'
+        , (e) ->
+          console.log "error", e
     return userLang
 
   # @method       _setLanguage
@@ -59,9 +92,10 @@ angular.module('translation.modules.languages', [
   # ## Public API
   api =
     # Change string translations and $locale
-    setLanguage:          _setLanguage
-    getStartupLanguage:   _getStartupLanguage
-    langCode:             () ->
+    getInterfaceLanguages:  _getInterfaceLanguages
+    setLanguage:            _setLanguage
+    getStartupLanguage:     _getStartupLanguage
+    langCode:               () ->
       return _langCode
 
   return api

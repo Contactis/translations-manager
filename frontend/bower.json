@@ -16,7 +16,7 @@
     "angular-data-table": "~0.3.18",
     "angular-dynamic-locale": "~0.1.27",
     "angular-i18n": "~1.4.7",
-    "angular-lodash": "~0.1.2",
+    "angular-lodash": "latest",
     "angular-material": "0.11.0",
     "angular-messages": "~1.4.7",
     "angular-smart-table": "~2.1.4",
