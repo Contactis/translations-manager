@@ -54,7 +54,7 @@ angular.module('translation.modules.languages', [
     $translate.use _langCode        # for translations strings
     tmhDynamicLocale.set _langCode  # set locale for translations
     # TODO Add moment.js locale file
-
+    return
 
   # ## Public API
   api =
