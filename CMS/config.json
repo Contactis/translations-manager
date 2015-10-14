@@ -21,7 +21,7 @@
   "public": {
     "address": "0.0.0.0",
     "port": 3005,
-    "title": "ISBX CMS",
+    "title": "Translation Manager CMS",
     "css": "/css/custom.css",
     "authModel": "Accounts",
     "profileModel": "Account",
@@ -34,117 +34,6 @@
     },
     "customModules": [],
     "nav": [
-      {
-        "label": "Users",
-        "path": "users",
-        "icon": "fa-user",
-        "roles": ["SuperAdmin"],
-        "subnav": [
-          {
-            "label": "Add",
-            "route": "edit",
-            "roles": ["SuperAdmin"],
-            "options": {
-              "model": "User",
-              "key": "id"
-            }
-          },
-          {
-            "label": "All Users",
-            "route": "list",
-            "roles": ["SuperAdmin"],
-            "options": {
-              "model": "User",
-              "key": "id",
-              "showFilter": true,
-              "pageSize": 500,
-              "params": {
-              },
-              "columns": [
-                {
-                  "field": "email",
-                  "displayName": "E-mail"
-                },
-                {
-                  "field": "username",
-                  "displayName": "Username"
-                },
-                {
-                  "field": "created",
-                  "displayName": "Created",
-                  "headerClass": "center",
-                  "cellClass": "center",
-                  "cellFilter": "date:'yyyy-MM-dd'"
-                }
-              ]
-            }
-          },
-          {
-            "label": "Manage Roles",
-            "route": "list",
-            "roles": ["SuperAdmin"],
-            "options": {
-              "model": "Role",
-              "key": "id",
-              "params": {},
-              "enableRowSelection": false,
-              "pageSize": 100,
-              "columns": [
-                {
-                  "field": "description",
-                  "displayName": "Role"
-                },
-                {
-                  "field": "id",
-                  "displayName": "Manage Users",
-                  "headerClass": "center",
-                  "cellClass": "center",
-                  "width": 160,
-                  "cellTemplate": "<a href=\"{{ $state.href('dashboard.model.action.list', { model: section.path, action:'Manage User Roles' }) }}?roleId={{ row.entity.id }}&filterDescription={{ row.entity.description }}\">Manage Users</a>"
-                }
-              ]
-            }
-          },
-          {
-            "label": "Manage User Roles",
-            "route": "list",
-            "roles": ["SuperAdmin"],
-            "hidden": true,
-            "options": {
-              "api": "Roles/{roleId}/RoleMappings",
-              "model": "RoleMapping",
-              "key": "id",
-              "params": {
-                "filter[include][User]": 1
-              },
-              "enableRowSelection": false,
-              "showFilter": true,
-              "pageSize": 500,
-              "columns": [
-                {
-                  "field": "User.email",
-                  "displayName": "E-mail",
-                  "cellTemplate": "<a ui-sref=\"dashboard.model.action.edit({ model: section.path, action: 'All Users', id: row.entity.User.id })\">{{row.entity.User.email}}</a>"
-                },
-                {
-                  "field": "User.username",
-                  "displayName": "Username"
-                },
-                {
-                  "field": "id",
-                  "displayName": "Remove",
-                  "sortable": false,
-                  "headerClass": "center",
-                  "cellClass": "center",
-                  "width": 90,
-                  "cellTemplate": "<button class=\"btn btn-default link delete\" ng-click=\"deleteRow(row)\"><i class=\"fa fa-times\"></i></button>"
-                }
-              ]
-            }
-          }
-        ],
-        "defaultSubNavIndex": 1
-      },
       {
         "label": "Accounts",
         "path": "accounts",
@@ -228,7 +117,7 @@
               "params": {
                 "filter[include][Account]": 1
               },
-              "enableRowSelection": false,
+              "enableRowSelection": true,
               "showFilter": true,
               "pageSize": 500,
               "columns": [

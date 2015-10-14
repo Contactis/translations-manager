@@ -6,6 +6,9 @@
     "validateUpsert": true
   },
   "properties": {
+    "id": {
+      "type": "number"
+    },
     "realm": {
       "type": "string"
     },

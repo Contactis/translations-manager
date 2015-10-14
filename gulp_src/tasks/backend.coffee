@@ -46,8 +46,12 @@ gulp.task 'db:seed', shell.task [
   "node ./ --seeds --silent --disable-cms"
 ]
 
+gulp.task 'db:secondary-seed', shell.task [
+  "node ./ --secondary-seeds --silent --disable-cms"
+]
+
 gulp.task 'db:restore', ->
-  runSequence 'db:renew', 'db:seed'
+  runSequence 'db:renew', 'db:seed', 'db:secondary-seed'
 
 gulp.task 'app:npm', shell.task [
   "npm update"
