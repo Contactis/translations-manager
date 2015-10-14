@@ -10,11 +10,18 @@ md-dialog(flex="50")
               md-radio-button(data-ng-value="false") String
               md-radio-button(data-ng-value="true") Plural
           div(layout layout-sm="column")
-            md-input-container(flex)
-              label Namespace
-              input(data-ng-model="currentKey.namespace" required name="namespace")
-              div(data-ng-if="keyForm.namespace.$touched" ng-messages="keyForm.namespace.$error")
-                div(ng-message="required") This is required.
+            md-autocomplete(flex md-search-text="searchText" md-items="item in querySearch(searchText)" required
+              md-input-minlength="2")
+              md-item-template
+                span(md-highlight-text="searchText") {{item.namespace}}
+            //md-input-container(flex)
+            //  label Namespace
+            //  input(data-ng-model="currentKey.namespace" required name="namespace")
+            //  div(data-ng-if="keyForm.namespace.$touched" ng-messages="keyForm.namespace.$error")
+            //    div(ng-message="required") This is required.
+
+
+
             md-input-container(flex)
               label Key Index
               input(data-ng-model="currentKey.key" name="key" required)

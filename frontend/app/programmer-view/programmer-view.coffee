@@ -74,30 +74,34 @@ $mdUtil, TranslationKey, $mdDialog) ->
       targetEvent: ev
       clickOutsideToClose: true
 
-  DialogController = ($scope, $mdDialog) ->
-    $scope.currentKey = {}
-    $scope.currentKey.isPlural = true
+  DialogController = ($scope, $mdDialog, FiltersStateService) ->
+    $scope.currentKey           = {}
+    $scope.currentKey.isPlural  = true
+    $scope.searchText           = null
+    $scope.groups = FiltersStateService.getGroups()
+
     $scope.closeDialog = () ->
       $mdDialog.hide()
 
     $scope.saveKey = () ->
-      sample =
-      {
-        'keyString': 'LOGIN_KUBY'
-        'isPlural': false
-        'projectId': 1
-        'groupId': 3
-      }
-      TranslationKey.create(sample).$promise.then () ->
+      TranslationKey.create(currentKey).$promise.then () ->
         console.log 'saving key!'
       , (error) ->
         console.log 'error while saving key'
+
+    $scope.querySearch = (query) ->
+      if query then $scope.groups.filter(createFilterFor(query)) else []
+
+    createFilterFor = (query) ->
+      lowercaseQuery = angular.lowercase(query)
+      (state) ->
+        state.namespace.indexOf(lowercaseQuery) == 0
 
     #mocked
     $scope.languagePlurals = [
       { plural: "One",   example: ": 1"}
       { plural: "Other", example: ": 0, 2-999, 12..."}
     ]
-  DialogController.$inject = ["$scope", "$mdDialog"]
+  DialogController.$inject = ["$scope", "$mdDialog", "FiltersStateService"]
 
   return

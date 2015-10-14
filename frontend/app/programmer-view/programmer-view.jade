@@ -11,7 +11,10 @@ table.table.table-striped(search-watch-model="query" st-safe-src="tableData" st-
       td {{singleRow.keyString}}
       td mock1
       td mock2
-
+md-autocomplete(flex md-search-text="searchText" md-items="item in querySearch(searchText)" required
+md-input-minlength="2")
+  md-item-template
+    span(md-highlight-text="searchText") {{item.namespace}}
 div(layout='row')
   span(flex)
   md-button.md-fab.md-primary.md-fab-bottom-right(aria-label="Profile" ng-click="showAdvanced($event)" )
