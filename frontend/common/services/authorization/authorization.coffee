@@ -5,10 +5,13 @@ angular.module 'translation.services.authorization', [
   'lbServices'
   'translation.modules.languages'
   'translation.services.account'
+  'translation.providers.userPermissionsSettings'
 ]
 
 .service 'AuthorizationService', ($q, $state, $mdToast, $timeout, AccountService, Account,
-LanguagesService) ->
+LanguagesService, UserPermissionsSettings) ->
+
+  userRoles = UserPermissionsSettings.userRoles
 
   _authorizePageAccess = (accessLevel, role) ->
     if typeof role is 'undefined'
@@ -25,9 +28,12 @@ LanguagesService) ->
 
     Account.login {rememberMe: rememberMe},  _credentials
       , (response) ->
+
         response = response.toJSON()
-        response.user.role = JSON.parse response.user.role
+        response.user.role = userRoles[response.user.role]
+
         AccountService.setAccount response.user
+
         userLang = LanguagesService.getStartupLanguage(response.user.interfaceLanguage)
         LanguagesService.setLanguage(userLang)
         _deferred.resolve response.user

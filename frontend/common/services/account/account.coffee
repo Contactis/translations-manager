@@ -11,8 +11,7 @@ angular.module('translation.services.account', [
 .service 'AccountService', ($q, $cookies, $http, $timeout, $state, $mdToast, Restangular,
 UserPermissionsSettings, Account) ->
 
-  accessLevels  = UserPermissionsSettings.accessLevels
-  userRoles     = UserPermissionsSettings.userRoles
+  userRoles = UserPermissionsSettings.userRoles
 
   _notify = $q.defer()
   _deferred = null
@@ -23,7 +22,7 @@ UserPermissionsSettings, Account) ->
 
   _decodeAccountResource = (accountResource) ->
     accountResource = accountResource.toJSON()
-    accountResource.role = JSON.parse accountResource.role
+    accountResource.role = userRoles[accountResource.role]
     return accountResource
 
   _accountUpdated = ->
