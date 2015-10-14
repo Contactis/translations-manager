@@ -18,7 +18,7 @@ accounts = [
     lastName:           'Manager'
     password:           'manager'
     role:               'user'
-    interfaceLanguage:  'en-us'
+    interfaceLanguage:  'pl-pl'
     lastUpdated:        moment().format()
   }
   {
@@ -36,7 +36,7 @@ accounts = [
     lastName:           'Programmer'
     password:           'programmer'
     role:               'user'
-    interfaceLanguage:  'en-us'
+    interfaceLanguage:  'en'
     lastUpdated:        moment().format()
   }
 ]
