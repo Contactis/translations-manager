@@ -41,6 +41,17 @@ gulp.task 'vendor-js', ->
   gulp.src(config.build.vendor_files.js)
   .pipe(gulpif(!config.arguments.production, copy(config.buildDir)))
 
+gulp.task 'source-maps', (cb) ->
+
+  _vendorFiles = config.build.vendor_files.sourceMaps
+  _keys = Object.keys _vendorFiles
+
+  if _keys.length > 0
+    _keys.forEach (val, i) ->
+      gulp.src(_vendorFiles[val].source)
+      .pipe(gulp.dest(_vendorFiles[val].destination))
+  cb()
+
 gulp.task 'permissions-config', ->
 
   string = "common.permissionConfig = #{JSON.stringify permissionsConfig};"
@@ -55,4 +66,5 @@ gulp.task 'build-assets', [
   'copy-files'
   'copy-images'
   'vendor-js'
+  'source-maps'
 ]

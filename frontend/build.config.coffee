@@ -1,5 +1,7 @@
 # This file/module contains all configuration for the build process.
 
+gulp_build_dir = 'public'
+
 module.exports =
 
   backendDir:   'backend'
@@ -10,7 +12,7 @@ module.exports =
   tpl_name:       'templates-module.js'
   tpl_module:     'templates-module'
 
-  gulp_build_dir: 'public'
+  gulp_build_dir: gulp_build_dir
 
   #  Global filenames for html templates
   project_theme_name: 'theme_material'
@@ -72,6 +74,17 @@ module.exports =
       'frontend/vendor/angular-data-table/release/dataTable.css'
       'frontend/vendor/angular-data-table/release/material.css'
     ]
+
+    sourceMaps:
+      bootstrap:
+        source:       'frontend/vendor/bootstrap/dist/css/bootstrap.css.map'
+        destination:  gulp_build_dir + '/assets'
+      angularAria:
+        source:       'frontend/vendor/angular-aria/angular-aria.min.js.map'
+        destination:  gulp_build_dir + '/frontend/vendor/angular-aria'
+      smartTable:
+        source:       'frontend/vendor/angular-smart-table/dist/smart-table.min.js.map'
+        destination:  gulp_build_dir + '/frontend/vendor/angular-smart-table/dist'
 
     assets: ''
 
