@@ -15,6 +15,7 @@ translationApp.config( [
 
     # ### Common phrases
     # This section contains general phrases used in project
+    'TRANSLATION_MANAGER':        'Translation manager'
     'LOGIN':                      'Login'
     'LOG_IN':                     'Log in'
     'LOG_OUT':                    'Log out'
@@ -29,7 +30,6 @@ translationApp.config( [
     'VERIFIED':                   'Verified'
     'VERIFY':                     'Verify'
     'NOT_VERIFIED':               'Not verified'
-    'REMOVE':                     'Remove'
     'DELETE':                     'Delete'
     'YES':                        'Yes'
     'NO':                         'No'
@@ -63,7 +63,15 @@ translationApp.config( [
 
 
     # app/login.jade
+    'EMAIL':                                        'E-mail'
+    'PASSWORD':                                     'Password'
+    'REPEAT_PASSWORD':                              'Repeat password'
+    'FIRST_NAME':                                   'First name'
+    'LAST_NAME':                                    'Last name'
+    'REGISTER':                                     'Register'
+    'COMPLETE':                                     'Complete'
     'LOGIN_WITH_YOUR_TRANSLATION_MANAGER_ACCOUNT':  'Login with your translation manager account'
+
 
   })
 ])

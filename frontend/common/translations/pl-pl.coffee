@@ -15,6 +15,7 @@ translationApp.config( [
 
     # ### Common phrases
     # This section contains general phrases used in project
+    'TRANSLATION_MANAGER':        'Menadżer tłumaczeń'
     'LOGIN':                      'Login'
     'LOG_IN':                     'Zaloguj się'
     'LOG_OUT':                    'Wyloguj się'
@@ -62,6 +63,15 @@ translationApp.config( [
 
 
     # app/login.jade
+    # ### login.jade
+    'EMAIL':                                        'E-mail'
+    'PASSWORD':                                     'Hasło'
+    'REPEAT_PASSWORD':                              'Powtórz hasło'
+    'FIRST_NAME':                                   'Imię'
+    'LAST_NAME':                                    'Nazwisko'
+    'REGISTER':                                     'Zarejestruj'
+    'COMPLETE':                                     'Zakończ'
+    'REMEMBER_ME':                                  'Pamiętaj mnie'
     'LOGIN_WITH_YOUR_TRANSLATION_MANAGER_ACCOUNT':  'Zaloguj się używając swojego konta Menadzera Tłumaczeń'
 
   })
