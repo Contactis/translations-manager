@@ -23,6 +23,9 @@ translationApp = angular.module('translation', [
   'translation.pages.dashboard'
   'translation.pages.manager-view'
   'translation.pages.programmer-view'
+  #
+  # Including modules
+  'translation.modules.languages'
 
   # Including services
   'translation.services.account'
@@ -102,7 +105,8 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
     'en_US': 'en-us'
     'en-en': 'en-us'
     'en':    'en-us'
-    'pl_PL': 'en-us'
+    'pl':    'en-us'
+    'pl-pl': 'en-us'
   }).determinePreferredLanguage()
 
   # configure loading angular locales

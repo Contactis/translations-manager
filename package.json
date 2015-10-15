@@ -32,7 +32,6 @@
     "slu-seed": "^0.1.5"
   },
   "devDependencies": {
-    "isbx-loopback-cms": "git+https://github.com/ISBX/isbx-loopback-cms.git",
     "bcryptjs": "^2.2.2",
     "body-parser": "^1.13.3",
     "chalk": "^1.1.1",
@@ -72,9 +71,11 @@
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.3.4",
+    "isbx-loopback-cms": "git+https://github.com/ISBX/isbx-loopback-cms.git",
     "js2coffee": "^2.1.0",
     "jshint": "^2.5.6",
     "jwt-simple": "^0.3.1",
+    "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "morgan": "^1.6.1",
     "run-sequence": "^1.1.2",

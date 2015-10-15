@@ -2,12 +2,16 @@ angular.module 'translation.services.authorization', [
   'ui.router'
   'ngMaterial'
   'ngCookies'
-  'translation.services.account'
   'lbServices'
+  'translation.modules.languages'
+  'translation.services.account'
+  'translation.providers.userPermissionsSettings'
 ]
 
-.service 'AuthorizationService', ($q, $state, $mdToast, $timeout, AccountService, Account) ->
+.service 'AuthorizationService', ($q, $state, $mdToast, $timeout, AccountService, Account,
+LanguagesService, UserPermissionsSettings) ->
 
+  userRoles = UserPermissionsSettings.userRoles
 
   _authorizePageAccess = (accessLevel, role) ->
     if typeof role is 'undefined'
@@ -23,15 +27,19 @@ angular.module 'translation.services.authorization', [
       password:   password
 
     Account.login {rememberMe: rememberMe},  _credentials
-    , (response) ->
-      response = response.toJSON()
-      response.user.role = JSON.parse response.user.role
+      , (response) ->
 
-      AccountService.setAccount response.user
-      _deferred.resolve response.user
-    , (error) ->
-      console.log "error", error
-      _deferred.reject error
+        response = response.toJSON()
+        response.user.role = userRoles[response.user.role]
+
+        AccountService.setAccount response.user
+
+        userLang = LanguagesService.getStartupLanguage(response.user.interfaceLanguage)
+        LanguagesService.setLanguage(userLang)
+        _deferred.resolve response.user
+      , (error) ->
+        console.log "error", error
+        _deferred.reject error
 
     return _deferred.promise
 
