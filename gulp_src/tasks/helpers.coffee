@@ -15,3 +15,7 @@ gulp.task 'clean-all', ->
   .pipe(plumber())
   .pipe(rimraf({force: true}))
 
+gulp.task 'clean-docs', ->
+  gulp.src(config.build.docs_dir, {read: false})
+  .pipe(plumber())
+  .pipe(rimraf({force: true}))

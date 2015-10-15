@@ -1,0 +1,9 @@
+{
+  "glob": [
+    "frontend/**/*.coffee", "!frontend/**/*.spec.coffee",
+    "README.md"
+  ],
+  "out": "public/docs",
+  "index": "README.md",
+  "silent": true
+}
