@@ -61,6 +61,9 @@ UserPermissionsSettings, Account) ->
     getData: (key) ->
       return _account[key]
 
+    getAllData: () ->
+      return _account
+
     setAccount: (newAccount) ->
       _account = angular.copy newAccount
       _accountUpdated()

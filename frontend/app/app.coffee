@@ -9,6 +9,7 @@ translationApp = angular.module('translation', [
   'ngMaterial'
   'ngMessages'
   'smart-table'
+  'angular-lodash'
 
   # Including templates
   'templates-module'
@@ -56,7 +57,8 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
         return AccountService.loadSession()
       getGroups: (FiltersStateService) ->
         return FiltersStateService.refreshGroups()
-
+      InterfaceLanguagesResolver: (LanguagesService) ->
+        return LanguagesService.getInterfaceLanguages()
 
   $urlRouterProvider
     .when('', '/')
@@ -101,18 +103,22 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
   # This method tries to resolve language by user locale
   $translateProvider.registerAvailableLanguageKeys([
     'en-us'
+    'pl-pl'
   ], {
-    'en_US': 'en-us'
-    'en-en': 'en-us'
-    'en':    'en-us'
-    'pl':    'en-us'
-    'pl-pl': 'en-us'
+    'en_US':  'en-us'
+    'en-en':  'en-us'
+    'en':     'en-us' # NOTE: change/remove if international version will be added
+    'pl_PL':  'pl-pl'
+    'pl':     'pl-pl'
   }).determinePreferredLanguage()
 
+  $translateProvider.useSanitizeValueStrategy(null)
+
   # configure loading angular locales
-  #tmhDynamicLocaleProvider.localeLocationPattern('assets/angular-i18n/angular-locale_{{locale}}.js')
+  tmhDynamicLocaleProvider.localeLocationPattern('assets/angular-i18n/angular-locale_{{locale}}.js')
 
-
+# Run
+# ---
 .run ($rootScope, AccountService, AuthorizationService) ->
   _firstEnter = true
 
@@ -136,7 +142,18 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
 
 # App Controller
 # -------------
-.controller 'AppController', ($scope, $rootScope, $state, $cookies, $mdSidenav) ->
+.controller 'AppController', ($scope, $rootScope, $state, $cookies, $mdSidenav, LanguagesService, AccountService) ->
 
+  # Set language for income user (not logged in)
+  LanguagesService.setLanguage(LanguagesService.getStartupLanguage())
+
+  # Watch
+  $scope.$watch () ->
+    return AccountService.getAllData() # It should watch for whole object to track changes
+  , (newVal, oldVal) ->
+    # update user interface language if exsists and whole object user has been changed.
+    if newVal.interfaceLanguage then LanguagesService.setLanguage(newVal.interfaceLanguage)
+    return
+  , true
   return
 

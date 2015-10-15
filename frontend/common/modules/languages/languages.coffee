@@ -5,65 +5,91 @@ angular.module('translation.modules.languages', [
   'tmh.dynamicLocale'
   'ngCookies'
   'angularMoment'
+  'angular-lodash'
 ])
 
 # LanguageService
 # ---------------
-.factory 'LanguagesService', ($http, $rootScope, $translate, $locale, $cookieStore, tmhDynamicLocale) ->
+.factory 'LanguagesService', ($q, $log, $http, $rootScope, $translate, $locale, $cookieStore, tmhDynamicLocale,
+Restangular) ->
 
-  _langCode = null
+  # Array with supported languages by project
+  _interfaceLanguages = [
+    { nativeName: "English (U.S.)", ietfCode: "en-us" }
+    { nativeName: "Polski (Polska)", ietfCode: "pl-pl" }
+  ]
 
-  # @method         _unifyIetfCode
+
+  # @method         _unifyToIetfCode
   # @param          langCode
-  # @description    unify language notation from different browser to "xx-xx",
-  #                 like "en-us"
-  _unifyIetfCode = (langCode) ->
-    _langCode = langCode.replace("_", "-")
-    return _langCode.toLowerCase()
+  # @description    unify languages code notation from different browser to one
+  #                 like "xx-yy" or "xx" (ex: "en-us", "en")
+  # @returns        String
+  _unifyToIetfCode = (inputCode) ->
+    _code = inputCode.replace("_", "-")
+    return _code.toLowerCase()
+
+
+  # @method       _getInterfaceLanguages
+  # @getter
+  # @description  Get all frontend available interface languages from
+  #               the database
+  # @returns      Array
+  _getInterfaceLanguages = () ->
+    return _interfaceLanguages
 
 
   # @method       _getStartupLanguage
   # @setter
-  # @param        [userInterfaceLanguage]
+  # @param        {String}    [userInterfaceLanguage]   string with a language code; ex: en, en-us, pl-pl
   # @description  Determinate user startup language
+  # @returns      String
   _getStartupLanguage = (userInterfaceLanguage) ->
-    userInterfaceLanguage = if typeof userInterfaceLanguage is 'undefined' then null else userInterfaceLanguage
-    userLang = undefined
-    switch
+    userInterfaceLanguage = \
+      if typeof userInterfaceLanguage is 'undefined' or not userInterfaceLanguage
+        null
+      else userInterfaceLanguage
+
+    result = switch
+      when userInterfaceLanguage isnt null and not userInterfaceLanguage
+        userInterfaceLanguage
       when angular.isDefined $cookieStore.get 'selectedLanguage'
-        console.log "cookie is defined", $cookieStore.get 'selectedLanguage'
-        userLang = $cookieStore.get 'selectedLanguage'
-      when userInterfaceLanguage isnt null
-        console.log "userInterfaceLanguage", userInterfaceLanguage
-        userLang = userInterfaceLanguage
+        $cookieStore.get 'selectedLanguage'
       else
-        console.log "$translate.use()", $translate.use()
-        userLang = $translate.use()
-    return userLang
+        if _.findWhere(_interfaceLanguages, {ietfCode: _unifyToIetfCode($translate.use())}, 'ietfCode')
+          _unifyToIetfCode($translate.use())
+        else
+          _str = "Your language `" + _unifyToIetfCode($translate.use()) + \
+            "` was not found, so used default language `en`, international english."
+          $log.info _str
+          'en' # en = international english, not other dialects
+    return result
+
 
   # @method       _setLanguage
   # @setter
   # @param        langCode
   # @description  Set user language for the website.
-  _setLanguage = (langCode) ->
-    _langCode = _unifyIetfCode(langCode)
-    $cookieStore.put('selectedLanguage', _langCode)
-    moment.locale(_langCode)
-    $http.defaults.headers.common['X-LANG'] = _langCode
+  _setLanguage = (ietfCode) ->
+    console.log "_setLanguage ietfCode", ietfCode
+    _code = _unifyToIetfCode(ietfCode)
+    $cookieStore.put('selectedLanguage', _code)
+    moment.locale(_code)
+    $http.defaults.headers.common['X-LANG'] = _code
     $rootScope.$locale = $locale
-    $translate.use _langCode        # for translations strings
-    tmhDynamicLocale.set _langCode  # set locale for translations
+    $translate.use _code        # for translations strings
+    tmhDynamicLocale.set _code  # set locale for translations
     # TODO Add moment.js locale file
     return
+
 
   # ## Public API
   api =
     # Change string translations and $locale
-    setLanguage:          _setLanguage
-    getStartupLanguage:   _getStartupLanguage
-    langCode:             () ->
-      return _langCode
-
+    getInterfaceLanguages:  _getInterfaceLanguages
+    getStartupLanguage:     _getStartupLanguage
+    setLanguage:            _setLanguage
+    unifyToIetfCode:        _unifyToIetfCode
   return api
 
 

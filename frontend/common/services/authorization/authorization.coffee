@@ -33,7 +33,6 @@ LanguagesService, UserPermissionsSettings) ->
         response.user.role = userRoles[response.user.role]
 
         AccountService.setAccount response.user
-
         userLang = LanguagesService.getStartupLanguage(response.user.interfaceLanguage)
         LanguagesService.setLanguage(userLang)
         _deferred.resolve response.user

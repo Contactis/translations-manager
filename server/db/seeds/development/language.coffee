@@ -6,31 +6,38 @@ languages = [
     nameNative:   'English'
     nameEnglish:  'English'
     ietfCode:     'en'
-    description:  'Internaltional'
+    description:  'Internaltional version of English'
   }
   {
     id:           2
-    nameNative:   'Polski'
-    nameEnglish:  'Polish'
-    ietfCode:     'pl'
-    description:  ''
+    nameNative:   'American English'
+    nameEnglish:  'English U.S.'
+    ietfCode:     'en-us'
+    description:  'Internaltional version of English'
   }
   {
     id:           3
-    nameNative:   'Deutsch'
-    nameEnglish:  'German'
-    ietfCode:     'de'
+    nameNative:   'Polski'
+    nameEnglish:  'Polish'
+    ietfCode:     'pl-pl'
     description:  ''
   }
   {
     id:           4
+    nameNative:   'Deutsch'
+    nameEnglish:  'German'
+    ietfCode:     'de-de'
+    description:  ''
+  }
+  {
+    id:           5
     nameNative:   'Portuguese'
     nameEnglish:  'português'
     ietfCode:     'pt'
     description:  ''
   }
   {
-    id:           5
+    id:           6
     nameNative:   'Nederlands'
     nameEnglish:  'Dutch'
     ietfCode:     'nl'
