@@ -70,6 +70,7 @@ translationApp.config( [
     'LAST_NAME':                                    'Last name'
     'REGISTER':                                     'Register'
     'COMPLETE':                                     'Complete'
+    'REMEMBER_ME':                                  'Remember me'
     'LOGIN_WITH_YOUR_TRANSLATION_MANAGER_ACCOUNT':  'Login with your translation manager account'
 
 

@@ -5,7 +5,7 @@ md-content#login-page(flex layout="column" layout-align="center center")
       h2  {{ 'TRANSLATION_MANAGER' | translate }}
     md-whiteframe.md-whiteframe-3dp.round-borders-5(flex=30 layout="row" layout-align="center center")
       form(name="loginForm")
-        md-content.round-borders-5.padding-30(layout-padding class="autoScroll")
+        md-content.round-borders-5.padding-30(class="autoScroll")
           p.margin-top-0.margin-bottom-20.md-caption {{ 'LOGIN_WITH_YOUR_TRANSLATION_MANAGER_ACCOUNT' | translate }}
           md-input-container.md-icon-float
             label {{ 'EMAIL' | translate }}
@@ -28,8 +28,8 @@ md-content#login-page(flex layout="column" layout-align="center center")
             md-icon.material-icons.md-dark.md-inactive person
             input(data-ng-model="user.lastName" name="lastName" type="text" tabindex=4)
           div(flex layout="row")
-            md-button.md-raised(flex data-ng-show="!showRegistration" data-ng-click="toggleRegister()" tabindex=6) {{ 'REGISTER' | translate }}
             md-button.md-raised.md-accent(flex data-ng-show="!showRegistration" data-ng-click="login()" tabindex=5) {{ 'LOG_IN' | translate }}
+            md-button.md-raised(flex data-ng-show="!showRegistration" data-ng-click="toggleRegister()" tabindex=6) {{ 'REGISTER' | translate }}
             md-button.md-raised.md-warn(flex data-ng-show="showRegistration" data-ng-click="toggleRegister()" tabindex=8) {{ 'CANCEL' | translate }}
             md-button.md-raised.md-accent(flex data-ng-show="showRegistration" data-ng-click="register()" tabindex=7 ) {{ 'COMPLETE' | translate }}
           md-input-container.md-icon-float.margin-bottom-neg-25.margin-top-rm
