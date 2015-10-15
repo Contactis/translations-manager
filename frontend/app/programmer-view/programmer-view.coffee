@@ -59,7 +59,13 @@ $mdUtil, TranslationKey, $mdDialog) ->
 
   TranslationKey.find(
     filter:
-      include: ["translations", "project", "namespace"]
+      include: [
+        "translations": [
+          "language"
+        ]
+        "project"
+        "namespace"
+      ]
   ).$promise.then (success)->
     $scope.tableData = success
     $scope.displayedCollection = [].concat($scope.tableData)

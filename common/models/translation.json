@@ -40,6 +40,11 @@
       "model": "TranslationKey",
       "foreignKey": "translationsKeyId"
     },
+    "language": {
+      "type": "belongsTo",
+      "model": "Language",
+      "foreignKey": "languageId"
+    },
     "modifiedBy": {
       "type": "hasOne",
       "model": "Account",
