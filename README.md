@@ -48,7 +48,7 @@ Then clone the repo and install all requirements
 
 ```
 sudo apt-get install build-essential
-sudo npm install -g gulp bower sequelize-cli  # for global install may need sudo
+sudo npm install -g gulp bower sequelize-cli groc # for global install may need sudo
 
 git clone git@bitbucket.org:egel/translations-manager.git
 cd translations-manager
