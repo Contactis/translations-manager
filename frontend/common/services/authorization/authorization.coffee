@@ -44,12 +44,15 @@ LanguagesService, UserPermissionsSettings) ->
 
 
   _register = (attributes) ->
-    return Restangular.all('register').post(
-      email:      attributes.email
-      password:   attributes.password
-      firstName:  attributes.firstName
-      lastName:   attributes.lastName
-    )
+    _deferred = $q.defer()
+
+    Account.create(attributes).$promise.then (response) ->
+      _deferred.resolve response
+    , (err) ->
+      _deferred.reject err
+
+    return _deferred.promise
+
 
 
   _kickUnauthorised = (queue, event) ->
