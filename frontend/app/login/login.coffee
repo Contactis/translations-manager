@@ -75,10 +75,7 @@ angular.module('translation.pages.login', [
         password:   $scope.user.password
         firstName:  $scope.user.firstName
         lastName:   $scope.user.lastName
-      .then (response) ->
-
-        if angular.isDefined response.token
-          AccountService.loadDashboard response.token
+      .then $scope.login
       , ->
         $mdToast.show(
           $mdToast.simple()
