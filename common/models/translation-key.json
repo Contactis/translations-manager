@@ -28,7 +28,7 @@
     "translations": {
       "type": "hasMany",
       "model": "Translation",
-      "foreignKey": ""
+      "foreignKey": "translationsKeyId"
     }
   },
   "acls": [],

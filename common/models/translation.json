@@ -34,7 +34,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "translationKey" : {
+      "type":       "belongsTo",
+      "model":      "TranslationKey",
+      "foreignKey": "translationsKeyId"
+    }
+  },
   "acls": [],
   "methods": {}
 }
