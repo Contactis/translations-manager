@@ -7,7 +7,6 @@ nodemon         = require 'gulp-nodemon'
 gulp            = require 'gulp'
 coffeeLint      = require 'gulp-coffeelint'
 shell           = require 'gulp-shell'
-databaseConfig  = require './../../backend/' + _dbConfigFilePath
 runSequence     = require 'run-sequence'
 argv            = require('yargs').argv
 
