@@ -5,18 +5,6 @@
   "options": {
     "validateUpsert": true
   },
-  "relations": {
-    "RoleMappings": {
-      "model": "RoleMapping",
-      "type": "hasMany",
-      "foreignKey": "principalId"
-    },
-    "Roles": {
-      "model": "Role",
-      "type": "hasMany",
-      "through": "RoleMapping"
-    }
-  },
   "display": [
     "id",
     "username",
@@ -30,7 +18,9 @@
       "sourceKey": "accountId",
       "label": "Role",
       "type": "reference",
-      "roles": ["admin"],
+      "roles": [
+        "admin"
+      ],
       "options": {
         "model": "Role",
         "key": "id",
@@ -135,6 +125,18 @@
     }
   },
   "validations": [],
+  "relations": {
+    "RoleMappings": {
+      "type": "hasMany",
+      "model": "RoleMapping",
+      "foreignKey": "principalId"
+    },
+    "Roles": {
+      "type": "hasMany",
+      "model": "Role",
+      "through": "RoleMapping"
+    }
+  },
   "acls": [],
   "methods": {}
 }

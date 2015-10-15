@@ -38,12 +38,16 @@
         "label": "Accounts",
         "path": "accounts",
         "icon": "fa-user",
-        "roles": ["admin"],
+        "roles": [
+          "admin"
+        ],
         "subnav": [
           {
             "label": "Add",
             "route": "edit",
-            "roles": ["admin"],
+            "roles": [
+              "admin"
+            ],
             "options": {
               "model": "Account",
               "key": "id"
@@ -52,14 +56,15 @@
           {
             "label": "All Users",
             "route": "list",
-            "roles": ["admin"],
+            "roles": [
+              "admin"
+            ],
             "options": {
               "model": "Account",
               "key": "id",
               "showFilter": true,
               "pageSize": 500,
-              "params": {
-              },
+              "params": {},
               "columns": [
                 {
                   "field": "email",
@@ -82,7 +87,9 @@
           {
             "label": "Manage Roles",
             "route": "list",
-            "roles": ["admin"],
+            "roles": [
+              "admin"
+            ],
             "options": {
               "model": "Role",
               "key": "id",
@@ -108,7 +115,9 @@
           {
             "label": "Manage User Roles",
             "route": "list",
-            "roles": ["admin"],
+            "roles": [
+              "admin"
+            ],
             "hidden": true,
             "options": {
               "api": "Roles/{roleId}/RoleMappings",

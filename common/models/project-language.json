@@ -16,7 +16,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "language": {
+      "type": "belongsTo",
+      "model": "Language",
+      "foreignKey": ""
+    },
+    "project": {
+      "type": "belongsTo",
+      "model": "Project",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

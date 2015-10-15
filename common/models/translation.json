@@ -35,9 +35,9 @@
   },
   "validations": [],
   "relations": {
-    "translationKey" : {
-      "type":       "belongsTo",
-      "model":      "TranslationKey",
+    "translationKey": {
+      "type": "belongsTo",
+      "model": "TranslationKey",
       "foreignKey": "translationsKeyId"
     },
     "modifiedBy": {

@@ -24,6 +24,12 @@
       "type": "belongsTo",
       "model": "Language",
       "foreignKey": "defaultLanguageId"
+    },
+    "languages": {
+      "type": "hasMany",
+      "model": "Language",
+      "foreignKey": "",
+      "through": "ProjectLanguage"
     }
   },
   "acls": [

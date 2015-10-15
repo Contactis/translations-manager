@@ -40,7 +40,6 @@
       "model": "Namespace",
       "foreignKey": "namespaceId"
     }
-
   },
   "acls": [],
   "methods": {}
