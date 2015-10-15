@@ -62,5 +62,5 @@ gulp.task 'app:bower', shell.task [
 ]
 
 gulp.task 'app:restore', ->
-  runSequence 'db:restore', 'app:npm', 'app:bower'
+  runSequence 'app:npm', 'app:bower', 'db:restore'
 
