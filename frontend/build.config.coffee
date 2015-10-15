@@ -6,7 +6,7 @@ module.exports =
 
   backendDir:   'backend'
   frontendDir:  'frontend'
-
+  docs_dir:     'public/docs'
 #    Global filenames for html templates
 
   tpl_name:       'templates-module.js'
