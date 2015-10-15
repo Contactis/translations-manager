@@ -62,6 +62,7 @@ $mdUtil, TranslationKey, $mdDialog) ->
       include: [
         "translations": [
           "language"
+          "modifiedBy"
         ]
         "project"
         "namespace"
