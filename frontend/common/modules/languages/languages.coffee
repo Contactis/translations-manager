@@ -10,8 +10,7 @@ angular.module('translation.modules.languages', [
 
 # LanguageService
 # ---------------
-.factory 'LanguagesService', ($q, $log, $http, $rootScope, $translate, $locale, $cookieStore, tmhDynamicLocale,
-Restangular) ->
+.factory 'LanguagesService', ($q, $log, $http, $rootScope, $translate, $locale, $cookieStore, tmhDynamicLocale) ->
 
   # Array with supported languages by project
   _interfaceLanguages = [
@@ -21,10 +20,10 @@ Restangular) ->
 
 
   # @method         _unifyToIetfCode
-  # @param          langCode
+  # @param          {String}  langCode    some string with language key; like `pl-PL`
   # @description    unify languages code notation from different browser to one
   #                 like "xx-yy" or "xx" (ex: "en-us", "en")
-  # @returns        String
+  # @returns        { String }
   _unifyToIetfCode = (inputCode) ->
     _code = inputCode.replace("_", "-")
     return _code.toLowerCase()
@@ -34,7 +33,7 @@ Restangular) ->
   # @getter
   # @description  Get all frontend available interface languages from
   #               the database
-  # @returns      Array
+  # @returns      {Array}
   _getInterfaceLanguages = () ->
     return _interfaceLanguages
 
@@ -43,7 +42,7 @@ Restangular) ->
   # @setter
   # @param        {String}    [userInterfaceLanguage]   string with a language code; ex: en, en-us, pl-pl
   # @description  Determinate user startup language
-  # @returns      String
+  # @returns      { String }
   _getStartupLanguage = (userInterfaceLanguage) ->
     userInterfaceLanguage = \
       if typeof userInterfaceLanguage is 'undefined' or not userInterfaceLanguage
@@ -68,7 +67,7 @@ Restangular) ->
 
   # @method       _setLanguage
   # @setter
-  # @param        langCode
+  # @param        {String}   langCode    some string with language key; like `pl-PL`
   # @description  Set user language for the website.
   _setLanguage = (ietfCode) ->
     console.log "_setLanguage ietfCode", ietfCode
@@ -83,7 +82,7 @@ Restangular) ->
     return
 
 
-  # ## Public API
+  # ### Public API
   api =
     # Change string translations and $locale
     getInterfaceLanguages:  _getInterfaceLanguages
