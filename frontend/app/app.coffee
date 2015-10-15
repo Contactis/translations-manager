@@ -103,10 +103,13 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
   # This method tries to resolve language by user locale
   $translateProvider.registerAvailableLanguageKeys([
     'en-us'
+    'pl-pl'
   ], {
-    'en_US': 'en-us'
-    'en-en': 'en-us'
-    'en':    'en-us' # NOTE: change/remove if international version will be added
+    'en_US':  'en-us'
+    'en-en':  'en-us'
+    'en':     'en-us' # NOTE: change/remove if international version will be added
+    'pl_PL':  'pl-pl'
+    'pl':     'pl-pl'
   }).determinePreferredLanguage()
 
   $translateProvider.useSanitizeValueStrategy(null)
@@ -141,16 +144,14 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
 # -------------
 .controller 'AppController', ($scope, $rootScope, $state, $cookies, $mdSidenav, LanguagesService, AccountService) ->
 
-  console.log "AccountService.getData('interfaceLanguage')", AccountService.getData('interfaceLanguage')
-
-  LanguagesService.getStartupLanguage().then (langCode) ->
-    LanguagesService.setLanguage(langCode)
+  # Set language for income user (not logged in)
+  LanguagesService.setLanguage(LanguagesService.getStartupLanguage())
 
   # Watch
   $scope.$watch () ->
-    return AccountService.getAllData()
+    return AccountService.getAllData() # It should watch for whole object to track changes
   , (newVal, oldVal) ->
-    # update user interface lang if exsist and has been changed
+    # update user interface language if exsists and whole object user has been changed.
     if newVal.interfaceLanguage then LanguagesService.setLanguage(newVal.interfaceLanguage)
     return
   , true

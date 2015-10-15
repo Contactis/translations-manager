@@ -13,8 +13,11 @@ angular.module('translation.modules.languages', [
 .factory 'LanguagesService', ($q, $log, $http, $rootScope, $translate, $locale, $cookieStore, tmhDynamicLocale,
 Restangular) ->
 
-  _langCode = null
-  _deferredInterfaceLanguages = undefined
+  # Array with supported languages by project
+  _interfaceLanguages = [
+    { nativeName: "English (U.S.)", ietfCode: "en-us" }
+    { nativeName: "Polski (Polska)", ietfCode: "pl-pl" }
+  ]
 
 
   # @method         _unifyToIetfCode
@@ -31,57 +34,36 @@ Restangular) ->
   # @getter
   # @description  Get all frontend available interface languages from
   #               the database
-  # @returns      Promise
+  # @returns      Array
   _getInterfaceLanguages = () ->
-    if _deferredInterfaceLanguages
-      return _deferredInterfaceLanguages.promise
-    _deferredInterfaceLanguages = $q.defer()
-
-    Restangular.one('Languages').getList().then (response) ->
-      _deferredInterfaceLanguages.resolve(response.plain())
-    , (error) ->
-      console.log "Languages error: ", error
-      _deferredInterfaceLanguages.reject()
-    return _deferredInterfaceLanguages.promise
+    return _interfaceLanguages
 
 
   # @method       _getStartupLanguage
   # @setter
-  # @param        [userInterfaceLanguage]
+  # @param        {String}    [userInterfaceLanguage]   string with a language code; ex: en, en-us, pl-pl
   # @description  Determinate user startup language
-  # @returns      Promise
+  # @returns      String
   _getStartupLanguage = (userInterfaceLanguage) ->
-    _deferred = $q.defer()
-
     userInterfaceLanguage = \
       if typeof userInterfaceLanguage is 'undefined' or not userInterfaceLanguage
         null
       else userInterfaceLanguage
 
-    switch
+    result = switch
       when userInterfaceLanguage isnt null and not userInterfaceLanguage
-        console.log "userInterfaceLanguage", userInterfaceLanguage
-        _deferred.resolve userInterfaceLanguage
+        userInterfaceLanguage
       when angular.isDefined $cookieStore.get 'selectedLanguage'
-        console.log "cookie is defined", $cookieStore.get 'selectedLanguage'
-
-        _deferred.resolve $cookieStore.get 'selectedLanguage'
+        $cookieStore.get 'selectedLanguage'
       else
-        console.log "$translate.use()", _unifyToIetfCode($translate.use())
-        _getInterfaceLanguages().then (success) ->
-          console.log "success", success
-          _interfaceLangs = success
-          if _.findWhere(_interfaceLangs, {ietfCode: _unifyToIetfCode($translate.use())}, 'ietfCode')
-            _deferred.resolve _unifyToIetfCode($translate.use())
-          else
-            _str = "Your language `" + _unifyToIetfCode($translate.use()) + \
-              "` was not found, so used default language `en`, international english."
-            $log.info _str
-            _deferred.resolve 'en' # en = international english, not en-us or others
-        , (e) ->
-          console.log "error", e
-          _deferred.reject()
-    return _deferred.promise
+        if _.findWhere(_interfaceLanguages, {ietfCode: _unifyToIetfCode($translate.use())}, 'ietfCode')
+          _unifyToIetfCode($translate.use())
+        else
+          _str = "Your language `" + _unifyToIetfCode($translate.use()) + \
+            "` was not found, so used default language `en`, international english."
+          $log.info _str
+          'en' # en = international english, not other dialects
+    return result
 
 
   # @method       _setLanguage
@@ -104,11 +86,10 @@ Restangular) ->
   # ## Public API
   api =
     # Change string translations and $locale
-    langCode:               () ->
-      return _langCode
     getInterfaceLanguages:  _getInterfaceLanguages
     getStartupLanguage:     _getStartupLanguage
     setLanguage:            _setLanguage
+    unifyToIetfCode:        _unifyToIetfCode
   return api
 
 
