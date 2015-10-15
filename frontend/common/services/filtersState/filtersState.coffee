@@ -2,7 +2,7 @@ angular.module('translation.services.filtersState', [
   'lbServices'
 ])
 
-.service 'FiltersStateService', ($q, $timeout, ProjectGroup) ->
+.service 'FiltersStateService', ($q, $timeout, Namespace) ->
 
   _groups = []
   _topBarDefaultFilters = {}
@@ -39,7 +39,7 @@ angular.module('translation.services.filtersState', [
   ]
 
   _refreshGroups = () ->
-    ProjectGroup.find().$promise.then (success)->
+    Namespace.find().$promise.then (success)->
       _groups = groupHelper(success)
     , (error) ->
       console.log "Problem with loading groups"

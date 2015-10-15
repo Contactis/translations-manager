@@ -39,6 +39,11 @@
       "type":       "belongsTo",
       "model":      "TranslationKey",
       "foreignKey": "translationsKeyId"
+    },
+    "modifiedBy": {
+      "type": "hasOne",
+      "model": "Account",
+      "foreignKey": "id"
     }
   },
   "acls": [],

@@ -18,7 +18,7 @@
       "type": "number",
       "required": true
     },
-    "groupId": {
+    "namespaceId": {
       "type": "number",
       "required": true
     }
@@ -29,7 +29,18 @@
       "type": "hasMany",
       "model": "Translation",
       "foreignKey": "translationsKeyId"
+    },
+    "project": {
+      "type": "belongsTo",
+      "model": "Project",
+      "foreignKey": "projectId"
+    },
+    "namespace": {
+      "type": "belongsTo",
+      "model": "Namespace",
+      "foreignKey": "namespaceId"
     }
+
   },
   "acls": [],
   "methods": {}

@@ -1,6 +1,6 @@
 moment = require 'moment'
 
-projectsGroups = [
+namespaces = [
   {
     parentId:   null
     name:       "Home"
@@ -33,5 +33,5 @@ projectsGroups = [
   }
 ]
 
-projectsGroups.forEach (value, i) ->
-  ProjectGroup.seed value
+namespaces.forEach (value, i) ->
+  Namespace.seed value
