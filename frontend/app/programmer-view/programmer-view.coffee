@@ -57,7 +57,7 @@ $mdUtil, TranslationKey, $mdDialog) ->
       $log.debug("close LEFT is done")
 
 
-  TranslationKey.find().$promise.then (success)->
+  TranslationKey.find({filter: { "include": {"relation": "translations"}}}).$promise.then (success)->
     $scope.tableData = success
     $scope.displayedCollection = [].concat($scope.tableData)
   , (error) ->

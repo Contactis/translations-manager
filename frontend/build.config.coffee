@@ -38,6 +38,7 @@ module.exports =
     js: [
       # independent libraries
       'frontend/vendor/lodash/dist/lodash.js'
+
       # Angular lib should be the last of independent list!
       'frontend/vendor/angular/angular.js'
       'frontend/vendor/moment/moment.js'
