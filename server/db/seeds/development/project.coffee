@@ -4,7 +4,7 @@ projects = [
   {
     id:               1
     name:             'Translation manager'
-    defaultLanguage:  1
+    defaultLanguageId:  1
     description:      'This is dummy description for translation manager'
     createdAt:        moment().format()
     updatedAt:        moment().format()
@@ -12,7 +12,7 @@ projects = [
   {
     id:               2
     name:             'Sample project'
-    defaultLanguage:  3
+    defaultLanguageId:  3
     description:      'The purpus of this project is to test the API'
     createdAt:        moment().format()
     updatedAt:        moment().format()

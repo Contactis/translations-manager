@@ -10,7 +10,7 @@
       "type": "string",
       "required": true
     },
-    "defaultLanguage": {
+    "defaultLanguageId": {
       "type": "number",
       "required": true
     },
@@ -20,15 +20,10 @@
   },
   "validations": [],
   "relations": {
-    "projectLanguages": {
-      "type": "hasMany",
-      "model": "ProjectLanguage",
-      "foreignKey": ""
-    },
-    "projectGroups": {
-      "type": "hasMany",
-      "model": "ProjectGroup",
-      "foreignKey": ""
+    "defaultLanguage": {
+      "type": "belongsTo",
+      "model": "Language",
+      "foreignKey": "defaultLanguageId"
     }
   },
   "acls": [
