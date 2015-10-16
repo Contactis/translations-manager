@@ -20,26 +20,30 @@ module.exports = (server) ->
     RoleMapping = server.models.RoleMapping
 
     accountsProcessed = 0
+    otherAccountRole = []
 
     # Add roles for created users
 
-    connectUserRole = (foundRoles, foundAccounts, roleName, accountId) ->
-      roleResource = _.find(foundRoles, {name: roleName})
+    connectUserRole = (foundRoles, otherAccountRole, roleName, accountId) ->
+      roleResource = _.find foundRoles, {name: roleName}
       roleResource.principals.create
 
         principalType: RoleMapping.USER
         principalId: accountId
       , ->
-        if (++accountsProcessed == foundAccounts.length)
+        if (++accountsProcessed == otherAccountRole.length)
           process.exit()
 
 
     Account.find (err, foundAccounts) ->
 
+      otherAccountRole = _.reject foundAccounts, (value) ->
+        return value.role == 'user'
+
       Role.find (arr, foundRoles) ->
 
-        foundAccounts.forEach (val) ->
-
-          connectUserRole foundRoles, foundAccounts, val.role, val.id
+        otherAccountRole.forEach (val) ->
+          if val.role != 'user'
+            connectUserRole foundRoles, otherAccountRole, val.role, val.id
 
   return
