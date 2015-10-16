@@ -19,3 +19,4 @@ gulp.task 'clean-docs', ->
   gulp.src(config.build.docs_dir, {read: false})
   .pipe(plumber())
   .pipe(rimraf({force: true}))
+
