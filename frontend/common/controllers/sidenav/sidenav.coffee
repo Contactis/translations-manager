@@ -8,19 +8,19 @@ angular.module('translation.controllers.sidenav', [
   'translation.services.account'
   'translation.services.authorization'
   'translation.services.filtersState'
+  'translation.directives.accessLevel'
+  'translation.providers.userPermissionsSettings'
   'lbServices'
 ])
 
 
 .controller 'SidenavController', ($scope, $rootScope, $state, $cookies, Account, FiltersStateService,
-$mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService) ->
+$mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService, UserPermissionsSettings) ->
 
   $scope.user = AccountService.account()
   $scope.user.loggedIn = Account.isAuthenticated()
 
-
-  $scope.goTo = (uiview) ->
-    $state.go(uiview)
+  $scope.accessLevels = UserPermissionsSettings.accessLevels
 
   $scope.countLanguages = 8
   $scope.countKeys = 1234
@@ -34,14 +34,6 @@ $mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService) ->
     $scope.user = user
     $scope.user.loggedIn = Account.isAuthenticated()
 
-
-
-  $scope.pages = [
-    { name: "Programmer view", sref: "app.programmer-view" }
-    { name: "Manager view", sref: "app.manager-view" }
-    { name: "Translator view", sref: "app.translator-view" }
-    { name: "Admin view", sref: "app.admin-view" }
-  ]
 
   $rootScope.logout = AuthorizationService.logout
 

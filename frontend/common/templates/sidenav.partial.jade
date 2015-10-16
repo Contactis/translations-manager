@@ -46,12 +46,16 @@ div#sidenav.md-whiteframe-z2(ng-controller="SidenavController" ng-show="user.log
       md-divider
 
       md-subheader Pages
+      md-list-item
+        md-button(ui-sref="app.programmer-view" ui-sref-active="md-primary") Programmer view
+      md-list-item
+        md-button(ui-sref="app.manager-view" ui-sref-active="md-primary") Manager view
+      md-list-item
+        md-button(ui-sref="app.translator-view" ui-sref-active="md-primary") Translator view
 
-      md-list-item(ng-repeat="page in pages" ng-click="goTo(page.sref)" ng-class="{active: $state.includes('login')}")
-        span {{page.name}}
-        //- md-list-item(ng-repeat='page in pages')
-        //-   p {{ page.name }}
-        //-   md-checkbox.md-secondary(ng-model='page.wanted')
+      md-list-item(tr-access-level="accessLevels.management")
+        md-button(ui-sref="app.admin" ui-sref-active="md-primary") Admin view
+
 
 
       md-divider
