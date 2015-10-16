@@ -60,7 +60,7 @@ gulp.task 'permissions-config', ->
 
   string = "common.permissionConfig = #{JSON.stringify permissionsConfig};"
 
-  return file('frontend/vendors_offline/permissionConfig.js', string, {src: true}).pipe(gulp.dest('./'))
+  return file(config.buildDir + '/frontend/vendors_offline/permissionConfig.js', string, {src: true}).pipe(gulp.dest('./'))
 
 
 gulp.task 'build-assets', [
