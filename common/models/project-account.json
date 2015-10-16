@@ -1,6 +1,6 @@
 {
-  "name": "ProjectUser",
-  "plural": "projectId",
+  "name": "ProjectAccount",
+  "plural": "",
   "base": "PersistedModel",
   "idInjection": false,
   "options": {
@@ -11,13 +11,24 @@
       "type": "number",
       "required": true
     },
-    "userId": {
+    "accountId": {
       "type": "number",
       "required": true
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "account": {
+      "type": "belongsTo",
+      "model": "Account",
+      "foreignKey": ""
+    },
+    "project": {
+      "type": "belongsTo",
+      "model": "Project",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

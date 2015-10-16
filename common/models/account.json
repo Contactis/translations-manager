@@ -135,6 +135,12 @@
       "type": "hasMany",
       "model": "Role",
       "through": "RoleMapping"
+    },
+    "projects": {
+      "type": "hasMany",
+      "model": "Project",
+      "foreignKey": "",
+      "through": "ProjectAccount"
     }
   },
   "acls": [],
