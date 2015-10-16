@@ -5,26 +5,23 @@ angular.module('translation.directives.accessLevel', [
 
 .directive 'trAccessLevel', (AuthorizationService, AccountService) ->
   restrict: 'A'
+  scope:
+    accessLevel: '=trAccessLevel'
   link: ($scope, element, attrs) ->
     prevDisp      = element.css('display')
-    userRole      = null
-    accessLevel   = null
 
-    $scope.user = AccountService.getAllData()
-    $scope.$watch 'user', (user) ->
-      if user.role
-        userRole = user.role
+
+    $scope.$watch ->
+      return AccountService.getAllData()
+    , ->
       updateCSS()
     , true
 
-    attrs.$observe 'trAccessLevel', (al) ->
-      if al
-        accessLevel = $scope.$eval(al)
-      updateCSS()
-
-    updateCSS = () ->
-      if userRole and accessLevel
-        if !AuthorizationService.authorizePageAccess(accessLevel, userRole)
+    updateCSS = ->
+      if $scope.accessLevel
+        if !AuthorizationService.authorizePageAccess $scope.accessLevel
           element.css('display', 'none')
         else
           element.css('display', prevDisp)
+
+    updateCSS()
