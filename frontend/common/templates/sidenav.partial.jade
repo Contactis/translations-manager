@@ -54,7 +54,10 @@ div#sidenav.md-whiteframe-z2(ng-controller="SidenavController" ng-show="user.log
         md-button(ui-sref="app.translator-view" ui-sref-active="md-primary") Translator view
 
       md-list-item(tr-access-level="accessLevels.management")
-        md-button(ui-sref="app.admin" ui-sref-active="md-primary") Admin view
+        md-button(ui-sref="app.admin.project-assignment" ui-sref-active="md-primary") Manage users
+      md-list-item(tr-access-level="accessLevels.management")
+        md-button(ui-sref="app.admin.new-project" ui-sref-active="md-primary") New project
+
 
 
 

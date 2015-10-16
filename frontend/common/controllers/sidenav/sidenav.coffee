@@ -15,7 +15,7 @@ angular.module('translation.controllers.sidenav', [
 
 
 .controller 'SidenavController', ($scope, $rootScope, $state, $cookies, Account, FiltersStateService,
-$mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService, UserPermissionsSettings) ->
+$mdSidenav, $mdUtil, $mdDialog, ProjectsService, AccountService, AuthorizationService, UserPermissionsSettings) ->
 
   $scope.user = AccountService.account()
   $scope.user.loggedIn = Account.isAuthenticated()
@@ -26,6 +26,12 @@ $mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService, User
   $scope.countKeys = 1234
 
   $scope.currentProject = {}
+
+  originatorEv = null
+
+  $scope.openMenu = ($mdOpenMenu, ev) ->
+    originatorEv = ev
+    $mdOpenMenu ev
 
   ProjectsService.updated.then null, null, (project) ->
     $scope.currentProject = project
