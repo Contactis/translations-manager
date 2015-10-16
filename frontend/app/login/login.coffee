@@ -31,6 +31,7 @@ angular.module('translation.pages.login', [
     repeatPassword: ''
     firstName:      ''
     lastName:       ''
+    username:       ''
 
 
   $scope.showRegistration = false
@@ -75,14 +76,16 @@ angular.module('translation.pages.login', [
         password:   $scope.user.password
         firstName:  $scope.user.firstName
         lastName:   $scope.user.lastName
+        username:   $scope.user.username
       .then $scope.login
-      , ->
+      , (err) ->
         $mdToast.show(
           $mdToast.simple()
-          .content('Registration unsuccessful. Try again with different email.')
+          .content(err.data.error.message)
           .position('bottom right')
           .hideDelay(3000)
         )
+        return
 
   $scope.sizes = [
     "small (12-inch)"

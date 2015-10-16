@@ -72,6 +72,7 @@ translationApp.config( [
     'COMPLETE':                                     'Complete'
     'REMEMBER_ME':                                  'Remember me'
     'LOGIN_WITH_YOUR_TRANSLATION_MANAGER_ACCOUNT':  'Login with your translation manager account'
+    'USERNAME':                                     'Username'
 
 
   })

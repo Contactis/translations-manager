@@ -73,6 +73,7 @@ translationApp.config( [
     'COMPLETE':                                     'Zakończ'
     'REMEMBER_ME':                                  'Pamiętaj mnie'
     'LOGIN_WITH_YOUR_TRANSLATION_MANAGER_ACCOUNT':  'Zaloguj się używając swojego konta Menadzera Tłumaczeń'
+    'USERNAME':                                     'Nazwa użytkownika'
 
   })
 ])

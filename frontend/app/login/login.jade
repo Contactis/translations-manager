@@ -27,6 +27,10 @@ md-content#login-page(flex layout="column" layout-align="center center")
             label {{ 'LAST_NAME' | translate }}
             md-icon.material-icons.md-dark.md-inactive person
             input(data-ng-model="user.lastName" name="lastName" type="text" tabindex=4)
+          md-input-container.md-icon-float.register(data-ng-show="showRegistration" ng-animate="'animate'")
+            label {{ 'USERNAME' | translate }}
+            md-icon.material-icons.md-dark.md-inactive person
+            input(data-ng-model="user.username" name="username" type="text" tabindex=4)
           div(flex layout="row")
             md-button.md-raised.md-accent(flex data-ng-show="!showRegistration" data-ng-click="login()" tabindex=5) {{ 'LOG_IN' | translate }}
             md-button.md-raised(flex data-ng-show="!showRegistration" data-ng-click="toggleRegister()" tabindex=6) {{ 'REGISTER' | translate }}
