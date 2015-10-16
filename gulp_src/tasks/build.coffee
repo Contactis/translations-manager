@@ -9,8 +9,17 @@ chalk       = require 'chalk'
 
 buildArgs =
   stage1: ['clean-all']
-  stage2: ['coffee', 'loopback-models' ,'compile-jade', 'build-styles', 'build-assets']
-  stage3: ['build-html', 'nodemon']
+  stage2: [
+    'coffee'
+    'loopback-models'
+    'compile-jade'
+    'build-styles'
+    'build-assets'
+  ]
+  stage3: [
+    'build-html'
+    'nodemon'
+  ]
 
 
 gulp.task 'build', (done) ->
