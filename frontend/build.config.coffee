@@ -11,8 +11,8 @@ module.exports =
   docs_dir:         'public/docs'
 
   # Global filenames for html templates
-  tpl_name:       'templates-module.js'
-  tpl_module:     'templates-module'
+  tpl_name:         'templates-module.js'
+  tpl_module:       'templates-module'
 
   #  Global filenames for html templates
   project_theme_name: 'theme_material'
@@ -99,19 +99,15 @@ module.exports =
 
     assets: ''
 
-#    This is a collection of file patterns that refer to our app code (the
-#    stuff in `src/`). These file paths are used in the configuration of
-#    build tasks. `js` is all project JavaScript, less tests. `common_tpl`
-#    contains
-#    our reusable components' (`src/common`) template HTML files, while
-#    `app_tpl` contains the same, but for our app's code. `html` is just our
-#    main HTML file, `less` is our main style-sheet, and `unit` contains our
-#    app's unit tests.
-
-
-
+  # This is a collection of file patterns that refer to our app code (the
+  # stuff in `src/`). These file paths are used in the configuration of
+  # build tasks. `js` is all project JavaScript, less tests. `common_tpl`
+  # contains
+  # our reusable components' (`src/common`) template HTML files, while
+  # `app_tpl` contains the same, but for our app's code. `html` is just our
+  # main HTML file, `less` is our main style-sheet, and `unit` contains our
+  # app's unit tests.
   app_files:
-
     coffee:   [
       'frontend/**/*.coffee'
       '!frontend/**/*.spec.coffee'
@@ -119,6 +115,7 @@ module.exports =
       '!frontend/vendor/**/*.coffee'
       '!frontend/vendors_offline/**/*.coffee'
     ]
+    coffeeunit:         [ 'src/**/*.spec.coffee' ]
 
     all_coffee:         'frontend/**/*.coffee'
     gulp_files:         'gulp/**/*.coffee'
@@ -132,12 +129,11 @@ module.exports =
     html:     [ 'frontend/index.html' ]
 
 
-#    This is a collection of files used during testing only.
-
+  # This is a collection of files used during testing only.
   test_files:
     js: [
-      'vendor/angular-mocks/angular-mocks.js'
-      'vendor/jasmine-jquery/lib/jasmine-jquery.js'
+      'frontend/vendor/angular-mocks/angular-mocks.js'
+      'frontend/vendor/jasmine-jquery/lib/jasmine-jquery.js'
     ]
 
 
