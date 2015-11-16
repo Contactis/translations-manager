@@ -20,3 +20,15 @@ gulp.task 'clean-docs', ->
   .pipe(plumber())
   .pipe(rimraf({force: true}))
 
+gulp.task 'clean-tests', ->
+  gulp.src(config.testsDir, {read: false})
+  .pipe(plumber())
+  .pipe(rimraf({force: true}))
+
+gulp.task 'clean-prod', ->
+  gulp.src([
+    config.prod.plain
+    config.prod.jsAnnotated
+  ], {read: false})
+  .pipe(plumber())
+  .pipe(rimraf({force: true}))

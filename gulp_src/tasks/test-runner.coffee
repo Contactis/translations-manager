@@ -12,46 +12,50 @@ plumber     = require 'gulp-plumber'
 remove      = require 'gulp-remove-code'
 gulpif      = require 'gulp-if'
 karma       = require 'gulp-karma'
+Server      = require('karma').Server
 
-# ## Karma starting point.
-# ## Core settings used by every run type
 
-karmaSettings =
-  basePath: '/'
-  frameworks: ['jasmine']
-  plugins: [
-    'karma-jasmine'
-    'karma-coverage'
-    'karma-mocha-reporter'
-    'karma-phantomjs-launcher'
-    'karma-chrome-launcher'
-    'karma-safari-launcher'
-    'karma-junit-reporter'
-  ]
-  reporters: [
-    'mocha'
-    'coverage'
-    'junit'
-  ]
-  junitReporter:
-    outputDir: __dirname + '/../../' + config.build.gulp_build_dir + '/test-coverage/junit'
-    suite: ''
 
-  port: 9018
-  runnerPort: 9100
-  preprocessors: {}
-  urlRoot: '/'
-  colors: true
-  autoWatch: true
-  singleRun: true
-  browsers: [
-    'PhantomJS'
-  ]
-  coverageReporter:
-    type: 'html'
 
-# Vendor files loaded from build config file.
-# They allow project to load up and execute tests in testing environment
+# # ## Karma starting point.
+# # ## Core settings used by every run type
+
+# karmaSettings =
+#   basePath: '/'
+#   frameworks: ['jasmine']
+#   plugins: [
+#     'karma-jasmine'
+#     'karma-coverage'
+#     'karma-mocha-reporter'
+#     'karma-phantomjs-launcher'
+#     'karma-chrome-launcher'
+#     'karma-safari-launcher'
+#     'karma-junit-reporter'
+#   ]
+#   reporters: [
+#     'mocha'
+#     'coverage'
+#     'junit'
+#   ]
+#   junitReporter:
+#     outputDir: __dirname + '/../../' + config.build.gulp_build_dir + '/test-coverage/junit'
+#     suite: ''
+
+#   port: 9018
+#   runnerPort: 9100
+#   preprocessors: {}
+#   urlRoot: '/'
+#   colors: true
+#   autoWatch: true
+#   singleRun: true
+#   browsers: [
+#     'PhantomJS'
+#   ]
+#   coverageReporter:
+#     type: 'html'
+
+# # Vendor files loaded from build config file.
+# # They allow project to load up and execute tests in testing environment
 
 vendorFiles = []
 
@@ -61,8 +65,11 @@ config.build.vendor_files.js.forEach (val) ->
 config.build.test_files.js.forEach (val) ->
   vendorFiles.push __dirname + '/../../' + val
 
-# Default tests builder moved into a single function to keep the code clean
-testBuilder = ->
+
+# @private
+# @method       _testBuilder
+# @description  Default tests builder moved into a single function to keep the code clean
+_testBuilder = ->
   gulp.src(config.build.app_files.coffeeunit)
   .pipe(plumber( (error) ->
       GLOBAL.coffeeOK = false
@@ -78,7 +85,7 @@ testBuilder = ->
 
 # ## DEVELOPMENT TASKS
 gulp.task 'build-tests', ->
-  testBuilder()
+  _testBuilder()
   .pipe(gulp.dest(config.testsDir))
 
 
@@ -89,16 +96,14 @@ gulp.task 'run-karma', (done) ->
     __dirname + '/../../' + config.buildDir + '/common/**/*.js'
     __dirname + '/../../' + config.buildDir + '/' + config.build.tpl_name
   ]
-
   sources.push __dirname + '/../../' + config.testsSrc + "/**/*.js"
+  _files = vendorFiles.concat sources
+  Server = new Server({
+    configFile:       __dirname + '/karma.config.coffee'
+    files:            _files
+  }, done)
+  Server.start()
 
-  files = vendorFiles.concat sources
-
-  karmaSettings.preprocessors[__dirname + '/../../' + config.testsBuild + '/**/*.js'] = ['coverage']
-  karmaSettings.coverageReporter['dir'] = __dirname + '/../../' + config.build.gulp_build_dir + '/test-coverage'
-
-  gulp.src files
-  .pipe karma karmaSettings
 
 
 afterTestsBuild = (done) ->
@@ -109,11 +114,16 @@ afterTestsBuild = (done) ->
     done()
 
 
+# @method       run-tests
+# @type         gulp
+# @description  Run tests for the project.
 gulp.task 'run-tests', (done) ->
   runSequence 'clean-tests', 'build-tests', ->
     afterTestsBuild(done)
 
 
+# @method       run-tests-watch
+# @description  Run only tests when **source** or **test** files are changed.
 gulp.task 'run-tests-watch', (done) ->
   runSequence 'build-tests', ->
     afterTestsBuild(done)
@@ -127,8 +137,9 @@ gulp.task 'run-tests-watch', (done) ->
 # ### each stage gets it's own sets of tests
 
 
-# ### First stage, tests are run from common directory. No need for separate build
-
+# @method       run-karma-prod-tmp
+# @description  First stage, tests are run from common directory.
+#               No need for separate build
 gulp.task 'run-karma-prod-tmp', (done) ->
 
   sources = [
@@ -147,12 +158,14 @@ gulp.task 'run-karma-prod-tmp', (done) ->
   gulp.src files
   .pipe karma karmaSettings
 
+
+
 # ### Second stage, private tests.
 # Builds tests with private code parts removed. We call this part "public build"
 
-# @
+# @method       build-karma-prod-mid
 gulp.task 'build-karma-prod-mid', ->
-  testBuilder()
+  _testBuilder()
   .pipe(gulp.dest(config.prod.buildTests))
 
 gulp.task 'run-karma-prod-mid', ['build-karma-prod-mid'], (done) ->

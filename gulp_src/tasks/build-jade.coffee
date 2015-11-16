@@ -14,9 +14,12 @@ cback         = require 'gulp-callback'
 consoleWarn = deepcopy console.warn
 
 console.warn = (args) ->
-
   process.exit()
 
+
+# @method       jadeCore
+# @description  Build HTML templates from JADE template engine and save them
+#               with `.tpl.html` extension.
 jadeCore = ->
   gulp.src([
     config.build.app_files.jade_app_tpl
@@ -36,14 +39,14 @@ jadeCore = ->
         return url.replace(/.html$/, '.tpl.html')
     }))
 
+
+
+# @method       compile-jade
+# @description  Main task of compiling JADE to HTML templates.
 gulp.task 'compile-jade', ->
   jadeCore()
   .pipe(gulp.dest(config.buildDir))
   .pipe cback ->
     console.warn = consoleWarn
     config.arguments.jadeCache = true
-
-
-
-
 

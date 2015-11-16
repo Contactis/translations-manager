@@ -6,8 +6,12 @@ inject    = require 'gulp-inject'
 series    = require 'stream-series'
 htmlmini  = require 'gulp-minify-html'
 
-gulp.task 'build-html', ->
 
+
+# @method       build-html
+# @description  Build tempalteCache from bakin' HTML templates from files with
+#               `.tpl.html` extension.
+gulp.task 'build-html', ->
   appSrc = gulp.src [
     config.buildDir + '/app/**/*.js'
     config.buildDir + '/common/**/*.js'
