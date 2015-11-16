@@ -27,8 +27,9 @@
     "bootstrap": "~3.3.5",
     "messageformat": "~0.1.8",
     "restangular": "~1.5.1",
-    "angular-resource": "~1.4.7",
-    "angular-moment": "~0.10.3"
+    "angular-moment": "~0.10.3",
+    "angular-mocks": "~1.4.7",
+    "jasmine-jquery": "~2.1.1"
   },
   "resolutions": {
     "angular": "1.4.6"
