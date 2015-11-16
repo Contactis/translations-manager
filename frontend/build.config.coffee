@@ -1,6 +1,7 @@
 # This file/module contains all configuration for the build process.
 
-GULP_BUILD_DIR = 'public'
+GULP_BUILD_DIR      = 'public'
+PROJECT_THEME_NAME  = 'theme_material'
 
 module.exports =
 
@@ -15,7 +16,7 @@ module.exports =
   tpl_module:       'templates-module'
 
   #  Global filenames for html templates
-  project_theme_name: 'theme_material'
+  project_theme_name: PROJECT_THEME_NAME
 
   # These vars are overwritten in tasks:
   # `set_vars_for_build_process_priv` and `set_vars_for_build_process_pub`
@@ -125,8 +126,15 @@ module.exports =
     jade_common_tpl:    'frontend/common/**/*.jade'
     jade_all_templates: 'frontend/**/*.jade'
 
-    assets:   [ 'frontend/assets/**']
+    assets:   [ 'frontend/assets/**' ]
     html:     [ 'frontend/index.html' ]
+
+    # SASS files specyfic for current used theme
+    sass: [
+      'frontend/sass/' + PROJECT_THEME_NAME + '/main.sass'
+      'frontend/app/**/*.sass'
+      'frontend/common/**/*.sass'
+    ]
 
 
   # This is a collection of files used during testing only.
