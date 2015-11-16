@@ -41,6 +41,19 @@ module.exports =
       'frontend/vendor/jquery/dist/jquery.js'
       'frontend/vendor/bootstrap-sass/assets/javascripts/bootstrap.js'
 
+      'frontend/vendor/Chart.js/Chart.js'
+      'frontend/vendor/bootstrap-switch/dist/js/bootstrap-switch.js'
+      'frontend/vendor/iCheck/icheck.js'
+      'frontend/vendor/matchHeight/jquery.matchHeight.js'
+      'frontend/vendor/datatables/media/js/jquery.dataTables.js'
+      'frontend/vendor/select2/dist/js/select2.full.js'
+      'frontend/vendors_offline/dataTables.bootstrap.js'
+      'frontend/vendors_offline/ace.js'
+      'frontend/vendors_offline/mode-html.js'
+      'frontend/vendors_offline/theme-github.js'
+      'frontend/vendors_offline/template/app.js'
+
+
       # Angular lib should be the last of independent list!
       'frontend/vendor/angular/angular.js'
       'frontend/vendor/moment/moment.js'
@@ -76,6 +89,12 @@ module.exports =
     css: [
       'frontend/vendor/angular-data-table/release/dataTable.css'
       'frontend/vendor/angular-data-table/release/material.css'
+      'frontend/vendor/animate.css/animate.css'
+      'frontend/vendor/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css'
+      'frontend/vendor/iCheck/skins/flat/_all.css'
+      'frontend/vendor/datatables/media/css/jquery.dataTables.css'
+      'frontend/vendor/select2/dist/css/select2.css'
+      'frontend/vendors_offline/dataTables.bootstrap.css'
     ]
 
     sourceMaps:

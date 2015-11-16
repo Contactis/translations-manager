@@ -1,0 +1,17 @@
+tr-top-bar(filters='filters' context-menu="contextMenu" query="query")
+
+table.table.table-striped(search-watch-model="query" st-safe-src="tableData" st-table="displayedCollection")
+  thead
+    tr
+      th(st-sort="keyString") Group
+      th Context description
+      th English (en-GB)
+      th English (en-US)
+      th Polski (pl-PL)
+  tbody
+    tr(data-ng-repeat="singleRow in displayedCollection")
+      td {{singleRow.keyString}}
+      td mock1
+      td mock2
+      td mock3
+      td mock4

@@ -29,6 +29,10 @@ gulp.task 'copy-fonts', ->
   gulp.src('frontend/sass/' + config.build.project_theme_name + '/css/fonts/**')
   .pipe(gulp.dest(config.buildDir + '/assets/fonts'))
 
+gulp.task 'copy-font-awesome', ->
+  gulp.src('frontend/vendor/components-font-awesome/fonts/**')
+  .pipe(gulp.dest(config.buildDir + '/fonts'))
+
 gulp.task 'copy-vendor-angular-i18n', ->
   gulp.src('frontend/vendor/angular-i18n/angular-locale_*.js')
   .pipe(gulp.dest(config.buildDir + '/assets/angular-i18n/'))
@@ -67,6 +71,7 @@ gulp.task 'build-assets', [
   'permissions-config'
   'copy-assets'
   'copy-fonts'
+  'copy-font-awesome'
   'copy-files'
   'copy-images'
   'copy-vendor-angular-i18n'
