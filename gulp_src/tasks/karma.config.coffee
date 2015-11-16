@@ -1,10 +1,7 @@
 projectConfig = require '../variables'
 
-# -----------------------------------------
-
-# Vendor files loaded from build config file.
-# They allow project to load up and execute tests in testing environment
-
+# Karma starting point.
+# Core settings used by every run type
 module.exports = (config) ->
   config.set
     basePath: '/'

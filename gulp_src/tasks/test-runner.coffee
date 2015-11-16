@@ -15,48 +15,8 @@ karma       = require 'gulp-karma'
 Server      = require('karma').Server
 
 
-
-
-# # ## Karma starting point.
-# # ## Core settings used by every run type
-
-# karmaSettings =
-#   basePath: '/'
-#   frameworks: ['jasmine']
-#   plugins: [
-#     'karma-jasmine'
-#     'karma-coverage'
-#     'karma-mocha-reporter'
-#     'karma-phantomjs-launcher'
-#     'karma-chrome-launcher'
-#     'karma-safari-launcher'
-#     'karma-junit-reporter'
-#   ]
-#   reporters: [
-#     'mocha'
-#     'coverage'
-#     'junit'
-#   ]
-#   junitReporter:
-#     outputDir: __dirname + '/../../' + config.build.gulp_build_dir + '/test-coverage/junit'
-#     suite: ''
-
-#   port: 9018
-#   runnerPort: 9100
-#   preprocessors: {}
-#   urlRoot: '/'
-#   colors: true
-#   autoWatch: true
-#   singleRun: true
-#   browsers: [
-#     'PhantomJS'
-#   ]
-#   coverageReporter:
-#     type: 'html'
-
-# # Vendor files loaded from build config file.
-# # They allow project to load up and execute tests in testing environment
-
+# Vendor files loaded from build config file.
+# They allow project to load up and execute tests in testing environment
 vendorFiles = []
 
 config.build.vendor_files.js.forEach (val) ->
