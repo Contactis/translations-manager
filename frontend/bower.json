@@ -16,19 +16,19 @@
     "angular-data-table": "~0.3.18",
     "angular-dynamic-locale": "~0.1.27",
     "angular-i18n": "~1.4.7",
-    "angular-lodash": "latest",
-    "angular-material": "0.11.0",
     "angular-messages": "~1.4.7",
     "angular-resource": "~1.4.7",
     "angular-smart-table": "~2.1.4",
     "angular-translate": "~2.8.1",
     "angular-translate-interpolation-messageformat": "~2.8.1",
     "angular-ui-router": "~0.2.15",
-    "bootstrap": "~3.3.5",
     "messageformat": "~0.1.8",
     "restangular": "~1.5.1",
-    "angular-resource": "~1.4.7",
-    "angular-moment": "~0.10.3"
+    "angular-moment": "~0.10.3",
+    "bootstrap-sass": "~3.3.5",
+    "jquery": "~2.1.4",
+    "angular-lodash": "~0.1.2",
+    "angular-material": "~0.11.0"
   },
   "resolutions": {
     "angular": "1.4.6"

@@ -15,7 +15,7 @@ module.exports =
   gulp_build_dir: gulp_build_dir
 
   #  Global filenames for html templates
-  project_theme_name: 'theme_material'
+  project_theme_name: 'theme_bootstrap'
 
 #    This is the same as `app_files`, except it contains patterns that
 #    reference vendor code (`vendor/`) that we need to place into the build
@@ -38,6 +38,8 @@ module.exports =
     js: [
       # independent libraries
       'frontend/vendor/lodash/dist/lodash.js'
+      'frontend/vendor/jquery/dist/jquery.js'
+      'frontend/vendor/bootstrap-sass/assets/javascripts/bootstrap.js'
 
       # Angular lib should be the last of independent list!
       'frontend/vendor/angular/angular.js'
@@ -72,16 +74,11 @@ module.exports =
       ]
 
     css: [
-      'frontend/vendor/bootstrap/dist/css/bootstrap.css'
-      'frontend/vendor/angular-material/angular-material.css'
       'frontend/vendor/angular-data-table/release/dataTable.css'
       'frontend/vendor/angular-data-table/release/material.css'
     ]
 
     sourceMaps:
-      bootstrap:
-        source:       'frontend/vendor/bootstrap/dist/css/bootstrap.css.map'
-        destination:  gulp_build_dir + '/assets'
       angularAria:
         source:       'frontend/vendor/angular-aria/angular-aria.min.js.map'
         destination:  gulp_build_dir + '/frontend/vendor/angular-aria'
