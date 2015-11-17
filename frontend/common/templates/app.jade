@@ -3,6 +3,7 @@
     .top(ng-controller="SidenavController" ng-show="user.loggedIn")
       include topbar.partial.jade
       include sidenav.partial.jade
-    .container-fluid(data-ui-view="")
+    .container-fluid
+      .side-body.padding-top(data-ui-view="")
 
 
