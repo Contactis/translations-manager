@@ -48,6 +48,7 @@ translationApp = angular.module('translation', [
 
   # Including directives
   'translator.directive.trTopBar'
+  'translator.directive.trDashboardTop'
 ])
 
 
