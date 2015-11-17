@@ -13,7 +13,7 @@ module.exports = (config) ->
       'karma-junit-reporter'
       'karma-phantomjs-launcher'
       'karma-chrome-launcher'
-      'karma-safari-launcher'
+      # 'karma-safari-launcher'
     ]
     reporters: [
       'mocha'
@@ -36,5 +36,5 @@ module.exports = (config) ->
     browsers: [
       'PhantomJS'
       'Chrome'
-      'Safari'
+      # 'Safari'
     ]
