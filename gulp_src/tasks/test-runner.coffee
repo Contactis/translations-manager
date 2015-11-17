@@ -39,16 +39,22 @@ _testBuilder = ->
   .pipe(coffeeLint())
   .pipe(coffeeLint.reporter())
   .pipe(coffeeLint.reporter('fail'))
-  .pipe(gulpif(config.arguments.production, remove({production: true})))
+  .pipe(gulpif(!config.arguments.production, remove({production: true})))
   .pipe(coffee({bare: true}))
 
 
-# ## DEVELOPMENT TASKS
+# @method       run-karma
+# @type         gulp-task
+# @description  Run test on test files against source files and put them into
+#               testsDir
 gulp.task 'build-tests', ->
   _testBuilder()
   .pipe(gulp.dest(config.testsDir))
 
 
+# @method       run-karma
+# @type         gulp-task
+# @description  Run tests files against source files for DEVELOPMENT
 gulp.task 'run-karma', (done) ->
   sources = [
     __dirname + '/../../' + config.buildDir + '/app/**/*.js'
@@ -59,116 +65,65 @@ gulp.task 'run-karma', (done) ->
   _files = vendorFiles.concat sources
 
   Server = new Server({
-    configFile:       __dirname + '/karma.config.coffee'
+    configFile:       __dirname + '/karma-dev.config.coffee'
     files:            _files
   }, done)
   Server.start()
 
 
+# @method       run-karma-prod
+# @type         gulp-task
+# @description  Run tests files against JS source file (concat & uglify)
+#               for PRODUCTION. It depends on
+gulp.task 'run-karma-prod', (done) ->
+  sources = [
+    __dirname + '/../../' + config.buildDir + '/' + config.prod.jsDeployFileName
+  ]
+  sources.push __dirname + '/../../' + config.testsSrc + "/**/*.js"
+  _files = vendorFiles.concat sources
 
-afterTestsBuild = (done) ->
+  Server = new Server({
+    configFile:       __dirname + '/karma-prod.config.coffee'
+    files:            _files
+  }, done)
+  Server.start()
+
+
+# @private
+# @method       _afterTestsBuild
+# @description  Run project tests for DEVELOPMENT.
+_afterTestsBuild = (done) ->
   if GLOBAL.coffeeOK
-    runSequence 'run-karma', done
+    if config.arguments.production
+      runSequence 'run-karma-prod', done
+    else
+      runSequence 'run-karma', done
   else
     GLOBAL.coffeeOK = true
     done()
 
 
 # @method       run-tests
-# @type         gulp
-# @description  Run tests for the project.
+# @type         gulp-task
+# @description  GULP task to fire project tests for DEVELOPMENT.
 gulp.task 'run-tests', (done) ->
   runSequence 'clean-tests', 'build-tests', ->
-    afterTestsBuild(done)
+    _afterTestsBuild(done)
+
+
+# @method       run-tests-prod
+# @type         gulp-task
+# @description  GULP task to fire project tests for PRODUCTION.
+gulp.task 'run-tests-prod', (done) ->
+  runSequence 'clean-tests', 'build-tests', ->
+    _afterTestsBuild(done)
 
 
 # @method       run-tests-watch
-# @description  Run only tests when **source** or **test** files are changed.
+# @type         gulp-task
+# @description  Gulp task fired only tests when **source** or **test** files
+#               are changed.
 gulp.task 'run-tests-watch', (done) ->
   runSequence 'build-tests', ->
-    afterTestsBuild(done)
-# ## END DEVELOPMENT TASKS
+    _afterTestsBuild(done)
 
-
-
-# ##### PRODUCTION TASKS
-
-# ### $ gulp production divides build process into three stages
-# ### each stage gets it's own sets of tests
-
-
-# @method       run-karma-prod-tmp
-# @description  First stage, tests are run from common directory.
-#               No need for separate build
-gulp.task 'run-karma-prod-tmp', (done) ->
-
-  sources = [
-    __dirname + '/../../' + config.prod.jsAnnotated + '/app/**/*.js'
-    __dirname + '/../../' + config.prod.jsAnnotated + '/common/**/*.js'
-    __dirname + '/../../' + config.prod.jsAnnotated + '/' + config.build.tpl_name
-  ]
-  sources.push __dirname + '/../../' + config.prod.plain + "/**/*.spec.js"
-  files = vendorFiles.concat sources
-
-  karmaSettings.preprocessors[__dirname + '/../../' + config.prod.jsAnnotated + '/**/*.js'] = ['coverage']
-  karmaSettings.coverageReporter['dir'] = __dirname + '/../../' + config.build.gulp_build_dir + '/test-coverage/tmp'
-
-  gulp.src files
-  .pipe karma karmaSettings
-
-
-
-# ### Second stage, private tests.
-# Builds tests with private code parts removed. We call this part "public build"
-
-# @method       build-karma-prod-mid
-gulp.task 'build-karma-prod-mid', ->
-  _testBuilder()
-  .pipe(gulp.dest(config.prod.buildTests))
-
-gulp.task 'run-karma-prod-mid', ['build-karma-prod-mid'], (done) ->
-
-
-  sources = [
-    __dirname + '/../../' + config.prod.buildAnnotated + '/app/**/*.js'
-    __dirname + '/../../' + config.prod.buildAnnotated + '/common/**/*.js'
-    __dirname + '/../../' + config.prod.buildAnnotated + '/' + config.build.tpl_name
-  ]
-
-  sources.push __dirname + '/../../' + config.prod.buildTests + "/**/*.js"
-
-  files = vendorFiles.concat sources
-
-  karmaSettings.preprocessors[__dirname + '/../../' + config.prod.buildAnnotated + '/**/*.js'] = ['coverage']
-  karmaSettings.coverageReporter['dir'] = __dirname + '/../../' + config.build.gulp_build_dir + '/test-coverage/mid'
-
-  gulp.src files
-  .pipe karma karmaSettings
-
-
-# ### Third and last build stage. It doesn't include any vendor files because they are all included in
-# ### one app file. All that needs to be included are ngMocks and tests files, which had been build in previous stage
-
-gulp.task 'run-karma-prod-final', (done) ->
-
-  files = []
-
-  config.build.test_files.js.forEach (val) ->
-    files.push __dirname + '/../../' + val
-
-  sources = [
-    __dirname + '/../../' + config.buildDir + '/*.js'
-  ]
-
-  sources = sources.concat files
-
-  sources.push __dirname + '/../../' + config.prod.buildTests + "/**/*.js"
-
-
-  delete karmaSettings.coverageReporter
-  delete karmaSettings.reporters[1]
-
-  gulp.src sources
-  .pipe karma karmaSettings
-
-# ##### END PRODUCTION TASKS
