@@ -17,34 +17,35 @@ angular.module('translation.pages.dashboard', [
       access: access.user
 
 
-.controller 'DashboardController', ($scope) ->
+.controller 'DashboardController', () ->
+  vm = this
 
-  $scope.filter = {}
-  $scope.static = {}
-  $scope.languageList = ['pl','en','de']
+  vm.filter = {}
+  vm.static = {}
+  vm.languageList = ['pl','en','de']
 
-  $scope.static.translation = [
+  vm.static.translation = [
     "All translations"
     "Missing translations"
     "Without missing translations"
   ]
 
-  $scope.static.plurals = [
+  vm.static.plurals = [
     "None"
     "Only plurals"
     "Not plurals"
   ]
-  $scope.test = [
+  vm.test = [
     'no elo'
     'lalala'
   ]
-  $scope.filter.translation = $scope.static.translation[0]
-  $scope.filter.plural = $scope.static.plurals[0]
+  vm.filter.translation = vm.static.translation[0]
+  vm.filter.plural = vm.static.plurals[0]
 
 
 
 
-  $scope.options = {
+  vm.options = {
     rowHeight: 50,
     footerHeight: false,
     headerHeight: 40,
@@ -69,7 +70,7 @@ angular.module('translation.pages.dashboard', [
     }]
   }
   #mocked data
-  $scope.data = [
+  vm.data = [
     {name: "dashboard.page_title", gender: "Name should be short and essential", company: "Home", something: "Home",
     wuwu: "Strona główna"}
     {name: "dashboard.something", gender: "Name should be short and essential", company: "Login", something: "Login",
