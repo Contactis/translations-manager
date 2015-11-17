@@ -8,19 +8,16 @@ gulpif  = require 'gulp-if'
 
 _jsFiles = config.build.vendor_files.js
 _appFiles = [
-  config.prod.buildAnnotated + '/app/**/*.js'
-  config.prod.buildAnnotated + '/common/**/*.js'
-  config.prod.buildAnnotated + '/' + config.build.tpl_name
+  config.prod.tmpBuildDir + '/**/*.js'
 ]
 _jsFiles = _jsFiles.concat(_appFiles)
-_jsConcatedFileName = config.pkg.name + '_' + config.pkg.version + '.js'
 
 
-# @method       build-js
+# @method       build-js-prod
 # @type         gulp-task
-# @description  Take all JS files uglify
-gulp.task 'build-js', ->
+# @description  Take all JS files concatenate and uglify it to one, single file
+gulp.task 'build-js-prod', ->
   gulp.src _jsFiles
-  .pipe(concat(_jsConcatedFileName))
+  .pipe(concat(config.prod.jsDeployFileName))
   .pipe(gulpif(config.arguments.uglify, uglify()))
   .pipe(gulp.dest(config.buildDir))
