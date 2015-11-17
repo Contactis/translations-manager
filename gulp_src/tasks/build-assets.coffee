@@ -15,11 +15,16 @@ permissionsConfig = require '../../common/permissionsConfig'
 assets = config.build.app_files.assets
 assets = assets.concat config.build.vendor_files.assets
 
+
+# @method       loopback-models
+# @type         gulp-task
+# @description  This task includes loopback models into dest folder, but
+#               destination folder depends if it production build or not (dev)
 gulp.task 'loopback-models', ->
   gulp.src('./server/server.js')
   .pipe(loopback())
   .pipe(rename('loopbackModelsService.js'))
-  .pipe(gulp.dest('./public/common/services/loopbackModels'))
+  .pipe(gulpif(config.arguments.production, gulp.dest(config.prod.tmpBuildDir), gulp.dest('./public/common/services/loopbackModels')))
 
 gulp.task 'copy-assets', ->
   gulp.src(assets)
