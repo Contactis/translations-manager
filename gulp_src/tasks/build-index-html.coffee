@@ -1,10 +1,10 @@
 # require build config
 config = require '../variables'
 
-gulp      = require 'gulp'
-inject    = require 'gulp-inject'
-series    = require 'stream-series'
-htmlmini  = require 'gulp-minify-html'
+gulp        = require 'gulp'
+inject      = require 'gulp-inject'
+series      = require 'stream-series'
+minifyHTML  = require 'gulp-minify-html'
 
 
 # @method       build-index-html
@@ -42,9 +42,9 @@ gulp.task 'build-index-html-prod', ->
   ],
     read: false
 
-  gulp.src 'src/index.html'
+  gulp.src 'frontend/index.html'
   .pipe inject(appSrc,
     ignorePath: config.buildDir)
-  .pipe htmlmini
+  .pipe minifyHTML
     conditionals: true
   .pipe gulp.dest config.buildDir
