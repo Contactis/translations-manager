@@ -7,12 +7,11 @@ series    = require 'stream-series'
 htmlmini  = require 'gulp-minify-html'
 
 
-
-# @method       build-html
+# @method       build-index-html
 # @type         gulp-task
 # @description  Build tempalteCache from bakin' HTML templates from files with
 #               `.tpl.html` extension.
-gulp.task 'build-html', ->
+gulp.task 'build-index-html', ->
   appSrc = gulp.src [
     config.buildDir + '/app/**/*.js'
     config.buildDir + '/common/**/*.js'
@@ -32,11 +31,11 @@ gulp.task 'build-html', ->
   .pipe gulp.dest config.buildDir
 
 
-# @method       bake-index-html-prod
+# @method       build-index-html-prod
 # @type         gulp-task
 # @description  Put concatenated, minified and uglified files of JS and CSS
 #               into `index.html`
-gulp.task 'bake-index-html-prod', ->
+gulp.task 'build-index-html-prod', ->
   appSrc = gulp.src [
     config.buildDir + '/*.js'
     config.buildDir + '/*.css'
