@@ -116,7 +116,7 @@ module.exports =
       '!frontend/vendor/**/*.coffee'
       '!frontend/vendors_offline/**/*.coffee'
     ]
-    coffeeunit:         [ 'src/**/*.spec.coffee' ]
+    coffeeunit:         [ 'frontend/**/*.spec.coffee' ]
 
     all_coffee:         'frontend/**/*.coffee'
     gulp_files:         'gulp/**/*.coffee'
@@ -141,6 +141,7 @@ module.exports =
   test_files:
     js: [
       'frontend/vendor/angular-mocks/angular-mocks.js'
+      'frontend/vendor/jquery/dist/jquery.js'
       'frontend/vendor/jasmine-jquery/lib/jasmine-jquery.js'
     ]
 
