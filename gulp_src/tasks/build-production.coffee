@@ -7,25 +7,39 @@ runSequence = require 'run-sequence'
 chalk       = require 'chalk'
 
 buildProdArgs =
-  tmp:
-    stage1: ['clean-all']
-    stage2: ['coffee-prod-annotate', 'compile-jade-prod-tmp']
-    stage3: ['run-karma-prod-tmp']
-  mid:
-    stage1: ['coffee-prod-mid-build-annotate', 'compile-jade-prod-mid']
-    stage2: ['run-karma-prod-mid']
-  final:
-    stage1: ['build-js', 'build-styles', 'build-assets']
-    stage2: ['run-karma-prod-final']
-    stage3: ['build-html-prod']
-    stage4: ['build-docs']
+  stage1: ['clean-all']
+  stage2: ['coffee-tmp-prod', 'compile-jade-tmp-prod', 'loopback-models'] # making JS files
+  stage3: ['build-js-prod', 'build-styles', 'build-assets']
+  stage4: ['run-tests-prod'] # run tests on prepared to deploy JS files
+  stage5: ['build-index-html-prod']
+  stage6: ['build-docs']
 
+
+# @method       production
+# @type         gulp-task
+# @description  Run all gulp tasks related with PRODUCTION
 gulp.task 'production', ->
-
   buildStart = Date.now()
   config.arguments.production = true
+  config.arguments.uglify     = true
 
-  runSequence buildProdArgs.tmp.stage1, buildProdArgs.tmp.stage2, buildProdArgs.tmp.stage3, buildProdArgs.mid.stage1, buildProdArgs.mid.stage2, buildProdArgs.final.stage1, buildProdArgs.final.stage2, buildProdArgs.final.stage3, buildProdArgs.final.stage4, ->
+  if config.arguments.nodemon
+    buildProdArgs.stage6.push 'nodemon'
+
+  runSequence buildProdArgs.stage1, buildProdArgs.stage2, buildProdArgs.stage3, buildProdArgs.stage4, buildProdArgs.stage5, buildProdArgs.stage6, ->
     diff = String((Date.now() - buildStart) / 1000)
     console.log chalk.white.bgGreen '[GULP] Build sequence had been completed successfully in ' + chalk.white.bgGreen diff + chalk.white.bgGreen 's!'
     config.arguments.production = false
+    config.arguments.uglify     = false
+
+
+# @method       production-without-nodemon
+# @type         gulp-task
+# @description  Run all gulp tasks related with PRODUCTION but without nodemon
+#               server. This is **ONLY** for testing purpose to complete it after
+#               run karma (nodemon not ends, it is a service).
+gulp.task 'production-without-nodemon', (done) ->
+  config.arguments.nodemon = false
+  console.log chalk.white.bgGreen '[GULP] Starting production task without nodemon'
+  runSequence 'production', ->
+    done()
