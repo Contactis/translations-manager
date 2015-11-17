@@ -14,6 +14,7 @@ cback         = require 'gulp-callback'
 consoleWarn = deepcopy console.warn
 
 console.warn = (args) ->
+  console.log args
   process.exit()
 
 
@@ -40,9 +41,9 @@ jadeCore = ->
     }))
 
 
-
 # @method       compile-jade
-# @description  Main task of compiling JADE to HTML templates.
+# @type         gulp-task
+# @description  Compiling JADE to HTML into `buildDir` (not uglified)
 gulp.task 'compile-jade', ->
   jadeCore()
   .pipe(gulp.dest(config.buildDir))
@@ -50,3 +51,14 @@ gulp.task 'compile-jade', ->
     console.warn = consoleWarn
     config.arguments.jadeCache = true
 
+
+# @method       compile-jade-tmp-prod
+# @type         gulp-task
+# @description  Compiling JADE to HTML into temp. directory with uglification
+gulp.task 'compile-jade-tmp-prod', ->
+  jadeCore()
+  .pipe(uglify())
+  .pipe(gulp.dest(config.prod.tmpBuildDir))
+  .pipe cback ->
+    console.warn = consoleWarn
+    config.arguments.jadeCache = true
