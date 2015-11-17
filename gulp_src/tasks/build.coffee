@@ -16,10 +16,8 @@ buildArgs =
     'build-styles'
     'build-assets'
   ]
-  stage3: [
-    'build-html'
-    'nodemon'
-  ]
+  stage3: ['build-html']
+  stage4: ['nodemon']
 
 
 # @method       build
@@ -34,7 +32,7 @@ gulp.task 'build', (done) ->
   if config.arguments.docs
     buildArgs.stage2.push 'build-docs'
 
-  runSequence buildArgs.stage1, buildArgs.stage2, buildArgs.stage3, ->
+  runSequence buildArgs.stage1, buildArgs.stage2, buildArgs.stage3, buildArgs.stage4, ->
     diff = String((Date.now() - buildStart) / 1000)
     console.log chalk.white.bgGreen '[GULP] Build sequence had been completed successfully in ' + chalk.white.bgGreen diff + chalk.white.bgGreen 's!'
     done()
