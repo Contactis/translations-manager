@@ -16,13 +16,14 @@ buildArgs =
     'build-styles'
     'build-assets'
   ]
-  stage3: ['build-html']
+  stage3: ['build-index-html']
   stage4: ['nodemon']
 
 
 # @method       build
-# @description  Begin standard project build in stages order: stage1, stage2
-#               and stage3.
+# @type         gulp-task
+# @description  Begin standard project build in stages order: stage1, stage2,
+#               stage3 and stage4.
 gulp.task 'build', (done) ->
   buildStart = Date.now()
 
@@ -39,6 +40,7 @@ gulp.task 'build', (done) ->
 
 
 # @method       watch
+# @type         gulp-task
 # @description  Begin standard project deployment and run watcher on the end to
 #               constantly observing changes in files.
 gulp.task 'watch', (done) ->
