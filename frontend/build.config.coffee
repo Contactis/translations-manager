@@ -11,9 +11,10 @@ module.exports =
   frontendDir:      'frontend'
   docs_dir:         'public/docs'
 
-  # Global filenames for html templates
+  # Global filenames for html templates, loopback
   tpl_name:         'templates-module.js'
   tpl_module:       'templates-module'
+  loopback_filename: 'loopbackModelsService.js'
 
   #  Global filenames for html templates
   project_theme_name: PROJECT_THEME_NAME
@@ -118,7 +119,7 @@ module.exports =
     ]
     coffeeunit:         [ 'frontend/**/*.spec.coffee' ]
 
-    all_coffee:         'frontend/**/*.coffee'
+    all_coffee:         'frontend/**/*.coffee' # use it carefully
     gulp_files:         'gulp/**/*.coffee'
     git_commit:         'src/assets/gitcommit.js'
 
