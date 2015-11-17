@@ -119,8 +119,9 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
 
 # Run
 # ---
-.run ($rootScope, AccountService, AuthorizationService) ->
-  _firstEnter = true
+.run ($rootScope, $window, AccountService, AuthorizationService) ->
+  _firstEnter   = true
+  _firstSuccess = false
 
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
     if _firstEnter
@@ -136,7 +137,12 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
     return
 
   $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+    if !_firstSuccess
+      appSetup()
+      _firstSuccess = true
+
     return
+
 
   return
 
