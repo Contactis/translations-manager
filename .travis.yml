@@ -11,4 +11,4 @@ before_script:
   - gulp db:restore
 
 script:
-  - gulp production
+  - gulp production-without-nodemon
