@@ -4,6 +4,7 @@ describe "Unit testing: translation.modules.languages Module >", () ->
 
     $rootScope            = null
     $cookieStore          = null
+    LanguagesService      = null
 
     # load required modules
     beforeEach () ->
@@ -14,6 +15,7 @@ describe "Unit testing: translation.modules.languages Module >", () ->
       #load services
       $rootScope            = $injector.get '$rootScope'
       $cookieStore          = $injector.get '$cookieStore'
+      LanguagesService      = $injector.get 'LanguagesService'
       return
 
     afterEach () ->
