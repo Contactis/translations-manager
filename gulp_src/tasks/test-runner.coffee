@@ -51,13 +51,13 @@ gulp.task 'build-tests', ->
 
 gulp.task 'run-karma', (done) ->
   sources = [
-    __dirname + '/../../' + config.buildDir + '/assets/gitcommit.js'
     __dirname + '/../../' + config.buildDir + '/app/**/*.js'
     __dirname + '/../../' + config.buildDir + '/common/**/*.js'
     __dirname + '/../../' + config.buildDir + '/' + config.build.tpl_name
   ]
   sources.push __dirname + '/../../' + config.testsSrc + "/**/*.js"
   _files = vendorFiles.concat sources
+
   Server = new Server({
     configFile:       __dirname + '/karma.config.coffee'
     files:            _files
@@ -107,9 +107,7 @@ gulp.task 'run-karma-prod-tmp', (done) ->
     __dirname + '/../../' + config.prod.jsAnnotated + '/common/**/*.js'
     __dirname + '/../../' + config.prod.jsAnnotated + '/' + config.build.tpl_name
   ]
-
   sources.push __dirname + '/../../' + config.prod.plain + "/**/*.spec.js"
-
   files = vendorFiles.concat sources
 
   karmaSettings.preprocessors[__dirname + '/../../' + config.prod.jsAnnotated + '/**/*.js'] = ['coverage']
