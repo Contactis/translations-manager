@@ -9,6 +9,7 @@ htmlmini  = require 'gulp-minify-html'
 
 
 # @method       build-html
+# @type         gulp-task
 # @description  Build tempalteCache from bakin' HTML templates from files with
 #               `.tpl.html` extension.
 gulp.task 'build-html', ->
@@ -22,13 +23,29 @@ gulp.task 'build-html', ->
   vendorSrc = gulp.src config.build.vendor_files.js,
     read: false
 
-  gitCommit = gulp.src(config.buildDir + '/assets/gitcommit.js')
-
   styles = gulp.src config.buildDir + '/assets/*.css',
     read: false
 
   gulp.src 'frontend/index.html'
-  .pipe inject(series(vendorSrc, gitCommit, appSrc, styles),
+  .pipe inject( series(vendorSrc, appSrc, styles),
     ignorePath: config.buildDir)
   .pipe gulp.dest config.buildDir
 
+
+# @method       bake-index-html-prod
+# @type         gulp-task
+# @description  Put concatenated, minified and uglified files of JS and CSS
+#               into `index.html`
+gulp.task 'bake-index-html-prod', ->
+  appSrc = gulp.src [
+    config.buildDir + '/*.js'
+    config.buildDir + '/*.css'
+  ],
+    read: false
+
+  gulp.src 'src/index.html'
+  .pipe inject(appSrc,
+    ignorePath: config.buildDir)
+  .pipe htmlmini
+    conditionals: true
+  .pipe gulp.dest config.buildDir
