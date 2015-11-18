@@ -1,4 +1,7 @@
-# Translation Manager [![Built with Gulp][build-with-gulp-png]][gulpjs-page] [![Stories in Ready](https://badge.waffle.io/Contactis/translations-manager.png?label=ready&title=Ready)](http://waffle.io/Contactis/translations-manager)
+# Translation Manager 
+[![Build Status][travis-ci-image]][travis-ci-project-website]
+[![Built with Gulp][gulpjs-image]][gulpjs-website]
+[![Stories in Ready][waffle-io-image]][waffle-io-project-website]
 > by iTelo
 
 Main goal of this project is to provide all neccessary features to store,
@@ -16,14 +19,14 @@ each other and tons of translations.
 
 
 ## Installation
-Project is build entirely with javascript, backend based on [node.js][node.js]
+Project is build entirely with javascript, backend based on [node.js][nodejs-website]
 and platform and frontend part becongs to AngularJS.  Therefor
 [npm](https://www.npmjs.com/) and [Bower](http://bower.io/) are used.
 
 ### Requirements
 Before [setup](#setup) you need to have few programs already installed on your
 machine, and these programs are:
-- [node.js][node.js]
+- [node.js][nodejs-website]
 
 ### Setup
 > Latest node.js is recommended for development (4.0.0 or higher).
@@ -97,9 +100,16 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
+
 [nvm-github]: https://github.com/creationix/nvm
-[node.js]: https://nodejs.org
+[gulpjs-website]: http://www.gulpjs.com
+[nodejs-website]: https://nodejs.org
 [wiki]: https://github.com/Contactis/translations-manager/wiki
 [wiki-development]: https://github.com/Contactis/translations-manager/wiki/Development
-[gulpjs-page]: https://www.gulpjs.com
-[build-with-gulp-png]: https://raw.githubusercontent.com/gulpjs/gulp/e2dd2b6c66409f59082c24585c6989244793d132/built-with-gulp.png
+[travis-ci-project-website]: https://travis-ci.org/Contactis/translations-manager 
+[waffle-io-project-website]: http://waffle.io/Contactis/translations-manager
+
+[waffle-io-image]: https://badge.waffle.io/Contactis/translations-manager.svg?label=ready&title=Ready
+[travis-ci-image]: https://travis-ci.org/Contactis/translations-manager.svg?branch=develop
+[gulpjs-image]: https://img.shields.io/badge/build%20with-gulp.js-green.svg
+[build-with-gulp-image]: https://raw.githubusercontent.com/gulpjs/gulp/e2dd2b6c66409f59082c24585c6989244793d132/built-with-gulp.png
