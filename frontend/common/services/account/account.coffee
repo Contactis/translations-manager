@@ -2,7 +2,6 @@ angular.module('translation.services.account', [
   'restangular'
   'lbServices'
   'ngCookies'
-  'ngMaterial'
   'ui.router'
   'translation.providers.userPermissionsSettings'
 ])

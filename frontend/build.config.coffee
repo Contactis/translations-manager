@@ -57,7 +57,6 @@ module.exports =
       'frontend/vendor/matchHeight/jquery.matchHeight.js'
       'frontend/vendor/datatables/media/js/jquery.dataTables.js'
       'frontend/vendor/select2/dist/js/select2.full.js'
-      'frontend/vendor/angular-bootstrap/ui-bootstrap.min.js'
       'frontend/vendors_offline/dataTables.bootstrap.js'
       'frontend/vendors_offline/ace.js'
       'frontend/vendors_offline/mode-html.js'
@@ -69,6 +68,7 @@ module.exports =
       'frontend/vendor/angular/angular.js'
       'frontend/vendor/moment/moment.js'
 
+      'frontend/vendor/angular-bootstrap/ui-bootstrap.min.js'
       # Libraries depends on independent libraries
       'frontend/vendor/angular-animate/angular-animate.js'
       'frontend/vendor/angular-cookies/angular-cookies.js'

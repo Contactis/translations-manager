@@ -51,8 +51,7 @@ translationApp = angular.module('translation', [
   'translator.directive.trDashboardTop'
 ])
 
-
-.config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider, $mdThemingProvider,
+.config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider,
 $translateProvider, tmhDynamicLocaleProvider, RestangularProvider, toastrConfig) ->
 
   $stateProvider
