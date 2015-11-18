@@ -6,6 +6,7 @@ cache         = require 'gulp-cached'
 jade          = require 'gulp-jade'
 templateCache = require 'gulp-angular-templatecache'
 remember      = require 'gulp-remember'
+plumber       = require 'gulp-plumber'
 uglify        = require 'gulp-uglify'
 gulpif        = require 'gulp-if'
 deepcopy      = require 'deepcopy'
@@ -32,6 +33,13 @@ _jadeCore = ->
     config.build.app_files.jade_common_tpl
     '!frontend/**/*.partial.jade'
   ])
+  .pipe(plumber( (error) ->
+      GLOBAL.coffeeOK = false
+      if config.arguments.production
+        throw new Error error.message
+      else
+        console.log "[JADE] error: ", error.message
+    ))
   .pipe(gulpif((!config.arguments.production && config.arguments.jadeCache), cache('jade-templates')))
   .pipe(jade({
       client: false
