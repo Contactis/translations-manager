@@ -38,6 +38,7 @@ translationApp = angular.module('translation', [
   'translation.services.authorization'
   'translation.services.filtersState'
   'translation.services.customTranslationHandler'
+  'translation.services.current-project'
 
   # Including controllers
   'translation.controllers.sidenav'
@@ -64,6 +65,8 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
         return FiltersStateService.refreshGroups()
       InterfaceLanguagesResolver: (LanguagesService) ->
         return LanguagesService.getInterfaceLanguages()
+      currentService: (CurrentProjectService) ->
+        return CurrentProjectService.getProject()
 
   $urlRouterProvider
     .when('', '/')
