@@ -68,7 +68,8 @@ module.exports =
       'frontend/vendor/angular/angular.js'
       'frontend/vendor/moment/moment.js'
 
-      'frontend/vendor/angular-bootstrap/ui-bootstrap.min.js'
+      'frontend/vendor/angular-bootstrap/ui-bootstrap.js'
+      'frontend/vendor/angular-bootstrap/ui-bootstrap-tpls.js'
       # Libraries depends on independent libraries
       'frontend/vendor/angular-animate/angular-animate.js'
       'frontend/vendor/angular-cookies/angular-cookies.js'
