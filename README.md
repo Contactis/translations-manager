@@ -63,7 +63,7 @@ then build and run environment
 
 ```
 gulp db:restore  # build and seed database
-gulp watch       # build and run the project
+gulp production  # build, run tests and deploy the project for production
 ```
 
 Open browser on: http://127.0.0.1:3000/
@@ -73,9 +73,10 @@ Enjoy the awesome :)
 
 ## Development
 All official things that is combined with development process like: app
-structure, frontend and backend side and other elaboration stuff are gathered in
-part called [**development**][wiki-development] into our Wiki pages.  To see
-more visit our [wiki pages][wiki].
+structure, frontend and backend side and other elaboration stuff are gathered in part called [**development**][wiki-development] into our Wiki pages.  
+To see more visit our [wiki pages][wiki].
+
+
 
 
 ## Licence
