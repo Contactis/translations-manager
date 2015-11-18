@@ -71,7 +71,7 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
 
   #$locationProvider.html5Mode(true)
 
-  #$animateProvider.classNameFilter(/animate/)
+  $animateProvider.classNameFilter(/animate/)
 
   ###
   The is some issue with defining backgroud color
