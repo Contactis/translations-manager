@@ -1,7 +1,7 @@
 # This file/module contains all configuration for the build process.
 
 GULP_BUILD_DIR      = 'public'
-PROJECT_THEME_NAME  = 'theme_material'
+PROJECT_THEME_NAME  = 'theme_bootstrap'
 
 module.exports =
 
@@ -152,7 +152,8 @@ module.exports =
 
     # SASS files specyfic for current used theme
     sass: [
-      'frontend/sass/' + PROJECT_THEME_NAME + '/main.sass'
+      'frontend/sass/' + PROJECT_THEME_NAME + '/**/*.sass'
+      'frontend/sass/' + PROJECT_THEME_NAME + '/**/*.scss'
       'frontend/app/**/*.sass'
       'frontend/common/**/*.sass'
     ]
