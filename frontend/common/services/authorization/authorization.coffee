@@ -60,7 +60,7 @@ LanguagesService, UserPermissionsSettings) ->
     if Account.isAuthenticated()
       $state.go 'app.dashboard'
     else
-      $state.go 'app.login'
+      $state.go 'login'
     return queue.resolve()
 
 
@@ -71,7 +71,7 @@ LanguagesService, UserPermissionsSettings) ->
     logout:       ->
       Account.logout().$promise.then ->
         AccountService.resetAccount()
-        $state.go 'app.login'
+        $state.go 'login'
         $mdToast.show(
           $mdToast.simple()
           .content('You had been logged out.')

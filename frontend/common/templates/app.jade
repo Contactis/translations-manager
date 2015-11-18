@@ -1,7 +1,9 @@
-div(layout='row' flex)
-  //- side navigation
-  include sidenav.partial.jade
+.app-container.expanded
+  .row.content-container
+    .top(ng-controller="SidenavController" ng-show="user.loggedIn")
+      include topbar.partial.jade
+      include sidenav.partial.jade
+    .container-fluid
+      .side-body.padding-top(data-ui-view="")
 
-  //- Content of page
-  #content(data-ui-view='')
 
