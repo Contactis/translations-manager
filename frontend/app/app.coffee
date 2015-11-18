@@ -143,7 +143,7 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider, toastrConfig)
 
 # App Controller
 # -------------
-.controller 'AppController', ($scope, $rootScope, $state, $cookies, $mdSidenav, LanguagesService, AccountService) ->
+.controller 'AppController', ($scope, $rootScope, $state, $cookies, LanguagesService, AccountService) ->
 
   # Set language for income user (not logged in)
   LanguagesService.setLanguage(LanguagesService.getStartupLanguage())
