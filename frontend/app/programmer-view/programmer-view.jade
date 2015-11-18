@@ -1,4 +1,12 @@
-.primary-containter
-  h1 programmer view
-
+table.table.table-striped(search-watch-model="query" st-safe-src="tableData" st-table="displayedCollection")
+    thead
+        tr
+            th(st-sort="keyString") Index key name
+            th Basic translation: English (English)
+            th Context Description
+    tbody
+        tr(data-ng-repeat="singleRow in displayedCollection")
+            td {{singleRow.keyString}}
+            td mock1
+            td mock2
 

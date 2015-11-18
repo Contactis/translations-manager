@@ -28,7 +28,6 @@
     "bootstrap-sass": "~3.3.5",
     "jquery": "~2.1.4",
     "angular-lodash": "~0.1.2",
-    "angular-material": "~0.11.0",
     "animate.css": "~3.4.0",
     "iCheck": "~1.0.2",
     "bootstrap-switch": "~3.3.2",
@@ -39,7 +38,8 @@
     "matchHeight": "~0.6.0",
     "angular-mocks": "~1.4.7",
     "jasmine-jquery": "~2.1.1",
-    "angular-toastr": "~1.6.0"
+    "angular-toastr": "~1.6.0",
+    "angular-bootstrap": "~0.14.3"
   },
   "resolutions": {
     "angular": "1.4.6"

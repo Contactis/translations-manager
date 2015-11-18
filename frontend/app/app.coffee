@@ -6,7 +6,7 @@ translationApp = angular.module('translation', [
   'restangular'
   'ngAnimate'
   'ngAria'
-  'ngMaterial'
+  'ui.bootstrap'
   'ngMessages'
   'smart-table'
   'angular-lodash'
