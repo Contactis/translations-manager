@@ -1,0 +1,18 @@
+//- pre {{ vm.projects | json }}
+//- pre {{ vm.accounts | json }}
+
+div(ng-repeat="project in vm.projects track by $index")
+  p {{ project.name }}
+
+.project-user-assigment(layout="column", ng-cloak="")
+  md-content.md-padding.autocomplete(layout="column")
+    md-contact-chips(ng-model="vm.contacts", md-contacts="vm.querySearch($query)", md-contact-name="name",
+    md-contact-image="image", md-contact-email="email", md-require-match="true",
+    md-highlight-flags="i", filter-selected="vm.filterSelected", placeholder="To")
+    md-list.fixedRows
+      md-subheader.md-no-sticky Contacts
+      md-list-item.md-2-line.contact-item(ng-repeat="(index, contact) in vm.allContacts", ng-if="vm.contacts.indexOf(contact) < 0")
+        img.md-avatar(ng-src="{{contact.image}}", alt="{{contact.name}}")
+        .md-list-item-text.compact
+          h3 {{contact.name}}
+          p {{contact.email}}
