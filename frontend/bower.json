@@ -36,9 +36,14 @@
     "select2": "~4.0.0",
     "components-font-awesome": "~4.4.0",
     "Chart.js": "~1.0.2",
-    "matchHeight": "~0.6.0"
+    "matchHeight": "~0.6.0",
+    "angular-mocks": "~1.4.7",
+    "jasmine-jquery": "~2.1.1"
   },
   "resolutions": {
     "angular": "1.4.6"
+  },
+  "devDependencies": {
+    "jquery": "~2.1.4"
   }
 }

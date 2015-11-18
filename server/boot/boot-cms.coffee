@@ -3,7 +3,6 @@ chalk   = require 'chalk'
 argv    = require('yargs').argv
 
 module.exports = (server) ->
-
   if (typeof argv.disableCms is "undefined")
     cms = undefined
     try
@@ -23,9 +22,7 @@ module.exports = (server) ->
 
       console.log "[#{chalk.gray moment().format 'HH:mm:ss'}]
       #{chalk.green '[CMS] Translation Manager CMS is running at'}
-      #{chalk.blue 'http://' + baseUrl + cmsPath}"
-
+      #{chalk.blue '' + baseUrl + cmsPath}"
 
     return
   return
-
