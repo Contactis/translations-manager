@@ -5,6 +5,7 @@ angular.module('translation.pages.programmer-view', [
   'ngMessages'
   'lbServices'
   'translation.providers.userPermissionsSettings'
+  'ui.bootstrap'
 ])
 
 .config ($stateProvider, UserPermissionsSettingsProvider) ->
@@ -18,7 +19,7 @@ angular.module('translation.pages.programmer-view', [
     data:
       access:       access.user
 
-.controller 'ProgrammerViewController', ($scope, $log, $cookies, $timeout, TranslationKey) ->
+.controller 'ProgrammerViewController', ($scope, $log, $cookies, $timeout, TranslationKey, $uibModal) ->
 
   $scope.query = ""
   $scope.filters     = {}
@@ -53,43 +54,31 @@ angular.module('translation.pages.programmer-view', [
 
 
 
+  $scope.open = ->
+    modalInstance = $uibModal.open(
+      animation: true
+      templateUrl: 'templates/dialog/translation.tpl.html'
+      controller: 'ModalInstanceCtrl'
+      size: 'lg'
+      windowClass: 'center-modal'
+    )
 
-#  $scope.showAdvanced = (ev) ->
-#    $mdDialog.show
-#      controller: DialogController
-#      templateUrl: "templates/dialog/translation.tpl.html"
-#      parent: angular.element(document.body)
-#      targetEvent: ev
-#      clickOutsideToClose: true
-#
-#  DialogController = ($scope, $mdDialog, FiltersStateService) ->
-#    $scope.currentKey           = {}
-#    $scope.currentKey.isPlural  = true
-#    $scope.searchText           = null
-#    $scope.groups = FiltersStateService.getGroups()
-#
-#    $scope.closeDialog = () ->
-#      $mdDialog.hide()
-#
-#    $scope.saveKey = () ->
-#      TranslationKey.create(currentKey).$promise.then () ->
-#        console.log 'saving key!'
-#      , (error) ->
-#        console.log 'error while saving key'
-#
-#    $scope.querySearch = (query) ->
-#      if query then $scope.groups.filter(createFilterFor(query)) else []
-#
-#    createFilterFor = (query) ->
-#      lowercaseQuery = angular.lowercase(query)
-#      (state) ->
-#        state.namespace.indexOf(lowercaseQuery) == 0
-#
-#    #mocked
-#    $scope.languagePlurals = [
-#      { plural: "One",   example: ": 1"}
-#      { plural: "Other", example: ": 0, 2-999, 12..."}
-#    ]
-#  DialogController.$inject = ["$scope", "$mdDialog", "FiltersStateService"]
 
   return
+
+
+.controller 'ModalInstanceCtrl', ($scope, $uibModalInstance, TranslationKey) ->
+  $scope.currentKey   = {}
+  $scope.currentKey.keyString     = 'TESTOWY'
+  $scope.currentKey.isPlural      = false
+  $scope.currentKey.projectId     = 1
+  $scope.currentKey.namespaceId   = 3
+  $scope.ok = ->
+    TranslationKey.create($scope.currentKey).$promise.then () ->
+      console.log 'saving key!'
+      $uibModalInstance.close()
+    , (error) ->
+      console.log 'error while saving key'
+
+  $scope.cancel = ->
+    $uibModalInstance.close()

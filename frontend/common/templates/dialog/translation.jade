@@ -1,4 +1,26 @@
-div#modalDefault.modal.fade(aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" style="display: none;")
-    div.model-dialog
-        div.modal-content
-            div.modal-content test
+.card
+    .card-header
+        .card-title
+            .title Add key
+    .card-body
+        form.form-horizontal
+            .form-group
+                label.col-sm-2.control-label(for="namespace") Namespace
+                .col-sm-2
+                    input.form-control(id ="namespace" type="text" placeholder="namespace")
+            .form-group
+                label.col-sm-2.control-label(for="keyString") Key index
+                .col-sm-2
+                    input.form-control(id ="keyString" type="text" placeholder="key" ng-modal="currentKey.keyString")
+        button.btn.btn-success.pull-right.margin-right-5(type="button" ng-click="ok()") Create
+        button.btn.btn-warning.pull-right.margin-right-15(type="button" ng-click="cancel()") Cancel
+        
+
+//.modal-header
+//    h3.modal-title Add key
+//
+//.modal-body
+//
+//.modal-footer
+//    button.btn.btn-primary(type="button" ng-click="ok()") OK
+//    button.btn.btn-warning(type="button" ng-click="cancel()") Cancel
