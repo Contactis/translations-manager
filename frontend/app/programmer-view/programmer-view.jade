@@ -1,21 +1,4 @@
-tr-top-bar(filters='filters' context-menu="contextMenu" query="query")
+.primary-containter
+  h1 programmer view
 
-table.table.table-striped(search-watch-model="query" st-safe-src="tableData" st-table="displayedCollection")
-  thead
-    tr
-      th(st-sort="keyString") Index key name
-      th Basic translation: English (English)
-      th Context Description
-  tbody
-    tr(data-ng-repeat="singleRow in displayedCollection")
-      td {{singleRow.keyString}}
-      td mock1
-      td mock2
-md-autocomplete(flex md-search-text="searchText" md-items="item in querySearch(searchText)" required
-md-input-minlength="2")
-  md-item-template
-    span(md-highlight-text="searchText") {{item.namespace}}
-div(layout='row')
-  span(flex)
-  md-button.md-fab.md-primary.md-fab-bottom-right.force-position-fixed(aria-label="Profile" ng-click="showAdvanced($event)" )
-    md-icon.material-icons add
+

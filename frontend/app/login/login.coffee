@@ -13,7 +13,7 @@ angular.module('translation.pages.login', [
 
   access = UserPermissionsSettingsProvider.accessLevels
 
-  $stateProvider.state 'app.login',
+  $stateProvider.state 'login',
     url:            '/login'
     controller:     'LoginController'
     templateUrl:    'login/login.tpl.html'
