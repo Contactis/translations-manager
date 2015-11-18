@@ -19,6 +19,10 @@ module.exports =
       'manager'
       'admin'
     ]
+    'management':       [
+      'admin'
+      'manager'
+    ]
     'translator-only':  [ 'translator' ]
     'programmer-only':  [ 'programmer' ]
     'manager':          [ 'manager' ]

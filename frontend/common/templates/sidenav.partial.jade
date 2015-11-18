@@ -12,34 +12,6 @@
           a(ui-sref="app.dashboard")
             span.icon.fa.fa-tachometer
             span.title Dashboard
-        //li.panel.panel-default.dropdown
-        //  a(data-toggle="collapse", data-target="#dropdown-element")
-        //    span.icon.fa.fa-desktop
-        //    span.title UI Kits
-        //  // Dropdown level 1
-        //  #dropdown-element.panel-collapse.collapse
-        //    .panel-body
-        //      ul.nav.navbar-nav
-        //        li
-        //          a(href="ui-kits/grid.html") Grid
-        //        li
-        //          a(href="ui-kits/button.html") Buttons
-        //        li
-        //          a(href="ui-kits/card.html") Cards
-        //        li
-        //          a(href="ui-kits/list.html") Lists
-        //        li
-        //          a(href="ui-kits/modal.html") Modals
-        //        li
-        //          a(href="ui-kits/alert.html") Alerts & Toasts
-        //        li
-        //          a(href="ui-kits/panel.html") Panels
-        //        li
-        //          a(href="ui-kits/loader.html") Loaders
-        //        li
-        //          a(href="ui-kits/step.html") Tabs & Steps
-        //        li
-        //          a(href="ui-kits/other.html") Other
         li(ui-sref-active="active")
           a(ui-sref="app.programmer-view")
             span.icon.fa.fa-list-alt
@@ -54,10 +26,17 @@
           a(ui-sref="app.translator-view")
             span.icon.fa.fa-table
             span.title Translator view
-
-        li(ui-sref-active="active")
-          a(ui-sref="app.admin-view")
+        li.panel.panel-default.dropdown(ui-sref-active="active")
+          a(data-toggle="collapse", data-target="#dropdown-element")
             span.icon.fa.fa-cog
-            span.title Admin view
+            span.title Project management
+          #dropdown-element.panel-collapse.collapse
+            .panel-body
+              ul.nav.navbar-nav
+                li
+                  a(data-ui-sref="app.admin.user-assignment") User assignment
+                li
+                  a(data-ui-sref="app.admin.project-settings") Project settings
+
 
 
