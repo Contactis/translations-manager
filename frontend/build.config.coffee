@@ -45,6 +45,7 @@ module.exports =
   # with our app's assets. This structure is flattened, so it is not
   # recommended that you use wildcards.
   vendor_files:
+    angular_i18n_locales: 'frontend/vendor/angular-i18n/angular-locale_*.js'
     js: [
       # independent libraries
       'frontend/vendor/lodash/dist/lodash.js'
@@ -137,6 +138,9 @@ module.exports =
       'frontend/common/**/*.sass'
     ]
 
+    fonts:        'frontend/sass/' + PROJECT_THEME_NAME + '/css/fonts/**'
+    images:       'frontend/sass/' + PROJECT_THEME_NAME + '/img/**'
+    other_files:  'frontend/sass/' + PROJECT_THEME_NAME + '/files/**' # files that are not images, css (ex: pdf, ect.)
 
   # This is a collection of files used during testing only.
   test_files:
