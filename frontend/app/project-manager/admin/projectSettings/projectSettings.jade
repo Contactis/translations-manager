@@ -1,8 +1,8 @@
 .container-fluid
   .row
     .col-xs-12
-      h1 Project settings
-      p {{ 'PAGE.TITLE.ADMINISTRATOR.PROJECT_SETTINGS' | translate }}
+      h1 {{ 'PAGE.TITLE.ADMINISTRATOR.PROJECT_SETTINGS' | translate }}
+      p {{ 'APP.ADMIN.PROJECT_SETTINGS.GENETAL_DESCRIPTION' | translate }}
 
   .row
     .col-md-12
@@ -13,11 +13,11 @@
           form
             .form-group
               label(for="projectNameInput") {{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_NAME_LABEL' | translate }}
-              input.form-control(name="projectNameInput" type="text", placeholder="{{ 'Type name for the project' | translate }}" data-ng-model="vm.currentProject.name")
+              input.form-control(name="projectNameInput" type="text", placeholder="{{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_NAME_PLACEHOLDER' | translate }}" data-ng-model="vm.currentProject.name")
             .form-group
               label(for='projectDescriptionInput') {{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DESCRITPION_LABEL' | translate }}
               textarea.form-control(name="projectDescriptionInput" rows="3" placeholder="{{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DESCRITPION_PLACEHOLDER' | translate }}" data-ng-model="vm.currentProject.description")
-            button.btn.btn-default(type='submit') Save
+            button.btn.btn-default(type='submit', data-ng-click="vm.saveAbout()") Save
       hr.col-md-12
 
 
@@ -25,6 +25,7 @@
       p {{ 'APP.ADMIN.PROJECT_SETTINGS.SECTION_DATE_AND_TIME_GENERAL_DESCRIPTION' | translate }}
       .alert.alert-warning(role="alert")
         | Warrning: {{ 'APP.FRONTEND_MESSAGES.THIS_FEATURE_IS_NOT_YET_READY' | translate}}
+      button.btn.btn-default Save
       hr.col-md-12
 
 
@@ -61,5 +62,5 @@
           input.form-control(data-ng-model="vm.vars.key_index_string")
 
 
-      button.btn(contenteditable='false') Run Network Diagnostic
+      button.btn.btn-default Save
     .span9
