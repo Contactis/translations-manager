@@ -3,6 +3,7 @@ angular.module('translation.pages.programmer-view', [
   'ngCookies'
   'data-table'
   'ngMessages'
+  'ngAnimate'
   'lbServices'
   'translation.providers.userPermissionsSettings'
   'ui.bootstrap'
@@ -20,7 +21,7 @@ angular.module('translation.pages.programmer-view', [
     data:
       access:       access.user
 
-.controller 'ProgrammerViewController', ($log, $cookies, $timeout, TranslationKey, $uibModal) ->
+.controller 'ProgrammerViewController', ($log, $cookies, $timeout, TranslationKey, $uibModal, Namespace, $http) ->
 
   vm              = this
   vm.query        = ""
@@ -70,21 +71,34 @@ angular.module('translation.pages.programmer-view', [
   return vm
 
 
-.controller 'ModalInstanceCtrl', ($uibModalInstance, TranslationKey) ->
-  vm                          = this
-  vm.currentKey               = {}
-  vm.currentKey.keyString     = 'TESTOWY'
-  vm.currentKey.isPlural      = false
-  vm.currentKey.projectId     = 1
-  vm.currentKey.namespaceId   = 3
+.controller 'ModalInstanceCtrl', ($uibModalInstance, TranslationKey, Namespace) ->
+  vm  = this
+
+  vm.getNamespaces = (val) ->
+    Namespace.find(
+      filter:
+        where:
+          namespace:
+            like: "%#{val}%"
+    ).$promise.then (success)->
+      vm.namespace = success
+      return success
+
+  vm.translationKey                       = {}
+  vm.translationKey.translatedPhrase      = 'TESTOWY'
+  vm.translationKey.pluralForm            = false
+  vm.translationKey.projectId             = 1
+  vm.translationKey.namespaceId           = 3
+
   vm.ok = ->
-    TranslationKey.create($scope.currentKey).$promise.then () ->
-      console.log 'saving key!'
+    TranslationKey.create(vm.translationKey).$promise.then () ->
       $uibModalInstance.close()
     , (error) ->
       console.log 'error while saving key'
 
   vm.cancel = ->
     $uibModalInstance.close()
+
+
 
   return vm

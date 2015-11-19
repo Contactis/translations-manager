@@ -7,31 +7,28 @@
       .form-group
         label.col-sm-2.control-label(for="indexType") Key index type
         .col-sm-1
-            label.checkbox-inline
-              input.margin-left-rm(type="checkbox" value="")
+            label.radio-inline
+              input.margin-left-rm(type="radio" name="optradio")
               span.margin-left-15 String
-        .col-sm-1
-            label.checkbox-inline
-              input(type="checkbox" value="")
-              span Plural
-
-      .form-group
-        label.col-sm-2.control-label(for="namespace") Namespace
         .col-sm-2
-          input.form-control(id="namespace" type="text" placeholder="namespace")
+            label.radio-inline
+              input(type="radio" name="optradio")
+              span Plural
+      .form-group
+        label.col-sm-2.control-label(for="namespaceInput") Namespace
+        .col-sm-2
+          input.form-control(id="namespaceInput" type="text" placeholder="namespace" data-ng-model="vm.namespaceTrash"
+          uib-typeahead="singleNamespace.namespace for singleNamespace in vm.getNamespaces($viewValue)")
+
+
       .form-group
         label.col-sm-2.control-label(for="keyString") Key index
         .col-sm-2
-          input.form-control(id ="keyString" type="text" placeholder="key" ng-modal="currentKey.keyString")
+          input.form-control(id ="keyString" type="text" placeholder="key" ng-modal="translationKey.keyString")
+      .form-group
+        label.col-sm-2.control-label(for="descriptionInput") Context description
+        .col-sm-6
+          textarea.form-control(id="descriptionInput" rows="2")
+
     button.btn.btn-success.pull-right.margin-right-5(type="button" ng-click="vm.ok()") Create
     button.btn.btn-warning.pull-right.margin-right-15(type="button" ng-click="vm.cancel()") Cancel
-
-
-//.modal-header
-//    h3.modal-title Add key
-//
-//.modal-body
-//
-//.modal-footer
-//    button.btn.btn-primary(type="button" ng-click="ok()") OK
-//    button.btn.btn-warning(type="button" ng-click="cancel()") Cancel
