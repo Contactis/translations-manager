@@ -46,18 +46,20 @@ translationApp.config( [
     'PAGE.TITLE.404':                                                     '404'
     'PAGE.TITLE.LOGIN':                                                   'Login'
     'PAGE.TITLE.HELP':                                                    'Help'
+    'PAGE.TITLE.DASHBOARD':                                               'Dashboard'
+    'PAGE.TITLE.TRANSLATOR':                                              'Translator'
     'PAGE.TITLE.PROGRAMMER':                                              'Programmer'
     'PAGE.TITLE.MANAGER':                                                 'Manager'
-    'PAGE.TITLE.TRANSLATOR':                                              'Translator'
     'PAGE.TITLE.ADMINISTRATOR':                                           'Administrator'
-    'PAGE.TITLE.DASHBOARD':                                               'Dashboard'
+    'PAGE.TITLE.ADMINISTRATOR.PROJECT_SETTINGS':                          'Project settings'
 
 
     # ### Backend messages
 
 
     # ## Frontend messages
-
+    'APP.FRONTEND_MESSAGES.THIS_FEATURE_IS_NOT_YET_READY':
+      'This feature is not yet ready. Apologize for any inconvenience.'
 
     # app/dashboard.jade
 
@@ -74,6 +76,35 @@ translationApp.config( [
     'LOGIN_WITH_YOUR_TRANSLATION_MANAGER_ACCOUNT':  'Login with your translation manager account'
     'USERNAME':                                     'Username'
 
+    # app/admin/projectSettings.jade
+    'APP.ADMIN.PROJECT_SETTINGS.SECTION_ABOUT':           'About'
+    'APP.ADMIN.PROJECT_SETTINGS.SECTION_DATE_AND_TIME':   'Date & Time'
+    'APP.ADMIN.PROJECT_SETTINGS.SECTION_WORKFLOW':        'Workflow'
+
+    'APP.ADMIN.PROJECT_SETTINGS.FIELD_OUTPUT_CASE_TYPE_LABEL':  'Output Case type'
+
+    'APP.ADMIN.PROJECT_SETTINGS.FIELD_NAMESPACE_LABEL':         'Separator for namespaces'
+    'APP.ADMIN.PROJECT_SETTINGS.FIELD_NAMESPACE_PLACEHOLDER':   'Type a namespace separator character'
+    'APP.ADMIN.PROJECT_SETTINGS.VALIDATION_NAMESPACE_REQUIRED':       'Namespace field is required'
+    'APP.ADMIN.PROJECT_SETTINGS.VALIDATION_NAMESPACE_IS_NOT_VALID':   'Namespace field is not valid'
+    'APP.ADMIN.PROJECT_SETTINGS.VALIDATION_NAMESPACE_IS_VALID':       'Namespace field is valid'
+    'APP.ADMIN.PROJECT_SETTINGS.VALIDATION_NAMESPACE_MIN_CHARACTER':  'Namespace field must contain minimum 1 character'
+
+    'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_NAME_LABEL':
+      'Project name'
+    'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_NAME_PLACEHOLDER':
+      'Type short description about what is the project'
+    'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DESCRITPION_LABEL':
+      'Project description'
+    'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DESCRITPION_PLACEHOLDER':
+      'Type short description about what is the project'
+
+    'APP.ADMIN.PROJECT_SETTINGS.SECTION_ABOUT_GENERAL_DESCRIPTION':
+      'Nothing here yet'
+    'APP.ADMIN.PROJECT_SETTINGS.SECTION_DATE_AND_TIME_GENERAL_DESCRIPTION':
+      'Nothing here yet'
+    'APP.ADMIN.PROJECT_SETTINGS.SECTION_WORKFLOW_GENERAL_DESCRIPTION':
+      'All stuff related to building translations'
 
   })
 ])
