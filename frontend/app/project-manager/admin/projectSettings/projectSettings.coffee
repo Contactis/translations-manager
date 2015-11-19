@@ -1,6 +1,5 @@
 angular.module('translation.pages.admin.project-settings', [
   'lbServices'
-  'translation.services.projects'
 ])
 
 
@@ -12,12 +11,12 @@ angular.module('translation.pages.admin.project-settings', [
     url:            '/project-settings'
     controller:     'ProjectSettingsController'
     controllerAs:   'vm'
-    templateUrl:    'admin/projectSettings/projectSettings.tpl.html'
+    templateUrl:    'project-manager/admin/projectSettings/projectSettings.tpl.html'
     data:
       access:       access.management
 
 
-.controller 'ProjectSettingsController', ($scope, $log, ProjectsService) ->
+.controller 'ProjectSettingsController', ($scope, $log) ->
   vm = this
 
   vm.currentProject =
