@@ -1,8 +1,6 @@
-angular.module('translation.pages.admin', [
+angular.module('translation.pages.admin', [])
 
-])
 .config ($stateProvider, UserPermissionsSettingsProvider) ->
-
   access = UserPermissionsSettingsProvider.accessLevels
 
   $stateProvider.state 'app.admin',
@@ -12,6 +10,7 @@ angular.module('translation.pages.admin', [
     controller:     'AdminController'
     templateUrl:    'project-manager/admin/admin.tpl.html'
     data:
-      access: access.management
+      access:       access.management
 
 .controller 'AdminController', ->
+  return
