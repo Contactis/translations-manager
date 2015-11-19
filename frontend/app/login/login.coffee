@@ -44,7 +44,7 @@ angular.module('translation.pages.login', [
     AuthorizationService.login($scope.rememberMe, $scope.user.email, $scope.user.password).then (account) ->
 
 
-      $state.go 'app.dashboard'
+      $state.go 'app.manager.dashboard'
 
 
       $mdToast.show(

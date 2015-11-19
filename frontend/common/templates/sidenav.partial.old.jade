@@ -3,7 +3,7 @@ div#sidenav.md-whiteframe-z2(ng-controller="SidenavController" ng-show="user.log
     md-toolbar.md-primary.md-hue-2(layout="column")
       header.md-toolbar-tools.fill-height
         img(width=40 src="https://material.angularjs.org/0.11.0/img/icons/angular-logo.svg")
-        a(href="" ng-click="goTo('app.dashboard')") {{ currentProject.name }}
+        a(href="" ng-click="goTo('app.manager.dashboard')") {{ currentProject.name }}
         span(flex)
         md-menu(md-offset='0 -5')
           md-button.md-icon-button(aria-label='Open project menu', ng-click='$mdOpenMenu()')

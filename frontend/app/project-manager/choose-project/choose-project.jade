@@ -1,0 +1,7 @@
+.col-xs-6.col-xs-offset-3
+  ul.list-group
+    li.list-group-item(data-ng-repeat="project in vm.projects track by $index" data-ng-bind="project.name"
+    data-ng-click="vm.chooseProject(project.id)")
+
+
+

@@ -2,14 +2,14 @@
   nav.navbar.navbar-default(role="navigation")
     .side-menu-container
       .navbar-header
-        a.navbar-brand(ui-sref="app.dashboard")
+        a.navbar-brand(ui-sref="app.manager.dashboard")
           .icon.fa.fa-paper-plane
           .title {{ currentProject.name }} Jakaś nazwa
         button.navbar-expand-toggle.pull-right.visible-xs(type="button")
           i.fa.fa-times.icon
       ul.nav.navbar-nav
         li(ui-sref-active="active")
-          a(ui-sref="app.dashboard")
+          a(ui-sref="app.manager.dashboard")
             span.icon.fa.fa-tachometer
             span.title Dashboard
         li(ui-sref-active="active")

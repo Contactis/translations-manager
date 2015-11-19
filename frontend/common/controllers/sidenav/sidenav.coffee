@@ -4,7 +4,6 @@ angular.module('translation.controllers.sidenav', [
   'ngCookies'
   'ngAria'
   'ngMaterial'
-  'translation.services.projects'
   'translation.services.account'
   'translation.services.authorization'
   'translation.services.filtersState'
@@ -13,7 +12,7 @@ angular.module('translation.controllers.sidenav', [
 
 
 .controller 'SidenavController', ($scope, $rootScope, $state, $cookies, Account, FiltersStateService,
-$mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService) ->
+$mdSidenav, $mdUtil, AccountService, AuthorizationService) ->
 
   $scope.user = AccountService.account()
   $scope.user.loggedIn = Account.isAuthenticated()
@@ -27,8 +26,8 @@ $mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService) ->
 
   $scope.currentProject = {}
 
-  ProjectsService.updated.then null, null, (project) ->
-    $scope.currentProject = project
+#  ProjectsService.updated.then null, null, (project) ->
+#    $scope.currentProject = project
 
   AccountService.updated.then null, null, (user) ->
     $scope.user = user

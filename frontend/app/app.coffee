@@ -21,9 +21,11 @@ translationApp = angular.module('translation', [
   # Including pages of aplication
   'translation.pages.404'
   'translation.pages.login'
+  'translation.pages.choose-project'
   'translation.pages.dashboard'
   'translation.pages.manager-view'
   'translation.pages.programmer-view'
+  'translation.pages.manager'
   'translation.pages.admin'
   'translation.pages.admin.project-settings'
   'translation.pages.admin.user-assignment'
@@ -65,8 +67,6 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
         return FiltersStateService.refreshGroups()
       InterfaceLanguagesResolver: (LanguagesService) ->
         return LanguagesService.getInterfaceLanguages()
-      currentService: (CurrentProjectService) ->
-        return CurrentProjectService.getProject()
 
   $urlRouterProvider
     .when('', '/')
@@ -132,6 +132,7 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
   _firstSuccess = false
 
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
+    console.log fromState, toState
     if _firstEnter
       _firstEnter = false
       AccountService.loadSession().then ->

@@ -7,6 +7,7 @@ angular.module('translation.pages.admin', [
 
   $stateProvider.state 'app.admin',
     abstract:       true
+    parent:         'app.manager'
     url:            '/admin'
     controller:     'AdminController'
     templateUrl:    'admin/admin.tpl.html'

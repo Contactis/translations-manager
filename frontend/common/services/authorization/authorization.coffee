@@ -58,7 +58,7 @@ LanguagesService, UserPermissionsSettings) ->
   _kickUnauthorised = (queue, event) ->
     event.preventDefault()
     if Account.isAuthenticated()
-      $state.go 'app.dashboard'
+      $state.go 'app.manager.dashboard'
     else
       $state.go 'login'
     return queue.resolve()
