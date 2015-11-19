@@ -149,11 +149,10 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
     if !_firstSuccess
       appSetup()
       _firstSuccess = true
-
     return
 
-
   return
+
 
 # App Controller
 # -------------
