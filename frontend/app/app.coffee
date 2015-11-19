@@ -135,11 +135,10 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider, toastrConfig)
     if !_firstSuccess
       appSetup()
       _firstSuccess = true
-
     return
 
-
   return
+
 
 # App Controller
 # -------------
