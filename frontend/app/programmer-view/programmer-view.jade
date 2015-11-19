@@ -1,13 +1,13 @@
-button.addButtonPosition.btn.btn-primary.btn-circle(type="button" data-ng-click="open()")
+button.addButtonPosition.btn.btn-primary.btn-circle(type="button" data-ng-click="vm.open()")
   i.fa.fa-plus
-table.table.table-striped(search-watch-model="query" st-safe-src="tableData" st-table="displayedCollection")
+table.table.table-striped(search-watch-model="vm.query" st-safe-src="vm.tableData" st-table="vm.displayedCollection")
     thead
         tr
-            th(st-sort="keyString") Index key name
+            th(st-sort="vm.keyString") Index key name
             th Basic translation: English (English)
             th Context Description
     tbody
-        tr(data-ng-repeat="singleRow in displayedCollection")
+        tr(data-ng-repeat="singleRow in vm.displayedCollection")
             td {{singleRow.keyString}}
             td mock1
             td mock2

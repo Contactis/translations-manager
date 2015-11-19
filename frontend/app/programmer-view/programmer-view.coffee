@@ -15,20 +15,22 @@ angular.module('translation.pages.programmer-view', [
   $stateProvider.state 'app.programmer-view',
     url:            '/programmer-view'
     controller:     'ProgrammerViewController'
+    controllerAs:   'vm'
     templateUrl:    'programmer-view/programmer-view.tpl.html'
     data:
       access:       access.user
 
-.controller 'ProgrammerViewController', ($scope, $log, $cookies, $timeout, TranslationKey, $uibModal) ->
+.controller 'ProgrammerViewController', ($log, $cookies, $timeout, TranslationKey, $uibModal) ->
 
-  $scope.query = ""
-  $scope.filters     = {}
-  $scope.contextMenu = {}
-  $scope.tableData  = []
+  vm              = this
+  vm.query        = ""
+  vm.filters      = {}
+  vm.contextMenu  = {}
+  vm.tableData    = []
 
   $timeout () ->
-    $scope.contextMenu.name   = "Programmer"
-    $scope.contextMenu.links  = [
+    vm.contextMenu.name   = "Programmer"
+    vm.contextMenu.links  = [
       {
         name: "Export selected to..."
         method: "exportSelectedTo()"
@@ -47,38 +49,42 @@ angular.module('translation.pages.programmer-view', [
         "namespace"
       ]
   ).$promise.then (success)->
-    $scope.tableData = success
-    $scope.displayedCollection = [].concat($scope.tableData)
+    vm.tableData = success
+    vm.displayedCollection = [].concat(vm.tableData)
   , (error) ->
     console.log "Problem with loading translation keys"
 
 
 
-  $scope.open = ->
-    modalInstance = $uibModal.open(
+  vm.open = ->
+    $uibModal.open(
       animation: true
       templateUrl: 'templates/dialog/translation.tpl.html'
       controller: 'ModalInstanceCtrl'
+      controllerAs: 'vm'
       size: 'lg'
       windowClass: 'center-modal'
     )
 
 
-  return
+  return vm
 
 
-.controller 'ModalInstanceCtrl', ($scope, $uibModalInstance, TranslationKey) ->
-  $scope.currentKey   = {}
-  $scope.currentKey.keyString     = 'TESTOWY'
-  $scope.currentKey.isPlural      = false
-  $scope.currentKey.projectId     = 1
-  $scope.currentKey.namespaceId   = 3
-  $scope.ok = ->
+.controller 'ModalInstanceCtrl', ($uibModalInstance, TranslationKey) ->
+  vm                          = this
+  vm.currentKey               = {}
+  vm.currentKey.keyString     = 'TESTOWY'
+  vm.currentKey.isPlural      = false
+  vm.currentKey.projectId     = 1
+  vm.currentKey.namespaceId   = 3
+  vm.ok = ->
     TranslationKey.create($scope.currentKey).$promise.then () ->
       console.log 'saving key!'
       $uibModalInstance.close()
     , (error) ->
       console.log 'error while saving key'
 
-  $scope.cancel = ->
+  vm.cancel = ->
     $uibModalInstance.close()
+
+  return vm
