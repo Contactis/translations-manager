@@ -1,5 +1,9 @@
+# # Project Settins (admin)
+
+# @module   translation.pages.admin.project-settings
 angular.module('translation.pages.admin.project-settings', [
   'lbServices'
+  'translation.services.current-project'
 ])
 
 
@@ -16,20 +20,45 @@ angular.module('translation.pages.admin.project-settings', [
       access:       access.management
 
 
-.controller 'ProjectSettingsController', ($scope, $log) ->
+# @package   ProjectSettingsController
+.controller 'ProjectSettingsController', ($scope, $log, CurrentProjectService, Project) ->
   vm = this
 
-  vm.currentProject =
-    "name": "Translation manager"
-    "defaultLanguageId": 1
-    "description": "This is dummy description for translation manager"
-    "id": 1
 
+  # @public
+  # @variable     vm.currentProject
+  # @type         Object
+  # @description  Object with current project data in it.
+  vm.currentProject = {}
+
+
+  # @private
+  # @getter
+  # @method       getProjectContext
+  # @package      CurrentProjectService
+  # @type         auto-resolved-promise
+  # @description  Gets data of current project and store it.
+  CurrentProjectService.getProjectContext().then (success) ->
+    vm.currentProject = success
+  , (e) ->
+    $log.error "Error", e
+
+
+  # @public
+  # @variable     vm.vars
+  # @type         Object
+  # @description  Sample examples of strings variables to show live view on
+  #               page.
   vm.vars =
     first_namespace:    "first namespace"
     second_namespace:   "second Namespace"
     key_index_string:   "key indEx_strRinG"
 
+
+  # @public
+  # @variable     vm.settings
+  # @type         Object
+  # @description  Project settings variables (not saved on backend)
   vm.settings =
     data_and_time:
       display_formats:
@@ -45,12 +74,22 @@ angular.module('translation.pages.admin.project-settings', [
           ">"
         ]
 
+
+  # @public
+  # @variable     vm.examples
+  # @description  Examples of live reload full keyindex strings
+  # @returns      {String}
   vm.examples =
     one: ->
       return vm.vars.first_namespace + vm.settings.workflow.namespace.separator + \
       vm.vars.second_namespace + vm.settings.workflow.namespace.separator + \
       vm.vars.key_index_string
 
+
+  # @public
+  # @variable     vm.outputCaseTypes
+  # @type         {Array}
+  # @description  Types of stings cases
   vm.outputCaseTypes = [
     {
       name: "Orginal"
@@ -78,5 +117,17 @@ angular.module('translation.pages.admin.project-settings', [
     }
   ]
 
+
+  # @public
+  # @method       vm.saveAbout
+  # @description  Save about data for current used project.
+  # @returns      {Promise}
+  vm.saveAbout = ->
+    vm.currentProject.$save().then (success) ->
+      $log.info "successfully saved"
+      return true
+    , (e) ->
+      $log.error "saveing failed"
+      return false
 
   return vm
