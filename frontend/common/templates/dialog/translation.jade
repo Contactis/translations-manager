@@ -1,20 +1,31 @@
 .card
-    .card-header
-        .card-title
-            .title Add key
-    .card-body
-        form.form-horizontal
-            .form-group
-                label.col-sm-2.control-label(for="namespace") Namespace
-                .col-sm-2
-                    input.form-control(id ="namespace" type="text" placeholder="namespace")
-            .form-group
-                label.col-sm-2.control-label(for="keyString") Key index
-                .col-sm-2
-                    input.form-control(id ="keyString" type="text" placeholder="key" ng-modal="currentKey.keyString")
-        button.btn.btn-success.pull-right.margin-right-5(type="button" ng-click="ok()") Create
-        button.btn.btn-warning.pull-right.margin-right-15(type="button" ng-click="cancel()") Cancel
-        
+  .card-header
+    .card-title
+      .title Add key
+  .card-body
+    form.form-horizontal
+      .form-group
+        label.col-sm-2.control-label(for="indexType") Key index type
+        .col-sm-1
+            label.checkbox-inline
+              input.margin-left-rm(type="checkbox" value="")
+              span.margin-left-15 String
+        .col-sm-1
+            label.checkbox-inline
+              input(type="checkbox" value="")
+              span Plural
+
+      .form-group
+        label.col-sm-2.control-label(for="namespace") Namespace
+        .col-sm-2
+          input.form-control(id="namespace" type="text" placeholder="namespace")
+      .form-group
+        label.col-sm-2.control-label(for="keyString") Key index
+        .col-sm-2
+          input.form-control(id ="keyString" type="text" placeholder="key" ng-modal="currentKey.keyString")
+    button.btn.btn-success.pull-right.margin-right-5(type="button" ng-click="ok()") Create
+    button.btn.btn-warning.pull-right.margin-right-15(type="button" ng-click="cancel()") Cancel
+
 
 //.modal-header
 //    h3.modal-title Add key
