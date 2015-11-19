@@ -77,6 +77,8 @@ translationApp.config( [
     'USERNAME':                                     'Username'
 
     # app/admin/projectSettings.jade
+    'APP.ADMIN.PROJECT_SETTINGS.GENETAL_DESCRIPTION':     'Nothing here yet'
+
     'APP.ADMIN.PROJECT_SETTINGS.SECTION_ABOUT':           'About'
     'APP.ADMIN.PROJECT_SETTINGS.SECTION_DATE_AND_TIME':   'Date & Time'
     'APP.ADMIN.PROJECT_SETTINGS.SECTION_WORKFLOW':        'Workflow'
@@ -93,7 +95,7 @@ translationApp.config( [
     'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_NAME_LABEL':
       'Project name'
     'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_NAME_PLACEHOLDER':
-      'Type short description about what is the project'
+      'Type name for the project'
     'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DESCRITPION_LABEL':
       'Project description'
     'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DESCRITPION_PLACEHOLDER':
