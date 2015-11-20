@@ -3,6 +3,7 @@ angular.module('translation.pages.choose-project', [
   'lbServices'
   'translation.services.current-project'
   'ui.router'
+  'toastr'
 ])
 
 .config ($stateProvider, UserPermissionsSettingsProvider) ->
@@ -18,7 +19,7 @@ angular.module('translation.pages.choose-project', [
       access: access.user
 
 
-.controller 'ChooseProjectController', ($state, Project, CurrentProjectService) ->
+.controller 'ChooseProjectController', ($state, toastr, Project, CurrentProjectService) ->
 
   vm = this
 
@@ -27,11 +28,11 @@ angular.module('translation.pages.choose-project', [
 
 
   vm.chooseProject = (projectId) ->
-    CurrentProjectService.downloadCurrentProject(projectId).then (project) ->
+    CurrentProjectService.downloadCurrentProject(projectId).then ->
       $state.go 'app.manager.dashboard'
     , (error) ->
-      console.log error
-      #TODO: toast error
+      toastr.warning error
+
 
 
 

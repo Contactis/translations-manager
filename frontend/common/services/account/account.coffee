@@ -8,7 +8,7 @@ angular.module('translation.services.account', [
 ])
 
 
-.service 'AccountService', ($q, $cookies, $http, $timeout, $state, $mdToast, Restangular,
+.service 'AccountService', ($q, $cookies, $http, $timeout, $state, Restangular,
 UserPermissionsSettings, Account) ->
 
   userRoles = UserPermissionsSettings.userRoles

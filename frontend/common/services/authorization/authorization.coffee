@@ -1,6 +1,6 @@
 angular.module 'translation.services.authorization', [
   'ui.router'
-  'ngMaterial'
+  'toastr'
   'ngCookies'
   'lbServices'
   'translation.modules.languages'
@@ -8,7 +8,7 @@ angular.module 'translation.services.authorization', [
   'translation.providers.userPermissionsSettings'
 ]
 
-.service 'AuthorizationService', ($q, $state, $mdToast, $timeout, AccountService, Account,
+.service 'AuthorizationService', ($q, $state, toastr, $timeout, AccountService, Account,
 LanguagesService, UserPermissionsSettings) ->
 
   userRoles = UserPermissionsSettings.userRoles
@@ -72,12 +72,7 @@ LanguagesService, UserPermissionsSettings) ->
       Account.logout().$promise.then ->
         AccountService.resetAccount()
         $state.go 'login'
-        $mdToast.show(
-          $mdToast.simple()
-          .content('You had been logged out.')
-          .position('bottom right')
-          .hideDelay(3000)
-        )
+        toastr.info 'You had been logged out.'
         return
       return
 
@@ -87,23 +82,14 @@ LanguagesService, UserPermissionsSettings) ->
       if angular.isUndefined(toState) or !('data' of toState) or !('access' of toState.data)
         if angular.isDefined(event)
           event.preventDefault()
-        $mdToast.show(
-          $mdToast.simple()
-          .content('Access undefined for this state')
-          .position('bottom right')
-          .hideDelay(3000)
-        )
+        toastr.warning 'Access undefined for this state'
+
         _kickUnauthorised _accessDeffered, event
       else
         if _authorizePageAccess(toState.data.access)
           _accessDeffered.resolve()
         else
-          $mdToast.show(
-            $mdToast.simple()
-            .content('Seems like you don\'t have permissions to access that page.')
-            .position('bottom right')
-            .hideDelay(3000)
-          )
+          toastr.error 'Seems like you don\'t have permissions to access that page.'
           _kickUnauthorised _accessDeffered, event
       return _accessDeffered.promise
 

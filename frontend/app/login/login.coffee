@@ -3,7 +3,7 @@ angular.module('translation.pages.login', [
   'pascalprecht.translate'
   'ngCookies'
   'restangular'
-  'ngMaterial'
+  'toastr'
   'translation.services.account'
   'translation.services.authorization'
   'translation.providers.userPermissionsSettings'
@@ -21,7 +21,7 @@ angular.module('translation.pages.login', [
       access:       access.anon
 
 
-.controller 'LoginController', ($scope, $state, $http, $mdToast, Restangular, AuthorizationService, AccountService) ->
+.controller 'LoginController', ($scope, $state, $http, Restangular, AuthorizationService, toastr) ->
 
   $scope.rememberMe = true
 
@@ -47,29 +47,14 @@ angular.module('translation.pages.login', [
       $state.go 'app.manager.dashboard'
 
 
-      $mdToast.show(
-        $mdToast.simple()
-        .content('Welcome!')
-        .position('bottom right')
-        .hideDelay(3000)
-      )
+      toastr.success('Welcome!')
     , (error) ->
-      $mdToast.show(
-        $mdToast.simple()
-        .content('Login unsuccessful. Try again.')
-        .position('bottom right')
-        .hideDelay(3000)
-      )
+      toastr.error error
 
 
   $scope.register = ->
     if $scope.user.password != $scope.user.repeatPassword
-      $mdToast.show(
-        $mdToast.simple()
-        .content('Passwords don\'t match. Try again')
-        .position('bottom right')
-        .hideDelay(3000)
-      )
+      toastr.warning 'Passwords don\'t match. Try again'
     else
       AuthorizationService.register
         email:      $scope.user.email
@@ -78,13 +63,8 @@ angular.module('translation.pages.login', [
         lastName:   $scope.user.lastName
         username:   $scope.user.username
       .then $scope.login
-      , (err) ->
-        $mdToast.show(
-          $mdToast.simple()
-          .content(err.data.error.message)
-          .position('bottom right')
-          .hideDelay(3000)
-        )
+      , (error) ->
+        toastr.error error.data.error.message
         return
 
   $scope.sizes = [
