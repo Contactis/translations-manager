@@ -64,11 +64,12 @@ gulp.task 'run-karma', (done) ->
   sources.push __dirname + '/../../' + config.testsSrc + "/**/*.js"
   _files = vendorFiles.concat sources
 
-  Server = new Server({
+  server = new Server {
     configFile:       __dirname + '/karma-dev.config.coffee'
     files:            _files
-  }, done)
-  Server.start()
+  }, ->
+    done()
+  server.start()
 
 
 # @method       run-karma-prod
@@ -82,11 +83,12 @@ gulp.task 'run-karma-prod', (done) ->
   sources.push __dirname + '/../../' + config.testsSrc + "/**/*.js"
   _files = vendorFiles.concat sources
 
-  Server = new Server({
+  server = new Server {
     configFile:       __dirname + '/karma-prod.config.coffee'
     files:            _files
-  }, done)
-  Server.start()
+  }, ->
+    done()
+  server.start()
 
 
 # @private
@@ -95,9 +97,11 @@ gulp.task 'run-karma-prod', (done) ->
 _afterTestsBuild = (done) ->
   if GLOBAL.coffeeOK
     if config.arguments.production
-      runSequence 'run-karma-prod', done
+      runSequence 'run-karma-prod', ->
+        done()
     else
-      runSequence 'run-karma', done
+      runSequence 'run-karma', ->
+        done()
   else
     GLOBAL.coffeeOK = true
     done()
@@ -126,4 +130,3 @@ gulp.task 'run-tests-prod', (done) ->
 gulp.task 'run-tests-watch', (done) ->
   runSequence 'build-tests', ->
     _afterTestsBuild(done)
-
