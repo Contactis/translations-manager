@@ -90,7 +90,7 @@ angular.module 'translation.services.current-project', [
     getCurrentProject:      getCurrentProject
     downloadCurrentProject: downloadCurrentProject
     getProjectContext:      getProjectContext
-    hadBeenChanged:         (cb) ->
+    hasBeenChanged:         (cb) ->
       _notify.promise.then null, null, cb
 
 
