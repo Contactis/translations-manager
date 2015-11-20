@@ -469,7 +469,11 @@ a:hover
 .card.summary-inline
   .card-body
     padding: 20px
-    .icon
+
+    .serial-number
+      font-size: 1.5em
+      &:before
+        content: "#"
     .content
       float: right
       .title
@@ -485,6 +489,14 @@ a:hover
         margin-bottom: 0
         padding: 0
         border-bottom: 0
+      .small-title
+        font-family: 'Lato', sans-serif
+        margin-top: -0.3em
+        font-size: 1.5em
+        text-align: right
+      .description
+        font-size: 1em
+
 
 .card.profile
   .card-body
