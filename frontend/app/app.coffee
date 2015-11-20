@@ -70,6 +70,8 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider, toastrConfig)
         return FiltersStateService.refreshGroups()
       InterfaceLanguagesResolver: (LanguagesService) ->
         return LanguagesService.getInterfaceLanguages()
+      PresentUsedProject: (CurrentProjectService) ->
+        return CurrentProjectService.getCurrentProject()
 
   $urlRouterProvider
     .when('', '/')

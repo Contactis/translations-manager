@@ -18,30 +18,21 @@ angular.module('translation.pages.admin.project-settings', [
     templateUrl:    'project-manager/admin/projectSettings/projectSettings.tpl.html'
     data:
       access:       access.management
+    resolve:
+      PresentUsedProject: (CurrentProjectService) ->
+        return CurrentProjectService.getCurrentProject()
 
 
 # @package   ProjectSettingsController
-.controller 'ProjectSettingsController', ($scope, $log, CurrentProjectService, Project) ->
+.controller 'ProjectSettingsController', ($scope, $log, PresentUsedProject, Project) ->
   vm = this
 
 
   # @public
   # @variable     vm.currentProject
   # @type         Object
-  # @description  Object with current project data in it.
-  vm.currentProject = {}
-
-
-  # @private
-  # @getter
-  # @method       getProjectContext
-  # @package      CurrentProjectService
-  # @type         auto-resolved-promise
-  # @description  Gets data of current project and store it.
-  CurrentProjectService.getProjectContext().then (success) ->
-    vm.currentProject = success
-  , (e) ->
-    $log.error "Error", e
+  # @description  Object with current project data returned in resolved promise.
+  vm.currentProject = PresentUsedProject
 
 
   # @public
