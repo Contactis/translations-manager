@@ -92,6 +92,8 @@ module.exports =
       'frontend/vendor/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js'
       'frontend/vendor/angular-dynamic-locale/dist/tmhDynamicLocale.js'
       'frontend/vendor/angular-smart-table/dist/smart-table.min.js'
+      'frontend/vendor/angular-toastr/dist/angular-toastr.js'
+      'frontend/vendor/angular-toastr/dist/angular-toastr.tpls.js'
 
       'frontend/vendors_offline/common.js'
       'frontend/vendors_offline/permissionConfig.js'
@@ -105,6 +107,7 @@ module.exports =
       'frontend/vendor/iCheck/skins/flat/_all.css'
       'frontend/vendor/datatables/media/css/jquery.dataTables.css'
       'frontend/vendor/select2/dist/css/select2.css'
+      'frontend/vendor/angular-toastr/dist/angular-toastr.css'
       'frontend/vendors_offline/dataTables.bootstrap.css'
     ]
 

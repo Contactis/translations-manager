@@ -10,6 +10,7 @@ translationApp = angular.module('translation', [
   'ngMessages'
   'smart-table'
   'angular-lodash'
+  'toastr'
 
   # Including templates
   'templates-module'
@@ -51,7 +52,7 @@ translationApp = angular.module('translation', [
 
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider, $mdThemingProvider,
-$translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
+$translateProvider, tmhDynamicLocaleProvider, RestangularProvider, toastrConfig) ->
 
   $stateProvider
   .state 'app',
@@ -81,22 +82,8 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
 
   $animateProvider.classNameFilter(/animate/)
 
-  ###
-  The is some issue with defining backgroud color
-  "Uncaught TypeError: Cannot read property '600' of undefined"
-  More info: https://github.com/angular/material/issues/2752
-  ###
-  $mdThemingProvider
-    .theme('default')
-    .primaryPalette('blue-grey')
-    .accentPalette('blue')
-    .warnPalette('red')
-    # .backgroundPalette('gray',
-    #   'default': 'A200',
-    #   'hue-1': '300',
-    #   'hue-2': '600',
-    #   'hue-3': '900'
-    # )
+  angular.extend toastrConfig,
+    positionClass: 'toast-bottom-right'
 
   # ### Translations (angular translate)
   $translateProvider.addInterpolation('$translateMessageFormatInterpolation')
