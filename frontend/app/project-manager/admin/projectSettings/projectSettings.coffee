@@ -2,9 +2,11 @@
 
 # @module   translation.pages.admin.project-settings
 angular.module('translation.pages.admin.project-settings', [
+  'pascalprecht.translate'
   'lbServices'
   'ngSanitize'
   'ui.select'
+  'toastr'
 ])
 
 
@@ -27,8 +29,8 @@ angular.module('translation.pages.admin.project-settings', [
 
 
 # @package   ProjectSettingsController
-.controller 'ProjectSettingsController', ($scope, $log, PresentUsingProjectResolver,
-AvailableLanguagesResolver, Project) ->
+.controller 'ProjectSettingsController', ($scope, $log, $filter, PresentUsingProjectResolver,
+AvailableLanguagesResolver, Project, toastr) ->
   vm = this
 
 
@@ -142,10 +144,14 @@ AvailableLanguagesResolver, Project) ->
   # @returns      {Promise}
   vm.saveAbout = ->
     vm.currentProject.$save().then (success) ->
-      $log.info "successfully saved", success
+      msg = $filter('translate')('APP.FRONTEND_MESSAGES.SUCCESSFULLY_SAVED_THE_DATA')
+      toastr.success msg
       return true
     , (e) ->
-      $log.error "saveing failed"
+      msg = $filter('translate')('APP.FRONTEND_MESSAGES.ERROR_OCCURED_WHILE_SAVING_THE_DATA') +
+        ' ' + $filter('translate')('APP.FRONTEND_MESSAGES.TRY_AGAIN_LATER') +
+        ' Error detail:' + e
+      toastr.error msg
       return false
 
   return vm
