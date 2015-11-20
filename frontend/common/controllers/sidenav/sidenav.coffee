@@ -16,8 +16,8 @@ AccountService, AuthorizationService, CurrentProjectService) ->
 
   vm = this
 
-  vm.user = AccountService.account()
-  vm.user.loggedIn = Account.isAuthenticated()
+  vm.account = AccountService.account()
+  vm.account.loggedIn = Account.isAuthenticated()
 
 
   vm.goTo = (uiview) ->
@@ -32,9 +32,9 @@ AccountService, AuthorizationService, CurrentProjectService) ->
     vm.currentProject = project
 
 
-  AccountService.updated.then null, null, (user) ->
-    vm.user = user
-    vm.user.loggedIn = Account.isAuthenticated()
+  AccountService.hadBeenReloaded (account) ->
+    vm.account = account
+    vm.account.loggedIn = Account.isAuthenticated()
 
 
 

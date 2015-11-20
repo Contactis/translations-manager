@@ -9,13 +9,13 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-top
         i.fa.fa-th.icon
     ul.nav.navbar-nav.navbar-right
       li.dropdown.profile
-        a.dropdown-toggle(href="#", data-toggle="dropdown", role="button", aria-expanded="false") {{ vm.user.username }}
+        a.dropdown-toggle(href="#", data-toggle="dropdown", role="button", aria-expanded="false") {{ vm.account.username }}
           span.caret
         ul.dropdown-menu.animated.fadeInDown
           li
             .profile-info
-              h4.username {{ vm.user.username }}
-              p {{ vm.user.email }}
+              h4.username {{ vm.account.username }}
+              p {{ vm.account.email }}
               .btn-group.margin-bottom-2x(role="group")
                 button.btn.btn-default(type="button")
                   i.fa.fa-sign-out(ng-click="logout()") Logout

@@ -45,7 +45,8 @@ UserPermissionsSettings, Account) ->
 
   api =
     loadSession:          _loadSession
-    updated:              _notify.promise
+    hadBeenReloaded:      (cb) ->
+      _notify.promise.then null, null, cb
     resetAccount:         ->
       _account = angular.copy _defaultAccountObject
       _accountUpdated()
