@@ -4,10 +4,15 @@ angular.module 'translation.services.current-project', [
   'ui.router'
 ]
 
-.service 'CurrentProjectService', ($q, $cookies, $state, Project) ->
+.service 'CurrentProjectService', ($q, $cookies, $state, $timeout, Project) ->
 
   _currentProjectResource = {}
+  _notify = $q.defer()
 
+  _projectChanged = ->
+    $timeout ->
+      _notify.notify _currentProjectResource
+    return
 
   downloadCurrentProjectIfProjectSaved = (_deferred) ->
     if _deferred is undefined
@@ -40,6 +45,7 @@ angular.module 'translation.services.current-project', [
     if response.length > 0
       _currentProjectResource = response[0]
       $cookies.put('currentProjectId', _currentProjectResource['id'])
+      _projectChanged()
       _deferred.resolve(_currentProjectResource)
     else
       _deferred.reject('Saved project not found')
@@ -84,6 +90,8 @@ angular.module 'translation.services.current-project', [
     getCurrentProject:      getCurrentProject
     downloadCurrentProject: downloadCurrentProject
     getProjectContext:      getProjectContext
+    hadBeenChanged:         (cb) ->
+      _notify.promise.then null, null, cb
 
 
 

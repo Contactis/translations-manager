@@ -4,18 +4,18 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-top
       button.navbar-expand-toggle(type="button")
         i.fa.fa-bars.icon
       ol.breadcrumb.navbar-breadcrumb
-        li.active Dashboard
+        li.active Project: {{ vm.currentProject.name }}
       button.navbar-right-expand-toggle.pull-right.visible-xs(type="button")
         i.fa.fa-th.icon
     ul.nav.navbar-nav.navbar-right
       li.dropdown.profile
-        a.dropdown-toggle(href="#", data-toggle="dropdown", role="button", aria-expanded="false") {{ user.username }}
+        a.dropdown-toggle(href="#", data-toggle="dropdown", role="button", aria-expanded="false") {{ vm.user.username }}
           span.caret
         ul.dropdown-menu.animated.fadeInDown
           li
             .profile-info
-              h4.username {{ user.username }}
-              p {{ user.email }}
+              h4.username {{ vm.user.username }}
+              p {{ vm.user.email }}
               .btn-group.margin-bottom-2x(role="group")
                 button.btn.btn-default(type="button")
                   i.fa.fa-sign-out(ng-click="logout()") Logout
