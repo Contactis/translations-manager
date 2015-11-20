@@ -21,16 +21,14 @@
               textarea.form-control(name="projectDescriptionInput" rows="3" placeholder="{{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DESCRITPION_PLACEHOLDER' | translate }}" data-ng-model="vm.currentProject.description")
             .form-group
               label(for='projectDefaultLanguageInput') {{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DEFAULT_LANGUAGE_LABEL' | translate }}
-              ui-select.form-control(ng-model='vm.availableLanguages.selected' theme='select2' title='Choose a person' on-select="vm.setSelectedLanguage($item)")
-                ui-select-match(placeholder='Select or search a person in the list...') {{ $select.selected.nameNative }}
-                ui-select-choices(repeat='item in vm.availableLanguages | filter: $select.search')
-                  div(ng-bind-html='item.nameNative | highlight: $select.search')
+              ui-select.form-control(ng-model="vm.availableLanguages.selected" theme="select2" title="{{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DEFAULT_LANGUAGE_PLACEHOLDER' | translate }}" on-select="vm.setSelectedLanguage($item)")
+                ui-select-match(placeholder="{{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DEFAULT_LANGUAGE_PLACEHOLDER' | translate }}") {{ $select.selected.nameNative }}
+                ui-select-choices(repeat="item in vm.availableLanguages | filter: $select.search")
+                  div(ng-bind-html="item.nameNative | highlight: $select.search")
                   small IETF:&nbsp;
-                  small(ng-bind-html='item.ietfCode | highlight: $select.search')
-            button.btn.btn-default(type='submit', data-ng-click="vm.saveAbout()") Save
+                  small(ng-bind-html="item.ietfCode | highlight: $select.search")
+            button.btn.btn-default(type='submit' data-ng-click="vm.saveAbout()") Save
 
-  //- select.form-control(name="projectDefaultLanguageInput" data-ng-model="vm.currentProject.defaultLanguageId" data-ng-required="true" ng-init="vm.projectDefaultLanguage[0].id" data-ng-change="vm.bindSelectedValue()"
-  //-   option(data-ng-repeat="language in vm.availableLanguages" value="{{language.id}}"){{language.nameNative}} ({{language.ietfCode}})
   .row
     .col-md-12
       .card
@@ -42,7 +40,6 @@
           .alert.alert-warning(role="alert")
             | Warning: {{ 'APP.FRONTEND_MESSAGES.THIS_FEATURE_IS_NOT_YET_READY' | translate}}
           button.btn.btn-default Save
-
 
   .row
     .col-md-12
@@ -86,8 +83,8 @@
 
           button.btn.btn-default Save
 
-  h2 Debug variables
-  pre
-    | vm.currentProject: {{vm.currentProject|json}}
-    | vm.availableLanguages.selected: {{vm.availableLanguages.selected|json}}
-    | vm.availableLanguages: {{vm.availableLanguages|json}}
+  //- h2 Debug variables
+  //- pre
+  //-   | vm.currentProject: {{vm.currentProject|json}}
+  //-   | vm.availableLanguages.selected: {{vm.availableLanguages.selected|json}}
+  //-   | vm.availableLanguages: {{vm.availableLanguages|json}}

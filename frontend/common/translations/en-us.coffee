@@ -60,6 +60,10 @@ translationApp.config( [
     # ## Frontend messages
     'APP.FRONTEND_MESSAGES.THIS_FEATURE_IS_NOT_YET_READY':
       'This feature is not yet ready. Apologize for any inconvenience.'
+    'APP.FRONTEND_MESSAGES.INFO':                                 'Info'
+    'APP.FRONTEND_MESSAGES.SUCCESSFULLY_SAVED_THE_DATA':          'Successfully saved the data.'
+    'APP.FRONTEND_MESSAGES.ERROR_OCCURED_WHILE_SAVING_THE_DATA':  'Error occured while saving the data.'
+    'APP.FRONTEND_MESSAGES.TRY_AGAIN_LATER':                      'Try again later'
 
     # app/dashboard.jade
 
@@ -98,6 +102,8 @@ translationApp.config( [
     'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DESCRITPION_PLACEHOLDER':
       'Type short description about what is the project'
     'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DEFAULT_LANGUAGE_LABEL':    'Project default language'
+    'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DEFAULT_LANGUAGE_PLACEHOLDER':
+      'Select or search default language for the project'
 
     'APP.ADMIN.PROJECT_SETTINGS.SECTION_ABOUT_GENERAL_DESCRIPTION':         'Nothing here yet'
     'APP.ADMIN.PROJECT_SETTINGS.SECTION_DATE_AND_TIME_GENERAL_DESCRIPTION': 'Nothing here yet'
