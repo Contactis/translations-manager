@@ -42,8 +42,11 @@
     "angular-toastr": "~1.6.0"
   },
   "resolutions": {
-    "angular": "1.4.6",
+    "angular": "1.4.7",
     "jquery": "~2.1.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "ui-select": "angular-ui-select#~0.13.2",
+    "angular-sanitize": "~1.4.8"
+  }
 }
