@@ -5,7 +5,7 @@
   .card-body
     form.form-horizontal
       .form-group
-        label.col-sm-2.control-label(for="indexType") Key index type
+        label.col-sm-2.control-label Key index type
         .col-sm-1
             label.radio-inline
               input.margin-left-rm(type="radio" name="optradio")
@@ -17,7 +17,7 @@
       .form-group
         label.col-sm-2.control-label(for="namespaceInput") Namespace
         .col-sm-2
-          input.form-control(id="namespaceInput" type="text" placeholder="namespace" data-ng-model="vm.namespaceTrash"
+          input.form-control(id="namespaceInput" type="text" placeholder="namespace" data-ng-model="vm.namespace"
           uib-typeahead="singleNamespace.namespace for singleNamespace in vm.getNamespaces($viewValue)")
 
 
