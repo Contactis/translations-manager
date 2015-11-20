@@ -15,16 +15,18 @@ angular.module('translation.pages.choose-project', [
     controller:     'ChooseProjectController'
     controllerAs:   'vm'
     templateUrl:    'project-manager/choose-project/choose-project.tpl.html'
+    resolve:
+      projects: (Project) ->
+        return Project.find().$promise
     data:
       access: access.user
 
 
-.controller 'ChooseProjectController', ($state, toastr, Project, CurrentProjectService) ->
+.controller 'ChooseProjectController', ($state, toastr, projects, CurrentProjectService) ->
 
   vm = this
 
-  Project.find().$promise.then (response) ->
-    vm.projects = response
+  vm.projects = projects
 
 
   vm.chooseProject = (projectId) ->
