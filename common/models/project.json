@@ -30,6 +30,12 @@
       "model": "Language",
       "foreignKey": "",
       "through": "ProjectLanguage"
+    },
+    "accounts": {
+      "type": "hasMany",
+      "model": "Account",
+      "foreignKey": "",
+      "through": "ProjectAccount"
     }
   },
   "acls": [

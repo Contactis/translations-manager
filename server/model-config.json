@@ -49,7 +49,7 @@
     "dataSource": "sqlite",
     "public": true
   },
-  "ProjectUser": {
+  "ProjectAccount": {
     "dataSource": "sqlite",
     "public": true
   },
