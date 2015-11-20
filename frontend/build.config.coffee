@@ -56,7 +56,7 @@ module.exports =
       'frontend/vendor/iCheck/icheck.js'
       'frontend/vendor/matchHeight/jquery.matchHeight.js'
       'frontend/vendor/datatables/media/js/jquery.dataTables.js'
-      'frontend/vendor/select2/dist/js/select2.full.js'
+      'frontend/vendor/select2/dist/js/select2.full.js'  # native select2; this is not angular-ui-select
       'frontend/vendors_offline/dataTables.bootstrap.js'
       'frontend/vendors_offline/ace.js'
       'frontend/vendors_offline/mode-html.js'
@@ -82,7 +82,9 @@ module.exports =
       'frontend/vendor/angular-data-table/release/dataTable.helpers.min.js'
       'frontend/vendor/angular-messages/angular-messages.js'
       'frontend/vendor/angular-moment/angular-moment.js'
+      'frontend/vendor/angular-sanitize/angular-sanitize.js'
 
+      'frontend/vendor/ui-select/dist/select.js'
       'frontend/vendor/messageformat/messageformat.js'
       'frontend/vendor/messageformat/locale/en.js' # need to upload all messageformat for all interface languages
       'frontend/vendor/messageformat/locale/pl.js'
@@ -106,9 +108,13 @@ module.exports =
       'frontend/vendor/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css'
       'frontend/vendor/iCheck/skins/flat/_all.css'
       'frontend/vendor/datatables/media/css/jquery.dataTables.css'
-      'frontend/vendor/select2/dist/css/select2.css'
       'frontend/vendor/angular-toastr/dist/angular-toastr.css'
       'frontend/vendors_offline/dataTables.bootstrap.css'
+
+      'frontend/vendor/select2/dist/css/select2.css' # native select2; this is not angular-ui-select
+      'frontend/vendors_offline/select2.css'
+      'frontend/vendors_offline/select2-bootstrap.css'
+      'frontend/vendor/ui-select/dist/select.css'
     ]
 
     sourceMaps:

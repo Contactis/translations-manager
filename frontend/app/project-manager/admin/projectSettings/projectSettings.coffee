@@ -1,9 +1,10 @@
-# # Project Settins (admin)
+# # Project Settings (admin)
 
 # @module   translation.pages.admin.project-settings
 angular.module('translation.pages.admin.project-settings', [
   'lbServices'
-  'translation.services.current-project'
+  'ngSanitize'
+  'ui.select'
 ])
 
 
@@ -19,21 +20,47 @@ angular.module('translation.pages.admin.project-settings', [
     data:
       access:       access.management
     resolve:
-      PresentUsedProject: (CurrentProjectService) ->
+      PresentUsingProjectResolver:  (CurrentProjectService) ->
         return CurrentProjectService.getCurrentProject()
+      AvailableLanguagesResolver:   (Language) ->
+        return Language.find().$promise
 
 
 # @package   ProjectSettingsController
-.controller 'ProjectSettingsController', ($scope, $log, PresentUsedProject, Project) ->
+.controller 'ProjectSettingsController', ($scope, $log, PresentUsingProjectResolver,
+AvailableLanguagesResolver, Project) ->
   vm = this
 
 
   # @public
   # @variable     vm.currentProject
   # @type         Object
-  # @description  Object with current project data returned in resolved promise.
-  vm.currentProject = PresentUsedProject
+  # @description  Object with current project data returned as resolved promise.
+  vm.currentProject       = PresentUsingProjectResolver
 
+
+  # @public
+  # @variable     vm.availableLanguages
+  # @type         Array
+  # @description  List with current languages avaiable to choose for projects
+  #               returned as resolved promise.
+  vm.availableLanguages = AvailableLanguagesResolver
+
+
+  # @public
+  # @variable     vm.availableLanguages.selected
+  # @type         Object
+  # @description  Currtent language object withdraw from `vm.availableLanguages`
+  #               to provide proper object selection from ui-select
+  vm.availableLanguages.selected = _.where(vm.availableLanguages, {id: vm.currentProject.defaultLanguageId})[0]
+
+
+  # @public
+  # @method       vm.setSelectedLanguage
+  # @param        {Object}  languageItem    full language item from `vm.availableLanguages`
+  # @description  Sets proper language ID for `vm.currentProject` object
+  vm.setSelectedLanguage = (languageItem) ->
+    vm.currentProject.defaultLanguageId = languageItem.id
 
   # @public
   # @variable     vm.vars
@@ -115,7 +142,7 @@ angular.module('translation.pages.admin.project-settings', [
   # @returns      {Promise}
   vm.saveAbout = ->
     vm.currentProject.$save().then (success) ->
-      $log.info "successfully saved"
+      $log.info "successfully saved", success
       return true
     , (e) ->
       $log.error "saveing failed"

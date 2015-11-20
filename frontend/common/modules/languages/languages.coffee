@@ -21,8 +21,8 @@ angular.module('translation.modules.languages', [
 
   # @method         _unifyToIetfCode
   # @param          {String}  langCode    some string with language key; like `pl-PL`
-  # @description    unify languages code notation from different browser to one
-  #                 like "xx-yy" or "xx" (ex: "en-us", "en")
+  # @description    Unify languages code notation from different browser to one
+  #                 like "xx-yy" or "xx" (ex: "en-us", "en"); For
   # @returns        { String }
   _unifyToIetfCode = (inputCode) ->
     _code = inputCode.replace("_", "-")
