@@ -28,8 +28,8 @@ translationApp = angular.module('translation', [
   'translation.pages.programmer-view'
   'translation.pages.manager'
   'translation.pages.admin'
+  'translation.pages.admin.new-project'
   'translation.pages.admin.project-settings'
-  'translation.pages.admin.user-assignment'
   'translation.pages.admin.user-assignment'
 
   #
