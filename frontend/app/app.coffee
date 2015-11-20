@@ -42,6 +42,7 @@ translationApp = angular.module('translation', [
   'translation.services.filtersState'
   'translation.services.customTranslationHandler'
   'translation.services.current-project'
+  'translation.services.helper'
 
   # Including controllers
   'translation.controllers.sidenav'

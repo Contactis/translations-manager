@@ -39,13 +39,11 @@
     "angular-bootstrap": "~0.14.3",
     "angular-mocks": "~1.4.7",
     "jasmine-jquery": "~2.1.1",
-    "angular-toastr": "~1.6.0",
-    "angular-bootstrap": "~0.14.3"
+    "angular-toastr": "~1.6.0"
   },
   "resolutions": {
-    "angular": "1.4.6"
-  },
-  "devDependencies": {
+    "angular": "1.4.6",
     "jquery": "~2.1.4"
-  }
+  },
+  "devDependencies": {}
 }
