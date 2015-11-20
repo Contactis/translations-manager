@@ -119,7 +119,6 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider, toastrConfig)
   _firstSuccess = false
 
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
-    console.log fromState, toState
     if _firstEnter
       _firstEnter = false
       AccountService.loadSession().then ->

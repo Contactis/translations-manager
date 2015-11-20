@@ -22,7 +22,5 @@ translationApp = angular.module('translation.pages.manager', [
 
   vm = this
 
-  console.log CurrentProjectService
-
 
   return vm

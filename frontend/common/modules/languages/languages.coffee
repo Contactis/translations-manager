@@ -70,7 +70,6 @@ angular.module('translation.modules.languages', [
   # @param        {String}   langCode    some string with language key; like `pl-PL`
   # @description  Set user language for the website.
   _setLanguage = (ietfCode) ->
-    console.log "_setLanguage ietfCode", ietfCode
     _code = _unifyToIetfCode(ietfCode)
     $cookieStore.put('selectedLanguage', _code)
     moment.locale(_code)
