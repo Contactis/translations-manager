@@ -4,39 +4,41 @@
       .navbar-header
         a.navbar-brand(ui-sref="app.manager.dashboard")
           .icon.fa.fa-paper-plane
-          .title Translations Manager
+          .title {{ 'PROJECT.FULL_NAME' | translate }}
         button.navbar-expand-toggle.pull-right.visible-xs(type="button")
           i.fa.fa-times.icon
       ul.nav.navbar-nav
         li(ui-sref-active="active")
           a(ui-sref="app.manager.dashboard")
             span.icon.fa.fa-tachometer
-            span.title Dashboard
+            span.title {{ 'PAGE.DASHBOARD.TITLE' | translate }}
+
         li(ui-sref-active="active")
           a(ui-sref="app.programmer-view")
             span.icon.fa.fa-list-alt
-            span.title Programmer view
+            span.title {{ 'PAGE.PROGRAMMER.TITLE' | translate }}
 
         li(ui-sref-active="active")
           a(ui-sref="app.manager-view")
             span.icon.fa.fa-area-chart
-            span.title Manager view
+            span.title {{ 'PAGE.MANAGER.TITLE' | translate }}
 
-        li(ui-sref-active="active")
-          a(ui-sref="app.translator-view")
+        li.disabled(ui-sref-active="active")
+          a
             span.icon.fa.fa-table
-            span.title Translator view
+            span.title {{ 'PAGE.TRANSLATOR.TITLE' | translate }}
+
         li.panel.panel-default.dropdown(ui-sref-active="active")
           a.cursor-pointer(data-toggle="collapse", data-target="#dropdown-element")
             span.icon.fa.fa-cog
-            span.title Project management
+            span.title {{ 'PAGE.PROJECT_MANAGEMENT.TITLE' | translate }}
           #dropdown-element.panel-collapse.collapse
             .panel-body
               ul.nav.navbar-nav
                 li
-                  a(data-ui-sref="app.admin.user-assignment") User assignment
+                  a(data-ui-sref="app.admin.project-settings") {{ 'PAGE.PROJECT_MANAGEMENT.PROJECT_SETTINGS.TITLE' | translate }}
                 li
-                  a(data-ui-sref="app.admin.project-settings") Project settings
+                  a(data-ui-sref="app.admin.user-assignment") {{ 'PAGE.PROJECT_MANAGEMENT.USER_ASSIGNMENT.TITLE' | translate }}
 
 
 

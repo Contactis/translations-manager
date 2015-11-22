@@ -15,7 +15,9 @@ translationApp.config( [
 
     # ### Common phrases
     # This section contains general phrases used in project
-    'TRANSLATION_MANAGER':        'Translation manager'
+    'PROJECT.FULL_NAME':        'Translation manager'
+
+
     'GENERAL.LOGIN':                      'Login'
     'GENERAL.LOG_IN':                     'Log in'
     'GENERAL.LOG_OUT':                    'Log out'
@@ -42,16 +44,16 @@ translationApp.config( [
 
 
     # ### Page naming
-    'PAGE.TITLE.404':                               '404'
-    'PAGE.TITLE.LOGIN':                             'Login'
-    'PAGE.TITLE.HELP':                              'Help'
-    'PAGE.TITLE.DASHBOARD':                         'Dashboard'
-    'PAGE.TITLE.TRANSLATOR':                        'Translator'
-    'PAGE.TITLE.PROGRAMMER':                        'Programmer'
-    'PAGE.TITLE.MANAGER':                           'Manager'
-    'PAGE.TITLE.ADMINISTRATOR':                     'Administrator'
-    'PAGE.TITLE.ADMINISTRATOR.PROJECT_SETTINGS':    'Project settings'
-    'PAGE.TITLE.ADMINISTRATOR.USER_ASSIGNMENT':     'User assignment'
+    'PAGE.404.TITLE':                               '404'
+    'PAGE.LOGIN.TITLE':                             'Login'
+    'PAGE.HELP.TITLE':                              'Help'
+    'PAGE.DASHBOARD.TITLE':                         'Dashboard'
+    'PAGE.TRANSLATOR.TITLE':                        'Translator view'
+    'PAGE.PROGRAMMER.TITLE':                        'Programmer view'
+    'PAGE.MANAGER.TITLE':                           'Manager view'
+    'PAGE.PROJECT_MANAGEMENT.TITLE':                     'Project management'
+    'PAGE.PROJECT_MANAGEMENT.PROJECT_SETTINGS.TITLE':    'Project settings'
+    'PAGE.PROJECT_MANAGEMENT.USER_ASSIGNMENT.TITLE':     'User assignment'
 
 
     # ### Backend messages
