@@ -89,6 +89,8 @@ translationApp.config( [
 
 
     # ## app/login.jade
+    'APP.LOGIN.SING_IN':                                      'Sing in'
+    'APP.LOGIN.REGISTER':                                     'Register'
     'APP.LOGIN.EMAIL':                                        'E-mail'
     'APP.LOGIN.PASSWORD':                                     'Password'
     'APP.LOGIN.REPEAT_PASSWORD':                              'Repeat password'

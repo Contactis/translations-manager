@@ -3,6 +3,8 @@ angular.module('translation.pages.admin.user-assignment', [
   'translation.services.current-project'
   'translation.services.helper'
 ])
+
+
 .config ($stateProvider, UserPermissionsSettingsProvider) ->
 
   access = UserPermissionsSettingsProvider.accessLevels
@@ -28,6 +30,7 @@ angular.module('translation.pages.admin.user-assignment', [
               "accounts"
             ]
         return response.$promise
+
 
 .controller 'UserAssignmentController', ($log, Project, Account, currentProjectAccountsResolver, allAccounts,
 HelperService) ->

@@ -42,8 +42,7 @@ AuthorizationService, toastr) ->
 
 
   $scope.login = ->
-    AuthorizationService.login($scope.rememberMe, $scope.user.email, $scope.user.password)
-    .then (account) ->
+    AuthorizationService.login($scope.rememberMe, $scope.user.email, $scope.user.password).then (account) ->
       $state.go 'app.manager.dashboard'
       msg = $filter('translate')('APP.FRONTEND_MESSAGES.LOGIN.WELCOME')
       toastr.success msg
