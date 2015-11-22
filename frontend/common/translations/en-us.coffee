@@ -16,42 +16,42 @@ translationApp.config( [
     # ### Common phrases
     # This section contains general phrases used in project
     'TRANSLATION_MANAGER':        'Translation manager'
-    'LOGIN':                      'Login'
-    'LOG_IN':                     'Log in'
-    'LOG_OUT':                    'Log out'
-    'SAVE':                       'Save'
-    'SAVE_AND_CLOSE':             'Save and colose'
-    'REMOVE':                     'Remove'
-    'CANCEL':                     'Cancel'
-    'PENDING':                    'Pending'
-    'LOADING':                    'Loading'
-    'WAITING_FOR_LOADING_DATA':   'Waiting for loading data'
-    'SETTINGS':                   'Settings'
-    'VERIFIED':                   'Verified'
-    'VERIFY':                     'Verify'
-    'NOT_VERIFIED':               'Not verified'
-    'DELETE':                     'Delete'
-    'YES':                        'Yes'
-    'NO':                         'No'
-    'TRY_AGAIN':                  'Try again'
-    'USER_UNKNOWN':               'User unknown'
-    'CHANGE':                     'Change'
-    'SAVE_CHANGES':               'Save changes'
-    'NOT_DEFINED':                'Not defined'
-    'NAME_NOT_DEFINED':           'Name not defined'
-    'EDIT':                       'Edit'
+    'GENERAL.LOGIN':                      'Login'
+    'GENERAL.LOG_IN':                     'Log in'
+    'GENERAL.LOG_OUT':                    'Log out'
+    'GENERAL.SAVE':                       'Save'
+    'GENERAL.SAVE_AND_CLOSE':             'Save and colose'
+    'GENERAL.REMOVE':                     'Remove'
+    'GENERAL.CANCEL':                     'Cancel'
+    'GENERAL.PENDING':                    'Pending'
+    'GENERAL.LOADING':                    'Loading'
+    'GENERAL.SETTINGS':                   'Settings'
+    'GENERAL.VERIFIED':                   'Verified'
+    'GENERAL.VERIFY':                     'Verify'
+    'GENERAL.NOT_VERIFIED':               'Not verified'
+    'GENERAL.DELETE':                     'Delete'
+    'GENERAL.YES':                        'Yes'
+    'GENERAL.NO':                         'No'
+    'GENERAL.TRY_AGAIN':                  'Try again'
+    'GENERAL.USER_UNKNOWN':               'User unknown'
+    'GENERAL.CHANGE':                     'Change'
+    'GENERAL.SAVE_CHANGES':               'Save changes'
+    'GENERAL.NOT_DEFINED':                'Not defined'
+    'GENERAL.NAME_NOT_DEFINED':           'Name not defined'
+    'GENERAL.EDIT':                       'Edit'
 
 
     # ### Page naming
-    'PAGE.TITLE.404':                                                     '404'
-    'PAGE.TITLE.LOGIN':                                                   'Login'
-    'PAGE.TITLE.HELP':                                                    'Help'
-    'PAGE.TITLE.DASHBOARD':                                               'Dashboard'
-    'PAGE.TITLE.TRANSLATOR':                                              'Translator'
-    'PAGE.TITLE.PROGRAMMER':                                              'Programmer'
-    'PAGE.TITLE.MANAGER':                                                 'Manager'
-    'PAGE.TITLE.ADMINISTRATOR':                                           'Administrator'
-    'PAGE.TITLE.ADMINISTRATOR.PROJECT_SETTINGS':                          'Project settings'
+    'PAGE.TITLE.404':                               '404'
+    'PAGE.TITLE.LOGIN':                             'Login'
+    'PAGE.TITLE.HELP':                              'Help'
+    'PAGE.TITLE.DASHBOARD':                         'Dashboard'
+    'PAGE.TITLE.TRANSLATOR':                        'Translator'
+    'PAGE.TITLE.PROGRAMMER':                        'Programmer'
+    'PAGE.TITLE.MANAGER':                           'Manager'
+    'PAGE.TITLE.ADMINISTRATOR':                     'Administrator'
+    'PAGE.TITLE.ADMINISTRATOR.PROJECT_SETTINGS':    'Project settings'
+    'PAGE.TITLE.ADMINISTRATOR.USER_ASSIGNMENT':     'User assignment'
 
 
     # ### Backend messages
@@ -64,6 +64,8 @@ translationApp.config( [
     'APP.FRONTEND_MESSAGES.SUCCESSFULLY_SAVED_THE_DATA':          'Successfully saved the data.'
     'APP.FRONTEND_MESSAGES.ERROR_OCCURED_WHILE_SAVING_THE_DATA':  'Error occured while saving the data.'
     'APP.FRONTEND_MESSAGES.TRY_AGAIN_LATER':                      'Try again later'
+
+    'APP.FRONTEND_MESSAGES.WAITING_FOR_LOADING_DATA':   'Waiting for loading data'
 
     # app/dashboard.jade
 
@@ -80,7 +82,18 @@ translationApp.config( [
     'LOGIN_WITH_YOUR_TRANSLATION_MANAGER_ACCOUNT':  'Login with your translation manager account'
     'USERNAME':                                     'Username'
 
-    # app/admin/projectSettings.jade
+
+    # app/project-manager/admin/userAssignment.jade
+    'APP.ADMIN.USER_ASSIGNMENT.GENETAL_DESCRIPTION':     'Nothing yet'
+
+    'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS':   'Project users'
+    'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS_GENERAL_DESCRIPTION':
+      'Nothing yet'
+    'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS.AVAILABLE_USERS': 'Available users'
+    'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS.ASSIGNED_USERS':  'Assigned Users'
+
+
+    # app/project-manager/admin/projectSettings.jade
     'APP.ADMIN.PROJECT_SETTINGS.GENETAL_DESCRIPTION':     'Nothing here yet'
 
     'APP.ADMIN.PROJECT_SETTINGS.SECTION_ABOUT':           'About'

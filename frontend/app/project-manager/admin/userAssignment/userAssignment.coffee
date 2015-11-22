@@ -12,13 +12,14 @@ angular.module('translation.pages.admin.user-assignment', [
     controller:     'UserAssignmentController'
     controllerAs:   'vm'
     templateUrl:    'project-manager/admin/userAssignment/userAssignment.tpl.html'
+    data:
+      access:       access.management
     resolve:
       currentProject: (CurrentProjectService) ->
         return CurrentProjectService.getCurrentProject()
       allAccounts: (Account) ->
         return Account.find().$promise
-      currentProjectAccounts: (Project, currentProject) ->
-
+      currentProjectAccountsResolver: (Project, currentProject) ->
         response = Project.findOne
           filter:
             where:
@@ -26,22 +27,53 @@ angular.module('translation.pages.admin.user-assignment', [
             include: [
               "accounts"
             ]
-
-
         return response.$promise
 
-    data:
-      access: access.management
-
-.controller 'UserAssignmentController', (Project, Account, currentProjectAccounts, allAccounts, HelperService) ->
-
+.controller 'UserAssignmentController', ($log, Project, Account, currentProjectAccountsResolver, allAccounts,
+HelperService) ->
   vm = this
 
-  vm.currentProjectAccounts = currentProjectAccounts
+  # @public
+  # @variable     vm.currentProjectAccounts
+  # @description  TODO
+  vm.currentProjectAccounts = currentProjectAccountsResolver
 
+
+  # @public
+  # @variable     vm.availableAccounts
+  # @description  TODO
   vm.availableAccounts = HelperService.diffArrayObjects(vm.currentProjectAccounts.accounts, allAccounts, 'id')
 
 
+  # @variable     vm.selectedUsersList
+  vm.selectedUsersList = []
+
+
+  # @private
+  # @method       _moveObject
+  _moveObject = (fromArray, toArray, index) ->
+    obj = fromArray.splice(index, 1)
+    toArray.push obj[0]
+
+
+  # @public
+  # @method       vm.addToSelectedList
+  vm.addToSelectedList = (index) ->
+    _moveObject(vm.availableAccounts, vm.selectedUsersList, index)
+    return true
+
+
+  # @public
+  # @method       vm.addToUnselectedList
+  vm.addToUnselectedList = (index) ->
+    _moveObject(vm.selectedUsersList, vm.availableAccounts, index)
+    return
+
+
+  # @public
+  # @method       vm.addToSelectedList
+  vm.saveSelectedUsers = () ->
+    $log.info "vm.saveSelectedUsers() called"
 
 
   return vm
