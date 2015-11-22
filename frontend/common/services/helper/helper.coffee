@@ -1,9 +1,19 @@
+# # Helper Service
+
+# @module   translation.services.helper
 angular.module 'translation.services.helper', []
+
+# @package      HelperService
+# @description  This module should has helper methods and variables used
+#               between modules/services/directives/filters during development
+#               process
 .service 'HelperService', ->
 
-
-  # @description Removes the same values from bigger collection of the same model
-  diffArrayObjects = (modelOne, modelTwo, equalKey) ->
+  # @public
+  # @method       _diffArrayObjects
+  # @description  Removes the same values from bigger collection of the same
+  #               model
+  _diffArrayObjects = (modelOne, modelTwo, equalKey) ->
     if !angular.isArray(modelOne) or !angular.isArray(modelTwo)
       throw Error('Both parameters must be arrays')
 
@@ -29,7 +39,7 @@ angular.module 'translation.services.helper', []
 
 
   api =
-    diffArrayObjects: diffArrayObjects
+    diffArrayObjects:     _diffArrayObjects
 
 
   return api
