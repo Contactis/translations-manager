@@ -8,8 +8,8 @@ angular.module 'translation.services.authorization', [
   'translation.providers.userPermissionsSettings'
 ]
 
-.service 'AuthorizationService', ($q, $state, $timeout, $filter, toastr, AccountService, Account,
-LanguagesService, UserPermissionsSettings) ->
+.service 'AuthorizationService', ($q, $state, $timeout, $log, $filter, toastr, AccountService,
+Account, LanguagesService, UserPermissionsSettings) ->
 
   userRoles = UserPermissionsSettings.userRoles
 
