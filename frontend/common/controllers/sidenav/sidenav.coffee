@@ -28,7 +28,7 @@ AccountService, AuthorizationService, CurrentProjectService) ->
 
   vm.currentProject = {}
 
-  CurrentProjectService.hadBeenChanged (project) ->
+  CurrentProjectService.hasBeenChanged (project) ->
     vm.currentProject = project
 
 
