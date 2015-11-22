@@ -17,35 +17,37 @@ angular.module('translation.pages.admin.user-assignment', [
     data:
       access:       access.management
     resolve:
-      currentProject: (CurrentProjectService) ->
+      CurrentProjectResolver: (CurrentProjectService) ->
         return CurrentProjectService.getCurrentProject()
-      allAccounts: (Account) ->
+      AllAccountsResolver: (Account) ->
         return Account.find().$promise
-      currentProjectAccountsResolver: (Project, currentProject) ->
+      CurrentProjectAccountsResolver: (Project, CurrentProjectResolver) ->
         response = Project.findOne
           filter:
             where:
-              id: currentProject.id
+              id: CurrentProjectResolver.id
             include: [
               "accounts"
             ]
         return response.$promise
 
 
-.controller 'UserAssignmentController', ($log, Project, Account, currentProjectAccountsResolver, allAccounts,
+.controller 'UserAssignmentController', ($log, Project, Account, CurrentProjectAccountsResolver, AllAccountsResolver,
 HelperService) ->
   vm = this
 
   # @public
   # @variable     vm.currentProjectAccounts
   # @description  TODO
-  vm.currentProjectAccounts = currentProjectAccountsResolver
+  vm.currentProjectAccounts = CurrentProjectAccountsResolver
+
+
 
 
   # @public
   # @variable     vm.availableAccounts
   # @description  TODO
-  vm.availableAccounts = HelperService.diffArrayObjects(vm.currentProjectAccounts.accounts, allAccounts, 'id')
+  vm.availableAccounts = HelperService.diffArrayObjects(vm.currentProjectAccounts.accounts, AllAccountsResolver, 'id')
 
 
   # @variable     vm.selectedUsersList
