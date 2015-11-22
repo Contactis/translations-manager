@@ -14,7 +14,7 @@ angular.module('translation.pages.dashboard', [
     controllerAs:   'vm'
     templateUrl:    'project-manager/dashboard/dashboard.tpl.html'
     data:
-      access: access.user
+      access:       access.user
 
 
 .controller 'DashboardController', () ->

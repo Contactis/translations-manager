@@ -69,23 +69,39 @@ translationApp.config( [
 
     'APP.FRONTEND_MESSAGES.WAITING_FOR_LOADING_DATA':   'Waiting for loading data'
 
-    # app/dashboard.jade
+    # authorization
+    'APP.FRONTEND_MESSAGES.AUTHORIZATION.YOU_HAD_BEEN_LOGGED_OUT':
+      'You had been logged out.'
+    'APP.FRONTEND_MESSAGES.AUTHORIZATION.ACCESS_UNDEFINED_FOR_THIS_STATE':
+      'Access undefined for this state'
+    'APP.FRONTEND_MESSAGES.AUTHORIZATION.SEEMS_LIKE_YOU_DONT_HAVE_PERMISSIONS':
+      'Seems like you don\'t have permissions to access that page.'
+
+    # login
+    'APP.FRONTEND_MESSAGES.LOGIN.WELCOME':                'Welcome!'
+    'APP.FRONTEND_MESSAGES.LOGIN.REGISTRATION_ERROR':     'Registration error'
+    'APP.FRONTEND_MESSAGES.LOGIN.LOGGING_ERROR':          'Logging error'
+    'APP.FRONTEND_MESSAGES.LOGIN.PASSWORDS_DONT_MATCH':   'Passwords don\'t match. Try again'
 
 
-    # app/login.jade
-    'EMAIL':                                        'E-mail'
-    'PASSWORD':                                     'Password'
-    'REPEAT_PASSWORD':                              'Repeat password'
-    'FIRST_NAME':                                   'First name'
-    'LAST_NAME':                                    'Last name'
-    'REGISTER':                                     'Register'
-    'COMPLETE':                                     'Complete'
-    'REMEMBER_ME':                                  'Remember me'
-    'LOGIN_WITH_YOUR_TRANSLATION_MANAGER_ACCOUNT':  'Login with your translation manager account'
-    'USERNAME':                                     'Username'
+
+    # ## app/dashboard.jade
 
 
-    # app/project-manager/admin/userAssignment.jade
+    # ## app/login.jade
+    'APP.LOGIN.EMAIL':                                        'E-mail'
+    'APP.LOGIN.PASSWORD':                                     'Password'
+    'APP.LOGIN.REPEAT_PASSWORD':                              'Repeat password'
+    'APP.LOGIN.FIRST_NAME':                                   'First name'
+    'APP.LOGIN.LAST_NAME':                                    'Last name'
+    'APP.LOGIN.REGISTER':                                     'Register'
+    'APP.LOGIN.COMPLETE':                                     'Complete'
+    'APP.LOGIN.REMEMBER_ME':                                  'Remember me'
+    'APP.LOGIN.LOGIN_WITH_YOUR_TRANSLATION_MANAGER_ACCOUNT':  'Login with your translation manager account'
+    'APP.LOGIN.USERNAME':                                     'Username'
+
+
+    # ## app/project-manager/admin/userAssignment.jade
     'APP.ADMIN.USER_ASSIGNMENT.GENETAL_DESCRIPTION':     'Nothing yet'
 
     'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS':   'Project users'
@@ -95,7 +111,7 @@ translationApp.config( [
     'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS.ASSIGNED_USERS':  'Assigned Users'
 
 
-    # app/project-manager/admin/projectSettings.jade
+    # ## app/project-manager/admin/projectSettings.jade
     'APP.ADMIN.PROJECT_SETTINGS.GENETAL_DESCRIPTION':     'Nothing here yet'
 
     'APP.ADMIN.PROJECT_SETTINGS.SECTION_ABOUT':           'About'
