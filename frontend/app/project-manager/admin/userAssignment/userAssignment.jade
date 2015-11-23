@@ -18,7 +18,7 @@
               .list-group
                 a.list-group-item.disabled(href="" data-ng-if="!vm.availableAccounts.length") Empty table
                 a.list-group-item(href="" data-ng-repeat="user in vm.availableAccounts" data-ng-click="vm.addToSelectedList($index)")
-                  span {{ user.username }} <{{user.email}}>
+                  span {{ user.username }} &lt;{{user.email}}&gt;
                   i.pull-right.fa.fa-arrow-right
 
             .col-xs-6
@@ -29,7 +29,7 @@
                 a.list-group-item.clearfix(href="" data-ng-repeat="user in vm.selectedUsersList" data-ng-click="vm.addToUnselectedList($index)")
                   i.fa.fa-arrow-left
                   span
-                    |  {{ user.username }} <{{ user.email }}>
+                    |  {{ user.username }} &lt;{{ user.email }}&gt;
           button.btn.btn-default(data-ng-click="vm.saveSelectedUsers()") {{ 'GENERAL.SAVE' | translate }}
 
 //- h2 Debug variables
