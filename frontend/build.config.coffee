@@ -58,9 +58,9 @@ module.exports =
       'frontend/vendor/datatables/media/js/jquery.dataTables.js'
       'frontend/vendor/select2/dist/js/select2.full.js'  # native select2; this is not angular-ui-select
       'frontend/vendors_offline/dataTables.bootstrap.js'
-      'frontend/vendors_offline/ace.js'
-      'frontend/vendors_offline/mode-html.js'
-      'frontend/vendors_offline/theme-github.js'
+      'frontend/vendors_offline/ace/ace.js'
+      'frontend/vendors_offline/ace/mode-html.js'
+      'frontend/vendors_offline/ace/theme-github.js'
       'frontend/vendors_offline/template/app.js'
 
 
