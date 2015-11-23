@@ -9,7 +9,7 @@ translationApp = angular.module('translation', [
   'ui.bootstrap'
   'ngMessages'
   'smart-table'
-  'angular-lodash'
+  'lodash'
   'toastr'
 
   # Including templates

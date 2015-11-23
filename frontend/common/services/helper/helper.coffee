@@ -1,13 +1,15 @@
 # # Helper Service
 
 # @module   translation.services.helper
-angular.module 'translation.services.helper', []
+angular.module 'translation.services.helper', [
+  'lodash'
+]
 
 # @package      HelperService
 # @description  This module should has helper methods and variables used
 #               between modules/services/directives/filters during development
 #               process
-.service 'HelperService', ->
+.service 'HelperService', (_) ->
 
   # @public
   # @method       _diffArrayObjects
@@ -40,6 +42,9 @@ angular.module 'translation.services.helper', []
 
   api =
     diffArrayObjects:     _diffArrayObjects
+
+    simple: (a, b) ->
+      return _.difference(a, b)
 
 
   return api

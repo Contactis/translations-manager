@@ -48,7 +48,7 @@ module.exports =
     angular_i18n_locales: 'frontend/vendor/angular-i18n/angular-locale_*.js'
     js: [
       # independent libraries
-      'frontend/vendor/lodash/dist/lodash.js'
+      'frontend/vendor/lodash/lodash.js'
       'frontend/vendor/jquery/dist/jquery.js'
       'frontend/vendor/bootstrap-sass/assets/javascripts/bootstrap.js'
       'frontend/vendor/Chart.js/Chart.js'
@@ -75,7 +75,6 @@ module.exports =
       'frontend/vendor/angular-cookies/angular-cookies.js'
       'frontend/vendor/angular-resource/angular-resource.js'
       'frontend/vendor/angular-aria/angular-aria.min.js'
-      'frontend/vendor/angular-lodash/angular-lodash.js'
       'frontend/vendor/angular-ui-router/release/angular-ui-router.js'
       'frontend/vendor/angular-translate/angular-translate.js'
       'frontend/vendor/restangular/src/restangular.js'

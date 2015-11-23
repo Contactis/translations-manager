@@ -5,12 +5,13 @@ angular.module('translation.modules.languages', [
   'tmh.dynamicLocale'
   'ngCookies'
   'angularMoment'
-  'angular-lodash'
+  'lodash'
 ])
 
 # LanguageService
 # ---------------
-.factory 'LanguagesService', ($q, $log, $http, $rootScope, $translate, $locale, $cookieStore, tmhDynamicLocale) ->
+.factory 'LanguagesService', ($q, $log, $http, $rootScope, $translate, $locale, $cookieStore,
+tmhDynamicLocale) ->
 
   # Array with supported languages by project
   _interfaceLanguages = [
