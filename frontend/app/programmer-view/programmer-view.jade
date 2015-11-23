@@ -9,6 +9,7 @@ table.table.table-striped(search-watch-model="vm.query" st-safe-src="vm.tableDat
     tbody
         tr(data-ng-repeat="singleRow in vm.displayedCollection")
             td {{singleRow.keyString}}
-            td mock1
-            td mock2
+            //TODO pass translation param
+            td {{singleRow.project.description}}
+            td {{singleRow.description}}
 

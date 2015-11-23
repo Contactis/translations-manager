@@ -9,7 +9,8 @@ angular.module('translation.controllers.translationModal', [
   'ui.bootstrap'
 ])
 
-.controller 'TranslationModalController', ($uibModalInstance, TranslationKey, Namespace) ->
+.controller 'TranslationModalController', ($uibModalInstance, Translation, TranslationKey, Namespace,
+CurrentProjectService) ->
   vm  = this
 
   vm.getNamespaces = (val) ->
@@ -23,53 +24,70 @@ angular.module('translation.controllers.translationModal', [
 
 
 
-  vm.translationKey                       = {}
-  vm.translationKey.translatedPhrase      = 'TESTOWY'
-  vm.translationKey.pluralForm            = false
-  vm.translationKey.projectId             = 1
-  vm.translationKey.namespaceId           = 3
+  vm.translationKey              = {}
+  vm.translationKey.keyString    = ''
+  vm.translationKey.isPlural     = false
 
-  _selectedNamespace = ""
 
+
+  _currentDate                      = new Date()
+  vm.translation                    = {}
+  vm.translation.description        = ''
+  vm.translation.createdAt         = _currentDate
+  vm.translation.updatedAt         = _currentDate
 
   _createNewNamespace = (namespace) ->
     _namespaceObject =
       parent_id: null
       namespace: namespace
-#TODO how should we create name?
+      #TODO how should we create name?
       name: namespace
-#FIXME mocking project Id to 1 for now
+      #TODO mocked should be CurrentProjectService.getCurrentProject().id?
       projectId: 1
-    Namespace.create(_namespaceObject ).$promise.then () ->
-      console.log "namespace created"
+    Namespace.create(_namespaceObject).$promise.then (success) ->
+      _createNewTranslationKey(success.id, vm.translationKey)
     , (error) ->
-      console.log 'error while creating namespace'
+      console.log 'error while saving namespace'
 
+  _createNewTranslationKey = (namespaceId, translationKeyObject) ->
+    translationKeyObject.namespaceId  = namespaceId
+    # TODO Do we really need this field since it's connected with namespace?
+    translationKeyObject.projectId    = 1
+    TranslationKey.create(translationKeyObject).$promise.then (success) ->
+      _createNewTranslation(success.id, vm.translation)
+    , (error) ->
+      console.log 'error while saving translationKey'
+
+  _createNewTranslation = (translationKeyId, translationObject) ->
+    translationObject.translationsKeyId = translationKeyId
+    translationObject.statusId          = 1
+    # TODO it cannot be blank but it should be?
+    translationObject.translatedPhrase  = "blank"
+    # TODO mocked
+    translationObject.languageId        = 1
+    translationObject.lastModifiedBy    = 1
+    translationObject.pluralForm        = null
+    Translation.create(translationObject).$promise.then () ->
+      $uibModalInstance.close()
+    , (error) ->
+      console.log 'error while saving translation'
 
   vm.ok = ->
-#creating namespace or using current
     Namespace.find(
       filter:
         where:
           namespace: vm.namespace
     ).$promise.then (success)->
       if success.length is 1
-        console.log "USING CURRENT NAMESPACE"
-        _selectedNamespace = success[0]
+        _createNewTranslationKey(success[0].id, vm.translationKey)
       else
-        _selectedNamespace = _createNewNamespace(vm.namespace)
+        _createNewNamespace(vm.namespace)
     , (error) ->
       console.log "something went wrong!"
 
 
-  #    TranslationKey.create(vm.translationKey).$promise.then () ->
-  #      $uibModalInstance.close()
-  #    , (error) ->
-  #      console.log 'error while saving key'
-
   vm.cancel = ->
     $uibModalInstance.close()
-
 
 
   return vm
