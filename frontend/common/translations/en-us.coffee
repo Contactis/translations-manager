@@ -18,6 +18,8 @@ translationApp.config( [
     'PROJECT.FULL_NAME':        'Translation manager'
 
 
+    'GENERAL.PROJECT':                    'Project'
+    'GENERAL.CHANGE_PROJECT':             'Change project'
     'GENERAL.LOGIN':                      'Login'
     'GENERAL.LOG_IN':                     'Log in'
     'GENERAL.LOG_OUT':                    'Log out'
