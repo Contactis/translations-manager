@@ -16,8 +16,8 @@
               p
                 strong {{ 'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS.AVAILABLE_USERS' | translate }}
               .list-group
-                a.list-group-item.disabled(href='#' data-ng-if="!vm.availableAccounts.length") Empty table
-                a.list-group-item(href='#' data-ng-repeat="user in vm.availableAccounts" data-ng-click="vm.addToSelectedList($index)")
+                a.list-group-item.disabled(href="" data-ng-if="!vm.availableAccounts.length") Empty table
+                a.list-group-item(href="" data-ng-repeat="user in vm.availableAccounts" data-ng-click="vm.addToSelectedList($index)")
                   span {{ user.username }} <{{user.email}}>
                   i.pull-right.fa.fa-arrow-right
 
@@ -25,8 +25,8 @@
               p
                 strong {{ 'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS.ASSIGNED_USERS' | translate }}
               .list-group
-                a.list-group-item.disabled(href='#' data-ng-if="!vm.selectedUsersList.length") Empty table
-                a.list-group-item.clearfix(href='#' data-ng-repeat="user in vm.selectedUsersList" data-ng-click="vm.addToUnselectedList($index)")
+                a.list-group-item.disabled(href="" data-ng-if="!vm.selectedUsersList.length") Empty table
+                a.list-group-item.clearfix(href="" data-ng-repeat="user in vm.selectedUsersList" data-ng-click="vm.addToUnselectedList($index)")
                   i.fa.fa-arrow-left
                   span
                     |  {{ user.username }} <{{ user.email }}>
