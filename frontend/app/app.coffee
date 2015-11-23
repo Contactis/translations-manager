@@ -26,6 +26,7 @@ translationApp = angular.module('translation', [
   'translation.pages.dashboard'
   'translation.pages.manager-view'
   'translation.pages.programmer-view'
+  'translation.pages.translator-view'
   'translation.pages.manager'
   'translation.pages.admin'
   'translation.pages.admin.project-settings'
