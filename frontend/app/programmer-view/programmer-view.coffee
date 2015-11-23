@@ -1,11 +1,12 @@
 angular.module('translation.pages.programmer-view', [
   'ui.router'
   'ngCookies'
-  'ngMaterial'
   'data-table'
   'ngMessages'
+  'ngAnimate'
   'lbServices'
   'translation.providers.userPermissionsSettings'
+  'ui.bootstrap'
 ])
 
 .config ($stateProvider, UserPermissionsSettingsProvider) ->
@@ -15,47 +16,28 @@ angular.module('translation.pages.programmer-view', [
   $stateProvider.state 'app.programmer-view',
     url:            '/programmer-view'
     controller:     'ProgrammerViewController'
+    controllerAs:   'vm'
     templateUrl:    'programmer-view/programmer-view.tpl.html'
     data:
       access:       access.user
 
-.controller 'ProgrammerViewController', ($scope, $log, $cookies, $timeout, $mdSidenav,
-$mdUtil, TranslationKey, $mdDialog) ->
+.controller 'ProgrammerViewController', ($log, $cookies, $timeout, TranslationKey, $uibModal, Namespace, $http) ->
 
-  $scope.query = ""
-  $scope.filters     = {}
-  $scope.contextMenu = {}
-  $scope.tableData  = []
+  vm              = this
+  vm.query        = ""
+  vm.filters      = {}
+  vm.contextMenu  = {}
+  vm.tableData    = []
 
   $timeout () ->
-    $scope.contextMenu.name   = "Programmer"
-    $scope.contextMenu.links  = [
+    vm.contextMenu.name   = "Programmer"
+    vm.contextMenu.links  = [
       {
         name: "Export selected to..."
         method: "exportSelectedTo()"
       }
     ]
     return
-
-
-  # @private
-  _exportSelectedTo = () ->
-    console.log "exportSelectedTo fired"
-
-
-  # @public
-  $scope.toogleSidenav = (componentId) ->
-    $mdSidenav(componentId)
-      .toggle()
-      .then( () ->
-        $log.debug('toggled')
-      )
-
-
-  $scope.toggleSidenav = () ->
-    $mdSidenav(menu).close().then () ->
-      $log.debug("close LEFT is done")
-
 
   TranslationKey.find(
     filter:
@@ -68,50 +50,24 @@ $mdUtil, TranslationKey, $mdDialog) ->
         "namespace"
       ]
   ).$promise.then (success)->
-    $scope.tableData = success
-    $scope.displayedCollection = [].concat($scope.tableData)
+    vm.tableData = success
+    vm.displayedCollection = [].concat(vm.tableData)
   , (error) ->
     console.log "Problem with loading translation keys"
 
 
 
+  vm.open = ->
+    $uibModal.open(
+      animation: true
+      templateUrl: 'templates/dialog/translation.tpl.html'
+      controller: 'TranslationModalController'
+      controllerAs: 'vm'
+      size: 'lg'
+      windowClass: 'center-modal'
+    )
 
-  $scope.showAdvanced = (ev) ->
-    $mdDialog.show
-      controller: DialogController
-      templateUrl: "templates/dialog/translation.tpl.html"
-      parent: angular.element(document.body)
-      targetEvent: ev
-      clickOutsideToClose: true
+  return vm
 
-  DialogController = ($scope, $mdDialog, FiltersStateService) ->
-    $scope.currentKey           = {}
-    $scope.currentKey.isPlural  = true
-    $scope.searchText           = null
-    $scope.groups = FiltersStateService.getGroups()
 
-    $scope.closeDialog = () ->
-      $mdDialog.hide()
 
-    $scope.saveKey = () ->
-      TranslationKey.create(currentKey).$promise.then () ->
-        console.log 'saving key!'
-      , (error) ->
-        console.log 'error while saving key'
-
-    $scope.querySearch = (query) ->
-      if query then $scope.groups.filter(createFilterFor(query)) else []
-
-    createFilterFor = (query) ->
-      lowercaseQuery = angular.lowercase(query)
-      (state) ->
-        state.namespace.indexOf(lowercaseQuery) == 0
-
-    #mocked
-    $scope.languagePlurals = [
-      { plural: "One",   example: ": 1"}
-      { plural: "Other", example: ": 0, 2-999, 12..."}
-    ]
-  DialogController.$inject = ["$scope", "$mdDialog", "FiltersStateService"]
-
-  return

@@ -1,0 +1,13 @@
+div.row
+  div.col-lg-3.col-md-6.col-sm-6.col-xs-12.cursor-pointer(data-ng-repeat="project in vm.projects track by $index")
+    a(data-ng-click="vm.chooseProject(project.id)")
+      div.card.green.summary-inline
+        div.card-body.clearfix
+          .serial-number.pull-left(data-ng-bind="project.id")
+          div.content
+            div.small-title(data-ng-bind="project.name")
+            div.description(data-ng-bind="project.description")
+
+
+
+

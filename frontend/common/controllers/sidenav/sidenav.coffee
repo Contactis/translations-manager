@@ -3,40 +3,42 @@ angular.module('translation.controllers.sidenav', [
   'ngAnimate'
   'ngCookies'
   'ngAria'
-  'ngMaterial'
-  'translation.services.projects'
   'translation.services.account'
   'translation.services.authorization'
   'translation.services.filtersState'
+  'translation.services.current-project'
   'lbServices'
 ])
 
 
-.controller 'SidenavController', ($scope, $rootScope, $state, $cookies, Account, FiltersStateService,
-$mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService) ->
+.controller 'SidenavController', ($rootScope, $state, $cookies, Account, FiltersStateService,
+AccountService, AuthorizationService, CurrentProjectService) ->
 
-  $scope.user = AccountService.account()
-  $scope.user.loggedIn = Account.isAuthenticated()
+  vm = this
+
+  vm.account = AccountService.account()
+  vm.account.loggedIn = Account.isAuthenticated()
 
 
-  $scope.goTo = (uiview) ->
+  vm.goTo = (uiview) ->
     $state.go(uiview)
 
-  $scope.countLanguages = 8
-  $scope.countKeys = 1234
+  vm.countLanguages = 8
+  vm.countKeys = 1234
 
-  $scope.currentProject = {}
+  vm.currentProject = {}
 
-  ProjectsService.updated.then null, null, (project) ->
-    $scope.currentProject = project
-
-  AccountService.updated.then null, null, (user) ->
-    $scope.user = user
-    $scope.user.loggedIn = Account.isAuthenticated()
+  CurrentProjectService.hasBeenChanged (project) ->
+    vm.currentProject = project
 
 
+  AccountService.hadBeenReloaded (account) ->
+    vm.account = account
+    vm.account.loggedIn = Account.isAuthenticated()
 
-  $scope.pages = [
+
+
+  vm.pages = [
     { name: "Programmer view", sref: "app.programmer-view" }
     { name: "Manager view", sref: "app.manager-view" }
     { name: "Translator view", sref: "app.translator-view" }
@@ -45,7 +47,7 @@ $mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService) ->
 
   $rootScope.logout = AuthorizationService.logout
 
-  $scope.groups = FiltersStateService.getGroups()
+  vm.groups = FiltersStateService.getGroups()
 
 
 
@@ -53,11 +55,4 @@ $mdSidenav, $mdUtil, ProjectsService, AccountService, AuthorizationService) ->
     console.log "change project"
 
 
-
-  # $scope.pages = [
-  #   { name: 'Pepperoni', wanted: true }
-  #   { name: 'Sausage', wanted: false }
-  #   { name: 'Black Olives', wanted: true }
-  #   { name: 'Green Peppers', wanted: false }
-  # ]
-  return
+  return vm

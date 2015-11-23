@@ -6,10 +6,11 @@ translationApp = angular.module('translation', [
   'restangular'
   'ngAnimate'
   'ngAria'
-  'ngMaterial'
+  'ui.bootstrap'
   'ngMessages'
   'smart-table'
   'angular-lodash'
+  'toastr'
 
   # Including templates
   'templates-module'
@@ -21,9 +22,16 @@ translationApp = angular.module('translation', [
   # Including pages of aplication
   'translation.pages.404'
   'translation.pages.login'
+  'translation.pages.choose-project'
   'translation.pages.dashboard'
   'translation.pages.manager-view'
   'translation.pages.programmer-view'
+  'translation.pages.manager'
+  'translation.pages.admin'
+  'translation.pages.admin.project-settings'
+  'translation.pages.admin.user-assignment'
+  'translation.pages.admin.user-assignment'
+
   #
   # Including modules
   'translation.modules.languages'
@@ -33,17 +41,20 @@ translationApp = angular.module('translation', [
   'translation.services.authorization'
   'translation.services.filtersState'
   'translation.services.customTranslationHandler'
+  'translation.services.current-project'
+  'translation.services.helper'
 
   # Including controllers
   'translation.controllers.sidenav'
+  'translation.controllers.translationModal'
 
   # Including directives
   'translator.directive.trTopBar'
+  'translator.directive.trDashboardTop'
 ])
 
-
-.config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider, $mdThemingProvider,
-$translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
+.config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider,
+$translateProvider, tmhDynamicLocaleProvider, RestangularProvider, toastrConfig) ->
 
   $stateProvider
   .state 'app',
@@ -71,24 +82,10 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
 
   #$locationProvider.html5Mode(true)
 
-  #$animateProvider.classNameFilter(/animate/)
+  $animateProvider.classNameFilter(/animate/)
 
-  ###
-  The is some issue with defining backgroud color
-  "Uncaught TypeError: Cannot read property '600' of undefined"
-  More info: https://github.com/angular/material/issues/2752
-  ###
-  $mdThemingProvider
-    .theme('default')
-    .primaryPalette('blue-grey')
-    .accentPalette('blue')
-    .warnPalette('red')
-    # .backgroundPalette('gray',
-    #   'default': 'A200',
-    #   'hue-1': '300',
-    #   'hue-2': '600',
-    #   'hue-3': '900'
-    # )
+  angular.extend toastrConfig,
+    positionClass: 'toast-bottom-right'
 
   # ### Translations (angular translate)
   $translateProvider.addInterpolation('$translateMessageFormatInterpolation')
@@ -148,7 +145,7 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider) ->
 
 # App Controller
 # -------------
-.controller 'AppController', ($scope, $rootScope, $state, $cookies, $mdSidenav, LanguagesService, AccountService) ->
+.controller 'AppController', ($scope, $rootScope, $state, $cookies, LanguagesService, AccountService) ->
 
   # Set language for income user (not logged in)
   LanguagesService.setLanguage(LanguagesService.getStartupLanguage())

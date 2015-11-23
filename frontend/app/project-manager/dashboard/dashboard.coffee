@@ -1,7 +1,6 @@
 angular.module('translation.pages.dashboard', [
   'ui.router'
   'data-table'
-  'translation.services.projects'
   'translation.providers.userPermissionsSettings'
 ])
 
@@ -9,10 +8,11 @@ angular.module('translation.pages.dashboard', [
 
   access = UserPermissionsSettingsProvider.accessLevels
 
-  $stateProvider.state 'app.dashboard',
+  $stateProvider.state 'app.manager.dashboard',
     url:            '/dashboard'
     controller:     'DashboardController'
-    templateUrl:    'dashboard/dashboard.tpl.html'
+    controllerAs:   'vm'
+    templateUrl:    'project-manager/dashboard/dashboard.tpl.html'
     data:
       access: access.user
 

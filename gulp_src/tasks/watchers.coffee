@@ -4,6 +4,7 @@ config = require '../variables'
 # Require all dependencies
 gulp        = require 'gulp'
 runSequence = require 'run-sequence'
+gulp-watch  = require 'gulp-watch'
 chalk       = require 'chalk'
 
 gulp.task 'watchers', ->
@@ -13,17 +14,24 @@ gulp.task 'watchers', ->
     source: config.build.app_files.coffee
     tasks:  ['coffee']
 
+  if config.arguments.tests
+    coffeeWatchArgs.tasks.push 'run-tests-watch'
+    coffeeWatchArgs.source = config.build.app_files.all_coffee
+
+  if config.arguments.docs
+    coffeeWatchArgs.tasks.push 'run-docs'
+
   coffeeWatcher = gulp.watch coffeeWatchArgs.source, ->
     runSequence coffeeWatchArgs.tasks
 
 
   # ### Jade templates
-  jadeWatcher = gulp.watch config.build.app_files.jade_all_templates, ->
+  jadeWatcher = gulp.watch config.build.app_files.jade_all_templates,  ->
     runSequence 'compile-jade'
 
 
   # ## Sass stylesheets
-  sassWatcher = gulp.watch 'frontend/sass/' + config.build.project_theme_name + '/**/*.sass', ->
+  sassWatcher = gulp.watch config.build.app_files.sass, ->
     runSequence 'build-styles'
 
   # ## Backend

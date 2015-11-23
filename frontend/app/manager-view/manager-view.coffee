@@ -15,22 +15,24 @@ angular.module('translation.pages.manager-view', [
   $stateProvider.state 'app.manager-view',
     url:            '/manager-view'
     controller:     'ManagerViewController'
+    controllerAs:   'vm'
     templateUrl:    'manager-view/manager-view.tpl.html'
     data:
       access: access.user
 
 
-.controller 'ManagerViewController', ($scope, $timeout, TranslationKey) ->
-  $scope.filters = {}
-  $scope.query = ""
-  $scope.languageList = ['pl','en','de']
-  $scope.contextMenu = {}
-  $scope.tableData = []
+.controller 'ManagerViewController', ($timeout, TranslationKey) ->
+  vm              = this
+  vm.filters      = {}
+  vm.query        = ""
+  vm.languageList = ['pl','en','de']
+  vm.contextMenu  = {}
+  vm.tableData    = []
 
 
   $timeout () ->
-    $scope.contextMenu.name   = "Manager"
-    $scope.contextMenu.links  = [
+    vm.contextMenu.name   = "Manager"
+    vm.contextMenu.links  = [
       {
         name: "Export selected to..."
         method: "exportSelectedTo()"
@@ -39,10 +41,10 @@ angular.module('translation.pages.manager-view', [
     return
 
   TranslationKey.find().$promise.then (success)->
-    $scope.tableData = success
-    $scope.displayedCollection = [].concat($scope.tableData)
+    vm.tableData = success
+    vm.displayedCollection = [].concat(vm.tableData)
   , (error) ->
     console.log "Problem with loading translation keys"
 
-  return
+  return vm
 

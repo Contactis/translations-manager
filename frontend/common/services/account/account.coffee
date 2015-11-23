@@ -2,13 +2,12 @@ angular.module('translation.services.account', [
   'restangular'
   'lbServices'
   'ngCookies'
-  'ngMaterial'
   'ui.router'
   'translation.providers.userPermissionsSettings'
 ])
 
 
-.service 'AccountService', ($q, $cookies, $http, $timeout, $state, $mdToast, Restangular,
+.service 'AccountService', ($q, $cookies, $http, $timeout, $state, Restangular,
 UserPermissionsSettings, Account) ->
 
   userRoles = UserPermissionsSettings.userRoles
@@ -46,7 +45,8 @@ UserPermissionsSettings, Account) ->
 
   api =
     loadSession:          _loadSession
-    updated:              _notify.promise
+    hadBeenReloaded:      (cb) ->
+      _notify.promise.then null, null, cb
     resetAccount:         ->
       _account = angular.copy _defaultAccountObject
       _accountUpdated()
