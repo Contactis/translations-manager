@@ -47,7 +47,8 @@ angular.module 'translation.services.helper', [
   # @param        {Array}   needle    usually smaller array; with less objects
   # @param        {String}  equalKey  parameter key of object; It should be **unique**
   # @description  Take `needle` array and compare it with `stash` to find
-  #               common and different objects
+  #               common and different objects into `stash`.
+  #               **This method manipulate(sort) only with `stash` array.**
   # @returns      {Array}
   # @example
   #     array1=[
@@ -71,17 +72,24 @@ angular.module 'translation.services.helper', [
 
     _.forEach stash, (referenceValue) ->
       _exists = false
+
+      _tmpDiff=[] # temporary array to store values that match but loop was not already ended
+      _bool=true  # trigger to copy _tmpDiff to _diffArray
       _.forEach needle, (comparableValue) ->
         if referenceValue[equalKey] == comparableValue[equalKey]
           _commonArray.push referenceValue
-          console.log "match", referenceValue[equalKey]
+          _bool=false
+          return false # itetation improvement; brake
         else
-          console.log "_commonArray", _commonArray.length
-          console.log "equalKey", equalKey, "referenceValue[equalKey]", referenceValue[equalKey]
-          if not _.some(_commonArray, {equalKey: referenceValue[equalKey]})
-            _diffArray.push referenceValue
-            console.log "NOT match", referenceValue[equalKey]
-
+          _comparableObject = {}
+          _comparableObject[equalKey] = referenceValue[equalKey]
+          if not _.some(_commonArray, _comparableObject) and not _.some(_tmpDiff, _comparableObject)
+            _tmpDiff.push referenceValue
+      # If not found a match during second loop then add all stored `_tmpDiff` objects to destination
+      # array, that means `_diffArray`
+      if _bool
+        for x in _tmpDiff
+          _diffArray.push x
     return [_commonArray, _diffArray]
 
 
