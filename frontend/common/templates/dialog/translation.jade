@@ -33,6 +33,11 @@
           label.col-sm-2.control-label Plural
           .col-sm-2
             input.form-control(type="text" placeholder="plural")
+      div(data-ng-show="!vm.translationKey.isPlural")
+        .form-group
+          label.col-sm-2.control-label Default translation
+          .col-sm-2
+            input.form-control(type="text" placeholder="default translation" data-ng-model="vm.translation.translatedPhrase")
       .form-group
         label.col-sm-2.control-label(for="descriptionInput" data-ng-model="vm.translation.description") Context description
         .col-sm-6
