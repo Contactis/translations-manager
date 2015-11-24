@@ -32,8 +32,9 @@
                     |  {{ user.username }} &lt;{{ user.email }}&gt;
           button.btn.btn-default(data-ng-click="vm.saveSelectedUsers()") {{ 'GENERAL.SAVE' | translate }}
 
-//- h2 Debug variables
-//- pre
-//-   | vm.selectedUsersList: {{ vm.selectedUsersList | json }}
-//-   | vm.currentProjectAccounts.accounts: {{ vm.currentProjectAccounts.accounts | json }}
-//-   | vm.availableAccounts: {{ vm.availableAccounts | json }}
+h2 Debug variables
+pre
+  | vm.currentProjectAccounts: {{ vm.currentProjectAccounts | json }}
+  | vm.allAccounts: {{ vm.allAccounts | json }}
+  | vm.selectedUsersList: {{ vm.selectedUsersList | json }}
+  | vm.availableAccounts: {{ vm.availableAccounts | json }}
