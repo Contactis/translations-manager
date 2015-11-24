@@ -12,11 +12,11 @@ angular.module('translation.pages.manager-view', [
 
   access = UserPermissionsSettingsProvider.accessLevels
 
-  $stateProvider.state 'app.manager-view',
+  $stateProvider.state 'app.manager.manager-view',
     url:            '/manager-view'
     controller:     'ManagerViewController'
     controllerAs:   'vm'
-    templateUrl:    'manager-view/manager-view.tpl.html'
+    templateUrl:    'project-manager/manager-view/manager-view.tpl.html'
     data:
       access: access.user
 

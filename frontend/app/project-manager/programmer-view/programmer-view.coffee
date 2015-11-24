@@ -13,11 +13,11 @@ angular.module('translation.pages.programmer-view', [
 
   access = UserPermissionsSettingsProvider.accessLevels
 
-  $stateProvider.state 'app.programmer-view',
+  $stateProvider.state 'app.manager.programmer-view',
     url:            '/programmer-view'
     controller:     'ProgrammerViewController'
     controllerAs:   'vm'
-    templateUrl:    'programmer-view/programmer-view.tpl.html'
+    templateUrl:    'project-manager/programmer-view/programmer-view.tpl.html'
     data:
       access:       access.user
 

@@ -13,11 +13,11 @@ angular.module('translation.pages.translator-view', [
 
   access = UserPermissionsSettingsProvider.accessLevels
 
-  $stateProvider.state 'app.translator-view',
+  $stateProvider.state 'app.manager.translator-view',
     url:            '/translator-view'
     controller:     'TranslatorViewController'
     controllerAs:   'vm'
-    templateUrl:    'translator-view/translator-view.tpl.html'
+    templateUrl:    'project-manager/translator-view/translator-view.tpl.html'
     data:
       access:       access.user
 
