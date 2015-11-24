@@ -1,16 +1,14 @@
-button.addButtonPosition.btn.btn-primary.btn-circle(type="button" data-ng-click="vm.open()")
-  i.fa.fa-plus
 table.table.table-striped(search-watch-model="vm.query" st-safe-src="vm.tableData" st-table="vm.displayedCollection")
   thead
     tr
-      th(st-sort="vm.keyString") Group
+      th Group
       th Context Description
-      th Default translation
-      th English (en-US)
+      th Default language: English (en-US)
       th Polski (pl-PL)
   tbody
     tr(data-ng-repeat="singleRow in vm.displayedCollection")
       td {{singleRow.keyString}}
-      //TODO pass translation param
-      td {{singleRow.project.description}}
+      td {{singleRow.translations[0].description}}
+        //input(type="text" data-ng-model="vm.translationKey.isPlural")
+      td {{singleRow.translations[0].translatedPhrase}}
       td {{singleRow.description}}

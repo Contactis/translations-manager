@@ -21,7 +21,8 @@ angular.module('translation.pages.translator-view', [
     data:
       access:       access.user
 
-.controller 'TranslatorViewController', ($log, $cookies, $timeout, TranslationKey, $uibModal, Namespace, $http) ->
+.controller 'TranslatorViewController', ($log, $cookies, $timeout, TranslationKey, Translation,
+$uibModal, Namespace, $http, CurrentProjectService) ->
 
   vm              = this
   vm.query        = ""
@@ -38,34 +39,55 @@ angular.module('translation.pages.translator-view', [
       }
     ]
     return
+  CurrentProjectService.getCurrentProject().then (response) ->
 
-  TranslationKey.find(
-    filter:
-      include: [
-        "translations": [
-          "language"
-          "modifiedBy"
+
+    TranslationKey.find(
+      filter:
+        include:[
+          {
+            relation: 'translations'
+            scope:
+              where:
+                languageId: 1
+          }
+          {
+            relation: 'namespace'
+          }
         ]
-        "project"
-        "namespace"
-      ]
-  ).$promise.then (success)->
-    vm.tableData = success
-    vm.displayedCollection = [].concat(vm.tableData)
+        where:
+          projectId: response.id
+    ).$promise.then (success)->
+      vm.tableData = success
+      vm.displayedCollection = [].concat(vm.tableData)
+    , (error) ->
+      console.log "Problem with loading translation keys"
   , (error) ->
-    console.log "Problem with loading translation keys"
+    console.log 'something went wrong!', error
 
 
+#  CurrentProjectService.getCurrentProject().then (response) ->
+#    Translation.find(
+#      filter:
+#        include:
+#          translationKey:
+#            "namespace"
+#        where:
+#          languageId: response.defaultLanguageId
+#
+#          translationKey:
+#            namespace:
+#              projectId: response.id
+#              projectId: 2
+#
+#    ).$promise.then (success)->
+#      vm.tableData = success
+#      vm.displayedCollection = [].concat(vm.tableData)
+#    , (error) ->
+#      console.log "Problem with loading translation keys"
 
-  vm.open = ->
-    $uibModal.open(
-      animation: true
-      templateUrl: 'templates/dialog/translation.tpl.html'
-      controller: 'TranslationModalController'
-      controllerAs: 'vm'
-      size: 'lg'
-      windowClass: 'center-modal'
-    )
+#  , (error) ->
+#    console.log 'something went wrong!', error
 
   return vm
 
