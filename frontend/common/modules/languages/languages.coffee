@@ -5,12 +5,13 @@ angular.module('translation.modules.languages', [
   'tmh.dynamicLocale'
   'ngCookies'
   'angularMoment'
-  'angular-lodash'
+  'lodash'
 ])
 
 # LanguageService
 # ---------------
-.factory 'LanguagesService', ($q, $log, $http, $rootScope, $translate, $locale, $cookieStore, tmhDynamicLocale) ->
+.factory 'LanguagesService', ($q, $log, $http, $rootScope, $translate, $locale, $cookieStore,
+tmhDynamicLocale) ->
 
   # Array with supported languages by project
   _interfaceLanguages = [
@@ -21,8 +22,8 @@ angular.module('translation.modules.languages', [
 
   # @method         _unifyToIetfCode
   # @param          {String}  langCode    some string with language key; like `pl-PL`
-  # @description    unify languages code notation from different browser to one
-  #                 like "xx-yy" or "xx" (ex: "en-us", "en")
+  # @description    Unify languages code notation from different browser to one
+  #                 like "xx-yy" or "xx" (ex: "en-us", "en"); For
   # @returns        { String }
   _unifyToIetfCode = (inputCode) ->
     _code = inputCode.replace("_", "-")

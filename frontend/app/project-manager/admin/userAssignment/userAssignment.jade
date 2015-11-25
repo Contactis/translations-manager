@@ -1,4 +1,42 @@
-h1 User assignment
-pre {{ vm.currentProjectAccounts.accounts | json }}
+.row
+    .col-xs-12
+      h1 {{ 'PAGE.PROJECT_MANAGEMENT.USER_ASSIGNMENT.TITLE' | translate }}
+      p {{ 'APP.ADMIN.USER_ASSIGNMENT.GENETAL_DESCRIPTION' | translate }}
 
-pre {{ vm.availableAccounts | json }}
+  .row
+    .col-md-12
+      .card
+        .card-header
+          .card-title
+            .title {{ 'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS' | translate }}
+        .card-body
+          p {{ 'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS_GENERAL_DESCRIPTION' | translate}}
+          .row
+            .col-xs-6
+              p
+                strong {{ 'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS.AVAILABLE_USERS' | translate }}
+              .list-group
+                a.list-group-item.disabled(href="" data-ng-if="!vm.availableAccounts.length") Empty table
+                a.list-group-item(href="" data-ng-repeat="user in vm.availableAccounts" data-ng-click="vm.addToSelectedList($index)")
+                  span {{ user.username }} &lt;{{user.email}}&gt;
+                  i.pull-right.fa.fa-arrow-right
+
+            .col-xs-6
+              p
+                strong {{ 'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS.ASSIGNED_USERS' | translate }}
+              .list-group
+                a.list-group-item.disabled(href="" data-ng-if="!vm.selectedUsersList.length") Empty table
+                a.list-group-item.clearfix(href="" data-ng-repeat="user in vm.selectedUsersList" data-ng-click="vm.addToUnselectedList($index)")
+                  i.fa.fa-arrow-left
+                  span
+                    |  {{ user.username }} &lt;{{ user.email }}&gt;
+          button.btn.btn-default(data-ng-click="vm.saveSelectedUsers()") {{ 'GENERAL.SAVE' | translate }}
+
+//- h2 Debug variables
+//- pre
+//-   | vm.currentProjectAccounts: {{ vm.currentProjectAccounts | json }}
+//-   | vm.allAccounts: {{ vm.allAccounts | json }}
+//-   | vm.projectAccounts: {{ vm.projectAccounts | json }}
+
+//-   | vm.selectedUsersList: {{ vm.selectedUsersList | json }}
+//-   | vm.availableAccounts: {{ vm.availableAccounts | json }}

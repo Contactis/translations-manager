@@ -18,6 +18,8 @@ module.exports = (config) ->
       'coverage'
       'junit'
     ]
+    client:
+      captureConsole: true
     junitReporter:
       outputDir:  __dirname + '/../../' + projectConfig.build.gulp_build_dir + '/test-coverage/junit'
       suite:      ''

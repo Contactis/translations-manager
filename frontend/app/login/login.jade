@@ -4,37 +4,41 @@
       .login-form.row
         .col-sm-12.text-center.login-header
           i.login-logo.fa.fa-connectdevelop.fa-5x
-          h4.login-title {{ 'TRANSLATION_MANAGER' | translate }}
+          h4.login-title {{ 'PROJECT.FULL_NAME' | translate }}
         .col-sm-12
+          .login-header
+            .header
+              .title(data-ng-hide="showRegistration" ng-animate="'animate'") {{ 'APP.LOGIN.SING_IN' | translate }}
+              .title(data-ng-show="showRegistration" ng-animate="'animate'") {{ 'APP.LOGIN.REGISTER' | translate }}
           .login-body
             #login-progress.progress.hidden
               .progress-bar.progress-bar-success.progress-bar-striped.active(role='progressbar', aria-valuenow='100', aria-valuemin='0', aria-valuemax='100', style='width: 100%')
                 | Log In...
             form(name="loginForm")
               .control
-                input.form-control(data-ng-model="user.email" name="email" type="text" autofocus="", placeholder="{{ 'EMAIL' | translate }}")
+                input.form-control(data-ng-model="user.email" name="email" type="text" autofocus="", placeholder="{{ 'APP.LOGIN.EMAIL' | translate }}")
               .control
-                input.form-control(data-ng-model="user.password" name="password" type="password", placeholder="{{ 'PASSWORD' | translate }}")
+                input.form-control(data-ng-model="user.password" name="password" type="password", placeholder="{{ 'APP.LOGIN.PASSWORD' | translate }}")
 
 
               .control(data-ng-show="showRegistration" ng-animate="'animate'")
-                input.form-control(data-ng-model="user.repeatPassword" name="repeatPassword" type="password" placeholder="{{ 'REPEAT_PASSWORD' | translate }}")
+                input.form-control(data-ng-model="user.repeatPassword" name="repeatPassword" type="password" placeholder="{{ 'APP.LOGIN.REPEAT_PASSWORD' | translate }}")
               .control(data-ng-show="showRegistration" ng-animate="'animate'")
-                input.form-control(data-ng-model="user.firstName" name="firstName" type="text" placeholder="{{ 'FIRST_NAME' | translate }}")
+                input.form-control(data-ng-model="user.firstName" name="firstName" type="text" placeholder="{{ 'APP.LOGIN.FIRST_NAME' | translate }}")
               .control(data-ng-show="showRegistration" ng-animate="'animate'")
-                input.form-control(data-ng-model="user.lastName" name="lastName" type="text" placeholder="{{ 'LAST_NAME' | translate }}")
+                input.form-control(data-ng-model="user.lastName" name="lastName" type="text" placeholder="{{ 'APP.LOGIN.LAST_NAME' | translate }}")
               .control(data-ng-show="showRegistration" ng-animate="'animate'")
-                input.form-control(data-ng-model="user.username" name="username" type="text" placeholder="{{ 'USERNAME' | translate }}")
+                input.form-control(data-ng-model="user.username" name="username" type="text" placeholder="{{ 'APP.LOGIN.USERNAME' | translate }}")
 
 
               .login-button.text-center
-                button.btn.btn-primary(data-ng-show="!showRegistration" data-ng-click="login()") {{ 'LOG_IN' | translate }}
-                button.btn.btn-primary(data-ng-show="showRegistration" data-ng-click="register()") {{ 'COMPLETE' | translate }}
+                button.btn.btn-primary(data-ng-show="!showRegistration" data-ng-click="login()") {{ 'GENERAL.LOG_IN' | translate }}
+                button.btn.btn-primary(data-ng-show="showRegistration" data-ng-click="register()") {{ 'APP.LOGIN.COMPLETE' | translate }}
           .login-footer
             span.text-right.pull-left
-              a.color-white(data-ng-show="!showRegistration" data-ng-click="toggleRegister()") {{ 'REGISTER' | translate }}
-              a.color-white(data-ng-show="showRegistration" data-ng-click="toggleRegister()") {{ 'CANCEL' | translate }}
+              a.color-white(data-ng-show="!showRegistration" data-ng-click="toggleRegister()") {{ 'APP.LOGIN.REGISTER' | translate }}
+              a.color-white(data-ng-show="showRegistration" data-ng-click="toggleRegister()") {{ 'GENERAL.CANCEL' | translate }}
             span.text-left.pull-right
-              label.color-white(for="remember-me") {{ 'REMEMBER_ME' | translate }}
+              label.color-white(for="remember-me") {{ 'APP.LOGIN.REMEMBER_ME' | translate }}
               input(type="checkbox" ng-model="rememberMe" id="remember-me")
 

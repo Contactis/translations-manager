@@ -48,7 +48,7 @@ module.exports =
     angular_i18n_locales: 'frontend/vendor/angular-i18n/angular-locale_*.js'
     js: [
       # independent libraries
-      'frontend/vendor/lodash/dist/lodash.js'
+      'frontend/vendor/lodash/lodash.js'
       'frontend/vendor/jquery/dist/jquery.js'
       'frontend/vendor/bootstrap-sass/assets/javascripts/bootstrap.js'
       'frontend/vendor/Chart.js/Chart.js'
@@ -56,11 +56,11 @@ module.exports =
       'frontend/vendor/iCheck/icheck.js'
       'frontend/vendor/matchHeight/jquery.matchHeight.js'
       'frontend/vendor/datatables/media/js/jquery.dataTables.js'
-      'frontend/vendor/select2/dist/js/select2.full.js'
+      'frontend/vendor/select2/dist/js/select2.full.js'  # native select2; this is not angular-ui-select
       'frontend/vendors_offline/dataTables.bootstrap.js'
-      'frontend/vendors_offline/ace.js'
-      'frontend/vendors_offline/mode-html.js'
-      'frontend/vendors_offline/theme-github.js'
+      'frontend/vendors_offline/ace/ace.js'
+      'frontend/vendors_offline/ace/mode-html.js'
+      'frontend/vendors_offline/ace/theme-github.js'
       'frontend/vendors_offline/template/app.js'
 
 
@@ -75,14 +75,15 @@ module.exports =
       'frontend/vendor/angular-cookies/angular-cookies.js'
       'frontend/vendor/angular-resource/angular-resource.js'
       'frontend/vendor/angular-aria/angular-aria.min.js'
-      'frontend/vendor/angular-lodash/angular-lodash.js'
       'frontend/vendor/angular-ui-router/release/angular-ui-router.js'
       'frontend/vendor/angular-translate/angular-translate.js'
       'frontend/vendor/restangular/src/restangular.js'
       'frontend/vendor/angular-data-table/release/dataTable.helpers.min.js'
       'frontend/vendor/angular-messages/angular-messages.js'
       'frontend/vendor/angular-moment/angular-moment.js'
+      'frontend/vendor/angular-sanitize/angular-sanitize.js'
 
+      'frontend/vendor/ui-select/dist/select.js'
       'frontend/vendor/messageformat/messageformat.js'
       'frontend/vendor/messageformat/locale/en.js' # need to upload all messageformat for all interface languages
       'frontend/vendor/messageformat/locale/pl.js'
@@ -106,9 +107,13 @@ module.exports =
       'frontend/vendor/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css'
       'frontend/vendor/iCheck/skins/flat/_all.css'
       'frontend/vendor/datatables/media/css/jquery.dataTables.css'
-      'frontend/vendor/select2/dist/css/select2.css'
       'frontend/vendor/angular-toastr/dist/angular-toastr.css'
       'frontend/vendors_offline/dataTables.bootstrap.css'
+
+      'frontend/vendor/select2/dist/css/select2.css' # native select2; this is not angular-ui-select
+      'frontend/vendors_offline/select2.css'
+      'frontend/vendors_offline/select2-bootstrap.css'
+      'frontend/vendor/ui-select/dist/select.css'
     ]
 
     sourceMaps:

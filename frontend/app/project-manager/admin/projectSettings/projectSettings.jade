@@ -1,1 +1,90 @@
-h1 Project settings
+.container-fluid
+  .row
+    .col-xs-12
+      h1 {{ 'PAGE.PROJECT_MANAGEMENT.PROJECT_SETTINGS.TITLE' | translate }}
+      p {{ 'APP.ADMIN.PROJECT_SETTINGS.GENETAL_DESCRIPTION' | translate }}
+
+  .row
+    .col-md-12
+      .card(style="overflow:visible")
+        .card-header
+          .card-title
+            .title {{ 'APP.ADMIN.PROJECT_SETTINGS.SECTION_ABOUT' | translate }}
+        .card-body
+          p {{ 'APP.ADMIN.PROJECT_SETTINGS.SECTION_ABOUT_GENERAL_DESCRIPTION' | translate}}
+          form
+            .form-group
+              label(for="projectNameInput") {{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_NAME_LABEL' | translate }}
+              input.form-control(name="projectNameInput" type="text", placeholder="{{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_NAME_PLACEHOLDER' | translate }}" data-ng-model="vm.currentProject.name")
+            .form-group
+              label(for='projectDescriptionInput') {{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DESCRITPION_LABEL' | translate }}
+              textarea.form-control(name="projectDescriptionInput" rows="3" placeholder="{{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DESCRITPION_PLACEHOLDER' | translate }}" data-ng-model="vm.currentProject.description")
+            .form-group
+              label(for='projectDefaultLanguageInput') {{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DEFAULT_LANGUAGE_LABEL' | translate }}
+              ui-select.form-control(ng-model="vm.availableLanguages.selected" theme="select2" title="{{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DEFAULT_LANGUAGE_PLACEHOLDER' | translate }}" on-select="vm.setSelectedLanguage($item)")
+                ui-select-match(placeholder="{{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DEFAULT_LANGUAGE_PLACEHOLDER' | translate }}") {{ $select.selected.nameNative }}
+                ui-select-choices(repeat="item in vm.availableLanguages | filter: $select.search")
+                  div(ng-bind-html="item.nameNative | highlight: $select.search")
+                  small IETF:&nbsp;
+                  small(ng-bind-html="item.ietfCode | highlight: $select.search")
+            button.btn.btn-default(type='submit' data-ng-click="vm.saveAbout()") Save
+
+  .row
+    .col-md-12
+      .card
+        .card-header
+          .card-title
+            .title {{ 'APP.ADMIN.PROJECT_SETTINGS.SECTION_DATE_AND_TIME' | translate }}
+        .card-body
+          p {{ 'APP.ADMIN.PROJECT_SETTINGS.SECTION_DATE_AND_TIME_GENERAL_DESCRIPTION' | translate }}
+          .alert.alert-warning(role="alert")
+            | Warning: {{ 'APP.FRONTEND_MESSAGES.THIS_FEATURE_IS_NOT_YET_READY' | translate}}
+          button.btn.btn-default Save
+
+  .row
+    .col-md-12
+      .card
+        .card-header
+          .card-title
+            .title {{ 'APP.ADMIN.PROJECT_SETTINGS.SECTION_WORKFLOW' | translate }}
+        .card-body
+
+          p {{ 'APP.ADMIN.PROJECT_SETTINGS.SECTION_WORKFLOW_GENERAL_DESCRIPTION' | translate }}
+
+          .alert.alert-warning(role="alert")
+            | Warning: {{ 'APP.FRONTEND_MESSAGES.THIS_FEATURE_IS_NOT_YET_READY' | translate}}
+
+          .row
+            .col-md-6
+              form(role="form" name="settingsWorkflowForm" data-ng-submit="settingsWorkflowForm.$valid && registerUser()")
+                .form-group
+                  label(for="outputCaseTypeInput") {{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_OUTPUT_CASE_TYPE_LABEL' | translate }}:
+                  select.form-control(name="outputCaseTypeInput")
+                    option(data-ng-repeat="x in vm.outputCaseTypes" value="x.type") {{x.name}}
+
+                .form-group
+                  label(for="namespaceSeparatorInput") {{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_NAMESPACE_LABEL' | translate }}:
+                  select.form-control(name="outputCaseTypeInput" data-ng-model="vm.settings.workflow.namespace.separator")
+                    option(data-ng-repeat="separator in vm.settings.workflow.namespace.separators_list" value="{{separator}}") {{separator}}
+
+            .col-md-6
+              h4 Live examples:
+              ol
+                li
+                  strong Standard key index:
+                  |  {{ vm.examples.one() }}
+
+              br
+
+              input.form-control(data-ng-model="vm.vars.first_namespace")
+              input.form-control(data-ng-model="vm.vars.second_namespace")
+              input.form-control(data-ng-model="vm.vars.key_index_string")
+
+
+          button.btn.btn-default Save
+
+  //- h2 Debug variables
+  //- pre
+  //-   | vm.currentProject: {{vm.currentProject|json}}
+  //-   | vm.availableLanguages.selected: {{vm.availableLanguages.selected|json}}
+  //-   | vm.availableLanguages: {{vm.availableLanguages|json}}

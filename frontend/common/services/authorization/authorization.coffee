@@ -8,8 +8,8 @@ angular.module 'translation.services.authorization', [
   'translation.providers.userPermissionsSettings'
 ]
 
-.service 'AuthorizationService', ($q, $state, toastr, $timeout, AccountService, Account,
-LanguagesService, UserPermissionsSettings) ->
+.service 'AuthorizationService', ($q, $state, $timeout, $log, $filter, toastr, AccountService,
+Account, LanguagesService, UserPermissionsSettings) ->
 
   userRoles = UserPermissionsSettings.userRoles
 
@@ -72,7 +72,8 @@ LanguagesService, UserPermissionsSettings) ->
       Account.logout().$promise.then ->
         AccountService.resetAccount()
         $state.go 'login'
-        toastr.info 'You had been logged out.'
+        msg = $filter('translate')('APP.FRONTEND_MESSAGES.AUTHORIZATION.YOU_HAD_BEEN_LOGGED_OUT')
+        toastr.info msg
         return
       return
 
@@ -82,14 +83,16 @@ LanguagesService, UserPermissionsSettings) ->
       if angular.isUndefined(toState) or !('data' of toState) or !('access' of toState.data)
         if angular.isDefined(event)
           event.preventDefault()
-        toastr.warning 'Access undefined for this state'
+        msg = $filter('translate')('APP.FRONTEND_MESSAGES.AUTHORIZATION.ACCESS_UNDEFINED_FOR_THIS_STATE')
+        toastr.warning msg
 
         _kickUnauthorised _accessDeffered, event
       else
         if _authorizePageAccess(toState.data.access)
           _accessDeffered.resolve()
         else
-          toastr.error 'Seems like you don\'t have permissions to access that page.'
+          msg = $filter('translate')('APP.FRONTEND_MESSAGES.AUTHORIZATION.SEEMS_LIKE_YOU_DONT_HAVE_PERMISSIONS')
+          toastr.error msg
           _kickUnauthorised _accessDeffered, event
       return _accessDeffered.promise
 
