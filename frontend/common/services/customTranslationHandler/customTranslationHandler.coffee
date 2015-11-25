@@ -3,7 +3,7 @@
 # This module provide single service for reporting missing translations
 angular.module('translation.services.customTranslationHandler', [
   'pascalprecht.translate'
-  'angular-lodash'
+  'lodash'
 ])
 
 # Custom Translation Handler Service

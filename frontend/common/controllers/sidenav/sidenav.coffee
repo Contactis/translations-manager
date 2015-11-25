@@ -32,7 +32,7 @@ AccountService, AuthorizationService, CurrentProjectService) ->
     vm.currentProject = project
 
 
-  AccountService.hadBeenReloaded (account) ->
+  AccountService.hasBeenReloaded (account) ->
     vm.account = account
     vm.account.loggedIn = Account.isAuthenticated()
 

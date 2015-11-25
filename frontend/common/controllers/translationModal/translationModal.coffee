@@ -40,7 +40,6 @@ CurrentProjectService) ->
     _namespaceObject =
       parent_id: null
       namespace: namespace
-#TODO name - useless field?
       name: namespace
       projectId: project.id
     Namespace.create(_namespaceObject).$promise.then (success) ->

@@ -10,8 +10,8 @@ projectsAccounts = [
     projectId:  1
   }
   {
-    accountId:  4
-    projectId:  1
+    accountId:  3
+    projectId:  2
   }
   {
     accountId:  4

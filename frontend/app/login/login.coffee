@@ -21,7 +21,8 @@ angular.module('translation.pages.login', [
       access:       access.anon
 
 
-.controller 'LoginController', ($scope, $state, $http, Restangular, AuthorizationService, toastr) ->
+.controller 'LoginController', ($scope, $state, $http, $filter, $log, Restangular,
+AuthorizationService, toastr) ->
 
   $scope.rememberMe = true
 
@@ -42,19 +43,20 @@ angular.module('translation.pages.login', [
 
   $scope.login = ->
     AuthorizationService.login($scope.rememberMe, $scope.user.email, $scope.user.password).then (account) ->
-
-
       $state.go 'app.manager.dashboard'
-
-
-      toastr.success('Welcome!')
+      msg = $filter('translate')('APP.FRONTEND_MESSAGES.LOGIN.WELCOME')
+      toastr.success msg
     , (error) ->
-      toastr.error error
+      title = $filter('translate')('APP.FRONTEND_MESSAGES.LOGIN.LOGGING_ERROR')
+      msg = error.data.error.message
+      toastr.error msg, title
 
 
   $scope.register = ->
     if $scope.user.password != $scope.user.repeatPassword
-      toastr.warning 'Passwords don\'t match. Try again'
+      title = $filter('translate')('APP.FRONTEND_MESSAGES.LOGIN.REGISTRATION_ERROR')
+      msg = $filter('translate')('APP.FRONTEND_MESSAGES.LOGIN.PASSWORDS_DONT_MATCH')
+      toastr.warning msg, title
     else
       AuthorizationService.register
         email:      $scope.user.email
@@ -64,7 +66,9 @@ angular.module('translation.pages.login', [
         username:   $scope.user.username
       .then $scope.login
       , (error) ->
-        toastr.error error.data.error.message
+        title = $filter('translate')('APP.FRONTEND_MESSAGES.LOGIN.REGISTRATION_ERROR')
+        msg = error.data.error.message
+        toastr.error msg, title
         return
 
   $scope.sizes = [
