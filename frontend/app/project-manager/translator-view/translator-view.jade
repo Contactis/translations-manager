@@ -9,6 +9,7 @@ table.table.table-striped(search-watch-model="vm.query" st-safe-src="vm.tableDat
     tr(data-ng-repeat="singleRow in vm.displayedCollection")
       td {{singleRow.keyString}}
       td {{singleRow.translations[0].description}}
-        //input(type="text" data-ng-model="vm.translationKey.isPlural")
-      td {{singleRow.translations[0].translatedPhrase}}
+      td
+        tr-edit-table(translate-val="singleRow.translations[0]")
+
       td {{singleRow.description}}

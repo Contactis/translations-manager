@@ -1,11 +1,12 @@
 angular.module('translation.pages.translator-view', [
+  'translation.providers.userPermissionsSettings'
+  'translator.directive.trEditTable'
   'ui.router'
   'ngCookies'
   'data-table'
   'ngMessages'
   'ngAnimate'
   'lbServices'
-  'translation.providers.userPermissionsSettings'
   'ui.bootstrap'
 ])
 
@@ -49,7 +50,7 @@ $uibModal, Namespace, $http, CurrentProjectService) ->
             relation: 'translations'
             scope:
               where:
-                languageId: 1
+                languageId: response.defaultLanguageId
           }
           {
             relation: 'namespace'
@@ -64,30 +65,6 @@ $uibModal, Namespace, $http, CurrentProjectService) ->
       console.log "Problem with loading translation keys"
   , (error) ->
     console.log 'something went wrong!', error
-
-
-#  CurrentProjectService.getCurrentProject().then (response) ->
-#    Translation.find(
-#      filter:
-#        include:
-#          translationKey:
-#            "namespace"
-#        where:
-#          languageId: response.defaultLanguageId
-#
-#          translationKey:
-#            namespace:
-#              projectId: response.id
-#              projectId: 2
-#
-#    ).$promise.then (success)->
-#      vm.tableData = success
-#      vm.displayedCollection = [].concat(vm.tableData)
-#    , (error) ->
-#      console.log "Problem with loading translation keys"
-
-#  , (error) ->
-#    console.log 'something went wrong!', error
 
   return vm
 
