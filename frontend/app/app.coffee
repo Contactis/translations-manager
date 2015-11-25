@@ -50,8 +50,8 @@ translationApp = angular.module('translation', [
   'translation.controllers.translationModal'
 
   # Including directives
-  'translator.directive.trTopBar'
   'translator.directive.trDashboardTop'
+  'translator.directive.trEditTable'
 ])
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider,
