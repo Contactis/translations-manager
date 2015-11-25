@@ -93,6 +93,14 @@ angular.module 'translation.services.helper', [
     return [_commonArray, _diffArray]
 
 
+  # @public
+  # @method       _partitionGreaterArrayByParameter
+  # @param        {Array}   array1    array with objects
+  # @param        {Array}   array2    array with objects
+  # @param        {String}  equalKey  parameter key of object; It should be **unique**
+  # @description  This method takes arrays, find which one is bigger and then
+  #               compare it just like in `_partitionArrayByParameter` method
+  # @returns      {Array}
   _partitionGreaterArrayByParameter = (array1, array2, equalKey) ->
     if !angular.isArray(array1) or !angular.isArray(array2)
       throw new Error('Both parameters `array1` and `array2` must be Arrays')
