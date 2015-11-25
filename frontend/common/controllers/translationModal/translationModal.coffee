@@ -37,16 +37,16 @@ CurrentProjectService) ->
   vm.translation.updatedAt    = _currentDate
 
   _createNewNamespace = (namespace, project) ->
-      _namespaceObject =
-        parent_id: null
-        namespace: namespace
-        #TODO name - useless field?
-        name: namespace
-        projectId: project.id
-      Namespace.create(_namespaceObject).$promise.then (success) ->
-        _createNewTranslationKey(success.id, vm.translationKey, project)
-      , (error) ->
-        console.log 'error while saving namespace', error
+    _namespaceObject =
+      parent_id: null
+      namespace: namespace
+      #TODO name - useless field?
+      name: namespace
+      projectId: project.id
+    Namespace.create(_namespaceObject).$promise.then (success) ->
+      _createNewTranslationKey(success.id, vm.translationKey, project)
+    , (error) ->
+      console.log 'error while saving namespace', error
 
   _createNewTranslationKey = (namespaceId, translationKeyObject, project) ->
     translationKeyObject.namespaceId  = namespaceId
