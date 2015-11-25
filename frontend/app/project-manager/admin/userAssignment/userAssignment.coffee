@@ -94,6 +94,12 @@ ProjectAccountsResolver, CurrentProjectResolver, CurrentProjectAccountsResolver,
     _moveObject(vm.selectedUsersList, vm.availableAccounts, index)
     return
 
+
+  # @private
+  # @method       _getBuildedProjectAccountModel
+  # @description  Build Array of objects which can be used to save data to the
+  #               backend
+  # @returns      {Array}
   _getBuildedProjectAccountModel = () ->
     _tmpArray = []
     if not vm.selectedUsersList.length <= 0
@@ -108,55 +114,60 @@ ProjectAccountsResolver, CurrentProjectResolver, CurrentProjectAccountsResolver,
   # @private
   # @method       _removeAllRelatedEntities
   # @description  removing all related entities from database
+  # @returns      {Promise}
   _removeAllRelatedEntities = () ->
     _removingPromises = []
     _deferred = $q.defer()
 
     # TODO if not vm.selectedUsersList == vm.projectAccounts
     for x in vm.projectAccounts
-      $log.info "x", x.id
       _removingPromises.push ProjectAccount.deleteById({id: x.id}).$promise
 
     $q.all(_removingPromises).then (success) ->
-      _deferred.resolve success
+      msg = $filter('translate')('APP.FRONTEND_MESSAGES.USER_ASSIGNMENT.REMOVED_ENTITIES_SUCCESSFULLY')
+      _deferred.resolve msg
     , (e) ->
-      _deferred.reject e
+      msg = $filter('translate')('APP.FRONTEND_MESSAGES.USER_ASSIGNMENT.REMOVED_ENTITIES_FAILED')
+      _deferred.reject msg
+    return _deferred.promise
 
 
   # @private
   # @method       _savingAllNewEntities
   # @description  save all related entities to the database
+  # @returns      {Promise}
   _savingAllNewEntities = () ->
     _newPromises = []
     _deferred = $q.defer()
 
     list = _getBuildedProjectAccountModel() # generate array model for backend
-    $log.warn "list", list
     if list.length > 0
       for y in list
         _newPromises.push ProjectAccount.create(y).$promise
 
     $q.all().then (success) ->
-      _deferred.resolve success
+      msg = $filter('translate')('APP.FRONTEND_MESSAGES.SUCCESSFULLY_SAVED_THE_DATA')
+      _deferred.resolve msg
     , (error) ->
-      _deferred.reject error
+      msg = $filter('translate')('APP.FRONTEND_MESSAGES.ERROR_OCCURED_WHILE_SAVING_THE_DATA') +
+          ' ' + $filter('translate')('APP.FRONTEND_MESSAGES.TRY_AGAIN_LATER') +
+          ' Error detail:' + error
+      _deferred.reject msg
+    return _deferred.promise
 
 
   # @public
   # @method       vm.addToSelectedList
+  # @description  Removing and saving all related entities
   vm.saveSelectedUsers = () ->
     _removeAllRelatedEntities().then (response) ->
-      toastr.success "All related entities removed successfully"
+      toastr.success response
       _savingAllNewEntities().then (result) ->
-        msg = $filter('translate')('APP.FRONTEND_MESSAGES.SUCCESSFULLY_SAVED_THE_DATA')
-        toastr.success msg
+        toastr.success result
       , (resultError) ->
-        msg = $filter('translate')('APP.FRONTEND_MESSAGES.ERROR_OCCURED_WHILE_SAVING_THE_DATA') +
-          ' ' + $filter('translate')('APP.FRONTEND_MESSAGES.TRY_AGAIN_LATER') +
-          ' Error detail:' + resultError
-        toastr.success msg
+        toastr.success resultError
     , (responseError) ->
-      toastr.success "All related entities removed successfully"
+      toastr.success responseError
 
 
   return vm

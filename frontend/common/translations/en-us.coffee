@@ -85,6 +85,11 @@ translationApp.config( [
     'APP.FRONTEND_MESSAGES.LOGIN.LOGGING_ERROR':          'Logging error'
     'APP.FRONTEND_MESSAGES.LOGIN.PASSWORDS_DONT_MATCH':   'Passwords don\'t match. Try again'
 
+    # userAssignment
+    'APP.FRONTEND_MESSAGES.USER_ASSIGNMENT.REMOVED_ENTITIES_SUCCESSFULLY':
+      'All related entities removed successfully'
+    'APP.FRONTEND_MESSAGES.USER_ASSIGNMENT.REMOVED_ENTITIES_FAILED':
+      'Removing entities failed'
 
 
     # ## app/dashboard.jade
