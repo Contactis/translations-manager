@@ -1,3 +1,6 @@
+# # Programmer view
+
+# @module       translation.pages.programmer-view
 angular.module('translation.pages.programmer-view', [
   'ui.router'
   'ngCookies'
@@ -20,14 +23,30 @@ angular.module('translation.pages.programmer-view', [
     templateUrl:    'project-manager/programmer-view/programmer-view.tpl.html'
     data:
       access:       access.user
+    resolve:
+      TranslationKeysResolver: (TranslationKey) ->
+        TranslationKey.find
+          filter:
+            include: [
+              "translations": [
+                "language"
+                "modifiedBy"
+              ]
+              "project"
+              "namespace"
+            ]
+        .$promise
 
-.controller 'ProgrammerViewController', ($log, $cookies, $timeout, TranslationKey, $uibModal, Namespace, $http) ->
-
+.controller 'ProgrammerViewController', ($log, $http, $timeout, $cookies, $uibModal,
+TranslationKeysResolver, TranslationKey, Namespace) ->
   vm              = this
+
   vm.query        = ""
   vm.filters      = {}
   vm.contextMenu  = {}
   vm.tableData    = []
+
+  vm.tableData = TranslationKeysResolver
 
   $timeout () ->
     vm.contextMenu.name   = "Programmer"
@@ -39,32 +58,25 @@ angular.module('translation.pages.programmer-view', [
     ]
     return
 
-  TranslationKey.find(
-    filter:
-      include: [
-        "translations": [
-          "language"
-          "modifiedBy"
-        ]
-        "project"
-        "namespace"
-      ]
-  ).$promise.then (success)->
-    vm.tableData = success
-    vm.displayedCollection = [].concat(vm.tableData)
-  , (error) ->
-    console.log "Problem with loading translation keys"
+  # .then (success)->
+  #   vm.tableData = success
+  #   vm.displayedCollection = [].concat(vm.tableData)
+  #   $log.info "ZAŁADOWANO", success
+  # , (error) ->
+  #   $log.error "Problem with loading translation keys", error
+  #   msg = $('translate')('APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.LOADING_TRANSLATION_KEYS_FAILED')
+  #   toastr.error msg
 
 
 
   vm.open = ->
     $uibModal.open(
-      animation: true
-      templateUrl: 'templates/dialog/translation.tpl.html'
-      controller: 'TranslationModalController'
+      animation:    true
+      templateUrl:  'templates/dialog/addTranslationKey.tpl.html'
+      controller:   'AddTranslationKeyController'
       controllerAs: 'vm'
-      size: 'lg'
-      windowClass: 'center-modal'
+      size:         'lg'
+      windowClass:  'center-modal'
     )
 
   return vm
