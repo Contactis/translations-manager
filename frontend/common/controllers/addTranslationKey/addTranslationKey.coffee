@@ -9,7 +9,7 @@ angular.module('translation.controllers.translationModal', [
   'ui.bootstrap'
 ])
 
-.controller 'TranslationModalController', ($uibModalInstance, Translation, TranslationKey, Namespace,
+.controller 'AddTranslationKeyController', ($uibModalInstance, Translation, TranslationKey, Namespace,
 CurrentProjectService) ->
   vm  = this
 

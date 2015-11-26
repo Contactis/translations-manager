@@ -26,6 +26,7 @@ translationApp.config( [
     'GENERAL.SAVE':                       'Save'
     'GENERAL.SAVE_AND_CLOSE':             'Save and colose'
     'GENERAL.REMOVE':                     'Remove'
+    'GENERAL.CREATE':                     'Create'
     'GENERAL.CANCEL':                     'Cancel'
     'GENERAL.PENDING':                    'Pending'
     'GENERAL.LOADING':                    'Loading'
@@ -91,6 +92,30 @@ translationApp.config( [
     'APP.FRONTEND_MESSAGES.USER_ASSIGNMENT.REMOVED_ENTITIES_FAILED':
       'Removing entities failed'
 
+    # programming-view
+    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.LOADING_TRANSLATION_KEYS_FAILED':
+      'Problem with loading translation keys'
+
+
+    # ## dialogs
+
+    # ### common/templates/dialog/translation.jade
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.ADD_NEW_TRANSLATION_KEY':
+      'Add new translation key'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.KEY_INDEX_TYPE':
+      'Key index type'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.STRING':
+      'String'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL':
+      'Plural'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.NAMESPACE':
+      'Namespace'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.KEY_INDEX':
+      'Key index'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.DEFAULT_TRANSLATION':
+      'Default translation'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.CONTEXT_DESCRIPTION':
+      'Context description'
 
     # ## app/dashboard.jade
 
@@ -108,6 +133,10 @@ translationApp.config( [
     'APP.LOGIN.REMEMBER_ME':                                  'Remember me'
     'APP.LOGIN.LOGIN_WITH_YOUR_TRANSLATION_MANAGER_ACCOUNT':  'Login with your translation manager account'
     'APP.LOGIN.USERNAME':                                     'Username'
+
+
+    # ## app/project-manager/programmer-view/programmer-view.coffee
+    'APP.PROJECT_MANAGER.PROGRAMMER_VIEW.':     'Nothing yet'
 
 
     # ## app/project-manager/admin/userAssignment.jade

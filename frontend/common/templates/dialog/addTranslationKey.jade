@@ -1,0 +1,35 @@
+form()
+  .modal-header
+    h3 {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.ADD_NEW_TRANSLATION_KEY' | translate }}
+
+  .modal-body
+    .row
+      .col-sm-6(style="margin:0")
+        .form-group
+          label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.KEY_INDEX_TYPE' | translate }}
+          select.form-control(data-ng-model="vm.translationKey.isPlural")
+            option(value="false") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.STRING' | translate }}
+            option(value="true") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL' | translate }}
+
+    .form-group
+      label(for="namespaceInput") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.NAMESPACE' | translate }}
+      input.form-control(id="namespaceInput" type="text" placeholder="namespace" data-ng-model="vm.namespace" uib-typeahead="singleNamespace.namespace for singleNamespace in vm.getNamespaces($viewValue)")
+
+    .form-group
+      label(for="keyString") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.KEY_INDEX' | translate }}
+      input.form-control(id ="keyString" type="text" placeholder="key" data-ng-model="vm.translationKey.keyString")
+
+    .form-group(data-ng-show="vm.translationKey.isPlural")
+      label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL' | translate }}
+      input.form-control(type="text" placeholder="plural")
+
+    .form-group(data-ng-show="!vm.translationKey.isPlural")
+      label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.DEFAULT_TRANSLATION' | translate }}
+      input.form-control(type="text" placeholder="default translation" data-ng-model="vm.translation.translatedPhrase")
+    .form-group
+      label.control-label(for="descriptionInput" data-ng-model="vm.translation.description") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.CONTEXT_DESCRIPTION' | translate }}
+      textarea.form-control(id="descriptionInput" rows="3")
+
+  .modal-footer
+    button.btn.btn-success.pull-right.margin-right-5(type="button" ng-click="vm.ok()") {{ 'GENERAL.CREATE' | translate }}
+    button.btn.btn-warning.pull-right.margin-right-15(type="button" ng-click="vm.cancel()") {{ 'GENERAL.CANCEL' | translate }}
