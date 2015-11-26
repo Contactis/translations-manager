@@ -50,7 +50,7 @@ CurrentProjectService) ->
   _createNewTranslationKey = (namespaceId, translationKeyObject, project) ->
     translationKeyObject.namespaceId  = namespaceId
     # TODO Do we really need this field since it's connected with namespace?
-    translationKeyObject.projectId    = 1
+    translationKeyObject.projectId    = project.id
     TranslationKey.create(translationKeyObject).$promise.then (success) ->
       _createNewTranslation(success.id, vm.translation, project)
     , (error) ->
