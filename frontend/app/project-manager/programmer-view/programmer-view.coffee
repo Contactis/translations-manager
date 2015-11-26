@@ -5,11 +5,13 @@ angular.module('translation.pages.programmer-view', [
   'ui.router'
   'ngCookies'
   'data-table'
+  'toastr'
   'ngMessages'
   'ngAnimate'
+  'ui.bootstrap'
   'lbServices'
   'translation.providers.userPermissionsSettings'
-  'ui.bootstrap'
+  'translation.directives.trWaitingSpinnerSpan'
 ])
 
 .config ($stateProvider, UserPermissionsSettingsProvider) ->
@@ -37,16 +39,17 @@ angular.module('translation.pages.programmer-view', [
             ]
         .$promise
 
-.controller 'ProgrammerViewController', ($log, $http, $timeout, $cookies, $uibModal,
+.controller 'ProgrammerViewController', ($log, $http, $filter, $timeout, toastr, $cookies, $uibModal,
 TranslationKeysResolver, TranslationKey, Namespace) ->
-  vm              = this
+  vm = this
 
-  vm.query        = ""
-  vm.filters      = {}
-  vm.contextMenu  = {}
-  vm.tableData    = []
+  vm.pending                    = true
+  vm.query                      = ""
+  vm.filters                    = {}
+  vm.contextMenu                = {}
+  vm.tableData                  = TranslationKeysResolver
+  vm.defaultLanguageNativeName  = "English (English)"
 
-  vm.tableData = TranslationKeysResolver
 
   $timeout () ->
     vm.contextMenu.name   = "Programmer"
@@ -58,26 +61,20 @@ TranslationKeysResolver, TranslationKey, Namespace) ->
     ]
     return
 
-  # .then (success)->
-  #   vm.tableData = success
-  #   vm.displayedCollection = [].concat(vm.tableData)
-  #   $log.info "ZAŁADOWANO", success
-  # , (error) ->
-  #   $log.error "Problem with loading translation keys", error
-  #   msg = $('translate')('APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.LOADING_TRANSLATION_KEYS_FAILED')
-  #   toastr.error msg
-
-
-
-  vm.open = ->
-    $uibModal.open(
+  vm.addNewKey = ->
+    $uibModal.open
       animation:    true
       templateUrl:  'templates/dialog/addTranslationKey.tpl.html'
       controller:   'AddTranslationKeyController'
       controllerAs: 'vm'
       size:         'lg'
       windowClass:  'center-modal'
-    )
+
+
+
+  vm.editRow = (translationId) ->
+    toastr.info $filter('translate')('APP.FRONTEND_MESSAGES.THIS_FEATURE_IS_NOT_YET_READY')
+    $log.info "opened", translationId
 
   return vm
 

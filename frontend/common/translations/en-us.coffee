@@ -31,6 +31,7 @@ translationApp.config( [
     'GENERAL.PENDING':                    'Pending'
     'GENERAL.LOADING':                    'Loading'
     'GENERAL.SETTINGS':                   'Settings'
+    'GENERAL.MODIFY':                     'Modify'
     'GENERAL.VERIFIED':                   'Verified'
     'GENERAL.VERIFY':                     'Verify'
     'GENERAL.NOT_VERIFIED':               'Not verified'
@@ -95,6 +96,9 @@ translationApp.config( [
     # programming-view
     'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.LOADING_TRANSLATION_KEYS_FAILED':
       'Problem with loading translation keys'
+    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.INDEX_KEY_NAME':       'Index key name'
+    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.BASIC_TRANSLATION':    'Basic translation'
+    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.CONTEXT_DESCRIPTION':  'Context description'
 
 
     # ## dialogs
