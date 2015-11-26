@@ -42,18 +42,17 @@ $uibModal, Namespace, $http, CurrentProjectService) ->
     return
   CurrentProjectService.getCurrentProject().then (response) ->
 
-
     TranslationKey.find(
       filter:
         include:[
           {
+            relation: 'namespace'
+          }
+          {
             relation: 'translations'
             scope:
               where:
-                languageId: response.defaultLanguageId
-          }
-          {
-            relation: 'namespace'
+                or:[{languageId:response.defaultLanguageId}, {languageId:3}]
           }
         ]
         where:
