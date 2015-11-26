@@ -1,0 +1,6 @@
+{
+  "translation-manager"
+  "dependencies": {
+    "tr-angular-exporter":   ">0.0.0"
+  }
+}
