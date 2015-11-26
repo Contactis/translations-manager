@@ -26,7 +26,7 @@ CurrentProjectService) ->
 
   vm.translationKey            = {}
   vm.translationKey.keyString  = ''
-  vm.translationKey.isPlural   = false
+  vm.translationKey.isPlural   = 'string'
 
 
 
@@ -68,11 +68,11 @@ CurrentProjectService) ->
       console.log 'error while saving translation'
 
   vm.ok = ->
-    Namespace.find(
+    Namespace.find
       filter:
         where:
           namespace: vm.namespace
-    ).$promise.then (success)->
+    .$promise.then (success)->
 
       CurrentProjectService.getCurrentProject().then (response) ->
         if success.length is 1

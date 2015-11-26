@@ -12,16 +12,15 @@
             tbody
               tr(data-ng-repeat="singleRow in vm.displayedCollection" data-ng-class="{'': singleRow.plural}")
                 td {{singleRow.keyString}}
-                //- TODO pass translation param
-                td {{singleRow.project.description}}
-                td {{singleRow.description}}
+                td {{singleRow.translations[0].translatedPhrase}}
+                td {{singleRow.translations[0].description}}
                 td
                   button.btn.btn-xs.btn-info(data-ng-click="vm.editRow(singleRow.id)") {{ 'GENERAL.EDIT' | translate }}
 
         button.addButtonPosition.btn.btn-primary.btn-circle(type="button" data-ng-click="vm.addNewKey()")
           i.fa.fa-plus
 
-    h2 Debug variables
-    pre
-      | vm.tableData {{vm.tableData|json}}
+    //- h2 Debug variables
+    //- pre
+    //-   | vm.tableData {{vm.tableData|json}}
 
