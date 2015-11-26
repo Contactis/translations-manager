@@ -42,7 +42,7 @@ $uibModal, Namespace, $http, CurrentProjectService) ->
     return
   CurrentProjectService.getCurrentProject().then (response) ->
 
-    TranslationKey.find(
+    TranslationKey.find
       filter:
         include:[
           {
@@ -57,7 +57,7 @@ $uibModal, Namespace, $http, CurrentProjectService) ->
         ]
         where:
           projectId: response.id
-    ).$promise.then (success)->
+    .$promise.then (success)->
       vm.tableData = success
       vm.displayedCollection = [].concat(vm.tableData)
     , (error) ->
