@@ -8,8 +8,8 @@ form()
         .form-group
           label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.KEY_INDEX_TYPE' | translate }}
           select.form-control(data-ng-model="vm.translationKey.isPlural")
-            option(value="false") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.STRING' | translate }}
-            option(value="true") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL' | translate }}
+            option(value="string") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.STRING' | translate }}
+            option(value="plural") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL' | translate }}
 
     .form-group
       label(for="namespaceInput") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.NAMESPACE' | translate }}
@@ -31,5 +31,5 @@ form()
       textarea.form-control(id="descriptionInput" rows="3")
 
   .modal-footer
-    button.btn.btn-success.pull-right.margin-right-5(type="button" ng-click="vm.ok()") {{ 'GENERAL.CREATE' | translate }}
+    button.btn.btn-success.pull-right(type="button" ng-click="vm.ok()") {{ 'GENERAL.CREATE' | translate }}
     button.btn.btn-warning.pull-right.margin-right-15(type="button" ng-click="vm.cancel()") {{ 'GENERAL.CANCEL' | translate }}
