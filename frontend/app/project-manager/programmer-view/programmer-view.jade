@@ -1,15 +1,27 @@
-button.addButtonPosition.btn.btn-primary.btn-circle(type="button" data-ng-click="vm.open()")
-  i.fa.fa-plus
-table.table.table-striped(search-watch-model="vm.query" st-safe-src="vm.tableData" st-table="vm.displayedCollection")
-    thead
-        tr
-            th(st-sort="vm.keyString") Index key name
-            th Basic translation: English (English)
-            th Context Description
-    tbody
-        tr(data-ng-repeat="singleRow in vm.displayedCollection")
-            td {{singleRow.keyString}}
-            //TODO pass translation param
-            td {{singleRow.project.description}}
-            td {{singleRow.description}}
+.row
+  .col-md-12
+    .card
+      .card-body
+        table.table.table-striped(search-watch-model="vm.query" st-safe-src="vm.tableData" st-table="vm.displayedCollection")
+          thead
+            tr
+              th(st-sort="vm.keyString") {{ 'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.INDEX_KEY_NAME' | translate }}
+              th {{ 'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.BASIC_TRANSLATION' | translate }}: {{ vm.defaultLanguageNativeName }}
+              th {{ 'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.CONTEXT_DESCRIPTION' | translate }}
+              th {{ 'GENERAL.MODIFY' | translate }}
+            tbody
+              tr(data-ng-repeat="singleRow in vm.displayedCollection" data-ng-class="{'': singleRow.plural}")
+                td {{singleRow.keyString}}
+                //- TODO pass translation param
+                td {{singleRow.project.description}}
+                td {{singleRow.description}}
+                td
+                  button.btn.btn-xs.btn-info(data-ng-click="vm.editRow(singleRow.id)") {{ 'GENERAL.EDIT' | translate }}
+
+        button.addButtonPosition.btn.btn-primary.btn-circle(type="button" data-ng-click="vm.addNewKey()")
+          i.fa.fa-plus
+
+    h2 Debug variables
+    pre
+      | vm.tableData {{vm.tableData|json}}
 
