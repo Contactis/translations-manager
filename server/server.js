@@ -3,7 +3,7 @@ var boot        = require('loopback-boot');
 var chalk       = require('chalk');
 var moment      = require('moment');
 var argv        = require('yargs').argv;
-var bodyParser  = require('body-parser')
+var bodyParser  = require('body-parser');
 
 var app = module.exports = loopback();
 
@@ -20,17 +20,15 @@ app.start = function() {
   return app.listen(function() {
     app.emit('started');
 
-      if (typeof argv.silent == "undefined") {
+      if (typeof argv.silent === 'undefined') {
           var baseUrl = app.get('url').replace(/\/$/, '');
 
           if (app.get('loopback-component-explorer')) {
-              var explorerPath = app.get('loopback-component-explorer').mountPath;
-              console.log("[" + (chalk.gray(moment().format('HH:mm:ss'))) + "] " + (chalk.green('[swagger] Swagger is accessible at %s%s')), chalk.blue(baseUrl), chalk.blue(explorerPath));
+            var explorerPath = app.get('loopback-component-explorer').mountPath;
+            console.log('[' + (chalk.gray(moment().format('HH:mm:ss'))) + '] ' + (chalk.green('[swagger] Swagger is accessible at %s%s')), chalk.blue(baseUrl), chalk.blue(explorerPath));
           }
 
-          console.log("[" + (chalk.gray(moment().format('HH:mm:ss'))) + "] " + (chalk.green('[express] Translation Manager backend is running at')) + " " + (chalk.blue(baseUrl)));
-
-
+          console.log('[' + (chalk.gray(moment().format('HH:mm:ss'))) + '] ' + (chalk.green('[express] Translation Manager backend is running at')) + ' ' + (chalk.blue(baseUrl)));
       }
   });
 };
