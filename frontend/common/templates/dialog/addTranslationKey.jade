@@ -19,11 +19,11 @@ form()
       label(for="keyString") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.KEY_INDEX' | translate }}
       input.form-control(id ="keyString" type="text" placeholder="key" data-ng-model="vm.translationKey.keyString")
 
-    .form-group(data-ng-show="vm.translationKey.isPlural")
+    .form-group(data-ng-show="vm.translationKey.isPlural == 'plural' ")
       label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL' | translate }}
       input.form-control(type="text" placeholder="plural")
 
-    .form-group(data-ng-show="!vm.translationKey.isPlural")
+    .form-group(data-ng-show="vm.translationKey.isPlural == 'string' ")
       label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.DEFAULT_TRANSLATION' | translate }}
       input.form-control(type="text" placeholder="default translation" data-ng-model="vm.translation.translatedPhrase")
     .form-group
