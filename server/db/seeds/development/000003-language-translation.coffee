@@ -15,15 +15,19 @@ languagesTranslation = [
   }
   {
     languageId: 2
-    pluralForm: 5
-  }
-  {
-    languageId: 2
-    pluralForm: 7
+    pluralForm: 9
   }
   {
     languageId: 3
     pluralForm: 1
+  }
+  {
+    languageId: 3
+    pluralForm: 5
+  }
+  {
+    languageId: 3
+    pluralForm: 7
   }
   {
     languageId: 3
