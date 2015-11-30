@@ -1,6 +1,6 @@
 form()
   .modal-header
-    h3 {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.ADD_NEW_TRANSLATION_KEY' | translate }} ({{vm.currentProject.}})
+    h3 {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.ADD_NEW_TRANSLATION_KEY' | translate }} ({{vm.currentProject.defaultLanguage.nameNative}})
 
   tr-waiting-spinner-div(is-pending="vm.isPending")
 
@@ -11,7 +11,7 @@ form()
           label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.KEY_INDEX_TYPE' | translate }}
           select.form-control(data-ng-model="vm.translationKey.isPlural")
             option(value="string") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.STRING' | translate }}
-            option(value="plural") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL' | translate }}
+            option(value="plural") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL_FORMS' | translate }}
 
     .form-group
       label(for="namespaceInput") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.NAMESPACE' | translate }}
@@ -22,21 +22,28 @@ form()
       input.form-control(id ="keyString" type="text" placeholder="ex: edit my account" data-ng-model="vm.translationKey.keyString")
 
     .form-group(data-ng-show="vm.isPlural()")
-      label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL' | translate }}
+      label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL_FORMS' | translate }} ({{vm.currentProject.defaultLanguage.nameNative}})
       .row
-        .col-sm-6
-          div(data-ng-repeat="n in vm.plurals")
-            label plural {{n.pluralForm}}
-            input.form-control(type="text" data-ng-model="n.pluralTranslationString" placeholder="plural string for {{n.pluralForm}}")
+        .col-sm-6(style="margin:0")
+          .form-group(data-ng-repeat="n in vm.plurals")
+            label {{vm.getNameOfPlural(n.pluralForm)}}
+            input.form-control(type="text" data-ng-model="n.pluralTranslationString" placeholder="")
 
 
     .form-group(data-ng-show="!vm.isPlural()")
-      label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.DEFAULT_TRANSLATION' | translate }}
-      input.form-control(type="text" placeholder="ex: translation string" data-ng-model="vm.translation.translatedPhrase")
+      label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.DEFAULT_TRANSLATION' | translate }} ({{vm.currentProject.defaultLanguage.nameNative}})
+      input.form-control(type="text" placeholder="" data-ng-model="vm.translation.translatedPhrase")
+
+    .form-group
+      label.control-label {{'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.LIVE_PREVIEW_RESULT' | translate }}
+      .panel.panel-warning
+        .panel-body {{ 'APP.FRONTEND_MESSAGES.THIS_FEATURE_IS_NOT_YET_READY' |  translate }}
+
 
     .form-group
       label.control-label(for="descriptionInput" data-ng-model="vm.translation.description") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.CONTEXT_DESCRIPTION' | translate }}
       textarea.form-control(id="descriptionInput" rows="3" placeholder="Simple description better describing current index key for translator if necessary")
+
 
   .modal-footer
     button.btn.btn-success.pull-right(type="button" ng-click="vm.saveTranslationKey()") {{ 'GENERAL.CREATE' | translate }}

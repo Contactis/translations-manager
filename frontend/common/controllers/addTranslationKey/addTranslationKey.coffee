@@ -10,11 +10,12 @@ angular.module('translation.controllers.addTranslationKey', [
   'lbServices'
   'ui.bootstrap'
   'translation.providers.userPermissionsSettings'
+  'translation.services.plural'
   'translation.directives.trWaitingSpinnerDiv'
 ])
 
 .controller 'AddTranslationKeyController', ($timeout, $log, $uibModalInstance, Translation, LanguageTranslation,
-TranslationKey, Namespace, CurrentProjectService) ->
+TranslationKey, Namespace, CurrentProjectService, PluralService) ->
   vm  = this
 
   _currentDate                  = new Date()
@@ -48,6 +49,7 @@ TranslationKey, Namespace, CurrentProjectService) ->
   , (errorCurrentProject) ->
     $log.error "error during retriving current project"
     vm.isPending = false
+
 
   # @public
   # @method       vm.getNamespaces
@@ -136,5 +138,8 @@ TranslationKey, Namespace, CurrentProjectService) ->
   vm.cancel = ->
     $uibModalInstance.close()
 
+
+  vm.getNameOfPlural = (id) ->
+    return PluralService.getPlural(id).name
 
   return vm
