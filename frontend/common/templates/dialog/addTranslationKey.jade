@@ -1,37 +1,42 @@
 form()
   .modal-header
-    h3 {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.ADD_NEW_TRANSLATION_KEY' | translate }} ({{vm.currentProject.defaultLanguage.nameNative}})
+    h3 {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.ADD_NEW_TRANSLATION_KEY' | translate }} ({{vm.meta.projectLanguage}})
 
   tr-waiting-spinner-div(is-pending="vm.isPending")
 
   .modal-body(data-ng-hide="vm.isPending")
     .row
-      .col-sm-6(style="margin:0")
+      .col-sm-4(style="margin:0")
         .form-group
           label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.KEY_INDEX_TYPE' | translate }}
           select.form-control(data-ng-model="vm.translationKey.isPlural")
             option(value="string") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.STRING' | translate }}
             option(value="plural") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL_FORMS' | translate }}
+    .row
+      .col-sm-6(style="margin:0")
+        .form-group
+          label(for="namespaceInput") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.NAMESPACE' | translate }}
+          input.form-control(id="namespaceInput" type="text" placeholder="ex: dashboard.account" data-ng-model="vm.namespace" uib-typeahead="singleNamespace.namespace for singleNamespace in vm.getNamespaces($viewValue)" autocomplete="off")
 
-    .form-group
-      label(for="namespaceInput") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.NAMESPACE' | translate }}
-      input.form-control(id="namespaceInput" type="text" placeholder="ex: dashboard.account" data-ng-model="vm.namespace" uib-typeahead="singleNamespace.namespace for singleNamespace in vm.getNamespaces($viewValue)")
+      .col-sm-6(style="margin:0")
+        .form-group
+          label(for="keyString") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.KEY_INDEX' | translate }}
+          input.form-control(id ="keyString" type="text" placeholder="ex: edit my account" data-ng-model="vm.translationKey.keyString")
 
-    .form-group
-      label(for="keyString") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.KEY_INDEX' | translate }}
-      input.form-control(id ="keyString" type="text" placeholder="ex: edit my account" data-ng-model="vm.translationKey.keyString")
 
     .form-group(data-ng-show="vm.isPlural()")
-      label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL_FORMS' | translate }} ({{vm.currentProject.defaultLanguage.nameNative}})
+      label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL_FORMS' | translate }} ({{vm.meta.projectLanguage}})
+      .panel.panel-danger(data-ng-show="vm.isPlural()")
+        .panel-body Not working for plurals yet. Yes, we are currently working on it ;)
       .row
-        .col-sm-6(style="margin:0")
-          .form-group(data-ng-repeat="n in vm.plurals")
+        .col-sm-12(style="margin:0; float: left")
+          .form-group.col-sm-6(data-ng-repeat="n in vm.plurals")
             label {{vm.getNameOfPlural(n.pluralForm)}}
             input.form-control(type="text" data-ng-model="n.pluralTranslationString" placeholder="")
 
     .form-group(data-ng-show="!vm.isPlural()")
-      label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.DEFAULT_TRANSLATION' | translate }} ({{vm.currentProject.defaultLanguage.nameNative}})
-      input.form-control(type="text" placeholder="" data-ng-model="vm.translation.translatedPhrase")
+      label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.DEFAULT_TRANSLATION' | translate }} ({{vm.meta.projectLanguage}})
+      input.form-control(type="text" placeholder="How should sound a translation ({{vm.meta.projectLanguage}})" data-ng-model="vm.translation.translatedPhrase")
 
     //- TODO to add this feature we need create service with naming/case conventions https://en.wikipedia.org/wiki/Naming_convention_(programming)
     .form-group

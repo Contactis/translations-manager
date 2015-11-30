@@ -38,6 +38,8 @@ CurrentProjectService, AccountService, PluralService) ->
     lastModifiedBy: AccountService.getData('id')
   vm.plurals        = null
   vm.currentProject = {}
+  vm.meta =
+    projectLanguage: ""
 
 
   if $cookies.get(_cookieName)
@@ -57,6 +59,8 @@ CurrentProjectService, AccountService, PluralService) ->
   CurrentProjectService.getCurrentProject().then (responseCurrentProject) ->
     $log.info "CurrentProjectService", responseCurrentProject
     vm.currentProject = responseCurrentProject
+    vm.meta.projectLanguage = vm.currentProject.defaultLanguage.nameNative + ', ' + \
+      vm.currentProject.defaultLanguage.ietfCode
     LanguageTranslation.find
       filter:
         where:

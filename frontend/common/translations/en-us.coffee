@@ -97,9 +97,10 @@ translationApp.config( [
     # programming-view
     'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.LOADING_TRANSLATION_KEYS_FAILED':
       'Problem with loading translation keys'
-    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.INDEX_KEY_NAME':       'Index key name'
-    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.BASIC_TRANSLATION':    'Basic translation'
-    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.CONTEXT_DESCRIPTION':  'Context description'
+    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.INDEX_KEY_NAME':           'Index key name'
+    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.BASIC_TRANSLATION':        'Basic translation'
+    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.CONTEXT_DESCRIPTION':      'Context description'
+    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.ADD_NEW_TRANSLATION_KEY':  'Add new translation key'
 
 
     # ## dialogs
