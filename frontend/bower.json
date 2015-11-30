@@ -24,7 +24,6 @@
     "angular-translate-interpolation-messageformat": "~2.8.1",
     "angular-ui-router": "~0.2.15",
     "messageformat": "~0.1.8",
-    "restangular": "~1.5.1",
     "angular-moment": "~0.10.3",
     "bootstrap-sass": "~3.3.5",
     "jquery": "~2.1.4",

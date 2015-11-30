@@ -3,7 +3,6 @@ translationApp = angular.module('translation', [
   'ui.router'
   'pascalprecht.translate'
   'tmh.dynamicLocale'
-  'restangular'
   'ngAnimate'
   'ngAria'
   'ui.bootstrap'
@@ -55,7 +54,7 @@ translationApp = angular.module('translation', [
 ])
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider,
-$translateProvider, tmhDynamicLocaleProvider, RestangularProvider, toastrConfig) ->
+$translateProvider, tmhDynamicLocaleProvider, toastrConfig) ->
 
   $stateProvider
   .state 'app',
@@ -78,9 +77,6 @@ $translateProvider, tmhDynamicLocaleProvider, RestangularProvider, toastrConfig)
     .when('/', '/login')
     .otherwise('/404')
 
-
-
-  RestangularProvider.setBaseUrl '/api'
 
   #$locationProvider.html5Mode(true)
 

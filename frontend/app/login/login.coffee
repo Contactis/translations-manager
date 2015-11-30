@@ -2,7 +2,6 @@ angular.module('translation.pages.login', [
   'ui.router'
   'pascalprecht.translate'
   'ngCookies'
-  'restangular'
   'toastr'
   'translation.services.account'
   'translation.services.authorization'
@@ -21,7 +20,7 @@ angular.module('translation.pages.login', [
       access:       access.anon
 
 
-.controller 'LoginController', ($scope, $state, $http, $filter, $log, Restangular,
+.controller 'LoginController', ($scope, $state, $http, $filter, $log,
 AuthorizationService, toastr) ->
 
   $scope.rememberMe = true
