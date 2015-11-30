@@ -47,7 +47,7 @@ translationApp = angular.module('translation', [
 
   # Including controllers
   'translation.controllers.sidenav'
-  'translation.controllers.translationModal'
+  'translation.controllers.addTranslationKey'
 
   # Including directives
   'translator.directive.trTopBar'

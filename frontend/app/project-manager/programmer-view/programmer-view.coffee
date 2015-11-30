@@ -61,6 +61,8 @@ TranslationKeysResolver, TranslationKey, Namespace) ->
     ]
     return
 
+  # @method       vm.addNewKey
+  # @description  Open modal with adding new index key form
   vm.addNewKey = ->
     $uibModal.open
       animation:    true

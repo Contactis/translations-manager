@@ -224,5 +224,6 @@ translationApp.config( [
     'APP.ADMIN.PROJECT_SETTINGS.SECTION_WORKFLOW_GENERAL_DESCRIPTION':
       'All stuff related to building translations'
 
+    # common/directives/trWaitingSpinnerDiv/trWaitingSpinnerDiv.jade
   })
 ])
