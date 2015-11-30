@@ -28,6 +28,7 @@ translationApp.config( [
     'GENERAL.REMOVE':                     'Remove'
     'GENERAL.CREATE':                     'Create'
     'GENERAL.CANCEL':                     'Cancel'
+    'GENERAL.CLEAN_FORM':                 'Clean form'
     'GENERAL.PENDING':                    'Pending'
     'GENERAL.LOADING':                    'Loading'
     'GENERAL.SETTINGS':                   'Settings'

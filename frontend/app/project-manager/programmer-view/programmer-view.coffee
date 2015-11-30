@@ -38,9 +38,13 @@ angular.module('translation.pages.programmer-view', [
               "namespace"
             ]
         .$promise
+      CurrentProjectResolver:  (CurrentProjectService) ->
+        return CurrentProjectService.getCurrentProject()
 
-.controller 'ProgrammerViewController', ($log, $http, $filter, $timeout, toastr, $cookies, $uibModal,
-TranslationKeysResolver, TranslationKey, Namespace) ->
+.controller 'ProgrammerViewController', ($rootScope, $scope, $log, $http, $filter, $timeout, toastr,
+$cookies, $uibModal, TranslationKeysResolver, CurrentProjectResolver, TranslationKey, Namespace) ->
+# $rootScope is used for $on object which listen to $emit/$broadcast
+# $scope is used for $watch
   vm = this
 
   vm.pending                    = true
@@ -48,18 +52,33 @@ TranslationKeysResolver, TranslationKey, Namespace) ->
   vm.filters                    = {}
   vm.contextMenu                = {}
   vm.tableData                  = TranslationKeysResolver
-  vm.defaultLanguageNativeName  = "English (English)"
+  vm.currentProject             = CurrentProjectResolver
 
 
-  $timeout () ->
-    vm.contextMenu.name   = "Programmer"
-    vm.contextMenu.links  = [
-      {
-        name: "Export selected to..."
-        method: "exportSelectedTo()"
-      }
-    ]
-    return
+  # @private
+  # @method       _reloadList
+  # @description  Reloading programmer list of translations keys
+  _reloadList = ->
+    TranslationKey.find
+      filter:
+        include: [
+          "translations": [
+            "language"
+            "modifiedBy"
+          ]
+          "project"
+          "namespace"
+        ]
+    .$promise.then (success) ->
+      $log.info "programmer list reload successfully"
+      vm.tableData = success
+      return
+    , (error) ->
+      toastr.warning "List could not be updated. Please realod page again."
+      return
+
+
+
 
   # @method       vm.addNewKey
   # @description  Open modal with adding new index key form
@@ -73,10 +92,15 @@ TranslationKeysResolver, TranslationKey, Namespace) ->
       windowClass:  'center-modal'
 
 
-
   vm.editRow = (translationId) ->
     toastr.info $filter('translate')('APP.FRONTEND_MESSAGES.THIS_FEATURE_IS_NOT_YET_READY')
     $log.info "opened", translationId
+
+
+  $rootScope.$on 'reloadProgrammerTranslationList', (event, data) ->
+    $log.info "reloadProgrammerTranslationList"
+    _reloadList()
+
 
   return vm
 

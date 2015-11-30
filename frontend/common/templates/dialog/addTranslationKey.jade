@@ -29,28 +29,27 @@ form()
             label {{vm.getNameOfPlural(n.pluralForm)}}
             input.form-control(type="text" data-ng-model="n.pluralTranslationString" placeholder="")
 
-
     .form-group(data-ng-show="!vm.isPlural()")
       label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.DEFAULT_TRANSLATION' | translate }} ({{vm.currentProject.defaultLanguage.nameNative}})
       input.form-control(type="text" placeholder="" data-ng-model="vm.translation.translatedPhrase")
 
+    //- TODO to add this feature we need create service with naming/case conventions https://en.wikipedia.org/wiki/Naming_convention_(programming)
     .form-group
       label.control-label {{'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.LIVE_PREVIEW_RESULT' | translate }}
       .panel.panel-warning
         .panel-body {{ 'APP.FRONTEND_MESSAGES.THIS_FEATURE_IS_NOT_YET_READY' |  translate }}
 
-
     .form-group
-      label.control-label(for="descriptionInput" data-ng-model="vm.translation.description") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.CONTEXT_DESCRIPTION' | translate }}
-      textarea.form-control(id="descriptionInput" rows="3" placeholder="Simple description better describing current index key for translator if necessary")
-
+      label.control-label(for="descriptionInput") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.CONTEXT_DESCRIPTION' | translate }}
+      textarea.form-control(id="descriptionInput" data-ng-model="vm.translation.description" rows="2" placeholder="Simple description better describing current index key for translator if necessary")
 
   .modal-footer
     button.btn.btn-success.pull-right(type="button" ng-click="vm.saveTranslationKey()") {{ 'GENERAL.CREATE' | translate }}
-    button.btn.btn-warning.pull-right.margin-right-15(type="button" ng-click="vm.cancel()") {{ 'GENERAL.CANCEL' | translate }}
+    button.btn.btn-info.pull-right.margin-right-15(type="button" ng-click="vm.cleanForm()") {{ 'GENERAL.CLEAN_FORM' | translate }}
+    button.btn.btn-warning.pull-right(type="button" ng-click="vm.cancel()") {{ 'GENERAL.CANCEL' | translate }}
 
-  h2 Debug variables
-  pre
-    | vm.isPending {{vm.isPending|json}}
-    | vm.currentProject {{vm.currentProject|json}}
-    | vm.plurals {{vm.plurals|json}}
+  //- h2 Debug variables
+  //- pre
+  //-   | vm.isPending {{vm.isPending|json}}
+  //-   | vm.currentProject {{vm.currentProject|json}}
+  //-   | vm.plurals {{vm.plurals|json}}

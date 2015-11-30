@@ -6,8 +6,8 @@
           thead
             tr
               th(st-sort="vm.keyString") {{ 'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.INDEX_KEY_NAME' | translate }}
-              th {{ 'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.BASIC_TRANSLATION' | translate }}: {{ vm.defaultLanguageNativeName }}
-              th {{ 'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.CONTEXT_DESCRIPTION' | translate }}
+              th {{ 'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.BASIC_TRANSLATION' | translate }} ({{ vm.currentProject.defaultLanguage.nameNative }})
+              th {{ 'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.CONTEXT_DESCRIPTION' | translate }} ({{ vm.currentProject.defaultLanguage.nameNative }})
               th {{ 'GENERAL.MODIFY' | translate }}
             tbody
               tr(data-ng-repeat="singleRow in vm.displayedCollection" data-ng-class="{'': singleRow.plural}")
@@ -22,5 +22,5 @@
 
     //- h2 Debug variables
     //- pre
+    //-   | vm.currentProject {{vm.currentProject|json}}
     //-   | vm.tableData {{vm.tableData|json}}
-
