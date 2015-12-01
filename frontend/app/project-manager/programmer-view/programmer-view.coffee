@@ -32,8 +32,9 @@ angular.module('translation.pages.programmer-view', [
             include: [
               "translations": [
                 "language"
-                "modifiedBy"
-              ]
+                "lastModifiedBy"
+                "statusId"
+              ],
               "project"
               "namespace"
             ]
