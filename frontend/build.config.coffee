@@ -77,7 +77,6 @@ module.exports =
       'frontend/vendor/angular-aria/angular-aria.min.js'
       'frontend/vendor/angular-ui-router/release/angular-ui-router.js'
       'frontend/vendor/angular-translate/angular-translate.js'
-      'frontend/vendor/restangular/src/restangular.js'
       'frontend/vendor/angular-data-table/release/dataTable.helpers.min.js'
       'frontend/vendor/angular-messages/angular-messages.js'
       'frontend/vendor/angular-moment/angular-moment.js'

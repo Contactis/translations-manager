@@ -1,6 +1,5 @@
 angular.module('translation.pages.admin.user-assignment', [
   'lbServices'
-  'restangular'
   'translation.services.current-project'
   'translation.services.helper'
   'toastr'
