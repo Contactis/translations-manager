@@ -59,6 +59,11 @@ angular.module 'translation.services.current-project', [
       filter:
         where:
           id: projectId
+        include: [
+          {
+            relation: 'defaultLanguage'
+          }
+        ]
     .$promise.then (response) ->
       parseProjectResponseResource response, _deferred
     , (error) ->

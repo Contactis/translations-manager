@@ -2,34 +2,34 @@ moment = require 'moment'
 
 namespaces = [
   {
-    parentId:   null
-    name:       "Home"
-    namespace:  "home_page"
-    projectId:  1
+    parentId:     null
+    namespace:    "home_page"
+    description:  "Home"
+    projectId:    1
   }
   {
-    parentId:   1
-    name:       "Login Page"
-    namespace:  "login"
-    projectId:  1
+    parentId:     1
+    description:  "Login Page"
+    namespace:    "login"
+    projectId:    1
   }
   {
-    parentId:   1
-    name:       "Register"
-    namespace:  "register"
-    projectId:  1
+    parentId:     1
+    description:  "Register"
+    namespace:    "register"
+    projectId:    1
   }
   {
-    parentId:   2
-    name:       "Forgot password"
-    namespace:  "missing_password"
-    projectId:  1
+    parentId:     2
+    description:  "Forgot password"
+    namespace:    "missing_password"
+    projectId:    1
   }
   {
-    parentId:   2
-    name:       "Token reset"
-    namespace:  "reset_token"
-    projectId:  1
+    parentId:     2
+    description:  "Token reset"
+    namespace:    "reset_token"
+    projectId:    1
   }
 ]
 

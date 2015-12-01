@@ -26,10 +26,13 @@ translationApp.config( [
     'GENERAL.SAVE':                       'Save'
     'GENERAL.SAVE_AND_CLOSE':             'Save and colose'
     'GENERAL.REMOVE':                     'Remove'
+    'GENERAL.CREATE':                     'Create'
     'GENERAL.CANCEL':                     'Cancel'
+    'GENERAL.CLEAN_FORM':                 'Clean form'
     'GENERAL.PENDING':                    'Pending'
     'GENERAL.LOADING':                    'Loading'
     'GENERAL.SETTINGS':                   'Settings'
+    'GENERAL.MODIFY':                     'Modify'
     'GENERAL.VERIFIED':                   'Verified'
     'GENERAL.VERIFY':                     'Verify'
     'GENERAL.NOT_VERIFIED':               'Not verified'
@@ -70,6 +73,8 @@ translationApp.config( [
     'APP.FRONTEND_MESSAGES.TRY_AGAIN_LATER':                      'Try again later'
 
     'APP.FRONTEND_MESSAGES.WAITING_FOR_LOADING_DATA':   'Waiting for loading data'
+    'APP.FRONTEND_MESSAGES.EXPECTED_PROVIDING_THE_FUNCTIONALITY_IS_@_MILESTONE':
+      'Expected providing the functionality is for {{name}} milestone.'
 
     # authorization
     'APP.FRONTEND_MESSAGES.AUTHORIZATION.YOU_HAD_BEEN_LOGGED_OUT':
@@ -91,6 +96,38 @@ translationApp.config( [
     'APP.FRONTEND_MESSAGES.USER_ASSIGNMENT.REMOVED_ENTITIES_FAILED':
       'Removing entities failed'
 
+    # programming-view
+    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.LOADING_TRANSLATION_KEYS_FAILED':
+      'Problem with loading translation keys'
+    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.INDEX_KEY_NAME':           'Index key name'
+    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.BASIC_TRANSLATION':        'Basic translation'
+    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.CONTEXT_DESCRIPTION':      'Context description'
+    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.ADD_NEW_TRANSLATION_KEY':  'Add new translation key'
+
+
+    # ## dialogs
+
+    # ### common/templates/dialog/translation.jade
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.ADD_NEW_TRANSLATION_KEY':
+      'Add new translation key'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.KEY_INDEX_TYPE':
+      'Key index type'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.STRING':
+      'String'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL':
+      'Plural'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL_FORMS':
+      'Plural forms'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.NAMESPACE':
+      'Namespace'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.KEY_INDEX':
+      'Key index'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.DEFAULT_TRANSLATION':
+      'Default translation'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.LIVE_PREVIEW_RESULT':
+      'Live preview result'
+    'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.CONTEXT_DESCRIPTION':
+      'Context description'
 
     # ## app/dashboard.jade
 
@@ -108,6 +145,10 @@ translationApp.config( [
     'APP.LOGIN.REMEMBER_ME':                                  'Remember me'
     'APP.LOGIN.LOGIN_WITH_YOUR_TRANSLATION_MANAGER_ACCOUNT':  'Login with your translation manager account'
     'APP.LOGIN.USERNAME':                                     'Username'
+
+
+    # ## app/project-manager/programmer-view/programmer-view.coffee
+    'APP.PROJECT_MANAGER.PROGRAMMER_VIEW.':     'Nothing yet'
 
 
     # ## app/project-manager/admin/userAssignment.jade
@@ -191,5 +232,6 @@ translationApp.config( [
     'APP.ADMIN.PROJECT_SETTINGS.SECTION_WORKFLOW_GENERAL_DESCRIPTION':
       'All stuff related to building translations'
 
+    # common/directives/trWaitingSpinnerDiv/trWaitingSpinnerDiv.jade
   })
 ])

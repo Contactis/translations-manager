@@ -31,15 +31,15 @@ languages = [
   }
   {
     id:           5
-    nameNative:   'Portuguese'
-    nameEnglish:  'português'
+    nameNative:   'Português'
+    nameEnglish:  'Portuguese'
     ietfCode:     'pt'
     description:  ''
   }
   {
     id:           6
-    nameNative:   'Nederlands'
-    nameEnglish:  'Dutch'
+    nameNative:   'Dutch'
+    nameEnglish:  'Nederlands'
     ietfCode:     'nl'
     description:  ''
   }

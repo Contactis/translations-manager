@@ -9,9 +9,9 @@
     "parentId": {
       "type": "number"
     },
-    "name": {
+    "description": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "namespace": {
       "type": "string",
