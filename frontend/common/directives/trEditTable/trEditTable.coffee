@@ -3,7 +3,7 @@ angular.module('translator.directive.trEditTable', [
 ])
 
 
-.directive 'trEditTable', ($compile, $timeout, Translation) ->
+.directive 'trEditTable', ($compile, $timeout, Translation, LanguageService) ->
   inputTemplate = '<input ng-model="translateVal.translatedPhrase"/>'
   tdTemplate    = '<span ng-bind="translateVal.translatedPhrase"></span>'
 
@@ -16,6 +16,24 @@ angular.module('translator.directive.trEditTable', [
         template = inputTemplate
       when 'td'
         template = tdTemplate
+
+  updateTranslation = (translate, translationKey) ->
+    if translate.id is undefined
+      #case translate was not created already
+      translate.pluralForm          = null
+      translate.translationsKeyId   = translationKey.id
+      translate.languageId          = LanguageService.getTranslationLanguageId()
+      #TODO lastmodify mocked
+      translate.lastModifiedBy      = 1
+      translate.statusId            = 2
+      translate.updateAt            = moment().format()
+      translate.createdAt           = moment().format()
+
+    else
+      translate.statusId = 2
+
+    Translation.upsert(translate).$promise.then (succes) ->
+      translate.id = succes.id
 
   cleanBindHelper = (_lock, element, scope)->
     _lock=true
@@ -31,31 +49,7 @@ angular.module('translator.directive.trEditTable', [
           $compile(element.contents())(scope)
         _lock=false
 
-  bindHelper = (_lock, element, scope) ->
-    element.html(getTemplate('td')).show()
-    scope.$apply ->
-      $compile(element.contents())(scope)
-    _lock = false
-    updateTranslation(scope.translateVal)
-    event.preventDefault()
 
-  updateTranslation = (translate, translationKey) ->
-    if translate.id is undefined
-      #case translate was not created already
-      translate.pluralForm          = null
-      translate.translationsKeyId   = translationKey.id
-      #TODO language/lastmodify mocked
-      translate.languageId          = 3
-      translate.lastModifiedBy      = 1
-      translate.statusId            = 2
-      translate.updateAt            = moment().format()
-      translate.createdAt           = moment().format()
-
-    else
-      translate.statusId = 2
-
-    Translation.upsert(translate).$promise.then (succes) ->
-      translate.id = succes.id
 
   prepareCleanInput = (element, scope) ->
     _lock = true
@@ -73,7 +67,13 @@ angular.module('translator.directive.trEditTable', [
         cleanBindHelper _lock, element, scope
 
 
-
+  bindHelper = (_lock, element, scope) ->
+    element.html(getTemplate('td')).show()
+    scope.$apply ->
+      $compile(element.contents())(scope)
+    _lock = false
+    updateTranslation(scope.translateVal)
+    event.preventDefault()
 
 
   prepareInput = (element, scope) ->
@@ -90,7 +90,6 @@ angular.module('translator.directive.trEditTable', [
 
         scope.$apply ->
           $compile(element.contents())(scope)
-
           element[0].querySelector('input').focus()
 
       _lock = true
