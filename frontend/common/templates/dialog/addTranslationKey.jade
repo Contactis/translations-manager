@@ -23,7 +23,6 @@ form()
           label(for="keyString") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.KEY_INDEX' | translate }}
           input.form-control(id ="keyString" type="text" placeholder="ex: edit my account" data-ng-model="vm.translationKey.keyString")
 
-
     .form-group(data-ng-show="vm.isPlural()")
       label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL_FORMS' | translate }} ({{vm.meta.projectLanguage}})
       .panel.panel-danger(data-ng-show="vm.isPlural()")
@@ -42,7 +41,10 @@ form()
     .form-group
       label.control-label {{'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.LIVE_PREVIEW_RESULT' | translate }}
       .panel.panel-warning
-        .panel-body {{ 'APP.FRONTEND_MESSAGES.THIS_FEATURE_IS_NOT_YET_READY' |  translate }}
+        .panel-body
+          | {{ 'APP.FRONTEND_MESSAGES.THIS_FEATURE_IS_NOT_YET_READY' |  translate }}&nbsp;
+          span(translate="APP.FRONTEND_MESSAGES.EXPECTED_PROVIDING_THE_FUNCTIONALITY_IS_@_MILESTONE" translate-values="{name: 'alpha 2'}")
+
 
     .form-group
       label.control-label(for="descriptionInput") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.CONTEXT_DESCRIPTION' | translate }}

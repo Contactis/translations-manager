@@ -3,6 +3,7 @@
 # @module       translation.controllers.addTranslationKey
 angular.module('translation.controllers.addTranslationKey', [
   'ui.router'
+  'pascalprecht.translate'
   'ngCookies'
   'data-table'
   'ngMessages'

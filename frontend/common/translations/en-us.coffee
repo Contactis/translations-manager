@@ -73,6 +73,8 @@ translationApp.config( [
     'APP.FRONTEND_MESSAGES.TRY_AGAIN_LATER':                      'Try again later'
 
     'APP.FRONTEND_MESSAGES.WAITING_FOR_LOADING_DATA':   'Waiting for loading data'
+    'APP.FRONTEND_MESSAGES.EXPECTED_PROVIDING_THE_FUNCTIONALITY_IS_@_MILESTONE':
+      'Expected providing the functionality is for {{name}} milestone.'
 
     # authorization
     'APP.FRONTEND_MESSAGES.AUTHORIZATION.YOU_HAD_BEEN_LOGGED_OUT':
