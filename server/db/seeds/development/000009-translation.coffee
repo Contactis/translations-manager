@@ -116,7 +116,7 @@ translations = [
     'pluralForm': null
     'description': 'income'
     'translationsKeyId': 6
-    'languageId': 3
+    'languageId': 1
     'statusId': 1
     'lastModifiedBy': 1
     'createdAt': moment().format()
@@ -138,7 +138,7 @@ translations = [
     'pluralForm': null
     'description': 'withdraw from account'
     'translationsKeyId': 7
-    'languageId': 3
+    'languageId': 1
     'statusId': 1
     'lastModifiedBy': 1
     'createdAt': moment().format()
@@ -160,7 +160,7 @@ translations = [
     'pluralForm': null
     'description': 'recharge account'
     'translationsKeyId': 8
-    'languageId': 3
+    'languageId': 1
     'statusId': 1
     'lastModifiedBy': 1
     'createdAt': moment().format()
@@ -182,7 +182,7 @@ translations = [
     'pluralForm': null
     'description': 'recharge account'
     'translationsKeyId': 9
-    'languageId': 3
+    'languageId': 1
     'statusId': 1
     'lastModifiedBy': 1
     'createdAt': moment().format()
@@ -204,7 +204,7 @@ translations = [
     'pluralForm': null
     'description': 'add element'
     'translationsKeyId': 10
-    'languageId': 3
+    'languageId': 1
     'statusId': 1
     'lastModifiedBy': 1
     'createdAt': moment().format()
@@ -226,7 +226,7 @@ translations = [
     'pluralForm': null
     'description': 'remove element'
     'translationsKeyId': 11
-    'languageId': 3
+    'languageId': 1
     'statusId': 1
     'lastModifiedBy': 1
     'createdAt': moment().format()

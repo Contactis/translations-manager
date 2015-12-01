@@ -10,6 +10,10 @@ projectsLanguages = [
     languageId: 3
   }
   {
+    projectId:  1
+    languageId: 4
+  }
+  {
     projectId:  2
     languageId: 1
   }
