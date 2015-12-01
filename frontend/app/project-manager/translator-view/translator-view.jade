@@ -3,7 +3,7 @@ table.table.table-striped(search-watch-model="vm.query" st-safe-src="vm.tableDat
     tr
       th Group
       th
-        select.form-controll(data-ng-model="vm.translateLanguage"
+        select.form-control(data-ng-model="vm.translateLanguage"
         data-ng-options="opt.nameEnglish disable when opt.id==1 for opt in vm.allLanguages "
         data-ng-change="vm.updateLanguage(vm.translateLanguage)")
       th Context Description
