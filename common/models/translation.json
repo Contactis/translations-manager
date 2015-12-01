@@ -45,7 +45,7 @@
       "model": "Language",
       "foreignKey": "languageId"
     },
-    "modifiedBy": {
+    "lastModifiedBy": {
       "type": "hasOne",
       "model": "Account",
       "foreignKey": "id"
