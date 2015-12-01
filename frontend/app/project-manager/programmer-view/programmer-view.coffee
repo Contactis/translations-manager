@@ -67,8 +67,9 @@ PluralService) ->
         include: [
           "translations": [
             "language"
-            "modifiedBy"
-          ]
+            "lastModifiedBy"
+            "statusId"
+          ],
           "project"
           "namespace"
         ]
@@ -79,8 +80,6 @@ PluralService) ->
     , (error) ->
       toastr.warning "List could not be updated. Please realod page again."
       return
-
-
 
 
   # @method       vm.addNewKey

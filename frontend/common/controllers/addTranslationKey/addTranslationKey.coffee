@@ -142,16 +142,15 @@ CurrentProjectService, AccountService, PluralService) ->
   # @method       _createNewTranslation
   # @param        {String}  translationKeyId
   # @param        {Object}  translationObject
-  # @param        {Object}  project                 object of given project
-  # @param        {Object}  pluralId
+  # @param        {Object}  project             object of given project
+  # @param        {Object}  pluralForm          plural form id which represents one of six potetial forms
   # @description  Creating new translation entry based on `tranlsation-key`
   # @returns      {Object}  new translation object or error msg
-  _createNewTranslation = (translationKeyId, translationObject, project, pluralId) ->
-    translationObject.pluralForm        = if angular.isUndefined(pluralId) then false else true
+  _createNewTranslation = (translationKeyId, translationObject, project, pluralForm) ->
+    translationObject.pluralForm        = if angular.isUndefined(pluralForm) then false else pluralForm
     translationObject.translationsKeyId = translationKeyId
     translationObject.statusId          = 1     # id of status is from TranslationStatuses (to_verify)
     translationObject.languageId        = project.defaultLanguageId
-    translationObject.lastModifiedBy    = 1
     _deferred = $q.defer()
     Translation.create(translationObject).$promise.then (translationSuccess) ->
       $log.info "new translation entry created: ", translationSuccess
@@ -181,22 +180,21 @@ CurrentProjectService, AccountService, PluralService) ->
   # @description  Create translation-key and translation entry for single indexkey String
   _createNewTranslationKeyAndTranslationPlural = (namespace) ->
     _createNewTranslationKey(namespace.id, vm.translationKey, vm.currentProject, true).then (translationKeyResponse) ->
-      promisesQuery = []
+      query = []
       vm.translation.translatedPhrase
       for x in vm.plurals
         $log.warn "x plural object", x,
         vm.translation.translatedPhrase = x.pluralTranslationString
-        vm.translation.pluralForm       = x.id
         translation = angular.copy vm.translation
-        promisesQuery.push _createNewTranslation(translationKeyResponse.id, translation, vm.currentProject, true)
+        query.push _createNewTranslation(translationKeyResponse.id, translation, vm.currentProject, x.pluralForm)
 
-      $q.all(promisesQuery).then (resultsSuccess) ->
+      $q.all(query).then (resultsSuccess) ->
         $log.info resultsSuccess
         toastr.success "Created all translation plurals successfully"
         $rootScope.$emit 'reloadProgrammerTranslationList'
         $uibModalInstance.close()
       , (resultsError) ->
-        $log.error "$q.all(promisesQuery) for translation plurals failed"
+        $log.error "$q.all(query) for translation plurals failed"
 
 
   # @public

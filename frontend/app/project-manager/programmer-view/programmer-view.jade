@@ -14,7 +14,7 @@
               tr(data-ng-repeat="singleRow in vm.displayedCollection")
                 td {{singleRow.keyString}}
                 td(data-ng-class="vm.whatClass(singleRow.isPlural)") {{singleRow.isPlural}}
-                td(data-ng-show="singleRow.isPlural")
+                td(data-ng-if="singleRow.isPlural")
                   p(data-ng-repeat="x in singleRow.translations")
                     strong {{ vm.getNameOfPlural(x.pluralForm) }}:
                     span  {{ x.translatedPhrase }}
@@ -26,7 +26,7 @@
         button.addButtonPosition.btn.btn-primary.btn-circle(type="button" data-ng-click="vm.addNewKey()" title="{{ 'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.ADD_NEW_TRANSLATION_KEY' | translate }}")
           i.fa.fa-plus
 
-    h2 Debug variables
-    pre
-      | vm.currentProject {{vm.currentProject|json}}
-      | vm.tableData {{vm.tableData|json}}
+    //- h2 Debug variables
+    //- pre
+    //-   | vm.currentProject {{vm.currentProject|json}}
+    //-   | vm.tableData {{vm.tableData|json}}
