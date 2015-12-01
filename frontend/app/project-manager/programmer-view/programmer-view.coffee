@@ -11,6 +11,7 @@ angular.module('translation.pages.programmer-view', [
   'ui.bootstrap'
   'lbServices'
   'translation.providers.userPermissionsSettings'
+  'translation.services.plural'
   'translation.directives.trWaitingSpinnerSpan'
 ])
 
@@ -43,7 +44,8 @@ angular.module('translation.pages.programmer-view', [
         return CurrentProjectService.getCurrentProject()
 
 .controller 'ProgrammerViewController', ($rootScope, $scope, $log, $http, $filter, $timeout, toastr,
-$cookies, $uibModal, TranslationKeysResolver, CurrentProjectResolver, TranslationKey, Namespace) ->
+$cookies, $uibModal, TranslationKeysResolver, CurrentProjectResolver, TranslationKey, Namespace,
+PluralService) ->
 # $rootScope is used for $on object which listen to $emit/$broadcast
 # $scope is used for $watch
   vm = this
@@ -91,6 +93,17 @@ $cookies, $uibModal, TranslationKeysResolver, CurrentProjectResolver, Translatio
       controllerAs: 'vm'
       size:         'lg'
       windowClass:  'center-modal'
+
+
+  # @public
+  # @method       vm.getNameOfPlural
+  # @description  Get name of plural with given id
+  vm.getNameOfPlural = (id) ->
+    return PluralService.getPlural(id).name
+
+
+  vm.whatClass = (isPlural) ->
+    return if isPlural then 'text-success' else 'text-danger'
 
 
   vm.editRow = (translationId) ->

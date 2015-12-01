@@ -185,9 +185,8 @@ CurrentProjectService, AccountService, PluralService) ->
       vm.translation.translatedPhrase
       for x in vm.plurals
         $log.warn "x plural object", x,
-        $log.info "vm.translation BEFORE", vm.translation
         vm.translation.translatedPhrase = x.pluralTranslationString
-        $log.info "vm.translation AFTER", vm.translation
+        vm.translation.pluralForm       = x.id
         translation = angular.copy vm.translation
         promisesQuery.push _createNewTranslation(translationKeyResponse.id, translation, vm.currentProject, true)
 
