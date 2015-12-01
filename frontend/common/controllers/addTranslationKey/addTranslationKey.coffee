@@ -43,19 +43,6 @@ CurrentProjectService, AccountService, PluralService) ->
     projectLanguage: ""
 
 
-  if $cookies.get(_cookieName)
-    _tmp = $cookies.get(_cookieName)
-    vm.translationKey.isPlural      = _tmp.isPlural
-    vm.namespace                    = _tmp.namespace
-    vm.translationKey.keyString     = _tmp.keyString
-    vm.translation.translatedPhrase = _tmp.translatedPhrase
-    vm.translation.description      = _tmp.description
-    for x in _tmp.plurals
-      index = _.findIndex vm.plurals, (item) ->
-        item.id is x.id
-      vm.plurals[index] = x.pluralTranslationString
-
-
   # Loading plurals for current language during opening modal
   CurrentProjectService.getCurrentProject().then (responseCurrentProject) ->
     $log.info "CurrentProjectService", responseCurrentProject
@@ -76,19 +63,6 @@ CurrentProjectService, AccountService, PluralService) ->
     $log.error 'Error occured while getting current project', currentProjectError
     vm.isPending = false
 
-  # @private
-  # @method     _saveCookie
-  _saveCookie = ->
-    _tmpObj =
-      isPlural:         vm.translationKey.isPlural
-      namespace:        vm.namespace
-      keyString:        vm.translationKey.keyString
-      translatedPhrase: vm.translation.translatedPhrase
-      description:      vm.translation.description
-      plurals:          []
-    for plural in vm.plurals
-      _tmpObj.plurals.push plural
-    $cookies.put _cookieName, _tmpObj
 
   # @public
   # @method       vm.getNamespaces
@@ -123,7 +97,7 @@ CurrentProjectService, AccountService, PluralService) ->
   # @param        {String}  namespace  indexkey string of new namespace for programmers;
   # @param        {Object}  project    project object where namespace should be assigned
   # @description  Creating new namespace for project
-  # @returns      {Object}  new namespace object or error
+  # @returns      {Object}  new namespace object or error msg
   _createNewNamespace = (namespace, project) ->
     _namespaceObject =
       parent_id:    null
@@ -132,11 +106,12 @@ CurrentProjectService, AccountService, PluralService) ->
       projectId:    project.id
     _deferred = $q.defer()
     Namespace.create(_namespaceObject).$promise.then (success) ->
-      $log.info "new namespace object", success
+      $log.info "new namespace object created: ", success
       _deferred.resolve success
     , (error) ->
-      $log.error 'Error occured while saving namespace', error
-      _deferred.reject 'Error occured while saving namespace'
+      msg = 'Error occured while saving namespace'
+      $log.error msg, error
+      _deferred.reject msg
     return _deferred.promise
 
 
@@ -145,40 +120,85 @@ CurrentProjectService, AccountService, PluralService) ->
   # @param        {String}  namespaceId
   # @param        {Object}  translationKeyObject
   # @param        {Object}  project                 object of given project
+  # @param        {Object}  [isPlural=false]        flag for translation-key that it is plural
   # @description  Creating new translation-key for translation object
-  # @returns      {Object}  new translation-key object or error
-  _createNewTranslationKey = (namespaceId, translationKeyObject, project) ->
+  # @returns      {Object}  new translation-key object or error msg
+  _createNewTranslationKey = (namespaceId, translationKeyObject, project, isPlural) ->
+    translationKeyObject.isPlural     = if angular.isUndefined(isPlural) then false else true
     translationKeyObject.namespaceId  = namespaceId
     translationKeyObject.projectId    = project.id
+    _deferred = $q.defer()
     TranslationKey.create(translationKeyObject).$promise.then (translationKeySuccess) ->
-      return translationKeySuccess
+      $log.info "TranslationKey.created: ", translationKeySuccess
+      _deferred.resolve translationKeySuccess
     , (translationKeyError) ->
-      $log.error 'Error while saving translationKey', translationKeyError
-      return translationKeyError
-
-
-  _createNewTranslation = (translationKeyId, translationObject, project) ->
-    translationObject.translationsKeyId = translationKeyId
-    translationObject.statusId          = 1
-    translationObject.languageId        = project.defaultLanguageId
-    translationObject.lastModifiedBy    = 1
-    translationObject.pluralForm        = null
-    Translation.create(translationObject).$promise.then (translationSuccess) ->
-      return translationSuccess
-    , (translationError) ->
-      $log.error 'Error while saving translation', translationError
-      return translationError
+      msg = 'Error while saving translationKey'
+      $log.error msg, translationKeyError
+      _deferred.reject msg
+    return _deferred.promise
 
 
   # @private
-  # @param        {Object}  namespace
-  _createNewTranslationKeyAndTranslation = (namespace) ->
+  # @method       _createNewTranslation
+  # @param        {String}  translationKeyId
+  # @param        {Object}  translationObject
+  # @param        {Object}  project                 object of given project
+  # @param        {Object}  pluralId
+  # @description  Creating new translation entry based on `tranlsation-key`
+  # @returns      {Object}  new translation object or error msg
+  _createNewTranslation = (translationKeyId, translationObject, project, pluralId) ->
+    translationObject.pluralForm        = if angular.isUndefined(pluralId) then false else true
+    translationObject.translationsKeyId = translationKeyId
+    translationObject.statusId          = 1     # id of status is from TranslationStatuses (to_verify)
+    translationObject.languageId        = project.defaultLanguageId
+    translationObject.lastModifiedBy    = 1
+    _deferred = $q.defer()
+    Translation.create(translationObject).$promise.then (translationSuccess) ->
+      $log.info "new translation entry created: ", translationSuccess
+      _deferred.resolve translationSuccess
+    , (translationError) ->
+      msg = 'Error while saving translation entry'
+      $log.error msg, translationError
+      _deferred.reject msg
+    return _deferred.promise
+
+
+  # @private
+  # @param        {Object}    namespace   created or exsisted namespace object
+  # @description  Create translation-key and translation entry for single indexkey String
+  _createNewTranslationKeyAndTranslationString = (namespace) ->
     _createNewTranslationKey(namespace.id, vm.translationKey, vm.currentProject).then (translationKeyResponse) ->
       _createNewTranslation(translationKeyResponse.id, vm.translation, vm.currentProject).then (translationResponse) ->
         $cookies.remove _cookieName
-        toastr.success "Created translation successfully"
+        toastr.success "Created single translation string successfully"
         $rootScope.$emit 'reloadProgrammerTranslationList'
         $uibModalInstance.close()
+
+
+  # @private
+  # @method       _createNewTranslationKeyAndTranslationPlural
+  # @param        {Object}    namespace   created or exsisted namespace object
+  # @description  Create translation-key and translation entry for single indexkey String
+  _createNewTranslationKeyAndTranslationPlural = (namespace) ->
+    _createNewTranslationKey(namespace.id, vm.translationKey, vm.currentProject, true).then (translationKeyResponse) ->
+      promisesQuery = []
+      vm.translation.translatedPhrase
+      for x in vm.plurals
+        $log.warn "x plural object", x,
+        $log.info "vm.translation BEFORE", vm.translation
+        vm.translation.translatedPhrase = x.pluralTranslationString
+        $log.info "vm.translation AFTER", vm.translation
+        translation = angular.copy vm.translation
+        promisesQuery.push _createNewTranslation(translationKeyResponse.id, translation, vm.currentProject, true)
+
+      $q.all(promisesQuery).then (resultsSuccess) ->
+        $log.info resultsSuccess
+        # $cookies.remove _cookieName
+        toastr.success "Created all translation plurals successfully"
+        $rootScope.$emit 'reloadProgrammerTranslationList'
+        $uibModalInstance.close()
+      , (resultsError) ->
+        $log.error "$q.all(promisesQuery) for translation plurals failed"
 
 
   # @public
@@ -186,8 +206,6 @@ CurrentProjectService, AccountService, PluralService) ->
   # @description  Create new translation with `namespace`, `translation-key`
   # @returns      {None}  none
   vm.saveTranslationKey = ->
-    _saveCookie() #save object in cookies
-
     Namespace.find
       filter:
         where:
@@ -195,10 +213,18 @@ CurrentProjectService, AccountService, PluralService) ->
     .$promise.then (namespaceResponse) ->
       $log.info "namespaceResponse", namespaceResponse
       if namespaceResponse.length # namespace exsists
-        _createNewTranslationKeyAndTranslation(namespaceResponse[0].id)
+        if vm.isPlural()
+          $log.info "plural! without creating new namespace"
+          _createNewTranslationKeyAndTranslationPlural(namespaceResponse[0]) # plural
+        else
+          _createNewTranslationKeyAndTranslationString(namespaceResponse[0]) # string
       else
         _createNewNamespace(vm.namespace, vm.currentProject).then (namespaceCreatedResponse) ->
-          _createNewTranslationKeyAndTranslation(namespaceCreatedResponse)
+          if vm.isPlural()
+            $log.info "plural! with namespace created"
+            _createNewTranslationKeyAndTranslationPlural(namespaceCreatedResponse) # plural
+          else
+            _createNewTranslationKeyAndTranslationString(namespaceCreatedResponse) # string
           return
     , (namespaceError) ->
       $log.error 'Something went wrong while search for a namespace!', namespaceError
