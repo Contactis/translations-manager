@@ -49,6 +49,11 @@
       "type": "hasOne",
       "model": "Account",
       "foreignKey": "id"
+    },
+    "statusId": {
+      "type": "hasOne",
+      "model": "TranslationStatus",
+      "foreignKey": "id"
     }
   },
   "acls": [],

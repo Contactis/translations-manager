@@ -15,7 +15,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "statusId": {
+      "type": "belongsTo",
+      "model": "TranslationStatus",
+      "foreignKey": "id"
+    }
+  },
   "acls": [],
   "methods": {}
 }
