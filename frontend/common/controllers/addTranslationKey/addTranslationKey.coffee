@@ -193,7 +193,6 @@ CurrentProjectService, AccountService, PluralService) ->
 
       $q.all(promisesQuery).then (resultsSuccess) ->
         $log.info resultsSuccess
-        # $cookies.remove _cookieName
         toastr.success "Created all translation plurals successfully"
         $rootScope.$emit 'reloadProgrammerTranslationList'
         $uibModalInstance.close()
