@@ -2,13 +2,16 @@ table.table.table-striped(search-watch-model="vm.query" st-safe-src="vm.tableDat
   thead
     tr
       th Group
+      th
+        select.form-controll(data-ng-model="vm.translateLanguage"
+        data-ng-options="opt.nameEnglish disable when opt.id==1 for opt in vm.allLanguages "
+        data-ng-change="vm.updateLanguage(vm.translateLanguage)")
       th Context Description
       th Default language: English (en-US)
-      th Polski (pl-PL)
   tbody
     tr(data-ng-repeat="singleRow in vm.displayedCollection")
       td {{singleRow.keyString}}
-      td {{singleRow.translations[0].description}}
-      td {{singleRow.translations[0].translatedPhrase}}
       td
         tr-edit-table(translate-val="singleRow.translations[1]" translate-object="singleRow")
+      td {{singleRow.translations[0].description}}
+      td {{singleRow.translations[0].translatedPhrase}}

@@ -21,9 +21,15 @@ angular.module('translation.pages.translator-view', [
     templateUrl:    'project-manager/translator-view/translator-view.tpl.html'
     data:
       access:       access.user
+    resolve:
+      currentProject: (CurrentProjectService) ->
+        return CurrentProjectService.getCurrentProject()
+      languageList: (LanguageService, currentProject) ->
+        #TODO asd
+        return LanguageService.getAllTranslationsForProject(currentProject.id)
 
-.controller 'TranslatorViewController', ($log, $cookies, $timeout, TranslationKey, Translation,
-$uibModal, Namespace, $http, CurrentProjectService) ->
+.controller 'TranslatorViewController', (TranslationKey, LanguageService, languageList, currentProject) ->
+
 
   vm              = this
   vm.query        = ""
@@ -31,17 +37,17 @@ $uibModal, Namespace, $http, CurrentProjectService) ->
   vm.contextMenu  = {}
   vm.tableData    = []
 
-  $timeout () ->
-    vm.contextMenu.name   = "Programmer"
-    vm.contextMenu.links  = [
-      {
-        name: "Export selected to..."
-        method: "exportSelectedTo()"
-      }
-    ]
-    return
-  CurrentProjectService.getCurrentProject().then (response) ->
+  _langList = languageList.result
+  vm.translateLanguage  = LanguageService.getTranslateLanguage(_langList)
+  vm.allLanguages       = _langList
 
+  vm.updateLanguage = (lang) ->
+    LanguageService.setTranslationLanguageId(lang.id)
+    _fetchData()
+
+
+  _fetchData = ->
+    _defaultLanguageId = currentProject.defaultLanguageId
     TranslationKey.find
       filter:
         include:[
@@ -52,19 +58,21 @@ $uibModal, Namespace, $http, CurrentProjectService) ->
             relation: 'translations'
             scope:
               where:
-                or:[{languageId:response.defaultLanguageId}, {languageId:3}]
+                or:[
+                  {languageId:_defaultLanguageId},
+                  {languageId:LanguageService.getTranslationLanguageIdOrFind(_defaultLanguageId, _langList)}
+                ]
           }
         ]
         where:
-          projectId: response.id
+          projectId: currentProject.id
     .$promise.then (success)->
       vm.tableData = success
       vm.displayedCollection = [].concat(vm.tableData)
     , (error) ->
-      console.log "Problem with loading translation keys"
-  , (error) ->
-    console.log 'something went wrong!', error
+      console.log 'Problem with loading translation keys', error
 
+  _fetchData()
   return vm
 
 
