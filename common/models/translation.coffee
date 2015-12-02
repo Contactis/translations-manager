@@ -1,24 +1,42 @@
 loopback        = require 'loopback'
 Q               = require 'q'
+_               = require 'lodash'
 
 module.exports = (Translation) ->
 
   Translation.export = (projectId, projectLanguageId, cb) ->
     TranslationKey= loopback.getModel('TranslationKey')
 
-    getTranslations = () ->
+    _defineProp = (obj, key, value) ->
+      config =
+        value: value
+        writable: true
+        enumerable: true
+        configurable: true
+      Object.defineProperty obj, key, config
+      return
+
+
+    _getTranslationKeyAsync = (translation, array) ->
+      _deferred = Q.defer()
+      TranslationKey.findOne
+        where:
+          id: translation.translationsKeyId
+      , (err, result) ->
+        if err
+          _deferred.reject err
+        else
+          tmp = {}
+          _.merge tmp, translation['__data']  # native loopback __data object
+          tmp['translationKey'] = result
+          _deferred.resolve tmp
+      return _deferred.promise
+
+
+    _getTranslations = () ->
       _deferred = Q.defer()
 
       Translation.find {
-        include: [
-          {relation: 'language'}
-          {relation: 'translationKey'}
-          {
-            relation: 'status'
-            scope:
-              fields: [ 'id', 'keyString' ]
-          }
-        ]
         where:
           languageId: projectLanguageId
       }, (err, result) ->
@@ -28,26 +46,19 @@ module.exports = (Translation) ->
           _deferred.resolve result
       return _deferred.promise
 
-    getTranslations().then (translationsResponse) ->
-      defineProp = (obj, key, value) ->
-        config =
-          value: value
-          writable: true
-          enumerable: true
-          configurable: true
-        Object.defineProperty obj, key, config
-        return
 
-      _finalResult = {}
-      _count = 0
-
+    _getTranslations().then (translationsResponse) ->
+      translationKeysQuery = []
       for x in translationsResponse
-        if x.translationKey
-          defineProp(_finalResult, x.id, x.translatedPhrase)
-        _count += 1
-      return translationsResponse
-      #return _finalResult
-      #return _count
+        translationKeysQuery.push _getTranslationKeyAsync(x)
+
+      Q.all(translationKeysQuery).then (translationKeysQueryResponse) ->
+        return translationKeysQueryResponse
+        # TODO get plurals name -> match plurals for translations -> generate and save to file form template
+      , (err) ->
+        console.log err
+        throw error
+
 
 
   Translation.remoteMethod 'export',
