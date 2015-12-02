@@ -2,9 +2,10 @@ loopback = require 'loopback'
 
 module.exports = (Translation) ->
 
-  TranslationKey = loopback.TranslationKey
-
   Translation.export = (projectId, projectLanguageId, cb) ->
+
+    TranslationKey = loopback.getModel('TranslationKey')
+
     TranslationKey.find
       where:
         projectId: projectId
