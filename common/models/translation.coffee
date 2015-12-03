@@ -12,8 +12,8 @@ module.exports = (Translation) ->
     #  In this exporter we used `angular` with modules: `angular-translate`,
     #  `angular-translate-interpolation-messageformat`
 
-    TranslationKey= loopback.getModel('TranslationKey')
-    Namespace = loopback.getModel('Namespace')
+    TranslationKey  = loopback.getModel('TranslationKey')
+    Namespace       = loopback.getModel('Namespace')
 
     _defineProp = (obj, key, value) ->
       config =
@@ -24,9 +24,8 @@ module.exports = (Translation) ->
       Object.defineProperty obj, key, config
       return
 
+
     _getKeyByValue = (object, value) ->
-      console.log "object", object
-      console.log "value", value
       for prop of object
         if object.hasOwnProperty(prop)
           if object[prop] == value
@@ -38,6 +37,7 @@ module.exports = (Translation) ->
       TranslationKey.findOne
         where:
           id: translation.translationsKeyId
+          projectId: projectId # projectId from main method
       , (err, result) ->
         if err
           _deferred.reject err
@@ -62,7 +62,9 @@ module.exports = (Translation) ->
       return _deferred.promise
 
 
-    # @returns    {Object}   it returns same translationKeyObj with additional property of `namespaces`
+    # @returns    {Object}    it returns same translationKeyObj with additional property of `namespaces`.
+    #                         for now name space ale single object in array that because it not get full path of
+    #                         namespace
     _getTranslationKeyWithNamespaceAsync = (translationKeyObj) ->
       if not isjs.object translationKeyObj
         msg = 'translationKeyObj is not Object'
@@ -126,6 +128,9 @@ module.exports = (Translation) ->
           else
             _results.plurals.push item
 
+        _oldResults = _.merge {}, _results
+        console.log "REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESULTS", _oldResults
+
         # sort for plurals that refers to single entry
         ptmp = []
         for plu in _results.plurals
@@ -150,7 +155,7 @@ module.exports = (Translation) ->
             ptmp.push segEl
 
         console.log "ptmp", ptmp
-        #console.log "pluralFormList", pluralFormList
+        console.log "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLD!!!!!!!!!!", _oldResults
         _results.plurals = ptmp # save almost done plurals, but still without namespaces
 
         # like plurals above we do not need to segregate strings, because every
@@ -158,18 +163,26 @@ module.exports = (Translation) ->
         # `_results.strings` is opposite of `_results.plurals`)
 
         # finding namespaces for
-        queryOfNamespaces = []
+        queryOfTranslationKeysWithNamespaces = []
         console.log "_results.strings.length", _results.strings.length
-        for item in _results.strings
-          index = _.findIndex _results.strings, item
-          queryOfNamespaces.push _getTranslationKeyWithNamespaceAsync(item.translationKey)
+        counter = 0
+        for item in _oldResults.strings
+          #index = _.findIndex _results.strings, item
+          counter += 1
+          queryOfTranslationKeysWithNamespaces.push _getTranslationKeyWithNamespaceAsync(item.translationKey)
 
-        for item in _results.plurals
-          queryOfNamespaces.push _getTranslationKeyWithNamespaceAsync(item)
+        for item in _oldResults.plurals
+          counter += 1
+          console.log "item", item
+          queryOfTranslationKeysWithNamespaces.push _getTranslationKeyWithNamespaceAsync(item.translationKey)
+
+        console.log "all NOT REFACTORED translations: " + counter
 
         # save as JSON
-        Q.all(queryOfNamespaces).then (success) ->
-          console.log "success", success.length
+        Q.all(queryOfTranslationKeysWithNamespaces).then (queryOfTranslationKeysWithNamespacesResponse) ->
+          #for x in queryOfTranslationKeysWithNamespacesResponse
+            #console.log "s", x
+          #console.log "queryOfTranslationKeysWithNamespacesResponse.length", queryOfTranslationKeysWithNamespacesResponse.length
           _finalResult = {}
           if _results.plurals.length
             for item in _results.plurals
@@ -181,11 +194,23 @@ module.exports = (Translation) ->
                 key = _getKeyByValue(pluralFormList, p.pluralForm)
                 text += key + '{' + p.translatedPhrase + '} '
               text += '}'
+              finalKey =
               _finalResult[item.keyString] = text
 
           if _results.strings.length
             for x in _results.strings
-              _finalResult[x.translationKey.keyString] = x.translatedPhrase
+              transKeyNamespaceIndex = _.findIndex queryOfTranslationKeysWithNamespacesResponse, (item) ->
+                item.keyString == x.translationKey.keyString
+              #console.log "x", x
+              #console.log 'queryOfTranslationKeysWithNamespacesResponse[transKeyNamespaceIndex]', queryOfTranslationKeysWithNamespacesResponse[transKeyNamespaceIndex]
+              if transKeyNamespaceIndex >= 0
+                finalKey = queryOfTranslationKeysWithNamespacesResponse[transKeyNamespaceIndex].namespaces[0].namespace + '.' + x.translationKey.keyString
+              else # if not have namespace
+                console.log "EEEEEEEEEE for x", transKeyNamespaceIndex
+                console.log "item.keystring", queryOfTranslationKeysWithNamespacesResponse[transKeyNamespaceIndex].keyString, ' = x.keystring',  x.translationKey.keyString
+                finalKey = x.translationKey.keyString
+              _finalResult[finalKey] = x.translatedPhrase
+              #_finalResult[x.translationKey.keyString] = x.translatedPhrase
 
           return _finalResult # final Object
         , (e) ->
