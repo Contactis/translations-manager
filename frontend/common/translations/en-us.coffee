@@ -105,6 +105,9 @@ translationApp.config( [
     'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.CONTEXT_DESCRIPTION':      'Context description'
     'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.ADD_NEW_TRANSLATION_KEY':  'Add new translation key'
 
+    # project-exporter
+    'APP.FRONTEND_MESSAGES.PROJECT_EXPORTER.SUCCESSFULLY_GENERATE_LIST' :  'Successfully generate list'
+
 
     # ## dialogs
 
@@ -160,6 +163,17 @@ translationApp.config( [
       'Nothing yet'
     'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS.AVAILABLE_USERS': 'Available users'
     'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS.ASSIGNED_USERS':  'Assigned Users'
+
+
+
+
+    # ## app/project-manager/admin/projectExporter.jade
+    'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.TITLE':                           'Project Exporter'
+    'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.GENETAL_DESCRIPTION':             'Nothing here yet'
+    'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.EXPORTER.TITLE':    'Exporter'
+    'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.EXPORTER.GENETAL_DESCRIPTION':    'Nothing here yet'
+    'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.EXPORTER.WHICH_LANGUAGE_EXPORT':
+      'Which language you want to export for current project'
 
 
     # ## app/project-manager/admin/projectSettings.jade

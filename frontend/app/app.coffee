@@ -31,6 +31,7 @@ translationApp = angular.module('translation', [
   'translation.pages.admin.new-project'
   'translation.pages.admin.project-settings'
   'translation.pages.admin.user-assignment'
+  'translation.pages.admin.project-exporter'
 
   #
   # Including modules
