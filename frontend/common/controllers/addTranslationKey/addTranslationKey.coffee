@@ -76,6 +76,7 @@ CurrentProjectService, AccountService, PluralService) ->
         where:
           namespace:
             like: "%#{val}%"
+          projectId: vm.currentProject.id
     .$promise.then (success)->
       return success
 
