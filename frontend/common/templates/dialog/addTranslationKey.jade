@@ -25,8 +25,6 @@ form()
 
     .form-group(data-ng-show="vm.isPlural()")
       label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL_FORMS' | translate }} ({{vm.meta.projectLanguage}})
-      .panel.panel-danger(data-ng-show="vm.isPlural()")
-        .panel-body Not working for plurals yet. Yes, we are currently working on it ;)
       .row
         .col-sm-12(style="margin:0; float: left")
           .form-group.col-sm-6(data-ng-repeat="n in vm.plurals")
