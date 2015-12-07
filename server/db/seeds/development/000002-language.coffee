@@ -3,17 +3,17 @@ moment = require 'moment'
 languages = [
   {
     id:           1
-    nameNative:   'English'
-    nameEnglish:  'English'
+    nameNative:   'English International'
+    nameEnglish:  'English International'
     ietfCode:     'en'
-    description:  'Internaltional version of English'
+    description:  'International version of English'
   }
   {
     id:           2
     nameNative:   'American English'
     nameEnglish:  'English U.S.'
     ietfCode:     'en-us'
-    description:  'Internaltional version of English'
+    description:  'American version of English'
   }
   {
     id:           3
