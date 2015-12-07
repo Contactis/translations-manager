@@ -7,6 +7,7 @@ angular.module('translation.pages.admin.project-exporter', [
   'ngSanitize'
   'ui.select'
   'toastr'
+  'lodash'
 ])
 
 
@@ -30,7 +31,7 @@ angular.module('translation.pages.admin.project-exporter', [
 
 # @package   ProjectSettingsController
 .controller 'ProjectExporterController', ($scope, $log, $filter, PresentUsingProjectResolver,
-LanguagesList, Project, Translation, toastr) ->
+LanguagesList, Project, Translation, toastr, _) ->
   vm = this
 
 
@@ -54,7 +55,9 @@ LanguagesList, Project, Translation, toastr) ->
   # @type         Object
   # @description  Currtent language object withdraw from `vm.availableLanguages`
   #               to provide proper object selection from ui-select
-  vm.languagesList.selected = vm.languagesList[0]
+  indexLang = _.findIndex vm.languagesList, (item) ->
+    item.id == vm.currentProject.defaultLanguage.id
+  vm.languagesList.selected = if indexLang then vm.languagesList[indexLang] else vm.languagesList[0]
 
 
   # @public
