@@ -15,6 +15,13 @@ module.exports = (Translation) ->
     TranslationKey  = loopback.getModel('TranslationKey')
     Namespace       = loopback.getModel('Namespace')
 
+    # Check if
+    #  - project exsist
+    #  - language for project exsist
+    #  - is there any translation (translationKeys) for project
+
+
+
     _defineProp = (obj, key, value) ->
       config =
         value: value
@@ -129,49 +136,58 @@ module.exports = (Translation) ->
             _results.plurals.push item
 
         _oldResults = _.merge {}, _results
-        console.log "REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESULTS", _oldResults
+        #console.log "REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESULTS", _oldResults
+        #console.log "_results.plurals", _results.plurals
 
         # sort for plurals that refers to single entry
         ptmp = []
-        for plu in _results.plurals
-          pluList = _.filter _results.plurals, (el) ->
+        p = _results.plurals.length - 1
+        while p >= 0
+          plu = _results.plurals[p]
+          pluList = _.filter _results.plurals, (el) -> #find plurals with same translationKey.id
             el.translationKey.id is plu.translationKey.id
           if pluList.length > 0
-            for x in pluList  # remove related items form `_results.plurals` to optimize
-              index = _.findIndex _results.plurals, x
-              #console.log 'index', index
-              _results.plurals.splice(index, 1)
+            i = pluList.length
+            while i--
+              index = _.findIndex _results.plurals, pluList[i]
+              _results.plurals.splice(index, 1)    # removing to reduce table >
+              p-- # if we splice from current loop (while p) we need to deincrement to mach current index of this loop
 
             # segregate element
-            #console.log "pluList", pluList
             segEl = {}
             segEl = _.merge {}, pluList[0].translationKey['__data'] # every single object of pluList has save same tanslationKey so we can get first one
             _defineProp(segEl, 'plurals', [])
-            #console.log "segEl", segEl
-            for z in pluList
-              delete z.translationKey
-              segEl.plurals.push z
-              #console.log "segEl", segEl
+            z = pluList.length
+            while z--
+              pluListItem = pluList[z]
+              delete pluListItem.translationKey
+              segEl.plurals.push pluListItem
             ptmp.push segEl
+          p -= 1 # increment by the negative
 
         console.log "ptmp", ptmp
-        console.log "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLD!!!!!!!!!!", _oldResults
         _results.plurals = ptmp # save almost done plurals, but still without namespaces
+        #console.log "_results.plurals", _results.plurals
+
 
         # like plurals above we do not need to segregate strings, because every
         # single entry has just one translationKey (even if structure of
         # `_results.strings` is opposite of `_results.plurals`)
 
-        # finding namespaces for
+        # finding related namespaces
         queryOfTranslationKeysWithNamespaces = []
         console.log "_results.strings.length", _results.strings.length
         counter = 0
         for item in _oldResults.strings
-          #index = _.findIndex _results.strings, item
           counter += 1
           queryOfTranslationKeysWithNamespaces.push _getTranslationKeyWithNamespaceAsync(item.translationKey)
 
-        for item in _oldResults.plurals
+        ## remove duplicates of translationKey.id
+        #tmp = []
+        #j = _oldResults.plurals.length - 1
+        #while j >= 0
+
+        for item in _oldResults.plurals # we work on not refactored because its build is just like _results.string
           counter += 1
           console.log "item", item
           queryOfTranslationKeysWithNamespaces.push _getTranslationKeyWithNamespaceAsync(item.translationKey)
@@ -194,8 +210,8 @@ module.exports = (Translation) ->
                 key = _getKeyByValue(pluralFormList, p.pluralForm)
                 text += key + '{' + p.translatedPhrase + '} '
               text += '}'
-              finalKey =
-              _finalResult[item.keyString] = text
+              finalKey = item.keyString
+              _finalResult[finalKey] = text
 
           if _results.strings.length
             for x in _results.strings
