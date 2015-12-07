@@ -22,7 +22,11 @@
       ]
     }
   },
-  "files": {},
+  "files": {
+    "loopback#static": {
+      "params": "$!../../public/assets"
+    }
+  },
   "final": {
     "loopback#urlNotFound": {}
   },
