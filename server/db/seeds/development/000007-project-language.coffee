@@ -15,7 +15,11 @@ projectsLanguages = [
   }
   {
     projectId:  2
-    languageId: 1
+    languageId: 2
+  }
+  {
+    projectId:  2
+    languageId: 3
   }
 ]
 
