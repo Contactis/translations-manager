@@ -28,7 +28,7 @@ angular.module('translation.pages.translator-view', [
         #TODO asd
         return LanguageService.getAllTranslationsForProject(currentProject.id)
 
-.controller 'TranslatorViewController', (TranslationKey, LanguageService, languageList, currentProject) ->
+.controller 'TranslatorViewController', (TranslationKey, LanguageService, Translation, languageList, currentProject) ->
 
 
   vm              = this
@@ -73,6 +73,18 @@ angular.module('translation.pages.translator-view', [
       console.log 'Problem with loading translation keys', error
 
   _fetchData()
+
+  vm.deleteTranslation = (itemIndex) ->
+    if vm.displayedCollection[itemIndex].translations[1] is undefined
+    else
+      _translationId = vm.displayedCollection[itemIndex].translations[1].id
+      if _translationId is undefined
+      else
+        Translation.deleteById { id:_translationId }
+        .$promise.then () ->
+          delete vm.displayedCollection[itemIndex].translations[1]
+
+
   return vm
 
 

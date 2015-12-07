@@ -50,7 +50,7 @@
       "model": "Account",
       "foreignKey": "id"
     },
-    "statusId": {
+    "status": {
       "type": "hasOne",
       "model": "TranslationStatus",
       "foreignKey": "id"

@@ -34,7 +34,7 @@ angular.module('translation.pages.programmer-view', [
               "translations": [
                 "language"
                 "lastModifiedBy"
-                "statusId"
+                "status"
               ],
               "project"
               "namespace"
@@ -68,7 +68,7 @@ PluralService) ->
           "translations": [
             "language"
             "lastModifiedBy"
-            "statusId"
+            "status"
           ],
           "project"
           "namespace"
