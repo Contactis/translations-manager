@@ -75,14 +75,14 @@ angular.module('translation.pages.translator-view', [
   _fetchData()
 
   vm.deleteTranslation = (itemIndex) ->
-    
-    _translationId = vm.displayedCollection[itemIndex].translations[1].id
-    if _translationId is undefined
-      console.log 'already deleted'
+    if vm.displayedCollection[itemIndex].translations[1] is undefined
     else
-      Translation.deleteById { id:_translationId }
-      .$promise.then () ->
-        delete vm.displayedCollection[itemIndex].translations[1]
+      _translationId = vm.displayedCollection[itemIndex].translations[1].id
+      if _translationId is undefined
+      else
+        Translation.deleteById { id:_translationId }
+        .$promise.then () ->
+          delete vm.displayedCollection[itemIndex].translations[1]
 
 
   return vm

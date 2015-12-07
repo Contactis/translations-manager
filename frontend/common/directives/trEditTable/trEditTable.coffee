@@ -3,7 +3,7 @@ angular.module('translator.directive.trEditTable', [
 ])
 
 
-.directive 'trEditTable', ($compile, $timeout, Translation, LanguageService) ->
+.directive 'trEditTable', ($compile, $timeout, Translation, LanguageService, toastr) ->
   inputTemplate = '<input ng-model="translateVal.translatedPhrase"/>'
   tdTemplate    = '<span ng-bind="translateVal.translatedPhrase"></span>'
 
@@ -28,10 +28,8 @@ angular.module('translator.directive.trEditTable', [
       translate.statusId            = 2
       translate.updateAt            = moment().format()
       translate.createdAt           = moment().format()
-
     else
       translate.statusId = 2
-
     Translation.upsert(translate).$promise.then (succes) ->
       translate.id = succes.id
 
@@ -47,9 +45,8 @@ angular.module('translator.directive.trEditTable', [
         element.html(getTemplate('input')).show()
         scope.$apply ->
           $compile(element.contents())(scope)
+          element[0].querySelector('input').focus()
         _lock=false
-
-
 
   prepareCleanInput = (element, scope) ->
     _lock = true
@@ -59,22 +56,23 @@ angular.module('translator.directive.trEditTable', [
     element.html(getTemplate('input')).show()
     $compile(element.contents())(scope)
 
-    element.bind "focusout", (event) ->
-      cleanBindHelper _lock, element, scope
+    element.bind "focusout", ->
+      if scope.translateVal.translatedPhrase != ""
+        cleanBindHelper _lock, element, scope
+        toastr.success 'Translate updated!'
 
     element.bind "keydown", (event) ->
       if event.which==13
-        cleanBindHelper _lock, element, scope
+        element[0].querySelector('input').blur()
 
-
-  bindHelper = (_lock, element, scope) ->
+  bindHelper = (element, scope) ->
     element.html(getTemplate('td')).show()
     scope.$apply ->
       $compile(element.contents())(scope)
-    _lock = false
     updateTranslation(scope.translateVal)
     event.preventDefault()
 
+    return false
 
   prepareInput = (element, scope) ->
     _lock = false
@@ -82,17 +80,25 @@ angular.module('translator.directive.trEditTable', [
       if !_lock
         element.html(getTemplate('input')).show()
 
+        element.unbind('focusout')
+        element.unbind('keydown')
+
         element.bind "focusout", () ->
-          bindHelper _lock, element, scope
+          if scope.translateVal.translatedPhrase != ""
+            _lock = bindHelper element, scope
+            toastr.success 'Translate updated!'
+
         element.bind "keydown", (event) ->
           if(event.which==13)
-            bindHelper _lock, element, scope
+            element[0].querySelector('input').blur()
 
         scope.$apply ->
           $compile(element.contents())(scope)
           element[0].querySelector('input').focus()
 
       _lock = true
+
+
 
 
 
@@ -103,12 +109,12 @@ angular.module('translator.directive.trEditTable', [
     else
       prepareInput(element, scope)
 
-
+    scope.$watch 'translateVal', (newVal, oldVal) ->
+      if newVal is undefined
+        toastr.warning 'Translate deleted'
+    , true
 
     return
-
-
-
 
 
   return {
