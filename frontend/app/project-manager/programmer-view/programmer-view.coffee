@@ -75,6 +75,8 @@ PluralService) ->
           "project"
           "namespace"
         ]
+        where:
+          projectId: CurrentProjectResolver.id
     .$promise.then (success) ->
       $log.info "programmer list reload successfully"
       vm.tableData = success
