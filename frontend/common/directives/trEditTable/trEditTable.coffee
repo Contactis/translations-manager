@@ -111,6 +111,7 @@ angular.module('translator.directive.trEditTable', [
 
     scope.$watch 'translateVal', (newVal, oldVal) ->
       if newVal is undefined
+        prepareCleanInput(element, scope)
         toastr.warning 'Translate deleted'
     , true
 
