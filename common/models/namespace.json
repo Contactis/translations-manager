@@ -7,7 +7,8 @@
   },
   "properties": {
     "parentId": {
-      "type": "number"
+      "type": "number",
+      "required": false
     },
     "description": {
       "type": "string",
