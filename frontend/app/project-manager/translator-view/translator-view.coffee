@@ -38,7 +38,7 @@ angular.module('translation.pages.translator-view', [
   vm.tableData    = []
 
   _langList = languageList.result
-  vm.translateLanguage  = LanguageService.getTranslateLanguage(_langList)
+  vm.translateLanguage  = LanguageService.getTranslateLanguage(_langList, currentProject.defaultLanguageId)
   vm.allLanguages       = _langList
 
   vm.updateLanguage = (lang) ->

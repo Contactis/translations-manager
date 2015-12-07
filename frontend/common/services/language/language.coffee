@@ -30,12 +30,14 @@ angular.module('translation.services.language', [
     ProjectLanguage.getLanguages({projectId:projectId}).$promise.then (success) ->
       return success
 
-  _getTranslateLanguage = (_languageList) ->
+  _getTranslateLanguage = (languageList, defaultLanguageId) ->
     _id = _getTranslationLanguageId()
     if _id is undefined
-      return _languageList[0]
+      for element, index in languageList
+        if element.id!=defaultLanguageId
+          return languageList[index]
     else
-      _index = _.find _languageList, (element) ->
+      _index = _.find languageList, (element) ->
         return element.id==_id
 
     return _index
