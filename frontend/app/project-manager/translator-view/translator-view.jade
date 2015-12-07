@@ -8,6 +8,7 @@ table.table.table-striped(search-watch-model="vm.query" st-safe-src="vm.tableDat
         data-ng-change="vm.updateLanguage(vm.translateLanguage)")
       th Context Description
       th Default language: English (en-US)
+      th Delete translation
   tbody
     tr(data-ng-repeat="singleRow in vm.displayedCollection")
       td {{singleRow.keyString}}
@@ -15,3 +16,5 @@ table.table.table-striped(search-watch-model="vm.query" st-safe-src="vm.tableDat
         tr-edit-table(translate-val="singleRow.translations[1]" translate-object="singleRow")
       td {{singleRow.translations[0].description}}
       td {{singleRow.translations[0].translatedPhrase}}
+      td
+        button.btn.btn-xs.btn-danger(data-ng-click="vm.deleteTranslation($index)") DELETE
