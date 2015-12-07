@@ -87,8 +87,6 @@ module.exports = (Translation) ->
         else
           obj = _.merge {}, translationKeyObj['__data']
           obj['namespaces'] = []
-          #_defineProp(translationKeyObj, 'namespaces', "dsdsdsd")
-          #console.log 'obj', obj
           obj.namespaces.push result
           _deferred.resolve obj
       return _deferred.promise
@@ -126,8 +124,6 @@ module.exports = (Translation) ->
             _results.plurals.push item
 
         _oldResults = _.merge {}, _results
-        #console.log "REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESULTS", _oldResults
-        #console.log "_results.plurals", _results.plurals
 
         # sort for plurals that refers to single entry
         ptmp = []
@@ -155,9 +151,7 @@ module.exports = (Translation) ->
             ptmp.push segEl
           p -= 1 # increment by the negative
 
-        console.log "ptmp", ptmp
         _results.plurals = ptmp # save almost done plurals, but still without namespaces
-        #console.log "_results.plurals", _results.plurals
 
 
         # like plurals above we do not need to segregate strings, because every
@@ -166,33 +160,17 @@ module.exports = (Translation) ->
 
         # finding related namespaces
         queryOfTranslationKeysWithNamespaces = []
-        console.log "_results.strings.length", _results.strings.length
-        counter = 0
         for item in _oldResults.strings
-          counter += 1
           queryOfTranslationKeysWithNamespaces.push _getTranslationKeyWithNamespaceAsync(item.translationKey)
-
-        ## remove duplicates of translationKey.id
-        #tmp = []
-        #j = _oldResults.plurals.length - 1
-        #while j >= 0
-
         for item in _oldResults.plurals # we work on not refactored because its build is just like _results.string
-          counter += 1
-          #console.log "item", item
           queryOfTranslationKeysWithNamespaces.push _getTranslationKeyWithNamespaceAsync(item.translationKey)
 
-        #console.log "all NOT REFACTORED translations: " + counter
 
         # save as JSON
         Q.all(queryOfTranslationKeysWithNamespaces).then (queryOfTranslationKeysWithNamespacesResponse) ->
-          for n in queryOfTranslationKeysWithNamespacesResponse
-            console.log "n", n
-          #console.log "queryOfTranslationKeysWithNamespacesResponse.length", queryOfTranslationKeysWithNamespacesResponse.length
           _finalResult = {}
           if _results.plurals.length
             for item in _results.plurals
-              console.log "item", item
               # TODO give a programmer a choice to choose name of this variable (NUM).
               # NUM is just a name of variable used by angular-translate-interpolation-messageformat notation
               # Why NUM? 'cause I like numbers, and this reminds that plural is number of some sort ;)
@@ -213,16 +191,11 @@ module.exports = (Translation) ->
             for x in _results.strings
               transKeyNamespaceIndex = _.findIndex queryOfTranslationKeysWithNamespacesResponse, (item) ->
                 item.keyString == x.translationKey.keyString
-              #console.log "x", x
-              #console.log 'queryOfTranslationKeysWithNamespacesResponse[transKeyNamespaceIndex]', queryOfTranslationKeysWithNamespacesResponse[transKeyNamespaceIndex]
-              if transKeyNamespaceIndex >= 0
-                finalKey = queryOfTranslationKeysWithNamespacesResponse[transKeyNamespaceIndex].namespaces[0].namespace + '.' + x.translationKey.keyString
-              else # if not have namespace
-                console.log "EEEEEEEEEE for x", transKeyNamespaceIndex
-                console.log "item.keystring", queryOfTranslationKeysWithNamespacesResponse[transKeyNamespaceIndex].keyString, ' = x.keystring',  x.translationKey.keyString
-                finalKey = x.translationKey.keyString
+              finalKey = ''
+              if transKeyNamespaceIndex isnt -1
+                finalKey += queryOfTranslationKeysWithNamespacesResponse[transKeyNamespaceIndex].namespaces[0].namespace + '.'
+              finalKey += x.translationKey.keyString
               _finalResult[finalKey] = x.translatedPhrase
-              #_finalResult[x.translationKey.keyString] = x.translatedPhrase
 
           return _finalResult # final Object
         , (e) ->
