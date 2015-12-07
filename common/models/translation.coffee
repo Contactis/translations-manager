@@ -94,15 +94,6 @@ module.exports = (Translation) ->
       return _deferred.promise
 
 
-    #_getFullNamespacePathAsync = (namespaceId, callback) ->
-      #if typeof callback is 'undefined' then throw new Error("callback parameter is undefined")
-      #if not isjs.function(callback) then throw new Error("callback parameter is not a function")
-      #_getNamespaceAsync(namespaceId).then (namespaceResult) ->
-        #if namespaceResult.parentId isnt null
-
-      #Q.all(query)
-
-
     _getTranslations = () ->
       _deferred = Q.defer()
 
@@ -123,7 +114,6 @@ module.exports = (Translation) ->
         translationKeysQuery.push _getTranslationKeyAsync(x)
 
       Q.all(translationKeysQuery).then (translationKeysQueryResponse) ->
-        # TODO get plurals name -> match plurals for translations -> generate and save to file form template
 
         # separate to reduce queries
         _results =
@@ -189,19 +179,20 @@ module.exports = (Translation) ->
 
         for item in _oldResults.plurals # we work on not refactored because its build is just like _results.string
           counter += 1
-          console.log "item", item
+          #console.log "item", item
           queryOfTranslationKeysWithNamespaces.push _getTranslationKeyWithNamespaceAsync(item.translationKey)
 
-        console.log "all NOT REFACTORED translations: " + counter
+        #console.log "all NOT REFACTORED translations: " + counter
 
         # save as JSON
         Q.all(queryOfTranslationKeysWithNamespaces).then (queryOfTranslationKeysWithNamespacesResponse) ->
-          #for x in queryOfTranslationKeysWithNamespacesResponse
-            #console.log "s", x
+          for n in queryOfTranslationKeysWithNamespacesResponse
+            console.log "n", n
           #console.log "queryOfTranslationKeysWithNamespacesResponse.length", queryOfTranslationKeysWithNamespacesResponse.length
           _finalResult = {}
           if _results.plurals.length
             for item in _results.plurals
+              console.log "item", item
               # TODO give a programmer a choice to choose name of this variable (NUM).
               # NUM is just a name of variable used by angular-translate-interpolation-messageformat notation
               # Why NUM? 'cause I like numbers, and this reminds that plural is number of some sort ;)
@@ -210,7 +201,12 @@ module.exports = (Translation) ->
                 key = _getKeyByValue(pluralFormList, p.pluralForm)
                 text += key + '{' + p.translatedPhrase + '} '
               text += '}'
-              finalKey = item.keyString
+              finalKey = ''
+              indexNamespace = _.findIndex queryOfTranslationKeysWithNamespacesResponse, (q) ->
+                item.id  == q.id
+              if indexNamespace isnt -1
+                finalKey += queryOfTranslationKeysWithNamespacesResponse[indexNamespace].namespaces[0].namespace + '.'
+              finalKey += item.keyString
               _finalResult[finalKey] = text
 
           if _results.strings.length
