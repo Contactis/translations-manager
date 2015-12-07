@@ -27,7 +27,9 @@ angular.module('translation.pages.programmer-view', [
     data:
       access:       access.user
     resolve:
-      TranslationKeysResolver: (TranslationKey) ->
+      CurrentProjectResolver:  (CurrentProjectService) ->
+        return CurrentProjectService.getCurrentProject()
+      TranslationKeysResolver: (TranslationKey, CurrentProjectResolver) ->
         TranslationKey.find
           filter:
             include: [
@@ -39,9 +41,9 @@ angular.module('translation.pages.programmer-view', [
               "project"
               "namespace"
             ]
+            where:
+              projectId: CurrentProjectResolver.id
         .$promise
-      CurrentProjectResolver:  (CurrentProjectService) ->
-        return CurrentProjectService.getCurrentProject()
 
 .controller 'ProgrammerViewController', ($rootScope, $scope, $log, $http, $filter, $timeout, toastr,
 $cookies, $uibModal, TranslationKeysResolver, CurrentProjectResolver, TranslationKey, Namespace,

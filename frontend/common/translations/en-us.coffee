@@ -104,6 +104,10 @@ translationApp.config( [
     'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.BASIC_TRANSLATION':        'Basic translation'
     'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.CONTEXT_DESCRIPTION':      'Context description'
     'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.ADD_NEW_TRANSLATION_KEY':  'Add new translation key'
+    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.NO_INDEX_KEYS_AVAILABLE_FOR_CURRENT_PROJECT':
+      'No index keys available for current project'
+    'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.ADD_NEW_INDEX_KEY':
+      'Add new index key, to see results.'
 
     # project-exporter
     'APP.FRONTEND_MESSAGES.PROJECT_EXPORTER.SUCCESSFULLY_GENERATE_LIST' :  'Successfully generate list'
