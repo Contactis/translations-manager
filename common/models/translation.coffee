@@ -21,7 +21,6 @@ module.exports = (Translation) ->
     #  - is there any translation (translationKeys) for project
 
 
-
     _defineProp = (obj, key, value) ->
       config =
         value: value
@@ -39,33 +38,21 @@ module.exports = (Translation) ->
             return prop
       return
 
+
     _getTranslationKeyAsync = (translation) ->
       _deferred = Q.defer()
       TranslationKey.findOne
         where:
-          id: translation.translationsKeyId
-          projectId: projectId # projectId from main method
+          id:         translation.translationsKeyId
+          projectId:  projectId # projectId from main method
       , (err, result) ->
         if err
           _deferred.reject err
         else
           tmp = {}
-          _.merge tmp, translation['__data']  # native lodash __data object
+          _.merge tmp, translation # native lodash __data object
           tmp['translationKey'] = result
           _deferred.resolve tmp
-      return _deferred.promise
-
-
-    _getNamespaceAsync = (namespaceId) ->
-      _deferred = Q.defer()
-      Namespace.findOne
-        where:
-          id: namespaceId
-      , (err, result) ->
-        if err
-          _deferred.reject err
-        else
-          _deferred.resolve result
       return _deferred.promise
 
 
@@ -80,7 +67,8 @@ module.exports = (Translation) ->
       _deferred = Q.defer()
       Namespace.findOne
         where:
-          id: translationKeyObj.namespaceId
+          id:         translationKeyObj.namespaceId
+          projectId:  projectId
       , (err, result) ->
         if err
           _deferred.reject err
@@ -95,10 +83,15 @@ module.exports = (Translation) ->
     _getTranslations = () ->
       _deferred = Q.defer()
 
-      Translation.find {
-        where:
-          languageId: projectLanguageId
-      }, (err, result) ->
+      ds = Translation.dataSource
+      sql = "SELECT Translation.*
+             FROM Translation
+             JOIN TranslationKey
+             ON TranslationKey.id = Translation.translationsKeyId
+             WHERE Translation.languageId = ? AND TranslationKey.projectId = ?
+             "
+
+      ds.connector.query sql, [ projectLanguageId, projectId ], (err, result) ->
         if err
           _deferred.reject err
         else
@@ -112,7 +105,6 @@ module.exports = (Translation) ->
         translationKeysQuery.push _getTranslationKeyAsync(x)
 
       Q.all(translationKeysQuery).then (translationKeysQueryResponse) ->
-
         # separate to reduce queries
         _results =
           plurals: []
