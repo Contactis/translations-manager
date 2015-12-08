@@ -16,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.text());
 
 app.start = function() {
+  //emitter.setMaxListeners(0);
   // start the web server
   return app.listen(function() {
     app.emit('started');

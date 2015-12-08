@@ -36,7 +36,7 @@ module.exports = (server) ->
 
 
     Account.find (err, foundAccounts) ->
-
+      console.log foundAccounts
       otherAccountRole = _.reject foundAccounts, (value) ->
         return value.role == 'user'
 
