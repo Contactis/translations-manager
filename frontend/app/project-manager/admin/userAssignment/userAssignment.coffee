@@ -160,7 +160,7 @@ ProjectAccountsResolver, CurrentProjectResolver, CurrentProjectAccountsResolver,
   # @description  Removing and saving all related entities
   vm.saveSelectedUsers = () ->
     _removeAllRelatedEntities().then (response) ->
-      toastr.success response
+#      toastr.success response
       _savingAllNewEntities().then (result) ->
         toastr.success result
       , (resultError) ->
