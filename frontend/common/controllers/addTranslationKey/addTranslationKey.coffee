@@ -148,7 +148,7 @@ CurrentProjectService, AccountService, PluralService) ->
   # @description  Creating new translation entry based on `tranlsation-key`
   # @returns      {Object}  new translation object or error msg
   _createNewTranslation = (translationKeyId, translationObject, project, pluralForm) ->
-    translationObject.pluralForm        = if angular.isUndefined(pluralForm) then false else pluralForm
+    translationObject.pluralForm        = if angular.isUndefined(pluralForm) then null else pluralForm
     translationObject.translationsKeyId = translationKeyId
     translationObject.statusId          = 1     # id of status is from TranslationStatuses (to_verify)
     translationObject.languageId        = project.defaultLanguageId
@@ -207,6 +207,7 @@ CurrentProjectService, AccountService, PluralService) ->
       filter:
         where:
           namespace: vm.namespace
+          projectId: vm.currentProject.id
     .$promise.then (namespaceResponse) ->
       $log.info "namespaceResponse", namespaceResponse
       if namespaceResponse.length # namespace exsists
