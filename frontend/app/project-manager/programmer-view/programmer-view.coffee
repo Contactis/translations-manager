@@ -67,13 +67,12 @@ PluralService) ->
     TranslationKey.find
       filter:
         include: [
-          "translations": [
-            "language"
-            "lastModifiedBy"
-            "status"
-          ],
-          "project"
-          "namespace"
+          {
+            relation: 'namespace'
+          },
+          {
+            relation: 'translations'
+          }
         ]
         where:
           projectId: CurrentProjectResolver.id
