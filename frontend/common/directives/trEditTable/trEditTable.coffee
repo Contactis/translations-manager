@@ -28,10 +28,20 @@ angular.module('translator.directive.trEditTable', [
       translate.statusId            = 2
       translate.updateAt            = moment().format()
       translate.createdAt           = moment().format()
+
+      Translation.create(translate).$promise.then (succes) ->
+        translate.id = succes.id
+        toastr.success 'Translate updated!'
     else
       translate.statusId = 2
-    Translation.upsert(translate).$promise.then (succes) ->
-      translate.id = succes.id
+      _updateHelper translate.id, translate
+      toastr.success 'Translate updated!'
+  #TODO loopback upsert is not working with relations 'belongs to', probably we should create our own backend to avoid
+  #TODO deleting translate
+  _updateHelper = (id, translate) ->
+    Translation.deleteById({ id: id }).$promise.then (succes) ->
+      Translation.create(translate).$promise.then (succes) ->
+        translate.id = succes.id
 
   cleanBindHelper = (_lock, element, scope)->
     _lock=true
@@ -59,7 +69,6 @@ angular.module('translator.directive.trEditTable', [
     element.bind "focusout", ->
       if scope.translateVal.translatedPhrase != ""
         cleanBindHelper _lock, element, scope
-        toastr.success 'Translate updated!'
 
     element.bind "keydown", (event) ->
       if event.which==13
@@ -86,7 +95,7 @@ angular.module('translator.directive.trEditTable', [
         element.bind "focusout", () ->
           if scope.translateVal.translatedPhrase != ""
             _lock = bindHelper element, scope
-            toastr.success 'Translate updated!'
+
 
         element.bind "keydown", (event) ->
           if(event.which==13)

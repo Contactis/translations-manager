@@ -35,6 +35,7 @@ angular.module('translation.services.language', [
     if _id is undefined
       for element, index in languageList
         if element.id!=defaultLanguageId
+          _setTranslationLanguageId(element.id)
           return languageList[index]
     else
       _index = _.find languageList, (element) ->
