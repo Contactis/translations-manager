@@ -20,9 +20,9 @@ gulp.task 'nodemon', ->
 
   _jsExec = 'node .'
 
-  if (typeof argv.aclDebug is not "undefined") or (argv.aclDebug is true)
-    _jsExec = 'DEBUG=loopback:security:* slc run'
 
+  if (typeof argv.debug is not "undefined") or (argv.debug is true)
+    _jsExec = 'DEBUG=loopback:datasource node .'
 
   nodemon
     verbose: false
@@ -35,6 +35,8 @@ gulp.task 'nodemon', ->
     execMap:
       js: _jsExec
     ext: "js coffee json"
+
+
 
 gulp.task 'db:renew', shell.task [
   "rm -f translation_manager_db.sqlite && node ./ --kill --silent --disable-cms"
