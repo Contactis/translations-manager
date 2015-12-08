@@ -26,4 +26,4 @@ WORKDIR /tr
 
 RUN apt-get remove -y python-pygments
 
-CMD gulp db:restore && gulp build --no-tests
+CMD gulp db:restore && gulp build --no-tests --no-docs
