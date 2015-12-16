@@ -22,9 +22,9 @@ module.exports =
     tmpBuildDir:          buildConfig.gulp_build_dir + '/tmp/build'
 
   arguments:
-    tests:      if (typeof argv.tests is "undefined") or (argv.tests is true) then true else false
-    docs:       if (typeof argv.docs is "undefined") or (argv.docs is true) then true else false
-    uglify:     if (typeof argv.uglify is "undefined") or (argv.uglify is true) then true else false
+    tests:      if (typeof argv.tests is not "undefined") or (argv.tests is true) then true else false
+    docs:       if (typeof argv.docs is not "undefined") or (argv.docs is true) then true else false
+    uglify:     if (typeof argv.uglify is not "undefined") or (argv.uglify is true) then true else false
     b2d:        false
     production: false
     nodemon:    true # by default nodemon is true (only in test we want disable it)

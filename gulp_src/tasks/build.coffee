@@ -27,10 +27,10 @@ buildArgs =
 gulp.task 'build', (done) ->
   buildStart = Date.now()
 
-  if config.arguments.tests
+  if config.arguments.tests is true
     buildArgs.stage3.push 'run-tests'
 
-  if config.arguments.docs
+  if config.arguments.docs is true
     buildArgs.stage2.push 'build-docs'
 
   runSequence buildArgs.stage1, buildArgs.stage2, buildArgs.stage3, buildArgs.stage4, ->
