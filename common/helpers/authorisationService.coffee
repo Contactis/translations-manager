@@ -34,7 +34,7 @@ buildAccessLevels = (accessLevelDeclarations, userRoles) ->
         resultBitMask = ''
         for role of userRoles
           resultBitMask += '1'
-        #accessLevels[level] = parseInt(resultBitMask, 2);
+        #accessLevels[level] = parseInt(resultBitMask, 2)
         accessLevels[level] = bitMask: parseInt(resultBitMask, 2)
       else
         console.log 'Access Control Error: Could not parse \'' +
