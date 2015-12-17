@@ -182,7 +182,7 @@ module.exports = (Translation) ->
           if _results.strings.length
             for x in _results.strings
               transKeyNamespaceIndex = _.findIndex queryOfTranslationKeysWithNamespacesResponse, (item) ->
-                item.keyString == x.translationKey.keyString
+                item.id == x.translationKey.id # compare only id of translationKeys
               finalKey = ''
               if transKeyNamespaceIndex isnt -1
                 finalKey += queryOfTranslationKeysWithNamespacesResponse[transKeyNamespaceIndex].namespaces[0].namespace + '.'
