@@ -56,9 +56,11 @@ translationApp.config( [
     'PAGE.TRANSLATOR.TITLE':                        'Translator view'
     'PAGE.PROGRAMMER.TITLE':                        'Programmer view'
     'PAGE.MANAGER.TITLE':                           'Manager view'
-    'PAGE.PROJECT_MANAGEMENT.TITLE':                     'Project management'
-    'PAGE.PROJECT_MANAGEMENT.PROJECT_SETTINGS.TITLE':    'Project settings'
-    'PAGE.PROJECT_MANAGEMENT.USER_ASSIGNMENT.TITLE':     'User assignment'
+    'PAGE.PROJECT_MANAGEMENT.TITLE':                      'Project management'
+    'PAGE.PROJECT_MANAGEMENT.NEW_PROJECT.TITLE':          'New project'
+    'PAGE.PROJECT_MANAGEMENT.PROJECT_SETTINGS.TITLE':     'Project settings'
+    'PAGE.PROJECT_MANAGEMENT.USER_ASSIGNMENT.TITLE':      'User assignment'
+    'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.TITLE':     'Project exporter'
 
 
     # ### Backend messages

@@ -1,5 +1,5 @@
 angular.module('translation.pages.admin.new-project', [
-
+  'pascalprecht.translate'
 ])
 .config ($stateProvider, UserPermissionsSettingsProvider) ->
 
@@ -8,9 +8,10 @@ angular.module('translation.pages.admin.new-project', [
   $stateProvider.state 'app.admin.new-project',
     url:            '/new-project'
     controller:     'NewProjectController'
-    templateUrl:    'admin/newProject/newProject.tpl.html'
+    templateUrl:    'project-manager/admin/newProject/newProject.tpl.html'
     data:
-      access: access.admin
+      access:       access.admin
 
 .controller 'NewProjectController', () ->
   console.log 'NewProjectController'
+  return
