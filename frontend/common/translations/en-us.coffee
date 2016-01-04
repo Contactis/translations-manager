@@ -172,13 +172,14 @@ translationApp.config( [
 
 
     # ## app/project-manager/admin/projectExporter.jade
-    'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.TITLE':                           'Project Exporter'
-    'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.GENETAL_DESCRIPTION':             'Nothing here yet'
-    'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.EXPORTER.TITLE':    'Exporter'
-    'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.EXPORTER.GENETAL_DESCRIPTION':    'Nothing here yet'
-    'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.EXPORTER.WHICH_LANGUAGE_EXPORT':
-      'Which language you want to export for current project'
+    'APP.ADMIN.PROJECT_EXPORTER.TITLE':                            'Project Exporter'
+    'APP.ADMIN.PROJECT_EXPORTER.GENETAL_DESCRIPTION':              'Nothing here yet'
+    'APP.ADMIN.PROJECT_EXPORTER.EXPORTER.TITLE':                   'Exporter'
+    'APP.ADMIN.PROJECT_EXPORTER.EXPORTER.GENETAL_DESCRIPTION':     'Nothing here yet'
+    'APP.ADMIN.PROJECT_EXPORTER.EXPORTER.WHICH_LANGUAGE_EXPORT': \
+      'Which language you want to export for current project',
 
+    '': '',
 
     # ## app/project-manager/admin/projectSettings.jade
     'APP.ADMIN.PROJECT_SETTINGS.GENETAL_DESCRIPTION':     'Nothing here yet'

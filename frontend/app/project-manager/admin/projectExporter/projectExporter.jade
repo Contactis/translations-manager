@@ -1,22 +1,22 @@
 .container-fluid
   .row
     .col-xs-12
-      h1 {{ 'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.TITLE' | translate }}
-      p {{ 'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.GENETAL_DESCRIPTION' | translate }}
+      h1 {{ 'APP.ADMIN.PROJECT_EXPORTER.TITLE' | translate }}
+      p {{ 'APP.ADMIN.PROJECT_EXPORTER.GENETAL_DESCRIPTION' | translate }}
 
   .row
     .col-md-12
       .card(style="overflow:visible")
         .card-header
           .card-title
-            .title {{ 'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.EXPORTER.TITLE' | translate }}
+            .title {{ 'APP.ADMIN.PROJECT_EXPORTER.EXPORTER.TITLE' | translate }}
         .card-body
-          p {{ 'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.EXPORTER.GENETAL_DESCRIPTION' | translate}}
+          p {{ 'APP.ADMIN.PROJECT_EXPORTER.EXPORTER.GENETAL_DESCRIPTION' | translate}}
           form
             .row
               .col-sm-6
                 .form-group
-                  label(for='projectDefaultLanguageInput') {{ 'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.EXPORTER.WHICH_LANGUAGE_EXPORT' | translate }}
+                  label(for='projectDefaultLanguageInput') {{ 'APP.ADMIN.PROJECT_EXPORTER.EXPORTER.WHICH_LANGUAGE_EXPORT' | translate }}
                   ui-select.form-control(ng-model="vm.languagesList.selected" theme="select2" title="{{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DEFAULT_LANGUAGE_PLACEHOLDER' | translate }}" on-select="vm.setSelectedLanguage($item)")
                     ui-select-match(placeholder="{{ 'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DEFAULT_LANGUAGE_PLACEHOLDER' | translate }}") {{ $select.selected.nameNative }}
                     ui-select-choices(repeat="item in vm.languagesList | filter: $select.search")
