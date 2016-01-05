@@ -38,6 +38,11 @@ module.exports = (Translation) ->
             return prop
       return
 
+    # @param      {String}  input  Simple string
+    # @returns    {String}  String with escaped double quotes
+    _escapeDoubleQuotes = (input) ->
+      return input.replace(/\"/g, '\"')
+
 
     _getTranslationKeyAsync = (translation) ->
       _deferred = Q.defer()
@@ -177,7 +182,7 @@ module.exports = (Translation) ->
               if indexNamespace isnt -1
                 finalKey += queryOfTranslationKeysWithNamespacesResponse[indexNamespace].namespaces[0].namespace + '.'
               finalKey += item.keyString
-              _finalResult[finalKey] = text
+              _finalResult[finalKey] = _escapeDoubleQuotes(text)
 
           if _results.strings.length
             for x in _results.strings
@@ -187,7 +192,7 @@ module.exports = (Translation) ->
               if transKeyNamespaceIndex isnt -1
                 finalKey += queryOfTranslationKeysWithNamespacesResponse[transKeyNamespaceIndex].namespaces[0].namespace + '.'
               finalKey += x.translationKey.keyString
-              _finalResult[finalKey] = x.translatedPhrase
+              _finalResult[finalKey] = _escapeDoubleQuotes(x.translatedPhrase)
 
           return _finalResult # final Object
         , (e) ->
