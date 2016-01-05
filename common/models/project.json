@@ -18,7 +18,8 @@
     },
     "prefixNamespace": {
       "type": "string",
-      "required": false
+      "required": false,
+      "default": ""
     },
     "defaultLanguageId": {
       "type": "number",
@@ -26,7 +27,8 @@
     },
     "description": {
       "type": "string",
-      "required": false
+      "required": false,
+      "default": ""
     },
     "isDeleted": {
       "type": "boolean",
