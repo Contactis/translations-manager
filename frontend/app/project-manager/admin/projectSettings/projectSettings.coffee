@@ -33,6 +33,9 @@ angular.module('translation.pages.admin.project-settings', [
 AvailableLanguagesResolver, Project, toastr) ->
   vm = this
 
+  # @description Store state of sumitted form
+  vm.submitted = false
+
 
   # @public
   # @variable     vm.currentProject
@@ -143,15 +146,19 @@ AvailableLanguagesResolver, Project, toastr) ->
   # @description  Save about data for current used project.
   # @returns      {Promise}
   vm.saveAbout = ->
-    vm.currentProject.$save().then (success) ->
-      msg = $filter('translate')('APP.FRONTEND_MESSAGES.SUCCESSFULLY_SAVED_THE_DATA')
-      toastr.success msg
-      return true
-    , (e) ->
-      msg = $filter('translate')('APP.FRONTEND_MESSAGES.ERROR_OCCURED_WHILE_SAVING_THE_DATA') +
-        ' ' + $filter('translate')('APP.FRONTEND_MESSAGES.TRY_AGAIN_LATER') +
-        ' Error detail:' + e
-      toastr.error msg
-      return false
+    vm.submitted = true
+    if $scope.updateProjectForm.$valid
+      vm.currentProject.$save().then (success) ->
+        msg = $filter('translate')('APP.FRONTEND_MESSAGES.SUCCESSFULLY_SAVED_THE_DATA')
+        toastr.success msg
+        vm.submitted = false
+        return true
+      , (e) ->
+        msg = $filter('translate')('APP.FRONTEND_MESSAGES.ERROR_OCCURED_WHILE_SAVING_THE_DATA') +
+          ' ' + $filter('translate')('APP.FRONTEND_MESSAGES.TRY_AGAIN_LATER') +
+          ' Error detail:' + e
+        toastr.error msg
+        vm.submitted = false
+        return false
 
   return vm

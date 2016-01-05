@@ -205,8 +205,6 @@ translationApp.config( [
     'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS.ASSIGNED_USERS':  'Assigned Users'
 
 
-
-
     # ## app/project-manager/admin/projectExporter.jade
     'APP.ADMIN.PROJECT_EXPORTER.TITLE':                            'Project Exporter'
     'APP.ADMIN.PROJECT_EXPORTER.GENETAL_DESCRIPTION':              'Nothing here yet'
@@ -240,6 +238,9 @@ translationApp.config( [
     'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DESCRITPION_LABEL':         'Project description'
     'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DESCRITPION_PLACEHOLDER':
       'Type short description about what is the project'
+    'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_PREFIX_NAMESPACE_LABEL':         'Prefix namespace'
+    'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_PREFIX_NAMESPACE_PLACEHOLDER':
+      'This prefix will be pasted before each one key-index\'s namespace for this project'
     'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DEFAULT_LANGUAGE_LABEL':    'Project default language'
     'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DEFAULT_LANGUAGE_PLACEHOLDER':
       'Select or search default language for the project'
@@ -258,37 +259,6 @@ translationApp.config( [
       'Nothing yet'
     'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS.AVAILABLE_USERS': 'Available users'
     'APP.ADMIN.USER_ASSIGNMENT.SECTION_PROJECT_USERS.ASSIGNED_USERS':  'Assigned Users'
-
-
-    # app/project-manager/admin/projectSettings.jade
-    'APP.ADMIN.PROJECT_SETTINGS.GENETAL_DESCRIPTION':     'Nothing here yet'
-
-    'APP.ADMIN.PROJECT_SETTINGS.SECTION_ABOUT':           'About'
-    'APP.ADMIN.PROJECT_SETTINGS.SECTION_DATE_AND_TIME':   'Date & Time'
-    'APP.ADMIN.PROJECT_SETTINGS.SECTION_WORKFLOW':        'Workflow'
-
-    'APP.ADMIN.PROJECT_SETTINGS.FIELD_OUTPUT_CASE_TYPE_LABEL':  'Output Case type'
-
-    'APP.ADMIN.PROJECT_SETTINGS.FIELD_NAMESPACE_LABEL':         'Separator for namespaces'
-    'APP.ADMIN.PROJECT_SETTINGS.FIELD_NAMESPACE_PLACEHOLDER':   'Type a namespace separator character'
-    'APP.ADMIN.PROJECT_SETTINGS.VALIDATION_NAMESPACE_REQUIRED':       'Namespace field is required'
-    'APP.ADMIN.PROJECT_SETTINGS.VALIDATION_NAMESPACE_IS_NOT_VALID':   'Namespace field is not valid'
-    'APP.ADMIN.PROJECT_SETTINGS.VALIDATION_NAMESPACE_IS_VALID':       'Namespace field is valid'
-    'APP.ADMIN.PROJECT_SETTINGS.VALIDATION_NAMESPACE_MIN_CHARACTER':  'Namespace field must contain minimum 1 character'
-
-    'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_NAME_LABEL':                'Project name'
-    'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_NAME_PLACEHOLDER':          'Type name for the project'
-    'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DESCRITPION_LABEL':         'Project description'
-    'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DESCRITPION_PLACEHOLDER':
-      'Type short description about what is the project'
-    'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DEFAULT_LANGUAGE_LABEL':    'Project default language'
-    'APP.ADMIN.PROJECT_SETTINGS.FIELD_PROJECT_DEFAULT_LANGUAGE_PLACEHOLDER':
-      'Select or search default language for the project'
-
-    'APP.ADMIN.PROJECT_SETTINGS.SECTION_ABOUT_GENERAL_DESCRIPTION':         'Nothing here yet'
-    'APP.ADMIN.PROJECT_SETTINGS.SECTION_DATE_AND_TIME_GENERAL_DESCRIPTION': 'Nothing here yet'
-    'APP.ADMIN.PROJECT_SETTINGS.SECTION_WORKFLOW_GENERAL_DESCRIPTION':
-      'All stuff related to building translations'
 
     # common/directives/trWaitingSpinnerDiv/trWaitingSpinnerDiv.jade
   })
