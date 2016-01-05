@@ -22,6 +22,8 @@ angular.module('translation.pages.admin.new-project', [
       ProjectsResolver: (Project) ->
         return Project.find
           filter:
+            where:
+              isDeleted: 0
             include: [
               "defaultLanguage"
             ]
@@ -29,12 +31,13 @@ angular.module('translation.pages.admin.new-project', [
       CurrentProjectResolver:  (CurrentProjectService) ->
         return CurrentProjectService.getCurrentProject()
 
-.controller 'NewProjectController', ($rootScope, $filter,
+.controller 'NewProjectController', ($rootScope, $filter, toastr,
 CurrentProjectResolver, ProjectsResolver, Project, ProjectLanguage, $uibModal) ->
   vm = this
 
   vm.currentProject = CurrentProjectResolver
   vm.projects = ProjectsResolver
+
 
   vm.addNewProject = () ->
     $uibModal.open
@@ -44,45 +47,43 @@ CurrentProjectResolver, ProjectsResolver, Project, ProjectLanguage, $uibModal) -
       controllerAs: 'vm'
       size:         'lg'
       windowClass:  'center-modal'
-
+    return
 
   _updateProjectsList = () ->
-    Project.find().$promise.then (projectsResponse) ->
+    Project.find
+      filter:
+        where:
+          isDeleted: 0
+        include: [
+          "defaultLanguage"
+        ]
+    .$promise.then (projectsResponse) ->
       vm.projects = projectsResponse
       return
     , (projectsError) ->
       msg = $filter('translate')('APP.FRONTEND_MESSAGES.ERROR_OCCURED_WHILE_GETTING_PROJECTS_DATA')
-      toastr.error msg
+      toastr.error(msg)
       return
     return
+
 
   vm.deleteProject = (index) ->
     _id = vm.projects[index].id
     console.log(_id)
-    Project.deleteById({id: _id}).$promise.then (projectDeleteResponse) ->
-      console.log "projectDeleteResponse", projectDeleteResponse
-      ProjectLanguage.find
-        where:
-          projectId: _id
-      .$promise.then (proLangResponse) ->
-        console.log 'proLangResponse', proLangResponse
-        ProjectLanguage.deleteById({id: proLangResponse.id}).$promise.then (proLangDeleteResponse) ->
-          console.log 'proLangDeleteResponse', proLangDeleteResponse
-          msg = $filter('translate')('APP.FRONTEND_MESSAGES.NEW_PROJECT.PROJECT_REMOVED_SUCCESSFULLY')
-          toastr.error msg
-          _updateProjectsList()
-          return
-        , (proLangDeleteError) ->
-          console.log('Cannot remove ProjectLanguage entry', proLangDeleteError)
-          return
-      , (proLangError) ->
-        console.log('Cannot get ProjectLanguage entry', proLangError)
-        return
+    _obj =
+      id:         _id
+      isDeleted:  1
+    Project.upsert(_obj).$promise.then (projectUpdateResponse) ->
+      # acctualty is not removed, only update isDeleted = true
+      console.log 'projectUpdateResponse', projectUpdateResponse
+      msg = $filter('translate')('APP.FRONTEND_MESSAGES.NEW_PROJECT.PROJECT_REMOVED_SUCCESSFULLY')
+      toastr.success msg
+      _updateProjectsList()
       return
-    , (projectDeleteError) ->
+    , (proLangDeleteError) ->
+      console.log('Cannot remove project', proLangDeleteError)
       msg = $filter('translate')('APP.FRONTEND_MESSAGES.NEW_PROJECT.ERROR_OCCURED_WHILE_REMOVING_PROJECT')
       toastr.error msg
-      console.log 'Error: ', projectDeleteError
       return
     return
 
@@ -90,6 +91,7 @@ CurrentProjectResolver, ProjectsResolver, Project, ProjectLanguage, $uibModal) -
   $rootScope.$on 'reloadProjectsList', (event, data) ->
     console.log 'reloadProjectsList', data
     _updateProjectsList()
+    return
 
 
   return vm
