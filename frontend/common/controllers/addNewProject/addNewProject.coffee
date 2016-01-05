@@ -57,7 +57,7 @@ ProjectLanguage) ->
         proLang =
           projectId:  projectResponse.id
           languageId: projectResponse.defaultLanguageId
-        ProjectLanguage.upset(proLang).$promise.then (proLangResponse) ->
+        ProjectLanguage.create(proLang).$promise.then (proLangResponse) ->
           console.log 'proLangResponse', proLangResponse
           msg = $filter('translate')('APP.FRONTEND_MESSAGES.ADD_NEW_PROJECT.PROJECT_CREATED_SUCCESSFULLY')
           toastr.success msg
