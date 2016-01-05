@@ -1,1 +1,35 @@
-div asdsdsadasdas
+.row
+  .col-md-12
+    .card
+      .card-body
+        .panel.panel-info(data-ng-hide="vm.projects.length")
+          .panel-heading
+            | {{  'APP.ADMIN.NEW_PROJECT.FRONTEND_MESSAGES.NO_PROJECTS_AVAILABLE' | translate }}
+          .panel-body
+            | {{  'APP.ADMIN.NEW_PROJECT.FRONTEND_MESSAGES.ADD_NEW_PROJECT' | translate }}
+        table.table.table-striped(data-ng-show="vm.projects.length" search-watch-model="vm.query" st-safe-src="vm.tableData" st-table="vm.displayedCollection")
+          thead
+            tr
+              th Id
+              th Project name
+              th Project description
+              th Prefix namespace
+              th Default language
+              th Delete project
+          tbody
+            tr(data-ng-repeat="singleRow in vm.projects")
+              td {{singleRow.id}}
+              td {{singleRow.name}}
+              td {{singleRow.description}}
+              td {{singleRow.prefixNamespace}}
+              td {{singleRow.defaultLanguage.nameNative}}
+              td
+                button.btn.btn-xs.btn-danger(data-ng-click="vm.deleteProject($index)")
+                  | Delete
+
+        button.addButtonPosition.btn.btn-primary.btn-circle(type="button" data-ng-click="vm.addNewProject()" title="{{ '' | translate }}")
+          i.fa.fa-plus
+
+     //-h2 Debug variables
+     //-pre
+       //-| vm: {{vm|json}}
