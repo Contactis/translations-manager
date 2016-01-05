@@ -72,6 +72,8 @@ translationApp.config( [
     'APP.FRONTEND_MESSAGES.INFO':                                 'Info'
     'APP.FRONTEND_MESSAGES.SUCCESSFULLY_SAVED_THE_DATA':          'Successfully saved the data.'
     'APP.FRONTEND_MESSAGES.ERROR_OCCURED_WHILE_SAVING_THE_DATA':  'Error occured while saving the data.'
+    'APP.FRONTEND_MESSAGES.ERROR_OCCURED_WHILE_GETTING_LANGUAGES_DATA':
+      'Error occured while getting languages data.'
     'APP.FRONTEND_MESSAGES.TRY_AGAIN_LATER':                      'Try again later'
 
     'APP.FRONTEND_MESSAGES.WAITING_FOR_LOADING_DATA':   'Waiting for loading data'
@@ -114,6 +116,19 @@ translationApp.config( [
     # project-exporter
     'APP.FRONTEND_MESSAGES.PROJECT_EXPORTER.SUCCESSFULLY_GENERATE_LIST' :  'Successfully generate list'
 
+    # new project (view)
+    'APP.FRONTEND_MESSAGES.NEW_PROJECT.PROJECT_REMOVED_SUCCESSFULLY' : 'Project removed successfully'
+    'APP.FRONTEND_MESSAGES.NEW_PROJECT.ERROR_OCCURED_WHILE_REMOVING_PROJECT' : 'Error occured while removeing project'
+
+
+    # dialog addNewProject
+    'APP.FRONTEND_MESSAGES.ADD_NEW_PROJECT.PROJECT_CREATED_SUCCESSFULLY' :  'Project created successfully'
+    'APP.FRONTEND_MESSAGES.ERROR_OCCURED_WHILE_GETTING_PROJECTS_DATA' :
+      'Error occured while getting projects data'
+    'APP.FRONTEND_MESSAGES.ADD_NEW_PROJECT.PROBLEM_OCCURED_WHILE_CREATING_NEW_PROJECT' :
+      'Problem occured while creating new project'
+    'APP.FRONTEND_MESSAGES.ADD_NEW_PROJECT.PROBLEM_OCCURED_WHILE_CREATING_PROJECT_LANGUAGE_ENTRY':
+      'Problem occured while creating project-language entry'
 
     # ## dialogs
 
@@ -139,8 +154,27 @@ translationApp.config( [
     'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.CONTEXT_DESCRIPTION':
       'Context description'
 
-    # ## app/dashboard.jade
 
+
+    # common/templates/dialog/addNewProject.jade
+    'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.ADD_NEW_PROJECT': 'Add new project'
+    'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.PROJECT_NAME': 'Project name'
+    'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.PROJECT_NAME_PLACEHOLDER': 'ex: Supersonic cars'
+    'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.PROJECT_NAMESPACE':
+      'Project namespace'
+    'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.PROJECT_NAMESPACE_PLACEHOLDER':
+      'This prefix will be pasted before each one key-index\'s namespace for this project'
+    'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.PROJECT_DESCRIPTION': 'Project description'
+    'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.PROJECT_DESCRIPTION_PLACEHOLDER':
+      'Simple description better describing this project'
+    'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.DEFAULT_LANGUAGE' : 'Default language'
+    'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.SELECT_LANGUAGE': '<< Select a language >>'
+    'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.VALIDATION.PROJECT_NAME_REQUIRED':
+      'Project name required'
+    'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.VALIDATION.PROJECT_DEFAULT_LANGUAGE_REQUIRED' :
+      'Project default language required'
+
+    # ## app/dashboard.jade
 
     # ## app/login.jade
     'APP.LOGIN.SING_IN':                                      'Sing in'
@@ -181,7 +215,9 @@ translationApp.config( [
     'APP.ADMIN.PROJECT_EXPORTER.EXPORTER.WHICH_LANGUAGE_EXPORT': \
       'Which language you want to export for current project',
 
-    '': '',
+    'APP.ADMIN.NEW_PROJECT.': '',
+    'APP.ADMIN.NEW_PROJECT.FRONTEND_MESSAGES.NO_PROJECTS_AVAILABLE': 'No projects available',
+    'APP.ADMIN.NEW_PROJECT.FRONTEND_MESSAGES.ADD_NEW_PROJECT': 'Add new project'
 
     # ## app/project-manager/admin/projectSettings.jade
     'APP.ADMIN.PROJECT_SETTINGS.GENETAL_DESCRIPTION':     'Nothing here yet'
