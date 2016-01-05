@@ -1,0 +1,39 @@
+form(novalidate="" role="form" name="addNewProjectForm")
+  .modal-header
+    h3 {{ 'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.ADD_NEW_PROJECT' | translate }}
+
+  tr-waiting-spinner-div(is-pending="vm.isPending")
+
+  .modal-body(data-ng-hide="vm.isPending")
+    .row
+      .col-sm-12(style="margin:0")
+        .form-group(style="margin: 0")
+          label(for="projectNameInput") {{ 'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.PROJECT_NAME' | translate }}*
+          input.form-control(id="projectNameInput" type="text" name="projectName" placeholder="{{ 'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.PROJECT_NAME_PLACEHOLDER' | translate}}" data-ng-model="vm.formdata.name" data-ng-required="true")
+        .text-danger(data-ng-show="(addNewProjectForm.projectName.$dirty && addNewProjectForm.projectName.$invalid || vm.submitted) && addNewProjectForm.projectName.$error.required")
+          | {{ 'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.VALIDATION.PROJECT_NAME_REQUIRED' | translate }}
+
+        .form-group(style="margin-top: 20px")
+          label.control-label(for="projectDescriptionInput") {{ 'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.PROJECT_DESCRIPTION' | translate }}
+          textarea.form-control(id="projectDescriptionInput" data-ng-model="vm.formdata.description" rows="2" placeholder="{{ 'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.PROJECT_DESCRIPTION_PLACEHOLDER' | translate }}" )
+
+        .form-group
+          label(for="projectNamespaceInput") {{ 'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.PROJECT_NAMESPACE' | translate }}
+          input.form-control(id="projectNamespaceInput" type="text" placeholder="{{ 'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.PROJECT_NAMESPACE_PLACEHOLDER' | translate }}" data-ng-model="vm.formdata.prefixNamespace")
+
+        .form-group(style="margin: 0")
+          label.control-label(for="defaultLanguageInput") {{ 'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.DEFAULT_LANGUAGE' | translate }}*
+          select.form-control(id="defaultLanguageInput" name="defaultLanguageId" data-ng-model="vm.formdata.defaultLanguageId" data-ng-required="true")
+            option(value="") {{ 'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.SELECT_LANGUAGE' | translate }}
+            option(value="{{item.id}}" data-ng-repeat="item in vm.languages") {{item.nameNative}} ({{ item.ietfCode }})
+        .text-danger(data-ng-show="(addNewProjectForm.defaultLanguageId.$dirty && addNewProjectForm.defaultLanguageId.$invalid || vm.submitted) && addNewProjectForm.defaultLanguageId.$error.required")
+          | {{ 'COMMON.TEMPALTES.DIALOG.ADD_NEW_PROJECT.VALIDATION.PROJECT_DEFAULT_LANGUAGE_REQUIRED' | translate }}
+
+  .modal-footer
+    button.btn.btn-success.pull-right(type="button" ng-click="vm.saveNewProject()") {{ 'GENERAL.CREATE' | translate }}
+    button.btn.btn-info.pull-right.margin-right-15(type="button" ng-click="vm.cleanForm()") {{ 'GENERAL.CLEAN_FORM' | translate }}
+    button.btn.btn-warning.pull-right(type="button" ng-click="vm.cancel()") {{ 'GENERAL.CANCEL' | translate }}
+
+   //-h2 Debug variables
+   //-pre
+     //-| vm: {{vm|json}}
