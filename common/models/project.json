@@ -6,16 +6,32 @@
     "validateUpsert": true
   },
   "properties": {
+    "id": {
+      "type": "number",
+      "display": {
+        "label": "ID"
+      }
+    },
     "name": {
       "type": "string",
       "required": true
+    },
+    "prefixNamespace": {
+      "type": "string",
+      "required": false
     },
     "defaultLanguageId": {
       "type": "number",
       "required": true
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "required": false
+    },
+    "isDeleted": {
+      "type": "boolean",
+      "required": false,
+      "default": 0
     }
   },
   "validations": [],
