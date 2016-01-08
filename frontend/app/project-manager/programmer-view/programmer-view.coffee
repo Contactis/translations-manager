@@ -108,6 +108,16 @@ PluralService) ->
   vm.whatClass = (isPlural) ->
     return if isPlural then 'text-success' else 'text-danger'
 
+  vm.removeRow = (translationId) ->
+    TranslationKey.deleteById
+      id: translationId
+    .$promise.then ->
+      toastr.success 'Removed'
+      _reloadList()
+
+
+
+
 
   vm.editRow = (translationId) ->
     toastr.info $filter('translate')('APP.FRONTEND_MESSAGES.THIS_FEATURE_IS_NOT_YET_READY')
