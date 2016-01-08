@@ -1,6 +1,18 @@
-FROM ubuntu:14.04
+FROM phusion/baseimage
 
-RUN apt-get update && apt-get install -y build-essential curl git libfreetype6 libfontconfig1 python-pygments
+ENV MYSQL_PASSWORD root
+
+RUN echo "mysql-server mysql-server/root_password password $MYSQL_PASSWORD" | debconf-set-selections
+RUN echo "mysql-server mysql-server/root_password_again password $MYSQL_PASSWORD" | debconf-set-selections
+
+RUN apt-get update && apt-get install -y build-essential curl git libfreetype6 libfontconfig1 mysql-server
+
+RUN service mysql start && \
+    mysql -u root -p$MYSQL_PASSWORD -e "create database tr;" && \
+    service mysql stop
+
+WORKDIR /
+
 RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 RUN apt-get install -y nodejs
 
@@ -24,6 +36,10 @@ RUN bower --allow-root install
 
 WORKDIR /tr
 
-RUN apt-get remove -y python-pygments
+RUN cp server/datasources.sample.json server/datasources.json
 
-CMD gulp db:restore && gulp build --no-tests --no-docs
+ADD init_scripts/mysql.sh /etc/service/mysql/run
+ADD init_scripts/tr.sh /etc/service/tr/run
+
+EXPOSE 3000
+CMD ["/sbin/my_init", "--enable-insecure-key"]
