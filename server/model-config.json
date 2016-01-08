@@ -14,63 +14,63 @@
     ]
   },
   "User": {
-    "dataSource": "sqlite",
+    "dataSource": "mysql",
     "public": false
   },
   "AccessToken": {
-    "dataSource": "sqlite",
+    "dataSource": "mysql",
     "public": false
   },
   "ACL": {
-    "dataSource": "sqlite",
+    "dataSource": "mysql",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "sqlite",
+    "dataSource": "mysql",
     "public": true
   },
   "Role": {
-    "dataSource": "sqlite",
+    "dataSource": "mysql",
     "public": true
   },
   "Language": {
-    "dataSource": "sqlite",
+    "dataSource": "mysql",
     "public": true
   },
   "Namespace": {
-    "dataSource": "sqlite",
+    "dataSource": "mysql",
     "public": true
   },
   "Project": {
-    "dataSource": "sqlite",
+    "dataSource": "mysql",
     "public": true
   },
   "ProjectLanguage": {
-    "dataSource": "sqlite",
+    "dataSource": "mysql",
     "public": true
   },
   "ProjectAccount": {
-    "dataSource": "sqlite",
+    "dataSource": "mysql",
     "public": true
   },
   "Translation": {
-    "dataSource": "sqlite",
+    "dataSource": "mysql",
     "public": true
   },
   "TranslationKey": {
-    "dataSource": "sqlite",
+    "dataSource": "mysql",
     "public": true
   },
   "TranslationStatus": {
-    "dataSource": "sqlite",
+    "dataSource": "mysql",
     "public": true
   },
   "Account": {
-    "dataSource": "sqlite",
+    "dataSource": "mysql",
     "public": true
   },
   "LanguageTranslation": {
-    "dataSource": "sqlite",
+    "dataSource": "mysql",
     "public": true
   }
 }

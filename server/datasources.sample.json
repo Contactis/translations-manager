@@ -1,0 +1,15 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mysql": {
+    "name": "mysql",
+    "connector": "mysql",
+    "host": "127.0.0.1",
+    "user": "root",
+    "password": "root",
+    "database": "test"
+  }
+}
+

@@ -1,6 +1,6 @@
 module.exports = (app) ->
-  app.dataSources.sqlite.isActual (err, actual) ->
+  app.dataSources.mysql.isActual (err, actual) ->
     if !actual
-      app.dataSources.sqlite.autoupdate()
+      app.dataSources.mysql.autoupdate()
     return
   return

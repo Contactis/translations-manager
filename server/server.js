@@ -9,7 +9,7 @@ var app = module.exports = loopback();
 
 require('coffee-script').register();
 
-
+require('events').EventEmitter.prototype._maxListeners = 100;
 app.use(loopback.compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

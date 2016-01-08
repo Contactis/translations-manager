@@ -5,6 +5,7 @@ public
 .env
 .DS_Store
 *.log
+datasources.json
 
 ###############################
 ## Wiki pages
