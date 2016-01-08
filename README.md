@@ -59,6 +59,8 @@ npm install   # should install without sudo
 cd frontend && bower install
 ```
 
+Make sure to copy `server/datasources.sample.json` to `server/datasources.json` and update your mysql connection settings.
+
 then build and run environment
 
 ```
