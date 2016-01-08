@@ -10,6 +10,7 @@ var app = module.exports = loopback();
 require('coffee-script').register();
 
 
+require('events').EventEmitter.prototype._maxListeners = 100;
 app.use(loopback.compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,6 +19,7 @@ app.use(bodyParser.text());
 app.start = function() {
   //emitter.setMaxListeners(0);
   // start the web server
+
   return app.listen(function() {
     app.emit('started');
 
@@ -37,6 +39,7 @@ app.start = function() {
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
 boot(app, __dirname, function(err) {
+
   if (err) throw err;
 
   // start the server if `$ node server.js`
