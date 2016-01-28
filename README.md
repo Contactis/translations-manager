@@ -59,7 +59,19 @@ npm install   # should install without sudo
 cd frontend && bower install
 ```
 
+Install mysql and create database:
+
+```sql
+CREATE DATABASE `transman` CHARACTER SET utf8 COLLATE utf8_general_ci;
+```
+
 Make sure to copy `server/datasources.sample.json` to `server/datasources.json` and update your mysql connection settings.
+
+> Example:
+
+    cp server/datasources.sample.json server/datasources.json
+    sed -i -- 's/yourRootPassword/yourPassword/g' server/datasources.json # replace `yourPassword` for your database root pass
+    sed -i -- 's/transman/yourDatabase/g' server/datasources.json # replace `yourDatabase` for name of TR database
 
 then build and run environment
 
