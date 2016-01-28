@@ -8,8 +8,11 @@ services:
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+  - mysql -e 'create database transman;'
+
   - npm install -g gulp bower sequelize-cli groc
   - npm install
+  - cp server/datasources.sample.json server/datasources.json
   - cd frontend && bower install
   - gulp db:restore
 
