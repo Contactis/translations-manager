@@ -1,6 +1,6 @@
 FROM phusion/baseimage
 
-ENV MYSQL_PASSWORD root
+ENV MYSQL_PASSWORD yourRootPassword
 
 RUN echo "mysql-server mysql-server/root_password password $MYSQL_PASSWORD" | debconf-set-selections
 RUN echo "mysql-server mysql-server/root_password_again password $MYSQL_PASSWORD" | debconf-set-selections
@@ -8,7 +8,7 @@ RUN echo "mysql-server mysql-server/root_password_again password $MYSQL_PASSWORD
 RUN apt-get update && apt-get install -y build-essential curl git libfreetype6 libfontconfig1 mysql-server
 
 RUN service mysql start && \
-    mysql -u root -p$MYSQL_PASSWORD -e "create database tr;" && \
+    mysql -u root -p$MYSQL_PASSWORD -e "create database transman;" && \
     service mysql stop
 
 WORKDIR /
