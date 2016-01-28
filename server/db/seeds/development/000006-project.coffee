@@ -2,22 +2,24 @@ moment = require 'moment'
 
 projects = [
   {
-    id:               1
-    name:             'Translation manager'
-    prefixNamespace:  ''
+    id:                 1
+    name:               'Translation manager'
+    prefixNamespace:    ''
     defaultLanguageId:  1
-    description:      'This is dummy description for translation manager'
-    createdAt:        moment().format()
-    updatedAt:        moment().format()
+    description:        'This is dummy description for translation manager'
+    isDeleted:          0
+    createdAt:          moment().format()
+    updatedAt:          moment().format()
   }
   {
-    id:               2
-    name:             'Sample project'
-    prefixNamespace:  ''
+    id:                 2
+    name:               'Sample project'
+    prefixNamespace:    ''
     defaultLanguageId:  3
-    description:      'The purpus of this project is to test the API'
-    createdAt:        moment().format()
-    updatedAt:        moment().format()
+    description:        'The purpus of this project is to test the API'
+    isDeleted:          0
+    createdAt:          moment().format()
+    updatedAt:          moment().format()
   }
 ]
 
