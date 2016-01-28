@@ -8,7 +8,7 @@ RUN echo "mysql-server mysql-server/root_password_again password $MYSQL_PASSWORD
 RUN apt-get update && apt-get install -y build-essential curl git libfreetype6 libfontconfig1 mysql-server
 
 RUN service mysql start && \
-    mysql -u root -p$MYSQL_PASSWORD -e "CREATE DATABASE `transman` CHARACTER SET utf8 COLLATE utf8_general_ci;" && \
+    mysql -u root -p$MYSQL_PASSWORD -e "CREATE DATABASE transman CHARACTER SET utf8 COLLATE utf8_general_ci;" && \
     service mysql stop
 
 WORKDIR /
