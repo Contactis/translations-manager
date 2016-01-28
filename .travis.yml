@@ -9,7 +9,7 @@ before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - mysql -e 'create database transman;'
-
+  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('yourRootPassword') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
   - npm install -g gulp bower sequelize-cli groc
   - npm install
   - cp server/datasources.sample.json server/datasources.json
