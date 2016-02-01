@@ -7,16 +7,19 @@ angular.module('translation.controllers.sidenav', [
   'translation.services.authorization'
   'translation.services.filtersState'
   'translation.services.current-project'
+  'translation.providers.userPermissionsSettings'
   'lbServices'
 ])
 
 
 .controller 'SidenavController', ($rootScope, $state, $cookies, Account, FiltersStateService,
-AccountService, AuthorizationService, CurrentProjectService) ->
+AccountService, AuthorizationService, CurrentProjectService, UserPermissionsSettings) ->
 
   vm = this
 
-  vm.account = AccountService.account()
+  vm.accessLevels = UserPermissionsSettings.accessLevels
+
+  vm.account = AccountService.getAllData()
   vm.account.loggedIn = Account.isAuthenticated()
 
 
@@ -35,7 +38,6 @@ AccountService, AuthorizationService, CurrentProjectService) ->
   AccountService.hasBeenReloaded (account) ->
     vm.account = account
     vm.account.loggedIn = Account.isAuthenticated()
-
 
 
   vm.pages = [

@@ -2,47 +2,44 @@
   nav.navbar.navbar-default(role="navigation")
     .side-menu-container
       .navbar-header
-        a.navbar-brand(ui-sref="app.manager.dashboard")
+        a.navbar-brand(data-ui-sref="app.manager.dashboard")
           .icon.fa.fa-paper-plane
           .title {{ 'PROJECT.FULL_NAME' | translate }}
         button.navbar-expand-toggle.pull-right.visible-xs(type="button")
           i.fa.fa-times.icon
       ul.nav.navbar-nav
-        li(ui-sref-active="active")
-          a(ui-sref="app.manager.dashboard")
+        li(data-ui-sref-active="active" data-tr-access-level="vm.accessLevels.user")
+          a(data-ui-sref="app.manager.dashboard")
             span.icon.fa.fa-tachometer
             span.title {{ 'PAGE.DASHBOARD.TITLE' | translate }}
 
-        li(ui-sref-active="active")
-          a(ui-sref="app.manager.programmer-view")
-            span.icon.fa.fa-list-alt
-            span.title {{ 'PAGE.PROGRAMMER.TITLE' | translate }}
-
-        li(ui-sref-active="active")
-          a(ui-sref="app.manager.manager-view")
+        li(data-ui-sref-active="active" data-tr-access-level="vm.accessLevels.management")
+          a(data-ui-sref="app.manager.manager-view")
             span.icon.fa.fa-area-chart
             span.title {{ 'PAGE.MANAGER.TITLE' | translate }}
 
-        li(ui-sref-active="active")
-          a(ui-sref="app.manager.translator-view")
+        li(data-ui-sref-active="active" data-tr-access-level="vm.accessLevels.programmer")
+          a(data-ui-sref="app.manager.programmer-view")
+            span.icon.fa.fa-list-alt
+            span.title {{ 'PAGE.PROGRAMMER.TITLE' | translate }}
+
+        li(data-ui-sref-active="active" data-tr-access-level="vm.accessLevels.translator")
+          a(data-ui-sref="app.manager.translator-view")
             span.icon.fa.fa-table
             span.title {{ 'PAGE.TRANSLATOR.TITLE' | translate }}
 
-        li.panel.panel-default.dropdown(ui-sref-active="active")
+        li.panel.panel-default.dropdown(data-ui-sref-active="active" data-tr-access-level="")
           a.cursor-pointer(data-toggle="collapse", data-target="#dropdown-element")
             span.icon.fa.fa-cog
             span.title {{ 'PAGE.PROJECT_MANAGEMENT.TITLE' | translate }}
           #dropdown-element.panel-collapse.collapse
             .panel-body
               ul.nav.navbar-nav
-                li
-                  a(data-ui-sref="app.admin.new-project") {{ 'PAGE.PROJECT_MANAGEMENT.NEW_PROJECT.TITLE' | translate }}
-                li
-                  a(data-ui-sref="app.admin.project-settings") {{ 'PAGE.PROJECT_MANAGEMENT.PROJECT_SETTINGS.TITLE' | translate }}
-                li
-                  a(data-ui-sref="app.admin.user-assignment") {{ 'PAGE.PROJECT_MANAGEMENT.USER_ASSIGNMENT.TITLE' | translate }}
-                li
-                  a(data-ui-sref="app.admin.project-exporter") {{ 'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.TITLE' | translate }}
-
-
-
+                li(data-tr-access-level="vm.accessLevels.admin-only")
+                  a(data-data-ui-sref="app.admin.new-project") {{ 'PAGE.PROJECT_MANAGEMENT.NEW_PROJECT.TITLE' | translate }}
+                li(data-tr-access-level="vm.accessLevels.management")
+                  a(data-data-ui-sref="app.admin.project-settings") {{ 'PAGE.PROJECT_MANAGEMENT.PROJECT_SETTINGS.TITLE' | translate }}
+                li(data-tr-access-level="vm.accessLevels.admin-only")
+                  a(data-data-ui-sref="app.admin.user-assignment") {{ 'PAGE.PROJECT_MANAGEMENT.USER_ASSIGNMENT.TITLE' | translate }}
+                li(data-tr-access-level="vm.accessLevels.programmer")
+                  a(data-data-ui-sref="app.admin.project-exporter") {{ 'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.TITLE' | translate }}
