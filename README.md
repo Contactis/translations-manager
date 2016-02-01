@@ -19,7 +19,7 @@ each other and tons of translations.
 
 
 ## Installation
-Project is build entirely with javascript, backend based on [node.js][nodejs-website]
+Project is build entirely with javascript, backend based on [loopback][loopback-website]
 and platform and frontend part becongs to AngularJS.  Therefor
 [npm](https://www.npmjs.com/) and [Bower](http://bower.io/) are used.
 
@@ -33,14 +33,15 @@ machine, and these programs are:
 
 Simply update using NPM ([how to set up node.js](https://docs.npmjs.com/getting-started/installing-node))
 
-```
+```shell
 sudo npm cache clean -f
 sudo npm install -g n
 sudo n stable
 ```
 
 or using [`nvm`][nvm-github] (recommended)
-```
+
+```shell
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.28.0/install.sh | bash
 nvm install 4
 nvm use 4
@@ -49,7 +50,7 @@ nvm use 4
 
 Then clone the repo and install all requirements
 
-```
+```shell
 sudo apt-get install build-essential
 sudo npm install -g gulp bower sequelize-cli groc # for global install may need sudo
 
@@ -69,13 +70,15 @@ Make sure to copy `server/datasources.sample.json` to `server/datasources.json` 
 
 > Example:
 
+    ```shell
     cp server/datasources.sample.json server/datasources.json
     sed -i -- 's/yourRootPassword/yourPassword/g' server/datasources.json # replace `yourPassword` for your database root pass
     sed -i -- 's/transman/yourDatabase/g' server/datasources.json # replace `yourDatabase` for name of TR database
+    ```
 
 then build and run environment
 
-```
+```shell
 gulp db:restore  # build and seed database
 gulp production  # build, run tests and deploy the project for production
 ```
@@ -89,8 +92,6 @@ Enjoy the awesome :)
 All official things that is combined with development process like: app
 structure, frontend and backend side and other elaboration stuff are gathered in part called [**development**][wiki-development] into our Wiki pages.  
 To see more visit our [wiki pages][wiki].
-
-
 
 
 ## Licence
@@ -119,6 +120,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 [nvm-github]: https://github.com/creationix/nvm
 [gulpjs-website]: http://www.gulpjs.com
 [nodejs-website]: https://nodejs.org
+[loopback-website]: http://loopback.io/
 [wiki]: https://github.com/Contactis/translations-manager/wiki
 [wiki-development]: https://github.com/Contactis/translations-manager/wiki/Development
 [travis-ci-project-website]: https://travis-ci.org/Contactis/translations-manager 
