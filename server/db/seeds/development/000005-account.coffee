@@ -20,7 +20,7 @@ accounts = [
     username:           'Sir Manager'
     lastName:           'Manager'
     password:           'manager'
-    role:               'user'
+    role:               'manager'
     interfaceLanguage:  'en-us'
     emailVerified:      true
     lastUpdated:        moment().format()
@@ -31,7 +31,7 @@ accounts = [
     username:           'Sir Translator'
     lastName:           'Translator'
     password:           'translator'
-    role:               'user'
+    role:               'translator'
     interfaceLanguage:  'en-us'
     emailVerified:      true
     lastUpdated:        moment().format()
@@ -42,7 +42,7 @@ accounts = [
     username:           'Sir Programmer'
     lastName:           'Programmer'
     password:           'programmer'
-    role:               'user'
+    role:               'programmer'
     interfaceLanguage:  'en-us'
     emailVerified:      true
     lastUpdated:        moment().format()
