@@ -9,9 +9,8 @@ module.exports =
     'admin'
   ]
   accessLevels:
-    'public':           '*'
-    'anon':             [ 'public' ]
-    'programmer':       [ 'programmer' ]
+    'public': '*'
+    'anon': [ 'public' ]
     'user': [
       'user'
       'translator'
@@ -19,14 +18,27 @@ module.exports =
       'manager'
       'admin'
     ]
-    'management':       [
-      'admin'
+    'translator': [
+      'translator'
       'manager'
+      'admin'
+    ]
+    'programmer': [
+      'programmer'
+      'manager'
+      'admin'
+    ]
+    'manager': [
+      'manager'
+      'admin'
+    ]
+    'admin': [
+      'admin'
     ]
     'translator-only':  [ 'translator' ]
     'programmer-only':  [ 'programmer' ]
-    'manager':          [ 'manager' ]
-    'admin':            [ 'admin' ]
+    'manager-only':     [ 'manager' ]
+    'admin-only':       [ 'admin' ]
 
 
 
