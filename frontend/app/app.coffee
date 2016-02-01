@@ -15,7 +15,7 @@ translationApp = angular.module('translation', [
   'templates-module'
 
   # Including directives
-  'translation.directives.accessLevel'
+  'translation.directives.trAccessLevel'
   'translation.directive.searchWatchModel'
 
   # Including pages of aplication
@@ -36,6 +36,9 @@ translationApp = angular.module('translation', [
   #
   # Including modules
   'translation.modules.languages'
+
+  # Including providers
+  'translation.providers.userPermissionsSettings'
 
   # Including services
   'translation.services.account'
