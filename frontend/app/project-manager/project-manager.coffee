@@ -1,7 +1,9 @@
 translationApp = angular.module('translation.pages.manager', [
   'translation.services.current-project'
 ])
-.config ($stateProvider) ->
+.config ($stateProvider, UserPermissionsSettingsProvider) ->
+
+  access = UserPermissionsSettingsProvider.accessLevels
 
   $stateProvider
   .state 'app.manager',
@@ -11,6 +13,8 @@ translationApp = angular.module('translation.pages.manager', [
     controller:   'ManagerController'
     controllerAs: 'vm'
     template:     '<div ui-view=""></div>'
+    data:
+      access:     access.manager
     resolve:
       currentProject: (CurrentProjectService) ->
         return CurrentProjectService.getProjectContext()
