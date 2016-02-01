@@ -20,7 +20,7 @@ angular.module('translation.pages.translator-view', [
     controllerAs:   'vm'
     templateUrl:    'project-manager/translator-view/translator-view.tpl.html'
     data:
-      access:       access.user
+      access:       access.translator
     resolve:
       currentProject: (CurrentProjectService) ->
         return CurrentProjectService.getCurrentProject()
