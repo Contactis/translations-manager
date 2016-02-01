@@ -213,9 +213,18 @@ translationApp.config( [
     'APP.ADMIN.PROJECT_EXPORTER.EXPORTER.WHICH_LANGUAGE_EXPORT': \
       'Which language you want to export for current project',
 
-    'APP.ADMIN.NEW_PROJECT.': '',
+    # ## 2app/project-manager/admin/newProject/newProject.jade
+    'APP.ADMIN.NEW_PROJECT.TITLE': 'Add new project',
+    'APP.ADMIN.NEW_PROJECT.GENETAL_DESCRIPTION': 'Manage of adding or removing projects'
     'APP.ADMIN.NEW_PROJECT.FRONTEND_MESSAGES.NO_PROJECTS_AVAILABLE': 'No projects available',
     'APP.ADMIN.NEW_PROJECT.FRONTEND_MESSAGES.ADD_NEW_PROJECT': 'Add new project'
+    'APP.ADMIN.NEW_PROJECT.TABLE.ID': 'Id'
+    'APP.ADMIN.NEW_PROJECT.TABLE.PROJECT_NAME': 'Project name'
+    'APP.ADMIN.NEW_PROJECT.TABLE.PROJECT_DESCRIPTION': 'Project description'
+    'APP.ADMIN.NEW_PROJECT.TABLE.PREFIX_NAMESPACE': 'Prefix namespace'
+    'APP.ADMIN.NEW_PROJECT.TABLE.DEFAULT_LANGUAGE': 'Default language'
+    'APP.ADMIN.NEW_PROJECT.TABLE.DELETE_PROJECT': 'Delete project'
+    'APP.ADMIN.NEW_PROJECT.DELETE': 'Delete'
 
     # ## app/project-manager/admin/projectSettings.jade
     'APP.ADMIN.PROJECT_SETTINGS.GENETAL_DESCRIPTION':     'Nothing here yet'
