@@ -1,6 +1,6 @@
-angular.module('translation.directives.accessLevel', [
+angular.module('translation.directives.trAccessLevel', [
   'translation.services.account'
-  'translation.providers.userPermissionsSettings'
+  'translation.services.authorization'
 ])
 
 .directive 'trAccessLevel', (AuthorizationService, AccountService) ->
