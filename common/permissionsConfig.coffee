@@ -20,12 +20,10 @@ module.exports =
     ]
     'translator': [
       'translator'
-      'manager'
       'admin'
     ]
     'programmer': [
       'programmer'
-      'manager'
       'admin'
     ]
     'manager': [
