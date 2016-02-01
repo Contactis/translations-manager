@@ -20,7 +20,7 @@ angular.module('translation.pages.admin.project-settings', [
     controllerAs:   'vm'
     templateUrl:    'project-manager/admin/projectSettings/projectSettings.tpl.html'
     data:
-      access:       access.management
+      access:       access.manager
     resolve:
       PresentUsingProjectResolver:  (CurrentProjectService) ->
         return CurrentProjectService.getCurrentProject()

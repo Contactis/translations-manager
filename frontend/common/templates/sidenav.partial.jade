@@ -13,7 +13,7 @@
             span.icon.fa.fa-tachometer
             span.title {{ 'PAGE.DASHBOARD.TITLE' | translate }}
 
-        li(data-ui-sref-active="active" data-tr-access-level="vm.accessLevels.management")
+        li(data-ui-sref-active="active" data-tr-access-level="vm.accessLevels.manager")
           a(data-ui-sref="app.manager.manager-view")
             span.icon.fa.fa-area-chart
             span.title {{ 'PAGE.MANAGER.TITLE' | translate }}
@@ -28,18 +28,18 @@
             span.icon.fa.fa-table
             span.title {{ 'PAGE.TRANSLATOR.TITLE' | translate }}
 
-        li.panel.panel-default.dropdown(data-ui-sref-active="active" data-tr-access-level="")
+        li.panel.panel-default.dropdown(data-ui-sref-active="active" data-tr-access-level="vm.accessLevels.user")
           a.cursor-pointer(data-toggle="collapse", data-target="#dropdown-element")
             span.icon.fa.fa-cog
             span.title {{ 'PAGE.PROJECT_MANAGEMENT.TITLE' | translate }}
           #dropdown-element.panel-collapse.collapse
             .panel-body
               ul.nav.navbar-nav
-                li(data-tr-access-level="vm.accessLevels.admin-only")
-                  a(data-data-ui-sref="app.admin.new-project") {{ 'PAGE.PROJECT_MANAGEMENT.NEW_PROJECT.TITLE' | translate }}
-                li(data-tr-access-level="vm.accessLevels.management")
-                  a(data-data-ui-sref="app.admin.project-settings") {{ 'PAGE.PROJECT_MANAGEMENT.PROJECT_SETTINGS.TITLE' | translate }}
-                li(data-tr-access-level="vm.accessLevels.admin-only")
-                  a(data-data-ui-sref="app.admin.user-assignment") {{ 'PAGE.PROJECT_MANAGEMENT.USER_ASSIGNMENT.TITLE' | translate }}
+                li(data-tr-access-level="vm.accessLevels.admin")
+                  a(data-ui-sref="app.admin.new-project") {{ 'PAGE.PROJECT_MANAGEMENT.NEW_PROJECT.TITLE' | translate }}
+                li(data-tr-access-level="vm.accessLevels.manager")
+                  a(data-ui-sref="app.admin.project-settings") {{ 'PAGE.PROJECT_MANAGEMENT.PROJECT_SETTINGS.TITLE' | translate }}
+                li(data-tr-access-level="vm.accessLevels.admin")
+                  a(data-ui-sref="app.admin.user-assignment") {{ 'PAGE.PROJECT_MANAGEMENT.USER_ASSIGNMENT.TITLE' | translate }}
                 li(data-tr-access-level="vm.accessLevels.programmer")
-                  a(data-data-ui-sref="app.admin.project-exporter") {{ 'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.TITLE' | translate }}
+                  a(data-ui-sref="app.admin.project-exporter") {{ 'PAGE.PROJECT_MANAGEMENT.PROJECT_EXPORTER.TITLE' | translate }}

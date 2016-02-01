@@ -18,7 +18,7 @@ angular.module('translation.pages.manager-view', [
     controllerAs:   'vm'
     templateUrl:    'project-manager/manager-view/manager-view.tpl.html'
     data:
-      access: access.user
+      access: access.manager
 
 
 .controller 'ManagerViewController', ($timeout, TranslationKey) ->

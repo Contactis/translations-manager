@@ -10,7 +10,7 @@ angular.module('translation.pages.admin', [])
     controller:     'AdminController'
     templateUrl:    'project-manager/admin/admin.tpl.html'
     data:
-      access:       access.management
+      access:       access.user
 
 .controller 'AdminController', ->
   return

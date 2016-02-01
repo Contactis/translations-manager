@@ -21,7 +21,7 @@ angular.module('translation.pages.admin.project-exporter', [
     controllerAs:   'vm'
     templateUrl:    'project-manager/admin/projectExporter/projectExporter.tpl.html'
     data:
-      access:       access.management
+      access:       access.programmer
     resolve:
       PresentUsingProjectResolver:  (CurrentProjectService) ->
         return CurrentProjectService.getCurrentProject()

@@ -16,7 +16,7 @@ angular.module('translation.pages.admin.user-assignment', [
     controllerAs:   'vm'
     templateUrl:    'project-manager/admin/userAssignment/userAssignment.tpl.html'
     data:
-      access:       access.management
+      access:       access.admin
     resolve:
       AllAccountsResolver: (Account) ->
         return Account.find().$promise

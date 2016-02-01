@@ -14,7 +14,7 @@ translationApp = angular.module('translation.pages.manager', [
     controllerAs: 'vm'
     template:     '<div ui-view=""></div>'
     data:
-      access:     access.manager
+      access:     access.user
     resolve:
       currentProject: (CurrentProjectService) ->
         return CurrentProjectService.getProjectContext()

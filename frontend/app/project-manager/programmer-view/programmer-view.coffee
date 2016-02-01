@@ -25,7 +25,7 @@ angular.module('translation.pages.programmer-view', [
     controllerAs:   'vm'
     templateUrl:    'project-manager/programmer-view/programmer-view.tpl.html'
     data:
-      access:       access.user
+      access:       access.programmer
     resolve:
       CurrentProjectResolver:  (CurrentProjectService) ->
         return CurrentProjectService.getCurrentProject()
