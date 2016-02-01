@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cd /tr && gulp db:restore && gulp build --no-tests --no-docs
+cd /tr && gulp build --no-tests --no-docs
