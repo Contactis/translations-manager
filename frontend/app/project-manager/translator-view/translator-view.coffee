@@ -27,7 +27,8 @@ angular.module('translation.pages.translator-view', [
       LanguageListResolver: (LanguageService, CurrentProjectResolver) ->
         return LanguageService.getAllTranslationsForProject(CurrentProjectResolver.id)
 
-.controller 'TranslatorViewController', (TranslationKey, LanguageService, Translation, UserPermissionsSettings,
+
+.controller 'TranslatorViewController', ($log, TranslationKey, LanguageService, Translation, UserPermissionsSettings,
 LanguageListResolver, CurrentProjectResolver) ->
 
   vm                  = this
@@ -43,12 +44,7 @@ LanguageListResolver, CurrentProjectResolver) ->
   vm.translateLanguage  = LanguageService.getTranslateLanguage(_langList, vm.currentProject.defaultLanguageId)
   vm.allLanguages       = _langList
 
-  vm.updateLanguage = (lang) ->
-    LanguageService.setTranslationLanguageId(lang.id)
-    _fetchData()
-
-
-  _fetchData = ->
+  (_fetchData = ->
     _defaultLanguageId = vm.currentProject.defaultLanguageId
     TranslationKey.find
       filter:
@@ -61,8 +57,8 @@ LanguageListResolver, CurrentProjectResolver) ->
             scope:
               where:
                 or:[
-                  {languageId:_defaultLanguageId},
-                  {languageId:LanguageService.getTranslationLanguageIdOrFind(_defaultLanguageId, _langList)}
+                  {languageId: _defaultLanguageId},
+                  {languageId: LanguageService.getTranslationLanguageIdOrFind(_defaultLanguageId, _langList)}
                 ]
           }
         ]
@@ -72,9 +68,14 @@ LanguageListResolver, CurrentProjectResolver) ->
       vm.tableData = success
       vm.displayedCollection = [].concat(vm.tableData)
     , (error) ->
-      console.log 'Problem with loading translation keys', error
+      $log.error 'Problem with loading translation keys', error
+  )(@)
 
-  _fetchData()
+
+  vm.updateLanguage = (lang) ->
+    LanguageService.setTranslationLanguageId(lang.id)
+    _fetchData()
+
 
   vm.deleteTranslation = (itemIndex) ->
     if vm.displayedCollection[itemIndex].translations[1] is undefined
@@ -85,7 +86,6 @@ LanguageListResolver, CurrentProjectResolver) ->
         Translation.deleteById { id:_translationId }
         .$promise.then () ->
           delete vm.displayedCollection[itemIndex].translations[1]
-
 
   return vm
 
