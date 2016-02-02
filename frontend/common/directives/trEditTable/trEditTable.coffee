@@ -44,7 +44,7 @@ angular.module('translator.directive.trEditTable', [
         translate.id = succes.id
 
   cleanBindHelper = (_lock, element, scope)->
-    _lock=true
+    _lock = true
     element.html(getTemplate('td')).show()
     scope.$apply ->
       $compile(element.contents())(scope)
@@ -56,7 +56,7 @@ angular.module('translator.directive.trEditTable', [
         scope.$apply ->
           $compile(element.contents())(scope)
           element[0].querySelector('input').focus()
-        _lock=false
+        _lock = false
 
   prepareCleanInput = (element, scope) ->
     _lock = true
@@ -129,7 +129,8 @@ angular.module('translator.directive.trEditTable', [
 
   return {
   require: '^?stTable'
-  template: '<span> {{ translateVal.translatedPhrase }} </span>'
+  replace: true
+  template: '<input type="text" class="form-control" value="{{ translateVal.translatedPhrase }}" />'
   link: linker
   scope:
     translateVal:'='
