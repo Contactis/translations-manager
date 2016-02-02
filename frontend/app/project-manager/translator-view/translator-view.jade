@@ -17,15 +17,12 @@
           | Programmers team need to provide translation strings.
 
       .card(data-ng-if="vm.displayedCollection.length > 0")
-        //- .card-header
-        //-   .card-title
-        //-     .title Translations
         .card-body
           table.table.table-striped(search-watch-model="vm.query" st-safe-src="vm.tableData" st-table="vm.displayedCollection")
             thead
               tr
                 th Group
-                th
+                th(style="min-width: 250px")
                   select.form-control(data-ng-model="vm.translateLanguage"
                   data-ng-options="opt.nameNative for opt in vm.allLanguages"
                   data-ng-change="vm.updateLanguage(vm.translateLanguage)")
@@ -33,6 +30,9 @@
                 th Context description ({{ vm.currentProject.defaultLanguage.nameNative }})
                 th
                   div(data-tr-access-level="vm.accessLevels.programmer") {{ 'GENERAL.MODIFY' | translate }}
+              tr
+                th(colspan="5")
+                  input(st-search="" class="form-control" placeholder="Search for phrases ..." type="text")
             tbody
               tr(data-ng-repeat="singleRow in vm.displayedCollection")
                 td {{singleRow.keyString}}
@@ -43,5 +43,6 @@
                   tr-edit-table(translate-val="singleRow.translations[0]" translate-object="singleRow")
                 td {{singleRow.translations[0].translatedPhrase}}
                 td {{singleRow.translations[0].description}}
-                td(data-tr-access-level="vm.accessLevels.programmer")
-                  button.btn.btn-xs.btn-danger(data-ng-click="vm.deleteTranslation($index)") {{ 'GENERAL.DELETE' | translate}}
+                td
+                  div(data-tr-access-level="vm.accessLevels.programmer")
+                    button.btn.btn-xs.btn-danger(data-ng-click="vm.deleteTranslation($index)") {{ 'GENERAL.DELETE' | translate}}
