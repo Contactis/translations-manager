@@ -28,10 +28,11 @@ CurrentProjectService, AccountService, PluralService) ->
   _currentDate      = new Date()
 
 
-  vm.isPending      = true
+  vm.isPending            = true
+  vm.isPluralFormsLoaded  = false
   vm.translationKey =
     keyString:  ''
-    isPlural:   'string'
+    type:       'string'
   vm.translation    =
     description:    ''
     createdAt:      _currentDate
@@ -56,12 +57,15 @@ CurrentProjectService, AccountService, PluralService) ->
     .$promise.then (responsePlurals) ->
       vm.plurals = responsePlurals
       vm.isPending = false
+      vm.isPluralFormsLoaded = true
     , (errorPlurals) ->
-      $log.error "error plurals:", errorPlurals
+      $log.error "Error while loading plural forms for currently translated language: ", errorPlurals
       vm.isPending = false
+      isPluralFormsLoaded = true
   , (currentProjectError) ->
-    $log.error 'Error occured while getting current project', currentProjectError
+    $log.error 'Error occured while getting current project: ', currentProjectError
     vm.isPending = false
+    isPluralFormsLoaded = true
 
 
   # @public
@@ -83,11 +87,11 @@ CurrentProjectService, AccountService, PluralService) ->
 
   # @public
   # @method       vm.isPlural
-  # @description  Checks if `vm.translationKey.isPlural` select option points
+  # @description  Checks if `vm.translationKey.type` select option points
   #               at 'plural'
   # @returns      {Bool}
   vm.isPlural = ->
-    if vm.translationKey.isPlural is 'plural'
+    if vm.translationKey.type is 'plural'
       return true
     else
       return false
@@ -121,7 +125,7 @@ CurrentProjectService, AccountService, PluralService) ->
   # @param        {String}  namespaceId
   # @param        {Object}  translationKeyObject
   # @param        {Object}  project                 object of given project
-  # @param        {Object}  [isPlural=false]        flag for translation-key that it is plural
+  # @param        {Object}  [isPlural=false]        flag for translation-key object that it is plural
   # @description  Creating new translation-key for translation object
   # @returns      {Object}  new translation-key object or error msg
   _createNewTranslationKey = (namespaceId, translationKeyObject, project, isPlural) ->
@@ -184,7 +188,6 @@ CurrentProjectService, AccountService, PluralService) ->
       query = []
       vm.translation.translatedPhrase
       for x in vm.plurals
-        $log.warn "x plural object", x,
         vm.translation.translatedPhrase = x.pluralTranslationString
         translation = angular.copy vm.translation
         query.push _createNewTranslation(translationKeyResponse.id, translation, vm.currentProject, x.pluralForm)
@@ -196,6 +199,7 @@ CurrentProjectService, AccountService, PluralService) ->
         $uibModalInstance.close()
       , (resultsError) ->
         $log.error "$q.all(query) for translation plurals failed"
+        $uibModalInstance.close()
 
 
   # @public
@@ -203,6 +207,7 @@ CurrentProjectService, AccountService, PluralService) ->
   # @description  Create new translation with `namespace`, `translation-key`
   # @returns      {None}  none
   vm.saveTranslationKey = ->
+    vm.isPending = true
     Namespace.find
       filter:
         where:
@@ -216,6 +221,8 @@ CurrentProjectService, AccountService, PluralService) ->
           _createNewTranslationKeyAndTranslationPlural(namespaceResponse[0]) # plural
         else
           _createNewTranslationKeyAndTranslationString(namespaceResponse[0]) # string
+        vm.isPending = false
+        return
       else
         _createNewNamespace(vm.namespace, vm.currentProject).then (namespaceCreatedResponse) ->
           if vm.isPlural()
@@ -223,8 +230,14 @@ CurrentProjectService, AccountService, PluralService) ->
             _createNewTranslationKeyAndTranslationPlural(namespaceCreatedResponse) # plural
           else
             _createNewTranslationKeyAndTranslationString(namespaceCreatedResponse) # string
+          vm.isPending = false
+          return
+        , (namespaceCreatedError) ->
+          $log.error "Something went wrong with creating new translation key", namespaceCreatedError
+          vm.isPending = false
           return
     , (namespaceError) ->
+      vm.isPending = false
       $log.error 'Something went wrong while search for a namespace!', namespaceError
       return
 
@@ -240,7 +253,7 @@ CurrentProjectService, AccountService, PluralService) ->
   # @method       cancel
   # @description  Close modal of adding index key
   vm.cleanForm = ->
-    vm.translationKey.isPlural      = 'string'
+    vm.translationKey.type          = 'string'
     vm.namespace                    = ""
     vm.translationKey.keyString     = ""
     for x in vm.plurals

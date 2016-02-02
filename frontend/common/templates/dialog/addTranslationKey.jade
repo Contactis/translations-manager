@@ -2,14 +2,17 @@ form()
   .modal-header
     h3 {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.ADD_NEW_TRANSLATION_KEY' | translate }} ({{vm.meta.projectLanguage}})
 
-  tr-waiting-spinner-div(is-pending="vm.isPending")
+  tr-waiting-spinner-div(is-pending="vm.isPending && !vm.isPluralFormsLoaded")
+
+  h2.text-center(data-ng-show="vm.isPending && vm.isPluralFormsLoaded")
+    | Saving translation key ...
 
   .modal-body(data-ng-hide="vm.isPending")
     .row
       .col-sm-4(style="margin:0")
         .form-group
           label.control-label {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.KEY_INDEX_TYPE' | translate }}
-          select.form-control(data-ng-model="vm.translationKey.isPlural")
+          select.form-control(data-ng-model="vm.translationKey.type")
             option(value="string") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.STRING' | translate }}
             option(value="plural") {{ 'COMMON.TEMPALTES.DIALOG.ADD_TRANSLATION_KEY_MODAL.PLURAL_FORMS' | translate }}
     .row
@@ -49,9 +52,11 @@ form()
       textarea.form-control(id="descriptionInput" data-ng-model="vm.translation.description" rows="2" placeholder="Simple description better describing current index key for translator if necessary")
 
   .modal-footer
-    button.btn.btn-success.pull-right(type="button" ng-click="vm.saveTranslationKey()") {{ 'GENERAL.CREATE' | translate }}
-    button.btn.btn-info.pull-right.margin-right-15(type="button" ng-click="vm.cleanForm()") {{ 'GENERAL.CLEAN_FORM' | translate }}
-    button.btn.btn-warning.pull-right(type="button" ng-click="vm.cancel()") {{ 'GENERAL.CANCEL' | translate }}
+    button.btn.btn-success.pull-right(type="button" ng-click="vm.saveTranslationKey()" data-ng-disabled="vm.isPending")
+      tr-waiting-spinner-span(is-pending="vm.isPending")
+      |  {{ 'GENERAL.CREATE' | translate }}
+    button.btn.btn-info.pull-right.margin-right-15(type="button" ng-click="vm.cleanForm()" data-ng-disabled="vm.isPending") {{ 'GENERAL.CLEAN_FORM' | translate }}
+    button.btn.btn-warning.pull-right(type="button" ng-click="vm.cancel()" data-ng-disabled="vm.isPending") {{ 'GENERAL.CANCEL' | translate }}
 
   //- h2 Debug variables
   //- pre
