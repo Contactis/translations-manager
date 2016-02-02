@@ -129,8 +129,7 @@ angular.module('translator.directive.trEditTable', [
 
   return {
   require: '^?stTable'
-  replace: true
-  template: '<input type="text" class="form-control" value="{{ translateVal.translatedPhrase }}" />'
+  template: '<span>{{ translateVal.translatedPhrase }}</span>'
   link: linker
   scope:
     translateVal:'='
