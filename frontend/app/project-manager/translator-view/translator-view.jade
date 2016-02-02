@@ -1,20 +1,43 @@
-table.table.table-striped(search-watch-model="vm.query" st-safe-src="vm.tableData" st-table="vm.displayedCollection")
-  thead
-    tr
-      th Group
-      th
-        select.form-control(data-ng-model="vm.translateLanguage"
-        data-ng-options="opt.nameEnglish disable when opt.id==1 for opt in vm.allLanguages "
-        data-ng-change="vm.updateLanguage(vm.translateLanguage)")
-      th Context Description
-      th Default language: English (en-US)
-      th Delete translation
-  tbody
-    tr(data-ng-repeat="singleRow in vm.displayedCollection")
-      td {{singleRow.keyString}}
-      td
-        tr-edit-table(translate-val="singleRow.translations[1]" translate-object="singleRow")
-      td {{singleRow.translations[0].description}}
-      td {{singleRow.translations[0].translatedPhrase}}
-      td
-        button.btn.btn-xs.btn-danger(data-ng-click="vm.deleteTranslation($index)") DELETE
+.container-fluid
+  .row
+    .col-xs-12
+      h1 Translations
+      p
+        | Here translators can translate phrases from default language for the project (in this case: {{ vm.currentProject.defaultLanguage.nameNative }}, {{vm.currentProject.defaultLanguage.ietfCode}}) to another language available.
+        br
+        strong Translations will be automatically saved after hit enter (or focus off).
+
+  .row
+    .col-md-12
+      .card
+        //- .card-header
+        //-   .card-title
+        //-     .title Translations
+        .card-body
+          .panel.panel-info(data-ng-if="vm.displayedCollection.length == 0")
+            .panel-heading
+              | {{  'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.NO_INDEX_KEYS_AVAILABLE_FOR_CURRENT_PROJECT' | translate }}
+            .panel-body
+              | {{  'APP.FRONTEND_MESSAGES.PROGRAMMER_VIEW.ADD_NEW_INDEX_KEY' | translate }}
+
+          table.table.table-striped(search-watch-model="vm.query" st-safe-src="vm.tableData" st-table="vm.displayedCollection" data-ng-if="vm.displayedCollection.length > 0")
+            thead
+              tr
+                th Group
+                th
+                  select.form-control(data-ng-model="vm.translateLanguage"
+                  data-ng-options="opt.nameNative disable when opt.id==vm.currentProject.defaultLanguageId for opt in vm.allLanguages"
+                  data-ng-change="vm.updateLanguage(vm.translateLanguage)")
+                th Default language ({{ vm.currentProject.defaultLanguage.nameNative }})
+                th Context description ({{ vm.currentProject.defaultLanguage.nameNative }})
+                th(data-tr-access-level="vm.accessLevels.programmer")
+                  | {{ 'GENERAL.MODIFY' | translate }}
+            tbody
+              tr(data-ng-repeat="singleRow in vm.displayedCollection")
+                td {{singleRow.keyString}}
+                td
+                  tr-edit-table(translate-val="singleRow.translations[1]" translate-object="singleRow")
+                td {{singleRow.translations[0].translatedPhrase}}
+                td {{singleRow.translations[0].description}}
+                td(data-tr-access-level="vm.accessLevels.programmer")
+                  button.btn.btn-xs.btn-danger(data-ng-click="vm.deleteTranslation($index)") {{ 'GENERAL.DELETE' | translate}}

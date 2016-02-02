@@ -22,23 +22,25 @@ angular.module('translation.pages.translator-view', [
     data:
       access:       access.translator
     resolve:
-      currentProject: (CurrentProjectService) ->
+      CurrentProjectResolver: (CurrentProjectService) ->
         return CurrentProjectService.getCurrentProject()
-      languageList: (LanguageService, currentProject) ->
-        #TODO asd
-        return LanguageService.getAllTranslationsForProject(currentProject.id)
+      LanguageListResolver: (LanguageService, CurrentProjectResolver) ->
+        return LanguageService.getAllTranslationsForProject(CurrentProjectResolver.id)
 
-.controller 'TranslatorViewController', (TranslationKey, LanguageService, Translation, languageList, currentProject) ->
+.controller 'TranslatorViewController', (TranslationKey, LanguageService, Translation, UserPermissionsSettings,
+LanguageListResolver, CurrentProjectResolver) ->
 
+  vm                  = this
+  vm.query            = ""
+  vm.filters          = {}
+  vm.contextMenu      = {}
+  vm.tableData        = []
 
-  vm              = this
-  vm.query        = ""
-  vm.filters      = {}
-  vm.contextMenu  = {}
-  vm.tableData    = []
+  vm.accessLevels     = UserPermissionsSettings.accessLevels
+  vm.currentProject   = CurrentProjectResolver
 
-  _langList = languageList.result
-  vm.translateLanguage  = LanguageService.getTranslateLanguage(_langList, currentProject.defaultLanguageId)
+  _langList = LanguageListResolver.result
+  vm.translateLanguage  = LanguageService.getTranslateLanguage(_langList, vm.currentProject.defaultLanguageId)
   vm.allLanguages       = _langList
 
   vm.updateLanguage = (lang) ->
@@ -47,7 +49,7 @@ angular.module('translation.pages.translator-view', [
 
 
   _fetchData = ->
-    _defaultLanguageId = currentProject.defaultLanguageId
+    _defaultLanguageId = vm.currentProject.defaultLanguageId
     TranslationKey.find
       filter:
         include:[
@@ -65,7 +67,7 @@ angular.module('translation.pages.translator-view', [
           }
         ]
         where:
-          projectId: currentProject.id
+          projectId: vm.currentProject.id
     .$promise.then (success)->
       vm.tableData = success
       vm.displayedCollection = [].concat(vm.tableData)
