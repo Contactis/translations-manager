@@ -43,6 +43,9 @@ LanguageListResolver, CurrentProjectResolver) ->
   _langList = LanguageListResolver.result
   vm.translateLanguage  = LanguageService.getTranslateLanguage(_langList, vm.currentProject.defaultLanguageId)
   vm.allLanguages       = _langList
+  if vm.translateLanguage is undefined
+    vm.translateLanguage = vm.allLanguages[0]
+
 
   (_fetchData = ->
     _defaultLanguageId = vm.currentProject.defaultLanguageId
