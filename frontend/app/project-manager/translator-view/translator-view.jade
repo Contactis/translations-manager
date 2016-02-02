@@ -31,13 +31,16 @@
                   data-ng-change="vm.updateLanguage(vm.translateLanguage)")
                 th Default language ({{ vm.currentProject.defaultLanguage.nameNative }})
                 th Context description ({{ vm.currentProject.defaultLanguage.nameNative }})
-                th(data-tr-access-level="vm.accessLevels.programmer")
-                  | {{ 'GENERAL.MODIFY' | translate }}
+                th
+                  div(data-tr-access-level="vm.accessLevels.programmer") {{ 'GENERAL.MODIFY' | translate }}
             tbody
               tr(data-ng-repeat="singleRow in vm.displayedCollection")
                 td {{singleRow.keyString}}
-                td
+                //- if for default language
+                td(data-ng-hide="vm.isTranslationForDefaultLanguage()")
                   tr-edit-table(translate-val="singleRow.translations[1]" translate-object="singleRow")
+                td(data-ng-show="vm.isTranslationForDefaultLanguage()")
+                  tr-edit-table(translate-val="singleRow.translations[0]" translate-object="singleRow")
                 td {{singleRow.translations[0].translatedPhrase}}
                 td {{singleRow.translations[0].description}}
                 td(data-tr-access-level="vm.accessLevels.programmer")

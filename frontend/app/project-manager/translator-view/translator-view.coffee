@@ -72,6 +72,10 @@ LanguageListResolver, CurrentProjectResolver) ->
   )(@)
 
 
+  vm.isTranslationForDefaultLanguage = () ->
+    return if vm.currentProject.defaultLanguageId is vm.translateLanguage.id then true else false
+
+
   vm.updateLanguage = (lang) ->
     LanguageService.setTranslationLanguageId(lang.id)
     _fetchData()
