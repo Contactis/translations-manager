@@ -60,7 +60,7 @@ angular.module('translator.directive.trEditTable', [
         element.html(_getTemplate('input', scope.virtualId)).show()
         scope.$apply ->
           $compile(element.contents())(scope)
-          element[0].querySelector('input' + '#' + scope.virtualId).focus()
+          element[0].querySelector('#' + scope.virtualId).focus()
         lock = false
 
 
@@ -78,7 +78,7 @@ angular.module('translator.directive.trEditTable', [
 
     element.bind "keydown", (event) ->
       if event.which==13
-        element[0].querySelector('input' + '#' + scope.virtualId).blur()
+        element[0].querySelector('#' + scope.virtualId).blur()
 
 
   _bindHelper = (element, scope) ->
@@ -109,11 +109,11 @@ angular.module('translator.directive.trEditTable', [
 
         element.bind "keydown", (event) ->
           if(event.which==13)
-            element[0].querySelector('input' + '#' + scope.virtualId).blur()
+            element[0].querySelector('#' + scope.virtualId).blur()
 
         scope.$apply ->
           $compile(element.contents())(scope)
-          element[0].querySelector('input' + '#' + scope.virtualId).focus()
+          element[0].querySelector('#' + scope.virtualId).focus()
 
       lock = true
 
