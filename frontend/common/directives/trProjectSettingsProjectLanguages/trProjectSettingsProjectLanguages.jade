@@ -3,11 +3,7 @@
     .card-title
       .title Project languages
   .card-body
-    p Nothing yet
-
-    .panel.panel-warning
-      .panel-heading Warning
-      .panel-body if translations for language exsist then we need crash project! TODO: NEED to check
+    p Here can choose which languages (to provide translations for them) should be added or removed from "{{currentProject.name}}" project.
 
     tr-project-languages-side-picker(data-unselected-data="unselectedData"
       data-unselected-title="AVAILABLE LANGUAGES"
@@ -15,14 +11,16 @@
       data-selected-title="ASSIGNED"
       data-current-project="currentProject"
       data-all-languages="availableLanguages"
-      data-choosen-languages="choosenLanguages")
+      data-choosen-languages="choosenLanguages"
+      data-left-languages="leftLanguages")
 
-    button.btn.btn-default(data-ng-click="saveProjectLanguages()")
-      | Save
+    button.btn.btn-default(data-ng-click="saveProjectLanguages()" data-ng-disabled="isPending")
+      tr-waiting-spinner-span(is-pending="isPending")
+      |  Save
 
     //- pre
+    //-   | availableLanguages: {{ availableLanguages | json}}
     //-   | selectedData: {{selectedData | json}}
     //-   | unselectedData: {{unselectedData | json}}
     //-   | currentProjectLanguages: {{ currentProjectLanguages | json}}
     //-   | projectLanguages: {{projectLanguages | json}}
-    //-   | availableLanguages: {{ availableLanguages | json}}
