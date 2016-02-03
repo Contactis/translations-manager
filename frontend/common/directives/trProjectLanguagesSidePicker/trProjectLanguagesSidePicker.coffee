@@ -16,6 +16,7 @@ angular.module('translation.directive.trProjectLanguagesSidePicker', [
     currentProject:     '='
     allLanguages:       '='
     choosenLanguages:   '='
+    leftLanguages:      '='
 
   link: (scope, element, attrs, ctrl) ->
 
