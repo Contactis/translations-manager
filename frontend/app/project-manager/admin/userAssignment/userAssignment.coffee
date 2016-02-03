@@ -54,7 +54,7 @@ ProjectAccountsResolver, CurrentProjectResolver, CurrentProjectAccountsResolver,
 
 
   # @private
-  # @description  simple assing result to variable to avoid multiple method call
+  # @description  simple assinginig result to variable to avoid multiple method call
   _partitionArray = () ->
     HelperService.partitionGreaterArrayByParameter(AllAccountsResolver, \
       vm.currentProjectAccounts.accounts, 'id')
@@ -164,9 +164,9 @@ ProjectAccountsResolver, CurrentProjectResolver, CurrentProjectAccountsResolver,
       _savingAllNewEntities().then (result) ->
         toastr.success result
       , (resultError) ->
-        toastr.success resultError
+        toastr.error resultError
     , (responseError) ->
-      toastr.success responseError
+      toastr.error responseError
 
 
   return vm
