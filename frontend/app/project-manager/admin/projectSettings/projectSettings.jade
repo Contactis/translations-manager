@@ -40,6 +40,12 @@
 
             button.btn.btn-default(type='submit' data-ng-click="vm.saveAbout()") Save
 
+
+  .row
+    .col-md-12
+      tr-project-settings-project-languages(data-available-languages="vm.availableLanguages" data-project-languages="vm.projectLanguages" data-current-project="vm.currentProject")
+
+
   .row
     .col-md-12
       .card
@@ -96,6 +102,4 @@
 
   //- h2 Debug variables
   //- pre
-  //-   | vm.currentProject: {{vm.currentProject|json}}
-  //-   | vm.availableLanguages.selected: {{vm.availableLanguages.selected|json}}
-  //-   | vm.availableLanguages: {{vm.availableLanguages|json}}
+  //-   | vm {{ vm | json}}

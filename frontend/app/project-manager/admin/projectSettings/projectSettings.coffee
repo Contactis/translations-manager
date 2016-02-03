@@ -7,6 +7,7 @@ angular.module('translation.pages.admin.project-settings', [
   'ngSanitize'
   'ui.select'
   'toastr'
+  'translation.directives.trProjectSettingsProjectLanguages'
 ])
 
 
@@ -26,11 +27,13 @@ angular.module('translation.pages.admin.project-settings', [
         return CurrentProjectService.getCurrentProject()
       AvailableLanguagesResolver:   (Language) ->
         return Language.find().$promise
+      ProjectLanguagesResolver: (ProjectLanguage) ->
+        return ProjectLanguage.find().$promise
 
 
 # @package   ProjectSettingsController
 .controller 'ProjectSettingsController', ($scope, $log, $filter, PresentUsingProjectResolver,
-AvailableLanguagesResolver, Project, toastr) ->
+AvailableLanguagesResolver, ProjectLanguagesResolver, Project, toastr) ->
   vm = this
 
   # @description Store state of sumitted form
@@ -58,6 +61,9 @@ AvailableLanguagesResolver, Project, toastr) ->
   # @description  Currtent language object withdraw from `vm.availableLanguages`
   #               to provide proper object selection from ui-select
   vm.availableLanguages.selected = _.where(vm.availableLanguages, {id: vm.currentProject.defaultLanguageId})[0]
+
+
+  vm.projectLanguages = ProjectLanguagesResolver
 
 
   # @public
@@ -160,5 +166,6 @@ AvailableLanguagesResolver, Project, toastr) ->
         toastr.error msg
         vm.submitted = false
         return false
+
 
   return vm
