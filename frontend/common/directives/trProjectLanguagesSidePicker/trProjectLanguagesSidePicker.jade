@@ -1,0 +1,22 @@
+.row
+  .col-xs-6
+    p
+      strong {{ unselectedTitle | translate }}
+    .list-group
+      a.list-group-item.disabled(href="" data-ng-if="isUnselectedListEmpty()") Empty table
+      a.list-group-item(href="" data-ng-repeat="item1 in leftLanguages" data-ng-click="addToSelectedList(item1.id)" title="{{item1.id}}")
+        span  {{ item1.nameNative }}, id: {{item1.id}}
+        i.pull-right.fa.fa-arrow-right
+
+  .col-xs-6
+    p
+      strong {{ selectedTitle | translate }}
+    .list-group
+      a.list-group-item.disabled(href="" data-ng-if="isSelectedListEmpty()") Empty table
+      a.list-group-item(href="" data-ng-repeat="item2 in choosenLanguages" data-ng-click="addToUnselectedList(item2.id)" title="{{item2.id}}")
+        i.fa.fa-arrow-left
+        span  {{ item2.nameNative }}, id: {{item2.id}}
+
+  //- pre
+  //-   | choosenLanguages: {{choosenLanguages|json}}
+  //-   | leftLanguages: {{leftLanguages|json}}
