@@ -1,0 +1,28 @@
+.card
+  .card-header
+    .card-title
+      .title Project languages
+  .card-body
+    p Nothing yet
+
+    .panel.panel-warning
+      .panel-heading Warning
+      .panel-body if translations for language exsist then we need crash project! TODO: NEED to check
+
+    tr-project-languages-side-picker(data-unselected-data="unselectedData"
+      data-unselected-title="AVAILABLE LANGUAGES"
+      data-selected-data="selectedData"
+      data-selected-title="ASSIGNED"
+      data-current-project="currentProject"
+      data-all-languages="availableLanguages"
+      data-choosen-languages="choosenLanguages")
+
+    button.btn.btn-default(data-ng-click="saveProjectLanguages()")
+      | Save
+
+    //- pre
+    //-   | selectedData: {{selectedData | json}}
+    //-   | unselectedData: {{unselectedData | json}}
+    //-   | currentProjectLanguages: {{ currentProjectLanguages | json}}
+    //-   | projectLanguages: {{projectLanguages | json}}
+    //-   | availableLanguages: {{ availableLanguages | json}}
