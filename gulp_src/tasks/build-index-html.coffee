@@ -4,7 +4,7 @@ config = require '../variables'
 gulp        = require 'gulp'
 inject      = require 'gulp-inject'
 series      = require 'stream-series'
-minifyHTML  = require 'gulp-minify-html'
+htmlmin     = require 'gulp-htmlmin'
 
 
 # @method       build-index-html
@@ -45,6 +45,7 @@ gulp.task 'build-index-html-prod', ->
   gulp.src 'frontend/index.html'
   .pipe inject(appSrc,
     ignorePath: config.buildDir)
-  .pipe minifyHTML
-    conditionals: true
+  .pipe htmlmin
+    collapseWhitespace:   true
+    removeTagWhitespace:  true
   .pipe gulp.dest config.buildDir
