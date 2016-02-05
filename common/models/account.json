@@ -51,6 +51,7 @@
     },
     "username": {
       "type": "string",
+      "length": 128,
       "display": {
         "label": "Username"
       }
@@ -58,6 +59,7 @@
     "password": {
       "type": "string",
       "required": true,
+      "length": 65534,
       "display": {
         "label": "Password",
         "type": "password",
@@ -65,16 +67,19 @@
       }
     },
     "credentials": {
-      "type": "object",
-      "deprecated": true
+      "type": "string",
+      "deprecated": true,
+      "length": 65534
     },
     "challenges": {
       "type": "object",
-      "deprecated": true
+      "deprecated": true,
+      "length": 65534
     },
     "email": {
       "type": "string",
       "required": true,
+      "length": 254,
       "display": {
         "label": "E-mail"
       }
@@ -83,10 +88,12 @@
       "type": "boolean"
     },
     "verificationToken": {
-      "type": "string"
+      "type": "string",
+      "length": 512
     },
     "status": {
-      "type": "string"
+      "type": "string",
+      "length": 512
     },
     "created": {
       "type": "date",
@@ -107,21 +114,31 @@
     },
     "firstName": {
       "type": "string",
+      "length": 128,
       "display": {
         "label": "First Name"
       }
     },
     "lastName": {
       "type": "string",
+      "length": 256,
       "display": {
         "label": "Last Name"
       }
     },
     "role": {
-      "type": "string"
+      "type": "string",
+      "length": 128,
+      "display": {
+        "label": "Role"
+      }
     },
     "interfaceLanguage": {
-      "type": "string"
+      "type": "string",
+      "length": 40,
+      "display": {
+        "label": "User interface language"
+      }
     }
   },
   "validations": [],
