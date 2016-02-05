@@ -10,12 +10,6 @@
 
   .row
     .col-md-12
-      .panel.panel-info(data-ng-if="vm.displayedCollection.length == 0")
-        .panel-heading
-          | No translations available for current project
-        .panel-body
-          | Programmers team need to provide translation strings.
-
       .card(data-ng-if="vm.displayedCollection.length > 0")
         .card-body
           table.table.table-striped(search-watch-model="vm.query" st-safe-src="vm.tableData" st-table="vm.displayedCollection")
@@ -33,6 +27,7 @@
               tr
                 th(colspan="5")
                   input(st-search="" class="form-control" placeholder="Search for phrases ..." type="text")
+
             tbody
               tr(data-ng-repeat="singleRow in vm.displayedCollection")
                 td {{singleRow.keyString}}
@@ -46,3 +41,14 @@
                 td
                   div(data-tr-access-level="vm.accessLevels.programmer")
                     button.btn.btn-xs.btn-danger(data-ng-click="vm.deleteTranslation($index)") {{ 'GENERAL.DELETE' | translate}}
+
+              tr
+                td(colspan=5)
+                  .text-danger(data-ng-if="vm.displayedCollection.length == 0 && vm.tableData.length > 0")
+                    | No results for searched phrase.
+
+          .panel.panel-info(data-ng-if="vm.tableData.length == 0")
+            .panel-heading
+              | No translations available for current project
+            .panel-body
+              | Programmers team need to provide translation strings.
