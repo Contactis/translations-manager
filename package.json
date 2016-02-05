@@ -90,7 +90,6 @@
     "karma-mocha-reporter": "^1.1.1",
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-safari-launcher": "^0.1.1",
-    "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "morgan": "^1.6.1",
     "phantomjs": "^1.9.18",
