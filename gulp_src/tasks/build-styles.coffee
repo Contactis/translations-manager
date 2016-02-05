@@ -3,7 +3,7 @@ config = require '../variables'
 
 gulp      = require 'gulp'
 sass      = require 'gulp-sass'
-minifyCss = require 'gulp-minify-css'
+cssnano   = require 'gulp-cssnano'
 uglifyCss = require 'gulp-uglifycss'
 rename    = require 'gulp-rename'
 concat    = require 'gulp-concat'
@@ -21,7 +21,7 @@ gulp.task 'build-styles', ->
     }).on('error', sass.logError))
   .pipe addSrc config.build.vendor_files.css
   .pipe concat config.cssDeployFileName
-  .pipe gulpif config.arguments.production, minifyCss()
+  .pipe gulpif config.arguments.production, cssnano()
   .pipe gulpif config.arguments.production, uglifyCss
     'max-line-len': 80
   .pipe(gulpif(config.arguments.production, gulp.dest(config.buildDir), gulp.dest(config.buildDir + '/assets')))
