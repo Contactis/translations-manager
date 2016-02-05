@@ -8,13 +8,15 @@
   "properties": {
     "translatedPhrase": {
       "type": "string",
-      "required": true
+      "required": true,
+      "length": 65534
     },
     "pluralForm": {
       "type": "number"
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "length": 65534
     },
     "translationsKeyId": {
       "type": "number",

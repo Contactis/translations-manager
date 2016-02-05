@@ -8,7 +8,8 @@
   "properties": {
     "keyString": {
       "type": "string",
-      "required": true
+      "required": true,
+      "length": 65534
     },
     "isPlural": {
       "type": "boolean",
