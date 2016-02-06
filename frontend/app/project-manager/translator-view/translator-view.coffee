@@ -84,15 +84,10 @@ LanguageListResolver, CurrentProjectResolver) ->
     _fetchData()
 
 
-  vm.deleteTranslation = (itemIndex) ->
-    if vm.displayedCollection[itemIndex].translations[1] is undefined
-    else
-      _translationId = vm.displayedCollection[itemIndex].translations[1].id
-      if _translationId is undefined
-      else
-        Translation.deleteById { id:_translationId }
-        .$promise.then () ->
-          delete vm.displayedCollection[itemIndex].translations[1]
+  vm.deleteTranslation = (translationObject) ->
+#    fixme translation id mocked
+    Translation.deleteById { id:translationObject.translations[0].id }
+    .$promise.then () ->
 
   return vm
 

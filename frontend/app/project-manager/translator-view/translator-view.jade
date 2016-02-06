@@ -45,4 +45,4 @@
                 td {{singleRow.translations[0].description}}
                 td
                   div(data-tr-access-level="vm.accessLevels.programmer")
-                    button.btn.btn-xs.btn-warning(data-ng-click="vm.deleteTranslation($index)") {{ 'GENERAL.CLEAR' | translate}}
+                    button.btn.btn-xs.btn-warning(data-ng-click="vm.deleteTranslation(singleRow)") {{ 'GENERAL.CLEAR' | translate}}
