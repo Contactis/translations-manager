@@ -37,6 +37,7 @@ translationApp.config( [
     'GENERAL.VERIFY':                     'Verify'
     'GENERAL.NOT_VERIFIED':               'Not verified'
     'GENERAL.DELETE':                     'Delete'
+    'GENERAL.CLEAR':                     'Clear'
     'GENERAL.YES':                        'Yes'
     'GENERAL.NO':                         'No'
     'GENERAL.TRY_AGAIN':                  'Try again'
