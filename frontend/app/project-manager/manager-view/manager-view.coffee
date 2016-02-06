@@ -4,7 +4,7 @@ angular.module('translation.pages.manager-view', [
   'data-table'
   'smart-table'
   'translation.providers.userPermissionsSettings'
-  'translation.directive.searchWatchModel'
+  'translation.directives.searchWatchModel'
 ])
 
 

@@ -1,4 +1,4 @@
-angular.module('translator.directive.trEditTable', [
+angular.module('translation.directives.trEditTable', [
   'smart-table'
 ])
 

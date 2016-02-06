@@ -1,4 +1,4 @@
-angular.module('translation.directive.searchWatchModel', [
+angular.module('translation.directives.searchWatchModel', [
 
 ])
 

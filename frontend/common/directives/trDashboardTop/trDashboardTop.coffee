@@ -1,4 +1,4 @@
-angular.module('translator.directive.trDashboardTop', [
+angular.module('translation.directives.trDashboardTop', [
   'translation.services.filtersState'
 ])
 
@@ -6,7 +6,5 @@ angular.module('translator.directive.trDashboardTop', [
   restrict: 'E'
   replace: true
   templateUrl: 'directives/trDashboardTop/trDashboardTop.tpl.html'
-
   link: (scope, element, attrs) ->
-
     return

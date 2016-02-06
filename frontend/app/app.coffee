@@ -14,10 +14,6 @@ translationApp = angular.module('translation', [
   # Including templates
   'templates-module'
 
-  # Including directives
-  'translation.directives.trAccessLevel'
-  'translation.directive.searchWatchModel'
-
   # Including pages of aplication
   'translation.pages.404'
   'translation.pages.login'
@@ -33,7 +29,6 @@ translationApp = angular.module('translation', [
   'translation.pages.admin.user-assignment'
   'translation.pages.admin.project-exporter'
 
-  #
   # Including modules
   'translation.modules.languages'
 
@@ -55,8 +50,7 @@ translationApp = angular.module('translation', [
   'translation.controllers.addNewProject'
 
   # Including directives
-  'translator.directive.trDashboardTop'
-  'translator.directive.trEditTable'
+  'translation.directives.trAccessLevel'
 ])
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $animateProvider,

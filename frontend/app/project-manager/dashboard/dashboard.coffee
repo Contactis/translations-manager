@@ -2,6 +2,7 @@ angular.module('translation.pages.dashboard', [
   'ui.router'
   'data-table'
   'translation.providers.userPermissionsSettings'
+  'translation.directives.trDashboardTop'
 ])
 
 .config ($stateProvider, UserPermissionsSettingsProvider) ->
