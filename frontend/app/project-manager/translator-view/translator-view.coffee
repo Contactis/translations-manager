@@ -1,13 +1,17 @@
 angular.module('translation.pages.translator-view', [
-  'translation.providers.userPermissionsSettings'
-  'translator.directive.trEditTable'
   'ui.router'
   'ngCookies'
   'data-table'
   'ngMessages'
   'ngAnimate'
+  'ui.select'
+  'ngSanitize'
   'lbServices'
   'ui.bootstrap'
+
+  'translation.providers.userPermissionsSettings'
+  'translation.directives.trEditTable'
+  'translation.directives.trWaitingSpinnerSpan'
 ])
 
 .config ($stateProvider, UserPermissionsSettingsProvider) ->
@@ -26,10 +30,16 @@ angular.module('translation.pages.translator-view', [
         return CurrentProjectService.getCurrentProject()
       LanguageListResolver: (LanguageService, CurrentProjectResolver) ->
         return LanguageService.getAllTranslationsForProject(CurrentProjectResolver.id)
+      NamespacesResolver: (Namespace, CurrentProjectResolver) ->
+        return Namespace.find
+          filter:
+            where:
+              projectId: CurrentProjectResolver.id
+        .$promise
 
 
 .controller 'TranslatorViewController', ($log, TranslationKey, LanguageService, Translation, UserPermissionsSettings,
-LanguageListResolver, CurrentProjectResolver) ->
+LanguageListResolver, CurrentProjectResolver, NamespacesResolver) ->
 
   vm                  = this
   vm.query            = ""
@@ -37,8 +47,10 @@ LanguageListResolver, CurrentProjectResolver) ->
   vm.contextMenu      = {}
   vm.tableData        = []
 
+  vm.isPending        = true
   vm.accessLevels     = UserPermissionsSettings.accessLevels
   vm.currentProject   = CurrentProjectResolver
+  vm.projectNamespaces = NamespacesResolver
 
   _langList = LanguageListResolver.result
   vm.translateLanguage  = LanguageService.getTranslateLanguage(_langList, vm.currentProject.defaultLanguageId)
@@ -48,7 +60,8 @@ LanguageListResolver, CurrentProjectResolver) ->
 
 
   (_fetchData = ->
-    _defaultLanguageId = vm.currentProject.defaultLanguageId
+    vm.isPending        = true
+    _defaultLanguageId  = vm.currentProject.defaultLanguageId
     TranslationKey.find
       filter:
         include:[
@@ -67,11 +80,13 @@ LanguageListResolver, CurrentProjectResolver) ->
         ]
         where:
           projectId: vm.currentProject.id
-    .$promise.then (success)->
-      vm.tableData = success
-      vm.displayedCollection = [].concat(vm.tableData)
+    .$promise.then (success) ->
+      vm.tableData            = success
+      vm.displayedCollection  = [].concat(vm.tableData)
+      vm.isPending            = false
     , (error) ->
       $log.error 'Problem with loading translation keys', error
+      vm.isPending        = false
   )(@)
 
 

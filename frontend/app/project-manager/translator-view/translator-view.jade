@@ -1,7 +1,10 @@
-.container-fluid
+.container-fluid.translator-view
   .row
     .col-xs-12
-      h1 Translations
+      h1
+        | Translations
+        .pull-right
+          tr-waiting-spinner-span(is-pending="vm.isPending")
       p
         | Here translators can translate phrases from default language for the project (in this case: {{ vm.currentProject.defaultLanguage.nameNative }}, {{vm.currentProject.defaultLanguage.ietfCode}}) to another language available.
         br
@@ -10,19 +13,26 @@
 
   .row
     .col-md-12
-      .card(data-ng-if="vm.displayedCollection.length > 0")
+      .panel.panel-info(data-ng-if="vm.tableData.length == 0 && !vm.isPending")
+        .panel-heading
+          | No translations available for current project
+        .panel-body
+          | Programmers team need to provide translation strings.
+
+      .card
         .card-body
           table.table.table-striped(search-watch-model="vm.query" st-safe-src="vm.tableData" st-table="vm.displayedCollection")
             thead
               tr
-                th Group
-                th(style="min-width: 250px")
+                th(id="th-group") Group
+                th(id="th-translate-language")
+                  span Translate to:
                   select.form-control(data-ng-model="vm.translateLanguage"
                   data-ng-options="opt.nameNative for opt in vm.allLanguages"
                   data-ng-change="vm.updateLanguage(vm.translateLanguage)")
-                th Default language ({{ vm.currentProject.defaultLanguage.nameNative }})
-                th Context description ({{ vm.currentProject.defaultLanguage.nameNative }})
-                th
+                th(id="th-default-language") Default language ({{ vm.currentProject.defaultLanguage.nameNative }})
+                th(id="th-description") Context description ({{ vm.currentProject.defaultLanguage.nameNative }})
+                th(id="th-modify")
                   div(data-tr-access-level="vm.accessLevels.programmer") {{ 'GENERAL.MODIFY' | translate }}
               tr
                 th(colspan="5")
@@ -31,7 +41,6 @@
             tbody
               tr(data-ng-repeat="singleRow in vm.displayedCollection")
                 td {{singleRow.keyString}}
-                //- if for default language
                 td(data-ng-hide="vm.isTranslationForDefaultLanguage()")
                   tr-edit-table(translate-val="singleRow.translations[1]" translate-object="singleRow")
                 td(data-ng-show="vm.isTranslationForDefaultLanguage()")
@@ -40,15 +49,13 @@
                 td {{singleRow.translations[0].description}}
                 td
                   div(data-tr-access-level="vm.accessLevels.programmer")
-                    button.btn.btn-xs.btn-danger(data-ng-click="vm.deleteTranslation($index)") {{ 'GENERAL.DELETE' | translate}}
+                    button.btn.btn-xs.btn-danger(data-ng-click="vm.deleteTranslation($index)") {{ 'GENERAL.REMOVE' | translate}}
 
               tr
                 td(colspan=5)
                   .text-danger(data-ng-if="vm.displayedCollection.length == 0 && vm.tableData.length > 0")
                     | No results for searched phrase.
 
-          .panel.panel-info(data-ng-if="vm.tableData.length == 0")
-            .panel-heading
-              | No translations available for current project
-            .panel-body
-              | Programmers team need to provide translation strings.
+      //- pre
+        //- | vm.displayedCollection: {{ vm.displayedCollection | json}}
+        //- | vm.projectNamespaces: {{vm.projectNamespaces|json}}
