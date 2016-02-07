@@ -5,6 +5,26 @@ angular.module('translation.directives.trEditTable', [
 
 .directive 'trEditTable', ($compile, $timeout, Translation, LanguageService, toastr) ->
 
+  submitted = false
+
+  #TODO loopback upsert is not working with relations 'belongs to', probably we should create our own backend to avoid
+  #TODO deleting translate
+  _updateHelper = (id, translate) ->
+    Translation.deleteById({ id: id }).$promise.then (succes) ->
+      Translation.create(translate).$promise.then (succes) ->
+        translate.id = succes.id
+
+
+  _enableSaving = () ->
+    submitted = false
+    return
+
+
+  _disableSaving = () ->
+    submitted = true
+    return
+
+
   updateTranslation = (translate, translationKey) ->
     if translate.id is undefined
 #case translate was not created already
@@ -19,35 +39,42 @@ angular.module('translation.directives.trEditTable', [
 
       Translation.create(translate).$promise.then (succes) ->
         translate.id = succes.id
-        toastr.success 'Translate updated!'
+        toastr.success 'New translation has been saved'
     else
       translate.statusId = 2
       _updateHelper translate.id, translate
-      toastr.success 'Translate updated!'
-  #TODO loopback upsert is not working with relations 'belongs to', probably we should create our own backend to avoid
-  #TODO deleting translate
-  _updateHelper = (id, translate) ->
-    Translation.deleteById({ id: id }).$promise.then (succes) ->
-      Translation.create(translate).$promise.then (succes) ->
-        translate.id = succes.id
+      toastr.success 'Translation has been updated'
 
 
-  linker = (scope, element, attrs) ->
-    scope.update = updateTranslation
+  linkerFn = (scope, element, attrs) ->
+    scope.saveOnBlur = () ->
+      if submitted is false
+        updateTranslation(scope.translateVal, scope.translateObject)
+      return
 
+
+    scope.saveOnEnter = () ->
+      if submitted is false
+        updateTranslation(scope.translateVal, scope.translateObject)
+        _disableSaving()
+      return
+
+
+    scope.prepareFocus = () ->
+      _enableSaving()
+      return
 
     return
 
 
   return {
-  require: '^?stTable'
-  template: '<input data-ng-blur="update(translateVal, translateObject)" class="form-control" type="text"
-  data-ng-model="translateVal.translatedPhrase">'
-  link: linker
-  replace: true
-  scope:
-    translateVal:'='
-    translateObject:'='
+    require:      '^?stTable'
+    templateUrl:  'directives/trEditTable/trEditTable.tpl.html'
+    link:         linkerFn
+    replace:      true
+    scope:
+      translateVal:     '='
+      translateObject:  '='
   }
 
 
