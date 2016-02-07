@@ -8,6 +8,7 @@ angular.module('translation.pages.translator-view', [
   'ngSanitize'
   'lbServices'
   'ui.bootstrap'
+  'toastr'
 
   'translation.providers.userPermissionsSettings'
   'translation.directives.trEditTable'
@@ -38,8 +39,8 @@ angular.module('translation.pages.translator-view', [
         .$promise
 
 
-.controller 'TranslatorViewController', ($log, TranslationKey, LanguageService, Translation, UserPermissionsSettings,
-LanguageListResolver, CurrentProjectResolver, NamespacesResolver) ->
+.controller 'TranslatorViewController', ($log, TranslationKey, LanguageService, Translation,
+toastr, UserPermissionsSettings, LanguageListResolver, CurrentProjectResolver, NamespacesResolver) ->
 
   vm                  = this
   vm.query            = ""
@@ -99,15 +100,15 @@ LanguageListResolver, CurrentProjectResolver, NamespacesResolver) ->
     _fetchData()
 
 
-  vm.deleteTranslation = (itemIndex) ->
-    if vm.displayedCollection[itemIndex].translations[1] is undefined
-    else
-      _translationId = vm.displayedCollection[itemIndex].translations[1].id
-      if _translationId is undefined
-      else
-        Translation.deleteById { id:_translationId }
-        .$promise.then () ->
-          delete vm.displayedCollection[itemIndex].translations[1]
+  vm.deleteTranslation = (translationObject) ->
+#    fixme translation id mocked
+    Translation.deleteById { id:translationObject.translations[0].id }
+    .$promise.then (deleteTranslationResponse) ->
+      _fetchData()
+      toastr.success "Clear translation successfully"
+    , (deleteTranslationError) ->
+      toastr.success "Some problem occured while clearing translation"
+      console.log "Error occured while clearing translation", deleteTranslationError
 
   return vm
 

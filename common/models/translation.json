@@ -8,7 +8,6 @@
   "properties": {
     "translatedPhrase": {
       "type": "string",
-      "required": true,
       "length": 65534
     },
     "pluralForm": {

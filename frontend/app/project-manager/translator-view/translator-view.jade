@@ -49,7 +49,7 @@
                 td {{singleRow.translations[0].description}}
                 td
                   div(data-tr-access-level="vm.accessLevels.programmer")
-                    button.btn.btn-xs.btn-danger(data-ng-click="vm.deleteTranslation($index)") {{ 'GENERAL.REMOVE' | translate}}
+                    button.btn.btn-xs.btn-warning(data-ng-click="vm.deleteTranslation(singleRow)") {{ 'GENERAL.CLEAR' | translate}}
 
               tr
                 td(colspan=5)
@@ -57,5 +57,6 @@
                     | No results for searched phrase.
 
       //- pre
-        //- | vm.displayedCollection: {{ vm.displayedCollection | json}}
-        //- | vm.projectNamespaces: {{vm.projectNamespaces|json}}
+      //-   | vm.displayedCollection: {{ vm.displayedCollection | json}}
+      //-   | vm.projectNamespaces: {{vm.projectNamespaces|json}}
+
