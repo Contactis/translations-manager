@@ -1,6 +1,6 @@
 .tr-edit-table
   input.form-control(id="translation-string" type="text"
-    data-ng-if="translateVal.translatedPhrase.length <= 32"
+    data-ng-if="translateVal.translatedPhrase.length <= 32 ||  translateVal.translatedPhrase === undefined"
     data-ng-model="translateVal.translatedPhrase"
     data-ng-focus="prepareFocus()"
     data-ng-blur="saveOnBlur()"
