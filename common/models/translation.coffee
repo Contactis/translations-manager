@@ -38,6 +38,14 @@ module.exports = (Translation) ->
             return prop
       return
 
+    # @param      {Object}  plain object (not nested)
+    # @returns    {Object}  sorted object by its properties
+    _sortObject = (obj) ->
+      arr = _.pairs(obj)
+      arr.sort()
+      return _.zipObject(arr)
+
+
     # @param      {String}  input  Simple string
     # @returns    {String}  String with escaped double quotes
     _escapeDoubleQuotes = (input) ->
@@ -194,7 +202,7 @@ module.exports = (Translation) ->
               finalKey += x.translationKey.keyString
               _finalResult[finalKey] = _escapeDoubleQuotes(x.translatedPhrase)
 
-          return _finalResult # final Object
+          return _sortObject(_finalResult) # final Object
         , (e) ->
           console.log e
           throw e
