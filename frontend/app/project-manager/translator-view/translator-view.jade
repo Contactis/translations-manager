@@ -30,7 +30,7 @@
                   select.form-control(data-ng-model="vm.translateLanguage"
                   data-ng-options="opt.nameNative for opt in vm.allLanguages"
                   data-ng-change="vm.updateLanguage(vm.translateLanguage)")
-                th(id="th-default-language") Default language ({{ vm.currentProject.defaultLanguage.nameNative }})
+                th(id="th-default-translation") Default language ({{ vm.currentProject.defaultLanguage.nameNative }})
                 th(id="th-description") Context description ({{ vm.currentProject.defaultLanguage.nameNative }})
                 th(id="th-modify")
                   div(data-tr-access-level="vm.accessLevels.programmer") {{ 'GENERAL.MODIFY' | translate }}
