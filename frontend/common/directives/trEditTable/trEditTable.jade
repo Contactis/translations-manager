@@ -1,4 +1,14 @@
-input.form-control(type="text" data-ng-model="translateVal.translatedPhrase"
-  data-ng-focus="prepareFocus()"
-  data-ng-blur="saveOnBlur()"
-  data-ng-keyup="$event.keyCode == 13 && saveOnEnter()")
+.tr-edit-table
+  input.form-control(id="translation-string" type="text"
+    data-ng-if="translateVal.translatedPhrase.length <= 32"
+    data-ng-model="translateVal.translatedPhrase"
+    data-ng-focus="prepareFocus()"
+    data-ng-blur="saveOnBlur()"
+    data-ng-keyup="$event.keyCode == 13 && saveOnEnter()")
+
+  textarea.form-control(id="translation-textarea" rows="6"
+    data-ng-if="translateVal.translatedPhrase.length > 32"
+    data-ng-model="translateVal.translatedPhrase"
+    data-ng-focus="prepareFocus()"
+    data-ng-blur="saveOnBlur()"
+    data-ng-keyup="$event.keyCode == 13 && saveOnEnter()")
