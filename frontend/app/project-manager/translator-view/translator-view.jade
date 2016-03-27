@@ -41,10 +41,9 @@
             tbody
               tr(data-ng-repeat="singleRow in vm.displayedCollection")
                 td {{singleRow.keyString}}
-                td(data-ng-hide="vm.isTranslationForDefaultLanguage()")
-                  tr-edit-table(translate-val="singleRow.translations[1]" translate-object="singleRow")
-                td(data-ng-show="vm.isTranslationForDefaultLanguage()")
-                  tr-edit-table(translate-val="singleRow.translations[0]" translate-object="singleRow")
+                // checking which translate should be displayed
+                td
+                  tr-edit-table(translate-object="singleRow" translate-chooser="vm.translateChooser(singleRow)")
                 td {{singleRow.translations[0].translatedPhrase}}
                 td {{singleRow.translations[0].description}}
                 td
