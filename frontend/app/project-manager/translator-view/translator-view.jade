@@ -43,7 +43,7 @@
                 td {{ singleRow.keyString }}
                 // checking which translate should be displayed
                 td
-                  tr-edit-table(translate-object="singleRow" select-language="vm.selectLanguage(singleRow)")
+                  tr-edit-table(translate-object="singleRow")
                 // displaying default translations
                 td {{ vm.defaultTranslation(singleRow).translatedPhrase }}
                 td {{ vm.defaultTranslation(singleRow).description }}

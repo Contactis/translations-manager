@@ -44,10 +44,13 @@ angular.module('translation.directives.trEditTable', [
       _updateHelper translate.id, translate
       toastr.success 'Translation has been updated'
 
+  selectLanguage = (singleRow, id) ->
+    return _.find singleRow.translations, (element) ->
+      return element.languageId == id
 
   linkerFn = (scope, element, attrs) ->
 
-    scope.translateVal = scope.selectLanguage({singleRow: scope.translateObject})
+    scope.translateVal = selectLanguage(scope.translateObject, LanguageService.getTranslationLanguageId())
 
     if scope.translateVal is undefined
       scope.translateVal = {}
@@ -78,7 +81,6 @@ angular.module('translation.directives.trEditTable', [
     link:         linkerFn
     replace:      true
     scope:
-      selectLanguage: '&'
       translateObject:  '='
   }
 
