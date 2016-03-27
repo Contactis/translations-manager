@@ -47,7 +47,7 @@ angular.module('translation.directives.trEditTable', [
 
   linkerFn = (scope, element, attrs) ->
 
-    scope.translateVal = scope.translateChooser({singleRow: scope.translateObject})
+    scope.translateVal = scope.selectLanguage({singleRow: scope.translateObject})
 
     if scope.translateVal is undefined
       scope.translateVal = {}
@@ -78,7 +78,7 @@ angular.module('translation.directives.trEditTable', [
     link:         linkerFn
     replace:      true
     scope:
-      languageChooser: '&'
+      selectLanguage: '&'
       translateObject:  '='
   }
 

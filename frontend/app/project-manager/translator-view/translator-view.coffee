@@ -42,27 +42,25 @@ angular.module('translation.pages.translator-view', [
 .controller 'TranslatorViewController', ($log, TranslationKey, LanguageService, Translation,
 toastr, UserPermissionsSettings, LanguageListResolver, CurrentProjectResolver) ->
 
-  vm                  = this
-  vm.query            = ""
-  vm.filters          = {}
-  vm.contextMenu      = {}
-  vm.tableData        = []
+  vm                    = this
+  vm.query              = ""
+  vm.filters            = {}
+  vm.contextMenu        = {}
+  vm.tableData          = []
 
-  vm.isPending        = true
-  vm.accessLevels     = UserPermissionsSettings.accessLevels
-  vm.currentProject   = CurrentProjectResolver
+  vm.isPending          = true
+  vm.accessLevels       = UserPermissionsSettings.accessLevels
+  vm.currentProject     = CurrentProjectResolver
+  vm.allLanguages       = LanguageListResolver.result
+  vm.translateLanguage  = LanguageService.getTranslateLanguage(vm.allLanguages, vm.currentProject.defaultLanguageId)
 #  vm.projectNamespaces = NamespacesResolver
+  _defaultLanguageId    = vm.currentProject.defaultLanguageId
 
-  _langList = LanguageListResolver.result
-  vm.translateLanguage  = LanguageService.getTranslateLanguage(_langList, vm.currentProject.defaultLanguageId)
-  vm.allLanguages       = _langList
   if vm.translateLanguage is undefined
     vm.translateLanguage = vm.allLanguages[0]
 
-
   (_fetchData = ->
     vm.isPending        = true
-    _defaultLanguageId  = vm.currentProject.defaultLanguageId
     TranslationKey.find
       filter:
         include:[
@@ -75,7 +73,7 @@ toastr, UserPermissionsSettings, LanguageListResolver, CurrentProjectResolver) -
               where:
                 or:[
                   {languageId: _defaultLanguageId},
-                  {languageId: LanguageService.getTranslationLanguageIdOrFind(_defaultLanguageId, _langList)}
+                  {languageId: LanguageService.getTranslationLanguageIdOrFind(_defaultLanguageId, vm.allLanguages)}
                 ]
           }
         ]
@@ -90,18 +88,18 @@ toastr, UserPermissionsSettings, LanguageListResolver, CurrentProjectResolver) -
       vm.isPending        = false
   )(@)
 
-
-  vm.isTranslationForDefaultLanguage = () ->
-    return if vm.currentProject.defaultLanguageId is vm.translateLanguage.id then true else false
-
-
   vm.updateLanguage = (lang) ->
     LanguageService.setTranslationLanguageId(lang.id)
     _fetchData()
 
-  vm.languageChooser = (singleRow) ->
+  vm.selectLanguage = (singleRow) ->
     return _.find singleRow.translations, (element) ->
       return element.languageId == vm.translateLanguage.id
+
+  vm.defaultTranslation = (singleRow) ->
+    return _.find singleRow.translations, (element) ->
+      return element.languageId == _defaultLanguageId
+
 
   vm.deleteTranslation = (translationObject) ->
 #    fixme translation id mocked

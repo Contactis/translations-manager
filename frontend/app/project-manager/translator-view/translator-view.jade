@@ -40,12 +40,13 @@
 
             tbody
               tr(data-ng-repeat="singleRow in vm.displayedCollection")
-                td {{singleRow.keyString}}
+                td {{ singleRow.keyString }}
                 // checking which translate should be displayed
                 td
-                  tr-edit-table(translate-object="singleRow" language-chooser="vm.languageChooser(singleRow)")
-                td {{singleRow.translations[0].translatedPhrase}}
-                td {{singleRow.translations[0].description}}
+                  tr-edit-table(translate-object="singleRow" select-language="vm.selectLanguage(singleRow)")
+                // displaying default translations
+                td {{ vm.defaultTranslation(singleRow).translatedPhrase }}
+                td {{ vm.defaultTranslation(singleRow).description }}
                 td
                   div(data-tr-access-level="vm.accessLevels.programmer")
                     button.btn.btn-xs.btn-warning(data-ng-click="vm.deleteTranslation(singleRow)") {{ 'GENERAL.CLEAR' | translate}}
@@ -54,8 +55,4 @@
                 td(colspan=5)
                   .text-danger(data-ng-if="vm.displayedCollection.length == 0 && vm.tableData.length > 0")
                     | No results for searched phrase.
-
-      //- pre
-      //-   | vm.displayedCollection: {{ vm.displayedCollection | json}}
-      //-   | vm.projectNamespaces: {{vm.projectNamespaces|json}}
 
