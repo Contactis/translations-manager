@@ -78,7 +78,7 @@ angular.module('translation.directives.trEditTable', [
     link:         linkerFn
     replace:      true
     scope:
-      translateChooser: '&'
+      languageChooser: '&'
       translateObject:  '='
   }
 

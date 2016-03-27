@@ -99,7 +99,7 @@ toastr, UserPermissionsSettings, LanguageListResolver, CurrentProjectResolver) -
     LanguageService.setTranslationLanguageId(lang.id)
     _fetchData()
 
-  vm.translateChooser = (singleRow) ->
+  vm.languageChooser = (singleRow) ->
     return _.find singleRow.translations, (element) ->
       return element.languageId == vm.translateLanguage.id
 
