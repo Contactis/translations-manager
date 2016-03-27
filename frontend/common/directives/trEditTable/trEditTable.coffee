@@ -10,9 +10,9 @@ angular.module('translation.directives.trEditTable', [
   #TODO loopback upsert is not working with relations 'belongs to', probably we should create our own backend to avoid
   #TODO deleting translate
   _updateHelper = (id, translate) ->
-    Translation.deleteById({ id: id }).$promise.then (succes) ->
-      Translation.create(translate).$promise.then (succes) ->
-        translate.id = succes.id
+    Translation.deleteById({ id: id }).$promise.then () ->
+      Translation.create(translate).$promise.then (success) ->
+        translate.id = success.id
 
 
   _enableSaving = () ->
@@ -26,19 +26,18 @@ angular.module('translation.directives.trEditTable', [
 
 
   updateTranslation = (translate, translationKey) ->
+
     if translate.id is undefined
-#case translate was not created already
+      #case translate was not created already
       translate.pluralForm          = null
       translate.translationsKeyId   = translationKey.id
       translate.languageId          = LanguageService.getTranslationLanguageId()
       #TODO lastmodify mocked
       translate.lastModifiedBy      = 1
       translate.statusId            = 2
-      translate.updateAt            = moment().format()
-      translate.createdAt           = moment().format()
 
-      Translation.create(translate).$promise.then (succes) ->
-        translate.id = succes.id
+      Translation.create(translate).$promise.then (success) ->
+        translate.id = success.id
         toastr.success 'New translation has been saved'
     else
       translate.statusId = 2
@@ -47,6 +46,10 @@ angular.module('translation.directives.trEditTable', [
 
 
   linkerFn = (scope, element, attrs) ->
+
+    if scope.translateVal is undefined
+      scope.translateVal = {}
+
     scope.saveOnBlur = () ->
       if submitted is false
         updateTranslation(scope.translateVal, scope.translateObject)

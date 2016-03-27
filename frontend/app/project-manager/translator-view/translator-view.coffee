@@ -31,16 +31,16 @@ angular.module('translation.pages.translator-view', [
         return CurrentProjectService.getCurrentProject()
       LanguageListResolver: (LanguageService, CurrentProjectResolver) ->
         return LanguageService.getAllTranslationsForProject(CurrentProjectResolver.id)
-      NamespacesResolver: (Namespace, CurrentProjectResolver) ->
-        return Namespace.find
-          filter:
-            where:
-              projectId: CurrentProjectResolver.id
-        .$promise
+#      NamespacesResolver: (Namespace, CurrentProjectResolver) ->
+#        return Namespace.find
+#          filter:
+#            where:
+#              projectId: CurrentProjectResolver.id
+#        .$promise
 
 
 .controller 'TranslatorViewController', ($log, TranslationKey, LanguageService, Translation,
-toastr, UserPermissionsSettings, LanguageListResolver, CurrentProjectResolver, NamespacesResolver) ->
+toastr, UserPermissionsSettings, LanguageListResolver, CurrentProjectResolver) ->
 
   vm                  = this
   vm.query            = ""
@@ -51,7 +51,7 @@ toastr, UserPermissionsSettings, LanguageListResolver, CurrentProjectResolver, N
   vm.isPending        = true
   vm.accessLevels     = UserPermissionsSettings.accessLevels
   vm.currentProject   = CurrentProjectResolver
-  vm.projectNamespaces = NamespacesResolver
+#  vm.projectNamespaces = NamespacesResolver
 
   _langList = LanguageListResolver.result
   vm.translateLanguage  = LanguageService.getTranslateLanguage(_langList, vm.currentProject.defaultLanguageId)
