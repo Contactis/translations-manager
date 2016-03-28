@@ -31,12 +31,6 @@ angular.module('translation.pages.translator-view', [
         return CurrentProjectService.getCurrentProject()
       LanguageListResolver: (LanguageService, CurrentProjectResolver) ->
         return LanguageService.getAllTranslationsForProject(CurrentProjectResolver.id)
-#      NamespacesResolver: (Namespace, CurrentProjectResolver) ->
-#        return Namespace.find
-#          filter:
-#            where:
-#              projectId: CurrentProjectResolver.id
-#        .$promise
 
 
 .controller 'TranslatorViewController', ($log, TranslationKey, LanguageService, Translation,
@@ -53,7 +47,7 @@ toastr, UserPermissionsSettings, LanguageListResolver, CurrentProjectResolver) -
   vm.currentProject     = CurrentProjectResolver
   vm.allLanguages       = LanguageListResolver.result
   vm.translateLanguage  = LanguageService.getTranslateLanguage(vm.allLanguages, vm.currentProject.defaultLanguageId)
-#  vm.projectNamespaces = NamespacesResolver
+
   _defaultLanguageId    = vm.currentProject.defaultLanguageId
 
   if vm.translateLanguage is undefined
@@ -96,16 +90,17 @@ toastr, UserPermissionsSettings, LanguageListResolver, CurrentProjectResolver) -
     return _.find singleRow.translations, (element) ->
       return element.languageId == _defaultLanguageId
 
-
   vm.deleteTranslation = (translationObject) ->
-#    fixme translation id mocked
-    Translation.deleteById { id:translationObject.translations[0].id }
+
+    _translation = _.find translationObject.translations, (element) ->
+      element.languageId == vm.translateLanguage.id
+
+    Translation.deleteById { id: _translation.id }
     .$promise.then (deleteTranslationResponse) ->
       _fetchData()
       toastr.success "Clear translation successfully"
     , (deleteTranslationError) ->
       toastr.success "Some problem occured while clearing translation"
-      console.log "Error occured while clearing translation", deleteTranslationError
 
   return vm
 
