@@ -23,7 +23,7 @@
 
               tbody
                 tr(data-ng-repeat="singleRow in vm.displayedCollection")
-                  td {{singleRow.keyString}}
+                  td {{singleRow.namespace.namespace}}.{{singleRow.keyString}}
                   td(data-ng-class="vm.whatClass(singleRow.isPlural)") {{singleRow.isPlural}}
                   td(data-ng-if="singleRow.isPlural")
                     p(data-ng-repeat="x in singleRow.translations")
