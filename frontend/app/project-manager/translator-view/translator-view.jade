@@ -39,7 +39,7 @@
                   input(st-search="" class="form-control" placeholder="Search for phrases ..." type="text")
 
             tbody
-              tr(data-ng-repeat="singleRow in vm.displayedCollection")
+              tr(data-ng-repeat="singleRow in vm.displayedCollection | orderBy:['namespace.namespace','keyString']")
                 td {{ singleRow.namespace.namespace }}.{{ singleRow.keyString }}
                 // checking which translate should be displayed
                 td
